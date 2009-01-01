@@ -1,0 +1,37 @@
+
+/***************
+ * Basic elements
+ ***************/
+
+body		{ font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; }
+tr			{ background-color:#ffffff }
+td			{ font-family: arial; font-size: 12px; color:black; text-align:center; font-weight:normal }
+th			{ font-family: arial; font-size: 12px; color:black; text-align:center; font-weight:normal }
+input		{ font-family: arial; font-size: 12px; color: navy; font-weight:normal }
+select		{ font-family: arial; font-size: 12px; color: navy; font-weight:normal }
+img			{ border: none; }	/* Necessary for browsers other than Safari */
+
+a:link		{ color: blue }
+a:visited	{ color: blue }
+a:active	{ color: orange }
+
+.error		{ color: red; text-align: center; }
+.warning 	{ color: orange; text-align: center; }
+.info		{ color: green; text-align: center; }
+
+/***************
+ * Login container
+ ***************/
+
+#loginpage					{ display: table; margin: auto; text-align: center; border: none; color: #333; line-height: 130%; }	/* text-align is needed for IE */
+#loginpage	h1				{ text-align: center; }
+#loginpage	h2				{ text-align: center; }
+#loginpage	h3				{ text-align: center; }
+#loginpage	h4				{ text-align: center; }
+#loginpage	#main			{ width: 300px; margin:	auto; border: thin solid #333; color: #000; background: #eee; }
+#loginpage	#headers		{ width: 100%; background: #3D69B6; color: white; text-align: center; font-family: sans-serif; font-size: small; font-weight: bold; }
+#loginpage	#headers th		{ background-color:#3D69B6; color:white; font-weight: bold; }
+#loginpage	#input			{ width: 100%; }
+#loginpage	#input th		{ width: 40%; }
+#loginpage	#input td		{ width: 50%; padding: 4px; font-family: sans-serif; font-size: small; font-weight: bold; text-align: left; }
+#loginpage  .buttons		{ padding: 4px 0px; margin: auto; text-align: center; }	/* text-align is needed for IE */

@@ -1,0 +1,101 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Company Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<h3>Company Maintenance</h3>
+<t:zone t:id="zoneFormView" show="slidedown">
+    <t:delegate to="block" />
+</t:zone>
+<t:block id="blockFormView">
+   <form t:type="form" t:id="CompanyForm" t:zone="zoneFormView" >
+       <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+       <button type="submit"><img  src="images/saveRecord24.png" /></button>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteDelete24.png" /></button></t:actionlink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+           <t:GRID
+           t:id="grid"           
+           t:reorder="company_code,company_name,buildinglot,country,postalcode,state,street,createlogin,createtimestamp,modifyLogin,modifytimestamp"
+           t:source="Companys"
+           t:row="Company"
+                   t:rowsPerPage="10"
+           t:pagerPosition="both"
+           t:inPlace="literal:true">
+           <t:parameter name="idCell">
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="Company.id">
+                   ${Company.id}
+               </t:actionlink>
+           </t:parameter>
+           </t:GRID>
+       </div>
+       
+       <div t:type="t5components/TabSet"
+	    panelIds="list:'Company','Address'"
+	    activePanelId="activePanel">
+	
+	    <div id="Company" style="display:none;">
+	    <table id="main1">
+           <tr>
+               <td>
+                   <table id="input1">
+                       <tr>
+                           <th><t:label t:for="id">id</t:label>:</th>
+                           <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="code">code</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="code" t:value="code" t:maxLength="10" t:size="10" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="name">name</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="name" t:value="name" t:maxLength="100" t:size="100" /> </td>
+                       </tr>                     
+                   </table>
+               </td>
+           </tr>
+       </table>
+	    </div>
+	    
+	    <div id="Address" style="display:none;">
+	    <table id="main">
+           <tr>
+               <td>
+                   <table id="input">                       
+                       <tr>
+                           <th><t:label t:for="area">area</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="area" t:value="area" t:maxLength="30" t:size="30" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="City">City</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="City" t:value="City" t:maxLength="30" t:size="30" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="buildingLot">buildingLot</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="buildingLot" t:value="buildingLot" t:maxLength="10" t:size="10" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="country">country</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="country" t:value="country" t:maxLength="30" t:size="30" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="postalCode">postalCode</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="postalCode" t:value="postalCode" t:maxLength="10" t:size="10" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="state">state</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="state" t:value="state" t:maxLength="30" t:size="30" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="street">street</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="street" t:value="street" t:maxLength="100" t:size="100" /> </td>
+                       </tr>
+                    </table>
+               </td>
+           </tr>
+       </table>
+	    </div>
+	    </div>
+       
+   <t:errors />
+   </form>
+</t:block>
+</body>
+</html>
