@@ -1,0 +1,80 @@
+<html t:type="ReportTemplate" 
+CompanyHeader="LUM MAH PLASTIC AND PRINTING (M) SDN BHD"
+ReportName="PRODUCTION ORDER (PLANT 2)"
+FormNo="LM-F-SA-04"
+xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<body>
+<table>
+	<tr>
+		<td width="800">
+			<table width="100%">
+				<tr>
+					<td>
+						<b>Order No</b>
+					</td>
+					<td>
+						: ORD1312312
+					</td>
+					<td>
+						<b>Order Date </b>
+					</td>
+					<td>
+						: 99/99/9999
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<b>P/O No </b>
+					</td>
+					<td>
+						: P00123123
+					</td>
+					<td>
+						<b>Delivery Date</b>
+					</td>
+					<td>
+						: 99/99/9999
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<b>Customer No </b>
+					</td>
+					<td>
+						: C00001
+					</td>
+					<td colspan="2">
+						
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<b>Brand Code</b>
+					</td>
+					<td>
+						:  Blue berry
+					</td>
+					<td colspan="2">
+						 
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4"></td>
+				</tr>
+			</table>	
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<t:TableTemplate datasource="MaterialDatasource" headers="titles">
+			</t:TableTemplate>
+		</td>
+	</tr>
+	
+	
+</table>	
+</body>
+</html>

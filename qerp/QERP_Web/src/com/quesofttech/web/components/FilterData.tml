@@ -16,7 +16,7 @@
 								<td><input t:type="TextField" t:id="lowerCustomerCode" t:value="lowerCustomerCode" size="10" maxLength="10" /></td><td><input t:type="TextField" t:id="upperCustomerCode" t:value="upperCustomerCode" size="10" maxLength="10" /></td>							
 							</tr>
 						</table>
-						<div class="buttons">
+						<div >
 							<t:submit t:id="btnFilter">Filter</t:submit>
 						</div>
 					</td>

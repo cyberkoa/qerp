@@ -6,7 +6,12 @@
 	padding-right: 3px;
 	width: 26px;
 }
-
+.Typefolderopen {	
+	float: left;
+	height: 14px;
+	padding-right: 3px;
+	width: 26px;
+}
 .folderopen {
 	background: transparent url(http://localhost:8080/QERP/images/folder-open.gif)
 		no-repeat scroll 0%;

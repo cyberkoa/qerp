@@ -1,0 +1,16 @@
+jup<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Bom Detail Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<table class="navigation" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+   <tr>
+        <t:loop source="pageNames" value="pageName" pages="test,test1,test2">
+            <td class="${tabClass}">
+                <t:pagelink page="pageName">${pageName}</t:pagelink>
+            </td>
+        </t:loop>
+    </tr>
+
+</table>
+</body>
+</html>
