@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openejb-jar xmlns="http://www.openejb.org/xml/ns/openejb-jar-2.2" xmlns:nam="http://geronimo.apache.org/xml/ns/naming-1.2" xmlns:pkgen="http://www.openejb.org/xml/ns/pkgen-2.0" xmlns:sec="http://geronimo.apache.org/xml/ns/security-1.2" xmlns:sys="http://geronimo.apache.org/xml/ns/deployment-1.2">
+  <sys:environment>
+    <sys:moduleId>
+      <sys:groupId>default</sys:groupId>
+      <sys:artifactId>QERP_EJB</sys:artifactId>
+      <sys:version>1.0</sys:version>
+      <sys:type>car</sys:type>
+    </sys:moduleId>
+    <sys:dependencies>
+            <sys:dependency>
+                <sys:groupId>console.dbpool</sys:groupId>
+                <sys:artifactId>qerp</sys:artifactId>
+            </sys:dependency>        
+    </sys:dependencies>
+  </sys:environment>
+  <enterprise-beans/>
+</openejb-jar>
