@@ -192,7 +192,7 @@ public class cmp_layout extends SimpleBasePage
 					                + "<td id='p" + _PNum++ + "'>"
 					                + "<div id='p" + _PNum++ + "' class='tier1'>"
 					                + "<a id='p"  + _PNum++ + "' href='#' onclick='toggleRows(this)' class='folder'>"
-					                + "</a><a href='#' onclick='toggleRows(this)'>" + _ProgramTypeNum[i_Type]  + "</a></div></td>"
+					                + "</a><a href='#' onclick='toggleRowsType(this)' >" + _ProgramTypeNum[i_Type]  + "</a></div></td>"
 					                + "</tr> ";
 								}
 				    			

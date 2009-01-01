@@ -31,8 +31,40 @@ function setLinks(e, target) {
 }
 
 Event.observe(window, 'load', setLinks);
+function toggleRowsType(elm) {
+ var rows = document.getElementsByTagName("TR");
+ elm.className = "Typefolderopen"; 
+ var newDisplay = "none";
+ var thisID = elm.parentNode.parentNode.parentNode.id + "-";
+ // Are we expanding or contracting? If the first child is hidden, we expand
+  for (var i = 0; i < rows.length; i++) {
+   var r = rows[i];
+   if (matchStart(r.id, thisID, true)) {
+    if (r.style.display == "none") {
+     if (document.all) newDisplay = "block"; //IE4+ specific code
+     else newDisplay = "table-row"; //Netscape and Mozilla
+	 elm.className = "Typefolderopen"; 
+    }
+    break;
+   }
+ }
 
+ // When expanding, only expand one level.  Collapse all desendants.
+ var matchDirectChildrenOnly = (newDisplay != "none");
 
+ for (var j = 0; j < rows.length; j++) {
+   var s = rows[j];
+   if (matchStart(s.id, thisID, matchDirectChildrenOnly)) {
+     s.style.display = newDisplay;
+     var cell = s.getElementsByTagName("TD")[0];
+     var tier = cell.getElementsByTagName("DIV")[0];
+     var folder = tier.getElementsByTagName("A")[0];
+     if (folder.getAttribute("onclick") != null) {
+	  folder.className = "folderclose"; 
+     }
+   }
+ }
+}
 function toggleRows(elm) {
  var rows = document.getElementsByTagName("TR");
  elm.className = "folderclose"; 
