@@ -1,0 +1,12 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<table>
+	<tr>
+	<t:loop source="prop:Headers" value="prop:title">
+		<td>
+			<b>${title}</b>
+		</td>
+	</t:loop>
+	</tr>
+
+	</table>
+</html>
