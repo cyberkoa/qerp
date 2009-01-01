@@ -24,17 +24,6 @@ import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceLocal;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 
-
-import com.quesofttech.business.domain.production.ProductionOrder;
-import com.quesofttech.business.domain.production.ProductionOrderMaterial;
-import com.quesofttech.business.domain.production.ProductionOrderOperation;
-
-
-
-
-
-
-
 @Stateless
 @Local(ISalesOrderServiceLocal.class)
 @Remote(ISalesOrderServiceRemote.class)
@@ -280,15 +269,5 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		return l;
 			
 	}
-	
-	public ProductionOrder ConvertToWorkOrder(SalesOrder so)
-	{
-	
-		
-		
-		return null;
-	}
-	
-	
 	
 }

@@ -90,7 +90,15 @@ public class Module extends BaseEntity {
 		this.rowInfo = new RowInfo();
 	}	
 
-	
+	// Constructors without the common fields
+	public Module(Long id) {
+		super();
+		/* Example of assignment
+		this.id = id;
+		this.type = type;
+		this.description = description;
+		*/
+	}
 	
 	public Module(Long id,String code, String description,
 			boolean isEnabled, boolean isPurchased, boolean isBasic) {

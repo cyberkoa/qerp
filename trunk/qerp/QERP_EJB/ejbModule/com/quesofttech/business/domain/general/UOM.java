@@ -55,7 +55,7 @@ public class UOM extends BaseEntity {
 	private Long id;
 	
 	@Version
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Long version;
 
 
@@ -124,7 +124,7 @@ public class UOM extends BaseEntity {
 		this.description = description;
 		*/
 
-
+		
 		this.rowInfo.setRecordStatus(recordStatus);
 		this.rowInfo.setSessionId(sessionId);
 		this.rowInfo.setCreateLogin(createLogin);
@@ -265,7 +265,7 @@ public class UOM extends BaseEntity {
 		}
 		*/
 		 
-		throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
+		//throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
 	}
 	
 	
@@ -395,6 +395,46 @@ public class UOM extends BaseEntity {
 	 */
 	public void setShortForm(String shortForm) {
 		this.shortForm = shortForm;
+	}
+
+
+	public String getUnit() {
+		return unit;
+	}
+
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+
+	public String getSingularLabel() {
+		return singularLabel;
+	}
+
+
+	public void setSingularLabel(String singularLabel) {
+		this.singularLabel = singularLabel;
+	}
+
+
+	public String getPluralLabel() {
+		return pluralLabel;
+	}
+
+
+	public void setPluralLabel(String pluralLabel) {
+		this.pluralLabel = pluralLabel;
+	}
+
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 	

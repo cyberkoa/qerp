@@ -35,6 +35,7 @@ import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.inventory.MaterialType;
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.util.StringUtil;
+import com.sun.crypto.provider.DESCipher;
 
 import java.util.List;
 //import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class Program extends BaseEntity {
 	private Long id;
 	
 	@Version
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Long version;
 
 
@@ -95,6 +96,7 @@ public class Program extends BaseEntity {
 	
 	public Program() {
 		super();
+		this.rowInfo = new RowInfo();
 	}	
 
 	
@@ -142,6 +144,10 @@ public class Program extends BaseEntity {
 		StringBuffer buf = new StringBuffer();
 		buf.append("Program: [");
 		buf.append("id=" + id + ", ");
+		buf.append("id=" + code + ", ");
+		buf.append("id=" + description + ", ");
+		buf.append("id=" + version + ", ");
+		buf.append("id=" + type + ", ");
 
 		/* All fields
 		buf.append("type=" + type + ", ");
@@ -240,6 +246,15 @@ public class Program extends BaseEntity {
 	public void validate() throws BusinessException {
 
 		
+		if (StringUtil.isEmpty(code)) {
+			//System.out.println("Yeah");
+			throw new ValueRequiredException(this, "Program Code");
+		}
+
+		if (StringUtil.isEmpty(description)) {
+			throw new ValueRequiredException(this, "Program Description");
+		}
+		
 		// Validate syntax...
 
 		//if (StringUtil.isEmpty(type)) {
@@ -263,7 +278,7 @@ public class Program extends BaseEntity {
 		}
 
 		 */
-		throw new ValueRequiredException(this, "Please remove this line");
+		//throw new ValueRequiredException(this, "Please remove this line");
 	}
 	
 	
@@ -354,7 +369,8 @@ public class Program extends BaseEntity {
 
 	public void setModifyLogin(String modifyLogin) {
 		this.rowInfo.setModifyLogin(modifyLogin);
-	}
+		this.rowInfo.setModifyLogin(modifyLogin);
+		}
 
 
 

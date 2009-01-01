@@ -12,28 +12,28 @@ import javax.persistence.Query;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.base.BaseService;
-import com.quesofttech.business.domain.security.Program;
-import com.quesofttech.business.domain.security.iface.IProgramServiceLocal;
-import com.quesofttech.business.domain.security.iface.IProgramServiceRemote;
+import com.quesofttech.business.domain.security.Module;
+import com.quesofttech.business.domain.security.iface.*;
+import com.quesofttech.business.domain.security.iface.*;
 
 @Stateless
-@Local(IProgramServiceLocal.class)
-@Remote(IProgramServiceRemote.class)
-public class ProgramService extends BaseService implements IProgramServiceLocal, IProgramServiceRemote {
+@Local(IModuleServiceLocal.class)
+@Remote(IModuleServiceRemote.class)
+public class ModuleService extends BaseService implements IModuleServiceLocal, IModuleServiceRemote {
 
 //	@PersistenceContext(unitName = "QERP_EJB")
 //	protected EntityManager _em;
 
 	// Program
 
-	public Program findProgram(Long id) throws DoesNotExistException {
-		Program program = (Program) find(Program.class, id);
-		return program;
+	public Module findModule(Long id) throws DoesNotExistException {
+		Module module = (Module) find(Module.class, id);
+		return module;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Program> findPrograms() throws DoesNotExistException {
-		Query q = _em.createQuery("select program from Program program where program.rowInfo.recordStatus='A' order by program.id");
+	public List<Module> findModules() throws DoesNotExistException {
+		Query q = _em.createQuery("select module from Module module where module.rowInfo.recordStatus='A' order by module.id");
 		List l = q.getResultList();
 		return l;
 	}
@@ -45,22 +45,20 @@ public class ProgramService extends BaseService implements IProgramServiceLocal,
 */
 	
 	
-	public void updateProgram(Program program) throws BusinessException {
-		System.out.println("before update:" + program.toString());
-		program = (Program) merge(program);
-		System.out.println("after update:" + program.toString());
+	public void updateModule(Module module) throws BusinessException {		
+		module = (Module) merge(module);
 	}
 
-	public void logicalDeleteProgram(Program program) throws BusinessException {
-		program.rowInfo.setRecordStatus("D");
-		updateProgram(program);
+	public void logicalDeleteModule(Module module) throws BusinessException {
+		module.rowInfo.setRecordStatus("D");
+		updateModule(module);
 	}
 	
-	public void addProgram(Program program) throws BusinessException {
+	public void addModule(Module module) throws BusinessException {
 		
 		//try{
 		System.out.println("just before persist in ProgramService");
-		persist(program);
+		persist(module);
 		
 		System.out.println("just after persist in ProgramService");
 		//}
