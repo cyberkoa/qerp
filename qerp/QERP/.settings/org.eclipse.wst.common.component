@@ -7,7 +7,7 @@
 <dependency-type>uses</dependency-type>
 </dependent-module>
 <dependent-module deploy-path="/" handle="module:/resource/QERP_Web/QERP_Web">
-            <dependent-object>//@application/@modules.1</dependent-object>
+            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
 </wb-module>
