@@ -1,0 +1,86 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Material Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+
+
+<h3>Material Maintenance</h3>
+<t:zone t:id="zoneFormView" show="slidedown">
+    <t:delegate to="block" />
+</t:zone>
+
+<t:block id="blockFormView">
+   <form t:type="form" t:id="MaterialForm" t:zone="zoneFormView" >
+       <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+       <button type="submit"><img  src="images/saveRecord24.png" /></button>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+           <t:GRID
+           t:id="grid" 
+           t:source="Materials"
+           t:row="Material"
+           t:reorder="id,code,description,materialtypecode,grade,length,width,height,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+                   t:rowsPerPage="10"
+           t:exclude="sessionid,recordstatus,version,modifyapp,createapp,materialtypedesc,codedescription"
+                   
+           t:pagerPosition="both"
+           t:inPlace="literal:true">
+           <t:parameter name="idCell">
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="Material.id">
+                   ${Material.id}
+               </t:actionlink>
+           </t:parameter>
+          
+           
+           
+           
+           </t:GRID>
+       </div>
+       <table id="main">
+           <tr>
+               <td>
+                   <table id="input">
+                       <tr>
+                           <th><t:label t:for="id">id</t:label>:</th>
+                           <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Code">Code</t:label>:</th>
+                           <td> <DIV style="display:${viewDisplayText};"> ${Code}</DIV><DIV style="display:${viewEditText};"> <input  t:type="TextField" t:id="Code" t:value="Code" t:maxLength="30" t:size="30" /> </DIV></td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Description">Description</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Description" t:value="Description" t:maxLength="100" t:size="100" /> </td>
+                       </tr>                       
+                       <tr>
+                           <th><t:label t:for="materialType">MaterialType</t:label>:</th>
+                           <td>   <select  t:type="select" t:id="materialType" t:model="materialTypesSelect" encoder="materialTypesSelect" t:value="materialType" /> </td>                      
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="uom">Unit Of Measurement</t:label>:</th>
+                           <td>   <select  t:type="select" t:id="uom" t:model="uomsSelect" encoder="uomsSelect" t:value="uom" /> </td>                      
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Height">Height</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Height" t:value="Height" t:maxLength="30" t:size="30" /> </td>
+                       </tr>  
+                       <tr>
+                           <th><t:label t:for="Width">Width</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Width" t:value="Width" t:maxLength="30" t:size="30" /> </td>
+                       </tr>    
+                       <tr>
+                           <th><t:label t:for="Length">Length</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Length" t:value="Length" t:maxLength="30" t:size="30" /> </td>
+                       </tr>   
+                       <tr>
+                           <th><t:label t:for="Grade">Grade</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Grade" t:value="Grade" t:maxLength="30" t:size="30" /> </td>
+                       </tr>    
+                   </table>
+               </td>
+           </tr>
+       </table>
+   <t:errors />
+   </form>
+</t:block>
+</body>
+</html>
