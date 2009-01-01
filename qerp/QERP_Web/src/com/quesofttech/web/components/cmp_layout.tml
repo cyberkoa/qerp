@@ -1,0 +1,69 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>	
+	<link href="${asset:context:css/inst.css}" rel="stylesheet" type="text/css"/>
+	<link href="${asset:context:css/tigris.css}" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+
+	table.t-data-grid tr th a {
+		color:darkBlue;
+	}
+	</style>	
+	
+	<style type="text/css">
+		<!--
+		#blanket {
+		   background-color:#111;
+		   opacity: 0.65;
+		   position:absolute;
+		   z-index: 9001; /*ooveeerrrr nine thoussaaaannnd*/
+		   top:0px;
+		   left:0px;
+		   width:100%;
+		}
+		#popUpDiv {
+			position:absolute;
+			background-color:#eeeeee;
+			width:300px;
+			height:300px;
+			z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+		}
+		-->
+	</style>
+	
+</head>
+
+<body onload="collapseAllRows();">
+<div>
+	<div id="doc3" width="100%">
+	    <div id="hd" style="text-align: center;">
+	        <div t:type="t5components/RoundCornerContainer" fgcolor="#D2E0F2" style="background-image:url(images/QERPLogo.png);background-repeat: no-repeat;align:left;background-color:#D2E0F2;margin-top:5px;margin-bottom:5px;">
+	           <div style="position:relative;float:right;left:-15px;">
+					
+				[ <t:actionlink t:id="actionSignOff"> <b> Log Out </b> </t:actionlink>  ${Username} ]
+				</div>  <h3><br/><br/><br/></h3>
+	                   
+	        </div>
+			 
+	    </div>
+	    <div id="bd" style="width:100%;">
+	        <div t:type="t5components/SidePanel" style="height:600px;">
+	            <div t:type="t5components/Accordion" subjects="subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
+	        </div>
+	        <fieldset style="padding-left:5px;height:580px;">
+	        	<div style="width:100%;height:100%;overflow:scroll;">
+	            	<t:body/>
+	            </div>
+	        </fieldset>
+	    </div>
+	    <div id="ft">
+	        <div t:type="t5components/RoundCornerContainer" fgcolor="#D2E0F2" style="background-color:#D2E0F2;margin-top:15px;">
+	            <p style="padding:5px;">
+	                open/close the side panel with mouse click on the bar or press 'alt-1' --- 'alt-2' un-/pin the sidebar content
+	            </p>
+	        </div>
+	    </div>
+	</div>
+</div>
+</body>
+</html>
