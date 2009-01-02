@@ -10,15 +10,23 @@
 </head>
 
 <body>
-	<div id="loginpage"> <br/>
-		<center><img src="images/QERPLogo.png"/></center>
-			<br/>
-		
-		<br/>
-		
-		
-		<br/><br/>
 
+<div id="doc3" width="100%">
+	    <div id="hd" style="text-align: center;">
+	        <div t:type="t5components/RoundCornerContainer" fgcolor="#D2E0F2" style="background-image:url(images/QERPLogo.png);background-repeat: no-repeat;align:center;background-color:#D2E0F2;margin-top:5px;margin-bottom:5px;">
+	          <br/><br/><br/><br/>
+					
+				
+	        </div>
+			 
+	    </div>
+	    <div id="bd" style="width:100%;">
+			<div id="loginpage"> <br/>
+			
+			<br/>
+			<br/>
+			<br/>
+			<br/>
 		<form t:type="form" t:id="login">
 		
 			<table id="main">
@@ -55,6 +63,7 @@
 			<small style="font-style: italic;">All rights reserved</small>		
 		</div>
  	</div>
-	
+	</div>
+</div>
 </body>
 </html>
