@@ -534,6 +534,7 @@ RUN RefreshRecords.
 RUN getRcdLocation.
 RUN getBlock.
 RUN onSuccess.
+RUN onFailure.
 RUN setupRender.
 RUN onValidateForm.
 RUN assignToDatabase.

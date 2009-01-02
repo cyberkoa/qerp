@@ -136,7 +136,7 @@ OUTPUT TO VALUE(str_formid + "Maintenance.tml").
 MESSAGE '<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">'.     
 MESSAGE '<head> <title>' + str_subject + ' Maintenance</title><link rel="stylesheet" type="text/css"  href="$' + CHR(123) + 'asset:context:css/global.css' + CHR(125) +  '"/></head>'.
 MESSAGE '<body>'.
-MESSAGE str_bodystart.
+MESSAGE '<h3>' + str_subject + ' Maintenance</h3>'.
 MESSAGE '<t:zone t:id="zoneFormView" show="slidedown">'.
 MESSAGE '    <t:delegate to="block" />'.
 MESSAGE '</t:zone>'.

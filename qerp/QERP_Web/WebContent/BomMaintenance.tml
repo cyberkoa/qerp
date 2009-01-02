@@ -1,27 +1,28 @@
 <html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 <head> <title>Bom Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
-
+<h3>BOM Maintenance</h3>
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
 <t:block id="blockFormView">
-   <form t:type="form" t:id="BomForm" t:zone="zoneFormView" >
+   <form t:type="form" t:id="BOMForm" t:zone="zoneFormView" >
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
-       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/addDelete24.png" /></button></t:actionlink>
-       <div style="height:300px;">
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbardel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
-           t:id="grid" 
-           t:source="Boms"
-           t:row="Bom"
-                   t:rowsPerPage="5"
-           t:pagerPosition="top"
-           t:exclude="sessionid,recordstatus,version"
+           t:id="Grid"
+           t:reorder="id,type,MaterialCode,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:source="BOMs"
+           t:row="BOM"
+                   t:rowsPerPage="10"
+           t:pagerPosition="both"
+           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
-               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="Bom.id">
-                   ${Bom.id}
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="BOM.id">
+                   ${BOM.id}
                </t:actionlink>
            </t:parameter>
            </t:GRID>
@@ -40,13 +41,12 @@
                        </tr>
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Material" t:value="Material" t:maxLength="20" t:size="20" /> </td>
+                           <td>    <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </td>
                        </tr>
                                </table>
                </td>
            </tr>
        </table>
-<t:actionlink  t:id="btnDetail" t:context="${id}"> Detail Page </t:actionlink>
    <t:errors />
    </form>
 </t:block>

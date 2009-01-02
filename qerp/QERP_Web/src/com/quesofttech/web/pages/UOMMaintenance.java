@@ -60,7 +60,7 @@ public class UOMMaintenance extends SecureBasePage {
 
     @Component(id = "GRID")
     private Grid _Grid;
-
+   
     //===============================
     // Text Component for id
     @Component(id = "id")
@@ -236,7 +236,7 @@ public class UOMMaintenance extends SecureBasePage {
     }
 
     void assignToDatabase(UOM uOM){
-       uOM.setId(id);
+       uOM.setId(id);      
        uOM.setPluralLabel(PluralLabel);
        uOM.setShortForm(ShortForm);
        uOM.setSingularLabel(SingularLabel);

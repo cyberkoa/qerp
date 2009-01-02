@@ -140,8 +140,15 @@ public class ProgramMaintenance extends SecureBasePage {
 
     //===============================
     // Text Component for Type
-    @Component(id = "Type")
-    private TextField _Type;
+    //@Component(id = "Type")
+    //private TextField _Type;
+    private String typesselect[] = {"Maintenance", "Report", "Inquiry", "Processing", "Posting" };
+    public String[] getTypesSelect()
+    {
+    	return typesselect;
+    }
+    
+    
     private String Type;
     public String getType()
     {

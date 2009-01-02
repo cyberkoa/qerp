@@ -36,6 +36,7 @@
                            <th><t:label t:for="id">id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
+                      
                        <tr>
                            <th><t:label t:for="PluralLabel">PluralLabel</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="PluralLabel" t:value="PluralLabel" t:maxLength="5" t:size="5" /> </td>
