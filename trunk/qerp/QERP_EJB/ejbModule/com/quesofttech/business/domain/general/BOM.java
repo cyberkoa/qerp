@@ -365,6 +365,11 @@ public class BOM extends BaseEntity {
 	public void setModifyTimestamp(java.sql.Timestamp modifyTimestamp) {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
 	}
+	
+	public String getMaterialCode()
+	{
+		return material.getCode();
+	}
 
 
 	/**
@@ -395,6 +400,16 @@ public class BOM extends BaseEntity {
 			/* Maintain the bidirectional relationship . */
 			//bomDetail.setBom(this);
 		}
+	}
+
+
+	public Material getMaterial() {
+		return material;
+	}
+
+
+	public void setMaterial(Material material) {
+		this.material = material;
 	}
 	
 	
