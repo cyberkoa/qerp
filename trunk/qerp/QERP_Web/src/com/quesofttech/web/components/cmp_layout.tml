@@ -57,7 +57,7 @@
 	    </div>
 	    <div id="bd" style="width:100%;">
 	        <div t:type="t5components/SidePanel" style="height:600px;">
-	            <div t:type="t5components/Accordion" subjects="subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
+	            <div t:type="t5components/Accordion" subjects="Subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
 	        </div>
 	        <fieldset style="padding-left:5px;height:580px;">
 	        	<div style="width:100%;height:100%;overflow:scroll;">

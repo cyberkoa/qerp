@@ -31,9 +31,9 @@ public class SecureBasePage extends SimpleBasePage {
 	
 	Object onActivate() {
 
-		if (!isVisitExists() || !getVisit().isLoggedIn()) {
-			return _index;
-		}
+		//if (!isVisitExists() || !getVisit().isLoggedIn()) {
+		//	return _index;
+		//}
 		//if ( getISecurityFinderServiceRemote().)
 
 		return null;
