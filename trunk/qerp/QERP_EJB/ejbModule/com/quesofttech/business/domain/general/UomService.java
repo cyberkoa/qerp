@@ -13,13 +13,13 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.base.BaseService;
 import com.quesofttech.business.domain.general.UOM;
-import com.quesofttech.business.domain.general.iface.IUOMServiceLocal;
-import com.quesofttech.business.domain.general.iface.IUOMServiceRemote;
+import com.quesofttech.business.domain.general.iface.IUomServiceLocal;
+import com.quesofttech.business.domain.general.iface.IUomServiceRemote;
 
 @Stateless
-@Local(IUOMServiceLocal.class)
-@Remote(IUOMServiceRemote.class)
-public class UOMService extends BaseService implements IUOMServiceLocal, IUOMServiceRemote {
+@Local(IUomServiceLocal.class)
+@Remote(IUomServiceRemote.class)
+public class UomService extends BaseService implements IUomServiceLocal, IUomServiceRemote {
 
 //	@PersistenceContext(unitName = "QERP_EJB")
 //	protected EntityManager _em;

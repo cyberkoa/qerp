@@ -4,7 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.general.UOM;
-import com.quesofttech.business.domain.general.iface.IUOMServiceRemote;
+import com.quesofttech.business.domain.general.iface.IUomServiceRemote;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
@@ -375,7 +375,7 @@ public class UOMMaintenance extends SecureBasePage {
        return null;
     }
 
-    private IUOMServiceRemote getUOMService() {
+    private IUomServiceRemote getUOMService() {
        return getBusinessServicesLocator().getUOMServiceRemote();
     }
 

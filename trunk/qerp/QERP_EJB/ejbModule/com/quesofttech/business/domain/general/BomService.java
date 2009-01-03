@@ -23,15 +23,15 @@ import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.general.BOM;
-import com.quesofttech.business.domain.general.iface.IBOMServiceLocal;
-import com.quesofttech.business.domain.general.iface.IBOMServiceRemote;
+import com.quesofttech.business.domain.general.iface.IBomServiceLocal;
+import com.quesofttech.business.domain.general.iface.IBomServiceRemote;
 
 
 
 @Stateless
-@Local(IBOMServiceLocal.class)
-@Remote(IBOMServiceRemote.class)
-public class BOMService extends BaseService implements IBOMServiceLocal, IBOMServiceRemote {
+@Local(IBomServiceLocal.class)
+@Remote(IBomServiceRemote.class)
+public class BomService extends BaseService implements IBomServiceLocal, IBomServiceRemote {
 
 //	@PersistenceContext(unitName = "QERP_EJB")
 //	protected EntityManager _em;

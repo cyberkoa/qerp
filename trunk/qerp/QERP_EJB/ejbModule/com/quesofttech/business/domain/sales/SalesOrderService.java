@@ -24,6 +24,18 @@ import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceLocal;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 
+import com.quesofttech.business.domain.general.BOM;
+import com.quesofttech.business.domain.general.BomDetail;
+import com.quesofttech.business.domain.general.BomTree;
+import com.quesofttech.business.domain.general.BomService;
+
+
+import com.quesofttech.business.domain.production.ProductionOrder;
+import com.quesofttech.business.domain.production.ProductionOrderOperation;
+import com.quesofttech.business.domain.production.ProductionOrderMaterial;
+import com.quesofttech.business.domain.production.ProductionOrderService;
+
+
 @Stateless
 @Local(ISalesOrderServiceLocal.class)
 @Remote(ISalesOrderServiceRemote.class)
@@ -269,5 +281,21 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		return l;
 			
 	}
+	
+	public void OrderedMaterialToWorkOrder(SalesOrderMaterial salesOrderMaterial)
+	{
+		BomTree bomTree = null;
+		
+		BomService bomService = new BomService();
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 	
 }

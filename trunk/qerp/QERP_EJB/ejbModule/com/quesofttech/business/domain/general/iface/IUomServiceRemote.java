@@ -10,7 +10,7 @@ import com.quesofttech.business.domain.general.UOM;
  * The <code>IUOMServiceRemote</code> bean exposes the business methods
  * in the interface.
  */
-public interface IUOMServiceRemote {
+public interface IUomServiceRemote {
 
 	// UOM
 

@@ -426,7 +426,7 @@ Object onActionFromSelect(long id)
    return null;
 }
 
-private IBOMServiceRemote getBomDetailService() {
+private IBomServiceRemote getBomDetailService() {
    return getBusinessServicesLocator().getBOMServiceRemote();
 }
 
