@@ -1,7 +1,7 @@
 <html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 <head> <title>Module Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
-
+<h3>Module Maintenance</h3>
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
@@ -9,14 +9,16 @@
    <form t:type="form" t:id="ModuleForm" t:zone="zoneFormView" >
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
-       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteDelete24.png" /></button></t:actionlink>
-       <div style="height:300px;">
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbardel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
-           t:id="grid" 
+           t:id="Grid"
+           t:reorder="id,Code,Description,IsBasic,IsEnabled,IsPurchased,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="Modules"
            t:row="Module"
-                   t:rowsPerPage="5"
-           t:pagerPosition="top"
+                   t:rowsPerPage="10"
+           t:pagerPosition="both"
+           t:exclude="enabled,purchased,basic,codedescription,sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="Module.id">
@@ -34,8 +36,8 @@
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="Code">Code</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Code" t:value="Code" t:maxLength="10" t:size="10" /> </td>
+                           <th><t:label t:for="Code">Code</t:label>:</th>                           
+                           <td> <DIV style="display:${viewDisplayText};"> ${Code}</DIV><DIV style="display:${viewEditText};">  <input  t:type="TextField" t:id="Code" t:value="Code" t:maxLength="10" t:size="10" /> </DIV></td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Description">Description</t:label>:</th>
@@ -43,15 +45,15 @@
                        </tr>
                        <tr>
                            <th><t:label t:for="IsBasic">IsBasic</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="IsBasic" t:value="IsBasic" t:maxLength="1" t:size="1" /> </td>
+                           <td>   <input  t:type="Checkbox" t:id="IsBasic" t:value="IsBasic" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="IsEnabled">IsEnabled</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="IsEnabled" t:value="IsEnabled" t:maxLength="1" t:size="1" /> </td>
+                           <td>   <input  t:type="Checkbox" t:id="IsEnabled" t:value="IsEnabled" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="IsPurchased">IsPurchased</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="IsPurchased" t:value="IsPurchased" t:maxLength="1" t:size="1" /> </td>
+                           <td>   <input  t:type="Checkbox" t:id="IsPurchased" t:value="IsPurchased" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                                </table>
                </td>

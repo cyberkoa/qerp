@@ -9,11 +9,11 @@
    <form t:type="form" t:id="CompanyForm" t:zone="zoneFormView" >
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
-       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteDelete24.png" /></button></t:actionlink>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="grid"           
-           t:reorder="company_code,company_name,buildinglot,country,postalcode,state,street,createlogin,createtimestamp,modifyLogin,modifytimestamp"
+           t:reorder="code,codename,createlogin,createtimestamp,modifyLogin,modifytimestamp"
            t:source="Companys"
            t:row="Company"
                    t:rowsPerPage="10"

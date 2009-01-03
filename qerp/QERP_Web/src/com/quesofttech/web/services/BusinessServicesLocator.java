@@ -144,6 +144,9 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 	public IModuleServiceRemote getModuleServiceRemote(){
 		return (IModuleServiceRemote) getService(ModuleService.class.getSimpleName()+"Remote");
 	}
+	public IRoleProgramServiceRemote getRoleProgramServiceRemote(){
+		return (IRoleProgramServiceRemote) getService(RoleProgramService.class.getSimpleName()+"Remote");
+	}
 
 	
 	
