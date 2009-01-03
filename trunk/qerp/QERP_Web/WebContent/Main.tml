@@ -1,5 +1,5 @@
 <t:cmp_layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
-<table>
+<table width="800">
 	<tr>
 		<td colspan="2">
 			Bulletin
@@ -9,7 +9,7 @@
 		<td width="20">
 			No
 		</td>
-		<td width="20">
+		<td width="780">
 			Description
 		</td>
 	</tr>
