@@ -10,7 +10,7 @@ import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
 
 import com.quesofttech.web.common.ContextFixer;
 import com.quesofttech.business.domain.general.UOM;
-import com.quesofttech.business.domain.general.iface.IUOMServiceRemote;
+import com.quesofttech.business.domain.general.iface.IUomServiceRemote;
 import com.quesofttech.business.domain.inventory.*;
 import com.quesofttech.business.domain.inventory.iface.*;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
@@ -251,7 +251,7 @@ public class MaterialMaintenance extends SecureBasePage {
     //private PropertyAccess _access_uom;
 	
 	
-	private IUOMServiceRemote getUOMService(){
+	private IUomServiceRemote getUOMService(){
 		return getBusinessServicesLocator().getUOMServiceRemote();
 	}
 	

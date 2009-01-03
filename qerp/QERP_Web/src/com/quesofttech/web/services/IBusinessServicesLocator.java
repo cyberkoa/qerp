@@ -37,10 +37,10 @@ public interface IBusinessServicesLocator {
 	
 	public abstract IMaterialServiceRemote getMaterialServiceRemote();
 	public abstract IProductionOrderServiceRemote getProductionOrderServiceRemote();
-	public abstract IBOMServiceRemote getBOMServiceRemote();
+	public abstract IBomServiceRemote getBOMServiceRemote();
 	public abstract IUserProgramServiceRemote getUserProgramServiceRemote();
 	public abstract IProgramServiceRemote getProgramServiceRemote();
-	public abstract IUOMServiceRemote getUOMServiceRemote();
+	public abstract IUomServiceRemote getUOMServiceRemote();
 	public abstract IModuleServiceRemote getModuleServiceRemote();
 	
 	/**

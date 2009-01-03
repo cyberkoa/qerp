@@ -10,7 +10,7 @@ import com.quesofttech.business.domain.general.BOM;import com.quesofttech.busin
  * The <code>IBOMServiceRemote</code> bean exposes the business methods
  * in the interface.
  */
-public interface IBOMServiceRemote {
+public interface IBomServiceRemote {
 
 	// BOM
 

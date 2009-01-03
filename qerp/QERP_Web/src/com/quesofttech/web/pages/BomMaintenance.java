@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.general.BOM;
-import com.quesofttech.business.domain.general.iface.IBOMServiceRemote;
+import com.quesofttech.business.domain.general.iface.IBomServiceRemote;
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
 import com.quesofttech.business.domain.sales.SalesOrder;
@@ -368,7 +368,7 @@ public class BomMaintenance extends SecureBasePage {
        return null;
     }
 
-    private IBOMServiceRemote getBOMService() {
+    private IBomServiceRemote getBOMService() {
        return getBusinessServicesLocator().getBOMServiceRemote();
     }
 

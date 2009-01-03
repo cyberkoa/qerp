@@ -125,8 +125,8 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 	public IMaterialServiceRemote getMaterialServiceRemote() {
 		return (IMaterialServiceRemote) getService(MaterialService.class.getSimpleName()+"Remote");
 	}
-	public IBOMServiceRemote getBOMServiceRemote() {
-		return (IBOMServiceRemote) getService(BOMService.class.getSimpleName()+"Remote");
+	public IBomServiceRemote getBOMServiceRemote() {
+		return (IBomServiceRemote) getService(BomService.class.getSimpleName()+"Remote");
 	}
 	
 	public IUserProgramServiceRemote getUserProgramServiceRemote() {
@@ -137,8 +137,8 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 		return (IProgramServiceRemote) getService(ProgramService.class.getSimpleName()+"Remote");
 	}
 	
-	public IUOMServiceRemote getUOMServiceRemote(){
-		return (IUOMServiceRemote) getService(UOMService.class.getSimpleName()+"Remote");
+	public IUomServiceRemote getUOMServiceRemote(){
+		return (IUomServiceRemote) getService(UomService.class.getSimpleName()+"Remote");
 	}
 	
 	public IModuleServiceRemote getModuleServiceRemote(){
