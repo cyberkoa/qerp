@@ -91,6 +91,7 @@ public class Role extends BaseEntity {
 
 	public Role() {
 		super();
+		this.rowInfo = new RowInfo();
 	}	
 
 	
@@ -433,6 +434,20 @@ public class Role extends BaseEntity {
 	 */
 	public void setRolePrograms(List<RoleProgram> rolePrograms) {
 		this.rolePrograms = rolePrograms;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getRoleDescription() {
+		return role + " - " + description;
 	}
 
 

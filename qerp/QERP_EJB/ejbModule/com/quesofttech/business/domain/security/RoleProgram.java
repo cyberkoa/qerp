@@ -60,7 +60,7 @@ public class RoleProgram extends BaseEntity {
 */
 	
     @Embeddable
-    public static class Id
+    public static class RoleId
         implements Serializable
     {
         @Column(name="fk_Role")
@@ -69,9 +69,9 @@ public class RoleProgram extends BaseEntity {
         @Column(name="fk_Program")
         private Long programId;
 
-        public Id() {}
+        public RoleId() {}
 
-        public Id(Long roleId, Long programId)
+        public RoleId(Long roleId, Long programId)
         {
             this.roleId = roleId;
             this.programId = programId;
@@ -102,7 +102,7 @@ public class RoleProgram extends BaseEntity {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			final Id other = (Id) obj;
+			final RoleId other = (RoleId) obj;
 			if (programId == null) {
 				if (other.programId != null)
 					return false;
@@ -133,9 +133,12 @@ public class RoleProgram extends BaseEntity {
  */       
 
     } 
-	
+    @Column(name = "id_Rolep", nullable = false)
+	private Long id;
+    
+    
     @EmbeddedId
-    private Id id = new Id(); 
+    private RoleId Roleid = new RoleId(); 
 	
     @ManyToOne
     @JoinColumn(
@@ -178,6 +181,7 @@ public class RoleProgram extends BaseEntity {
 	*/
 	public RoleProgram() {
 		super();
+		this.rowInfo = new RowInfo();
 	}	
 
 	
@@ -199,8 +203,8 @@ public class RoleProgram extends BaseEntity {
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
 		super();
 
-        this.id.roleId = role.getId();
-        this.id.programId = program.getId(); 
+        this.Roleid.roleId = role.getId();
+        this.Roleid.programId = program.getId(); 
 		//this.id = id;
 		/* Example of assignment
 		this.type = type;
@@ -268,7 +272,7 @@ public class RoleProgram extends BaseEntity {
 	
 */	@Override
 	public Serializable getIdForMessages() {
-		return id.roleId + id.programId;
+		return Roleid.roleId + Roleid.programId;
 	}
 
 	
@@ -355,7 +359,7 @@ public class RoleProgram extends BaseEntity {
 		}
 
 		 */
-		throw new ValueRequiredException(this, "Please remove this line");
+		//throw new ValueRequiredException(this, "Please remove this line");
 	}
 	
 	
@@ -514,6 +518,16 @@ public class RoleProgram extends BaseEntity {
 
 	public void setIsAllowed(Boolean isAllowed) {
 		this.isAllowed = isAllowed;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 
