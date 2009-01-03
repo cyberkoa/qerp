@@ -14,6 +14,7 @@ public interface IRoleServiceRemote {
 
 	// Role
 
+	
 	Role findRole(Long id)throws DoesNotExistException;
 
 	List<Role> findRoles() throws DoesNotExistException;

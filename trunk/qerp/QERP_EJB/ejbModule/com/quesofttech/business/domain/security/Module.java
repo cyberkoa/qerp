@@ -502,5 +502,29 @@ public class Module extends BaseEntity {
 		return code + " - " + description;
 	}
 
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
+	public Boolean getIsPurchased() {
+		return isPurchased;
+	}
+
+	public void setIsPurchased(Boolean isPurchased) {
+		this.isPurchased = isPurchased;
+	}
+
+	public Boolean getIsBasic() {
+		return isBasic;
+	}
+
+	public void setIsBasic(Boolean isBasic) {
+		this.isBasic = isBasic;
+	}
+
 	
 }
