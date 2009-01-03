@@ -144,7 +144,7 @@ MESSAGE '<t:block id="blockFormView">'.
 MESSAGE '   <form t:type="form" t:id="' + str_formid + 'Form" t:zone="zoneFormView" >'.
 MESSAGE '       <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>'.
 MESSAGE '       <button type="submit"><img  src="images/saveRecord24.png" /></button>'.
-MESSAGE '       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:$' + chr(123) + 'id' + chr(125) + '?"  t:id="toolbardel" t:context="$' + chr(123) + 'id' + chr(125) + '"><button><img src="images/DeleteRecord24.png" /></button></t:actionlink>'.
+MESSAGE '       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:$' + chr(123) + 'id' + chr(125) + '?"  t:id="toolbardel" t:context="$' + chr(123) + 'id' + chr(125) + '"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>'.
 MESSAGE '       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">'. 
 MESSAGE '           <t:GRID'.
 MESSAGE '           t:id="Grid"'.
