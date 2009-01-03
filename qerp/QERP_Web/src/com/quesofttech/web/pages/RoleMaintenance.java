@@ -26,256 +26,318 @@ import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 public class RoleMaintenance extends SecureBasePage {
-private String _strMode = "";
-private Role RoleDetail;
-private Role _Role;
-@Persist
-private List<Role> _Roles;
-@Inject
-private Logger _logger;
-@Inject
-private Block blockFormView;
-@Persist
-private long lng_CurrentID;
-@Component(id = "RoleForm")
-private Form _form;
-@Persist
-private int int_SelectedRow;
-@ApplicationState
-private String myState;
+// Default defination.
+    private String _strMode = "";
+    private Role RoleDetail;
+    private Role _role;
+    @Persist
+    private List<Role> _Roles;
+    @Inject
+    private Logger _logger;
+    @Inject
+    private Block blockFormView;
+    @Persist
+    private long lng_CurrentID;
+// End of  Default defination.
+    private String viewDisplayText="", viewEditText="";
+    public String getViewDisplayText()
+    {
+     return viewDisplayText;
+    }
 
-@Component(id = "GRID")
-private Grid _Grid;
-@Component(id = "id")
-private TextField _id;
-private Long id;
-public Long getid()
-{
-   return id;
-}
-public void setid(Long id)
-{
-   this.id = id;
-}
-@Component(id = "RoleField")
-private TextField _RoleField;
-private String RoleField;
-public String getRoleField()
-{
-   return RoleField;
-}
-public void setRoleField(String RoleField)
-{
-   this.RoleField = RoleField;
-}
-void RefreshRecords()
-{
-try
-{
-   _Roles = getRoleService().findRoles();
-}
-catch(BusinessException be)
-{
+    public String getviewEditText()
+    {
+         return viewEditText;
+    }
 
-}
-if(_Roles!=null && !_Roles.isEmpty())
-{
-   RoleDetail = _Roles.get(_Roles.size() - 1);
-   assignToLocalVariable(RoleDetail);
-}
-}
-private int getRcdLocation( Long id)  throws BusinessException
-{
-   int int_return ,int_i;
-   int_i = 0;
-   int_return = 0;
-   _Roles = getRoleService().findRoles();
-   for(Role p : _Roles)
-{
-   int_i++;
-   if((long)p.getId().intValue()==id)
-{
-                   int_return = int_i;
-}
-}
-return int_return;
-}
+    @Component(id = "RoleForm")
+    private Form _form;
+    @Persist
+    private int int_SelectedRow;
 
-public Block getBlock() {
-   return blockFormView;
-}
+    @ApplicationState
+    private String myState;
 
+    @Component(id = "GRID")
+    private Grid _Grid;
 
-Object onSuccess()
-{
-   RefreshRecords();
-   return blockFormView;
-}
+    //===============================
+    // Text Component for id
+    @Component(id = "id")
+    private TextField _id;
+    private Long id;
+    public Long getid()
+    {
+       return id;
+    }
 
+    public void setid(Long id)
+    {
+       this.id = id;
+    }
+    //===============================
 
-void setupRender() {
-   RefreshRecords();
-}
+    //===============================
+    // Text Component for Role
+    @Component(id = "Role")
+    private TextField _Role;
+    private String Role;
+    public String getRole()
+    {
+       return Role;
+    }
 
+    public void setRole(String Role)
+    {
+       this.Role = Role;
+    }
+    //===============================
 
-void onValidateForm() {
-if ("U"== myState)
-{
-   _UpdateRecord();
-}
-else
-if ("A" == myState)
-{
-   _AddRecord();
-}
-}
+    //===============================
+    // Text Component for Description
+    @Component(id = "Description")
+    private TextField _Description;
+    private String Description;
+    public String getDescription()
+    {
+       return Description;
+    }
 
-void assignToDatabase(Role role){
-   role.setId(id);
-   role.setRole(RoleField);
-   role.setRecordStatus("A");
-}
-void assignToLocalVariable(Role role)
-{
-   this.id = role.getId();
-   this.RoleField = role.getRole();
-}
-void _AddRecord()
-{
-Role role = new Role();
-try {
-	role.setCreateLogin(getVisit().getMyLoginId());
-	role.setModifyLogin(getVisit().getMyLoginId());
-	
-	role.setCreateApp(this.getClass().getSimpleName());
-	role.setModifyApp(this.getClass().getSimpleName());
-	 
-   assignToDatabase(role);
-   getRoleService().addRole(role);
-   }
-catch (Exception e) {
-   _logger.info("Role_Add_problem");
-   e.printStackTrace();
-   _form.recordError(getMessages().get("Role_add_problem"));
-}
-}
-
-void _UpdateRecord(){
-Role role = new Role();
-try
-{
-   role = getRoleService().findRole(id);
-}
-   catch(BusinessException be)
-   {
-
-}
-if(role !=null)
-{
-try {
-	//role.setCreateLogin(getVisit().getMyLoginId());
-	role.setModifyLogin(getVisit().getMyLoginId());
-	role.setModifyApp(this.getClass().getSimpleName()); 
-	
-	assignToDatabase(role);
-	getRoleService().updateRole(role);
-}
-catch (BusinessException e) {
-_form.recordError(_RoleField, e.getLocalizedMessage());
-}
-catch (Exception e) {
-   _logger.info("Role_update_problem");
-   e.printStackTrace();
-   _form.recordError(getMessages().get("Role_update_problem"));
+    public void setDescription(String Description)
+    {
+       this.Description = Description;
+    }
+    //===============================
+    void RefreshRecords()
+    {
+       try
+       {           
+           _Roles = getRoleService().findRoles();
        }
-   }
-}
+       catch(BusinessException be)
+       {
+
+       }
+       if(_Roles!=null && !_Roles.isEmpty())
+       {
+           if(int_SelectedRow==0)
+           {
+               RoleDetail = _Roles.get(_Roles.size() - 1);
+           }
+           else
+           {
+               RoleDetail = _Roles.get(int_SelectedRow - 1);
+           }
+           RoleDetail = _Roles.get(_Roles.size() - 1);
+           myState="U";
+           viewDisplayText="Block";
+           viewEditText="none";
+           assignToLocalVariable(RoleDetail);
+       }
+    }
+    private int getRcdLocation( Long id)  throws BusinessException
+    {
+      int int_return ,int_i;
+      int_i = 0;
+      int_return = 0;
+      for(Role p : _Roles)
+       {
+          int_i++;
+          if((long)p.getId().intValue()==id)
+           {
+                      int_return = int_i;
+           }
+       }
+       return int_return;
+    }
+
+    public Block getBlock() {
+       return blockFormView;
+    }
 
 
-void _DeleteRecord(Long id) {
-Role role = new Role();
-try
-{
-   role = getRoleService().findRole(id);
-}
-catch(BusinessException be)
-{
-
-}
-if(role!=null)
-{
-   try {
-	   //role.setCreateLogin(getVisit().getMyLoginId());
-		role.setModifyLogin(getVisit().getMyLoginId());
-		role.setModifyApp(this.getClass().getSimpleName());
-		 
-   getRoleService().logicalDeleteRole(role);
-}
-   catch (BusinessException e) {
-   _form.recordError(_RoleField, e.getLocalizedMessage());
-}
-catch (Exception e) {
-   _logger.info("Role_Delete_problem");
-   e.printStackTrace();
-   _form.recordError(getMessages().get("Role_Delete_problem"));
-}
-}
-}
-
-void onActionFromtoolbarDel(Long id)
-{
-	if (id!=null) {
-		_form.clearErrors();
-		myState = "D";
-		_strMode = "D";		
-		_DeleteRecord(id);
-	}
-}
-
-Object onActionFromToolbarAdd ()
-{
-   myState = "A";
-   _strMode = "A";
-   return blockFormView;
-}
-
-Object onActionFromSelect(long id)
-{
-   myState = "U";
-   _strMode = "U";
-   lng_CurrentID = id;
-   try
-   {
-       RoleDetail = getRoleService().findRole(id);
-       int_SelectedRow = getRcdLocation(id);
-   }
-catch(BusinessException be)
-{
-
-}
-
-if(RoleDetail!=null)
-{
-assignToLocalVariable(RoleDetail);
-return blockFormView;
-}
-return null;
-}
-private IRoleServiceRemote getRoleService() {
-   return getBusinessServicesLocator().getRoleServiceRemote();
-}
-public List<Role> getRoles() {
-   return _Roles;
-}
+    Object onSuccess()
+    {
+       _form.clearErrors();
+       RefreshRecords();
+       return blockFormView;
+    }
 
 
-public Role getRole() throws BusinessException{
-   return _Role;
-}
+    Object onFailure()
+    {
+       _form.clearErrors();
+       _form.recordError(getMessages().get("Record_Save_Error"));
+       return blockFormView;
+    }
 
 
- public void setRole(Role tb) {
-   _Role = tb;
-}
+    void setupRender() {
+       RefreshRecords();
+    }
+
+
+    void onValidateForm() {
+       if ("U"== myState)
+       {
+           _UpdateRecord();
+       }
+       else
+       if ("A" == myState)
+       {
+           _AddRecord();
+       }
+    }
+
+    void assignToDatabase(Role role){
+       role.setId(id);
+       role.setRole(Role);
+       role.setDescription(Description);
+       role.setRecordStatus("A");
+    }
+    void assignToLocalVariable(Role role)
+    {
+       this.id = role.getId();
+       this.Role = role.getRole();
+       this.Description = role.getDescription();
+    }
+    void _AddRecord()
+    {
+       Role role = new Role();
+       try {
+               role.setModifyLogin(getVisit().getMyLoginId());
+               role.setCreateLogin(getVisit().getMyLoginId());
+           assignToDatabase(role);
+           getRoleService().addRole(role);
+       }
+       catch (Exception e) {
+           _logger.info("Role_Add_problem");
+           e.printStackTrace();
+           _form.recordError(getMessages().get("Role_add_problem"));
+       }
+    }
+
+    void _UpdateRecord(){
+       Role role = new Role();
+       try
+       {
+           role = getRoleService().findRole(id);
+       }
+       catch(BusinessException be)
+       {
+
+       }
+       if(role !=null)
+       {
+           try {
+               role.setModifyLogin(getVisit().getMyLoginId());
+               assignToDatabase(role);
+               getRoleService().updateRole(role);
+           }
+           catch (BusinessException e) {
+               _form.recordError(_Role, e.getLocalizedMessage());
+           }
+       catch (Exception e) {
+               _logger.info("Role_update_problem");
+               e.printStackTrace();
+               _form.recordError(getMessages().get("Role_update_problem"));
+           }
+       }
+    }
+
+
+    void _DeleteRecord(Long id) {
+       Role role = new Role();
+       try
+       {
+           role = getRoleService().findRole(id);
+       }
+       catch(BusinessException be)
+       {
+
+       }
+       if(role!=null)
+       {
+           try {
+               role.setModifyLogin(getVisit().getMyLoginId());
+               getRoleService().logicalDeleteRole(role);
+               if(int_SelectedRow!=0)
+               {
+                   int_SelectedRow--;
+               }
+               RefreshRecords();
+           }
+               catch (BusinessException e) {
+               _form.recordError(_Role, e.getLocalizedMessage());
+       }
+           catch (Exception e) {
+               _logger.info("Role_Delete_problem");
+               e.printStackTrace();
+               _form.recordError(getMessages().get("Role_Delete_problem"));
+           }
+       }
+    }
+
+    void onActionFromtoolbarDel(Long id)
+    {
+            if (id!=null){
+       _form.clearErrors();
+       myState = "D";
+       _strMode = "D";
+       _DeleteRecord(id);
+            }
+    }
+
+    Object onActionFromToolbarAdd ()
+    {
+       _form.clearErrors();
+       myState = "A";
+       _strMode = "A";
+       return blockFormView;
+    }
+
+    Object onActionFromSelect(long id)
+    {
+       _form.clearErrors();
+       myState = "U";
+       _strMode = "U";
+       lng_CurrentID = id;
+       try
+       {
+           RoleDetail = getRoleService().findRole(id);
+           int_SelectedRow = getRcdLocation(id);
+       }
+       catch(BusinessException be)
+       {
+
+       }
+
+       if(RoleDetail!=null){
+           viewDisplayText="Block";
+           viewEditText="none";
+           assignToLocalVariable(RoleDetail);
+           return blockFormView;
+       }
+       return null;
+    }
+
+    private IRoleServiceRemote getRoleService() {
+       return getBusinessServicesLocator().getRoleServiceRemote();
+    }
+
+
+    public List<Role> getRoles() {
+       return _Roles;
+    }
+
+
+    public Role getRoleDetail() throws BusinessException{
+       return _role;
+    }
+
+
+     public void setRoleDetail(Role tb) {
+       _role = tb;
+    }
 
 }
