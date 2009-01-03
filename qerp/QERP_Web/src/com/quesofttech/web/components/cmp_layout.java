@@ -17,6 +17,7 @@ import org.apache.tapestry5.annotations.Property;
 import sun.security.action.GetLongAction;
 
 import com.quesofttech.business.common.exception.BusinessException;
+import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.inventory.MaterialType;
 import com.quesofttech.business.domain.inventory.iface.IMaterialTypeServiceRemote;
 import com.quesofttech.business.domain.security.SecurityFinderService;
@@ -36,6 +37,83 @@ public class cmp_layout extends SimpleBasePage
 {
 	@InjectPage
 	private Index _index;
+	//private int int_Array = getSubjectSize();
+	private String[] _TreeView  = new String[100];
+	
+	//@Property
+	//@Persist
+	private List<String> _subjects = new ArrayList<String>();
+	/*= {"Inventory Management"
+			//, "Bill Of Material"
+			, "Production Planning"
+			, "Procurement & Sourcing"
+			, "Sales & Distribution"
+			, "System Administration"
+			, "Finance & Controlling"};*/
+			
+	//@Persist		
+	private List<String> _modules  = new ArrayList<String>();
+	/*= {"INV"
+			//, "BOM"
+			, "PP"
+			, "PS"
+			, "SD"
+			, "SYS"
+			, "FICO"};*/
+	public cmp_layout()
+	{
+		
+	}
+	public List<String> getSubjects()
+	{
+		List<String> test = new ArrayList<String>();
+		int i=0;
+		try{
+			_subjects.clear();
+			_modules.clear();
+			List<Module> Modules;
+			
+			Modules = getBusinessServicesLocator().getModuleServiceRemote().findModules();
+			for(Module p : Modules)
+			{			
+				
+				System.out.println("This is the output data: " + p.toString());
+				_subjects.add(p.getDescription());
+				_modules.add(p.getCode());
+				//_modules[i] = p.getCode();
+				i++;
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}		
+		return _subjects;
+	}
+	
+	private int getSubjectSize()
+	{
+		int i=0;
+		try{
+			
+			List<Module> Modules;
+			
+			Modules = getBusinessServicesLocator().getModuleServiceRemote().findModules();
+			for(Module p : Modules)
+			{			
+				
+				System.out.println("This is the output data: " + p.toString());
+				//_subjects[i] = p.getDescription();
+				//_modules[i] = p.getCode();
+				i++;
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}		
+		//i++;
+		return i;
+	}
+	
 	
 	
 	//@InjectPage
@@ -48,64 +126,27 @@ public class cmp_layout extends SimpleBasePage
 	}
 	// _ProgramTypeNum is to let the tree view know the Particular
 	// Program type should locate at which location base on id.
-	private String[] _TreeView  = new String[100];
-	//List<String> _TreeString = new ArrayList<String>();
-	//List<String> _SubjectString = new ArrayList<String>();
-	//List<String> _ModuleString = new ArrayList<String>();
-	//List<Module> _Modules;
-	/*
-	private void getArrayValues()
-	{
-		//// System.out.println("here liao");
-		_Modules = getISecurityFinderServiceRemote().findModules();
-		//_subjects = new String[_Modules.];
-		for (Module m : _Modules)
-		{
-			_ModuleString.add(m.getCode());	
-			_SubjectString.add(m.getDescription());
-		}
-		//// System.out.println("_ModuleString size: " +  _ModuleString.size());
-		_subjects = new String[_ModuleString.size()];
-		for(int i_loop=0;i_loop<_ModuleString.size();i_loop++)
-		{
-			_subjects[i_loop] = _SubjectString.get(i_loop);
-		}
-	}*/
-	//@Property
-    //private String[] _subjects ;
 	
-	@Property
-	private String[] _subjects = {"Inventory Management"
-			//, "Bill Of Material"
-			, "Production Planning"
-			, "Procurement & Sourcing"
-			, "Sales & Distribution"
-			, "System Administration"
-			, "Finance & Controlling"};
-			
-			
-	private String[] _modules = {"INV"
-			//, "BOM"
-			, "PP"
-			, "PS"
-			, "SD"
-			, "SYS"
-			, "FICO"};
 	// TODO: Need to Change to Dynamic Module and Module Description in the Menu
 
 	private String[] _ProgramTypeNum = {"Maintenance", "Report", "Inquiry", "Processing", "Posting" };
 	private int getProgramTypeNum(String _input)
 	{		
 		int _temp = 1; // Assumed input value unknown will recognized it as Maint
-		//// System.out.println("input are " + _input);
-		for(int i=0;i<_subjects.length ;i++)    // Changed From hardcoded to base on _subject 's length
-		{
-			//// System.out.println("_ProgramTypeNum locatin:" + i + " and the value is :" + _ProgramTypeNum[i]);
-			if(_ProgramTypeNum[i].equals(_input.trim()))
+		try{
+			
+			for(int i=0;i<_subjects.size() ;i++)    // Changed From hardcoded to base on _subject 's length
 			{
-				_temp = i + 1;
-				break;				
-			}				
+				if(_ProgramTypeNum[i].equals(_input.trim()))
+				{
+					_temp = i + 1;
+					break;				
+				}				
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("getProgramTypeNum Exception:" + e.getMessage());
 		}
 		return _temp;
 	}
@@ -147,41 +188,22 @@ public class cmp_layout extends SimpleBasePage
 			//getArrayValues();
 			// TODO: (hardcode potion) this will temporary to do the user id assignment. to avoid development test having the exception when accesing the page without login.
 			_id =getVisit().getMyUserId(); // Hard coded to using KoaCG id located at No2.  
-			//_id = 2;
-			////// System.out.println("printing applicatoin stage:" + getVisit().getMyUserId() );
-	    	_user = getISecurityFinderServiceRemote().findUser(_id);   
+			_user = getISecurityFinderServiceRemote().findUser(_id);   
 	    	_Programs = getISecurityFinderServiceRemote().findAuthorizedProgramsByUser(_user);
-	    	// System.out.println("ID: " + _id);
-	    	// System.out.println("USER: " + _user.toString());
-			// System.out.println("PROGRAM:" + _Programs.toString());
-			for(int i_Subjects=0 ;i_Subjects< _subjects.length;i_Subjects++){ // To Loop number of Subjects
+	    	for(int i_Subjects=0 ;i_Subjects< _subjects.size();i_Subjects++){ // To Loop number of Subjects
 				_TreeView[i_Subjects] = "<div class='app'>" 
 					+ "<div style='background: #eee; border: dashed 1px #000;'>"
 					+ "<table width='100%'> " 
 					+ "<tr>   <th width='33%'>Program List</th></tr>";
 				for (int i_Type=0;i_Type<_ProgramTypeNum.length;i_Type++){ // To Loop Number of Program Type;
-					/*_TR_ID++;
-					_TreeView[i_Subjects] = _TreeView[i_Subjects] 
-	                + "<tr id='" + _TR_ID + "' class='a'>" 
-	                + "<td id='p" + _PNum++ + "'>"
-	                + "<div id='p" + _PNum++ + "' class='tier1'>"
-	                + "<a id='p"  + _PNum++ + "' href='#' onclick='toggleRows(this)' class='folder'>"
-	                + "</a>" + _ProgramTypeNum[i_Type]  + "</div></td>"
-	                + "</tr> ";*/
 					_Loop = 0;
 					for(Program p : _Programs)
 			    	{    		
-						_temp = p.getType();
-						////// System.out.println(_Programs.toString());
-						// System.out.println("Type: " + p.getType());
-						// System.out.println("Module: " + p.getModule());
+						_temp = p.getType();						
 			    		if(p.getModule()!=null)
 			    		{
 				    		_tempSubj = p.getModule().getCode();
-				    		//_modules[i_Subjects].equals
-				    		// System.out.println(_ProgramTypeNum[i_Type] + " = " + _temp);
-				    		//// System.out.println(_modules[i_Subjects] + " = " + _tempSubj);
-				    		if(_ProgramTypeNum[i_Type].equals(_temp) && _modules[i_Subjects].equals(_tempSubj))
+				    		if(_ProgramTypeNum[i_Type].equals(_temp) &&  _modules.get(i_Subjects).equals(_tempSubj))
 				    		{
 				    			// This is to set if Program have only list out the Maint, Posting , etc. to avoid looks messy
 								if(_Loop==0)
@@ -195,10 +217,6 @@ public class cmp_layout extends SimpleBasePage
 					                + "</a><a href='#' onclick='toggleRowsType(this)' >" + _ProgramTypeNum[i_Type]  + "</a></div></td>"
 					                + "</tr> ";
 								}
-				    			
-				    			
-				    			
-				    			
 				    			_Loop++;
 				    			_TreeView[i_Subjects] = _TreeView[i_Subjects]
 								 + " <tr id='" + _TR_ID + "-" + _Loop + "' class='a'>"
@@ -223,6 +241,7 @@ public class cmp_layout extends SimpleBasePage
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("GenerateTree Exception:" + e.getMessage());
 			returnLoginScreen();
 			return;
 		}
@@ -232,44 +251,12 @@ public class cmp_layout extends SimpleBasePage
 	{
 		return _index;
 	}
-	/*
-    private String _detail1 = "<div class='app'>" + 
-	"<div style='background: #eee; border: dashed 1px #000;'>" + 
-		"<table width='100%'> " +
-		"<tr>   <th width='33%'>Location</th></tr>" + 
-		"<tr id='1' class='a'>" + 
-		"<td id='p1'><div id='p2' class='tier1'><a id='p3' href='#' onclick='toggleRows(this)' class='folder'></a>By Activity</div></td>" + 
-		"</tr> " + 
-		" <tr id='1-1' class='a'>" + 
-		"<td id='p4'><div id='p5' class='tier2'><a id='p6' href='#' onclick='toggleRows(this)' class='folder'></a>Project Planning</div></td> " +
-		"</tr> " +
-		"<tr id='1-1-1' class='a'> " +
-		"<td><div class='tier3'><a href='http://localhost:8080/QERP/index'  target=" +  
-		(char)34 + "maintest" +  (char)34 +  "   class='doc'></a>Overview</div></td>  " +
-		"</tr>" +
-		"<tr id='1-1-2' class='a'> " +
-		"<td><div class='tier3'><a href='http://localhost:8080/QERP/MaterialTypeMaintenance'  target=" +  
-		(char)34 + "maintest" +  (char)34 +  "  class='dynamic'>A</a>Overview</div></td>  " +
-		"</tr>" +
-		"</table>" +
-	"</div>" +
-	"</div>"; */
-    	
-	/*
-	List<Role> roles = findUserRoles(user.getLogin());
+	//public List<String> getSubjects()
+	//{		
+		//System.out.println("this is the subject: and array is " + int_Array + ", subject: " + _subjects.toString());
+	//	return _subjects;
+	//}
 	
-	List<Long> roleIds = new ArrayList<Long>(); 
-	
-	for(Role r : roles)
-	{
-		roleIds.add(r.getId());
-	}
-    
-    */
-    
-    //Maint, Report, Inquery, Processing, 
-    //Posting 
-   
     private String _detail = "A";
     private String _test;
     private String _temp;
@@ -277,54 +264,34 @@ public class cmp_layout extends SimpleBasePage
     public String[] getDetails() throws BusinessException
     {
     	try{
+    		
 	    	GenerateTree();
-	    	String[] _Details_output = new String[_subjects.length];
+System.out.println("the tree size is :" + _subjects.size());
+	    	String[] _Details_output = new String[_subjects.size()];
 	    	
-	    	for(int i_Loop=0;i_Loop<_subjects.length;i_Loop++)
+	    	for(int i_Loop=0;i_Loop<_subjects.size();i_Loop++)
 	    	{
+	    		System.out.println("here");
 	    		if (! _TreeView[i_Loop].equals(""))
 	    		{
-	    			_Details_output[i_Loop] = _TreeView[i_Loop];    			
+	    			_Details_output[i_Loop] = _TreeView[i_Loop];   
+	    			System.out.println("the tree contains is :" + _TreeView[i_Loop]);
 	    		}
 	    		else 
 	    		{
+	    			System.out.println("the tree contains is blank");
 	    			_Details_output[i_Loop] = "<br><br><B><H1>N/A</H1></B>";
 	    		}
 	    		
 	    	}
-	    	return _Details_output;
-	    	
-	    	/*
-	    	_id = 2;
-	    	_temp1 = "Maint";
-	    	_user = getISecurityFinderServiceRemote().findUser(_id);
-	    	//// System.out.println("_user size:" + _user.getLogin());
-	    	_Programs = getISecurityFinderServiceRemote().findAuthorizedProgramsByUser(_user);
-	    	
-	    	if (_Programs != null)
-	    	{
-	    		//// System.out.println("not null");
-	    	}
-	    	else
-	    	{
-	    		//// System.out.println("cb...null");
-	    	}    	
-	    	for(Program p : _Programs)
-	    	{    		
-	    		_temp = p.getType();
-	    		//// System.out.println("My output is located at : " + _temp + ", " + getProgramTypeNum(_temp));    		
-	    	} */
+	    	return _Details_output;	    	
     	}
     	catch(Exception e)
     	{
     		String[] _error = {""};
     		returnLoginScreen(); 
-    		return _error;
-    		
-    	}
-    	
-    		
-    	
+    		return _error;    		
+    	} 	
     }
     
     private ISecurityFinderServiceRemote getISecurityFinderServiceRemote()
