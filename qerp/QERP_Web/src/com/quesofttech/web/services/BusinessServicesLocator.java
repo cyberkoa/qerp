@@ -147,6 +147,10 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 	public IRoleProgramServiceRemote getRoleProgramServiceRemote(){
 		return (IRoleProgramServiceRemote) getService(RoleProgramService.class.getSimpleName()+"Remote");
 	}
+	
+	public IUserPasswordServiceRemote getUserPasswordServiceRemote(){
+		return (IUserPasswordServiceRemote) getService(UserPasswordService.class.getSimpleName()+"Remote");
+	}
 
 	
 	

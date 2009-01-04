@@ -13,17 +13,22 @@ DEFINE VARIABLE  str_classname AS CHARACTER   NO-UNDO.
 /*   `fk_Customer` bigint(20) default NULL".    */
 
 
-pc_value = "`Rolep_id` bigint(20) default NULL,
-    `fk_Program` bigint(20) NOT NULL,
-  `fk_Role` bigint(20) NOT NULL,
-  `rolep_IsAllowed` bit(1) NOT NULL".
+pc_value = "`User_id` bigint(20) NOT NULL,
+  `user_EmailAddress` varchar(50) default NULL,
+  `user_ExpiryDate` datetime default NULL,
+  `user_FirstName` varchar(30) NOT NULL,
+  `user_LastName` varchar(30) NOT NULL,
+  `user_Login` varchar(20) NOT NULL,
+  `user_Salutation` varchar(10) default NULL,
+  `user_Telephone` varchar(15) default NULL,
+     `fk_UserPassword` bigint(20) default NULL".
  
   
 
 /*     SalesOrderMaterial */
-str_formid = 'RoleProgram'.
-str_subject = 'RoleProgram'.
-str_classname = 'roleProgram'.
+str_formid = 'User'.
+str_subject = 'User'.
+str_classname = 'user'.
     str_module = 'security'.
 
 
