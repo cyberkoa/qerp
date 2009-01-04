@@ -200,10 +200,10 @@ public class RoleProgramMaintenance extends SimpleBasePage {
       for(RoleProgram p : _RolePrograms)
        {
           int_i++;
-          if((long)p.getId().intValue()==id)
-           {
-                      int_return = int_i;
-           }
+         // if((long)p.getIdp().intValue()==id)
+         //  {
+         //             int_return = int_i;
+         //  }
        }
        return int_return;
     }
@@ -247,7 +247,7 @@ public class RoleProgramMaintenance extends SimpleBasePage {
     }
 
     void assignToDatabase(RoleProgram roleProgram){
-       roleProgram.setId(id);
+      // roleProgram.setIdp(id);
        roleProgram.setProgram(Program);
        roleProgram.setRole(role);
        roleProgram.setIsAllowed(IsAllowed);
@@ -255,7 +255,7 @@ public class RoleProgramMaintenance extends SimpleBasePage {
     }
     void assignToLocalVariable(RoleProgram roleProgram)
     {
-       this.id = roleProgram.getId();
+       //this.id = roleProgram.getIdp();
        this.Program = roleProgram.getProgram();
        this.role = roleProgram.getRole();
        this.IsAllowed = roleProgram.getIsAllowed();
@@ -267,6 +267,7 @@ public class RoleProgramMaintenance extends SimpleBasePage {
                roleProgram.setModifyLogin(getVisit().getMyLoginId());
                roleProgram.setCreateLogin(getVisit().getMyLoginId());
            assignToDatabase(roleProgram);
+           System.out.println("roleProgram: " + roleProgram.toString());
            getRoleProgramService().addRoleProgram(roleProgram);
        }
        catch (Exception e) {
