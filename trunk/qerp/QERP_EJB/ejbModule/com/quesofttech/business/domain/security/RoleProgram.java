@@ -60,7 +60,7 @@ public class RoleProgram extends BaseEntity {
 */
 	
     @Embeddable
-    public static class RoleId
+    public static class Id
         implements Serializable
     {
         @Column(name="fk_Role")
@@ -69,9 +69,9 @@ public class RoleProgram extends BaseEntity {
         @Column(name="fk_Program")
         private Long programId;
 
-        public RoleId() {}
+        public Id() {}
 
-        public RoleId(Long roleId, Long programId)
+        public Id(Long roleId, Long programId)
         {
             this.roleId = roleId;
             this.programId = programId;
@@ -102,7 +102,7 @@ public class RoleProgram extends BaseEntity {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			final RoleId other = (RoleId) obj;
+			final Id other = (Id) obj;
 			if (programId == null) {
 				if (other.programId != null)
 					return false;
@@ -133,12 +133,9 @@ public class RoleProgram extends BaseEntity {
  */       
 
     } 
-    @Column(name = "id_Rolep", nullable = false)
-	private Long id;
-    
-    
+	
     @EmbeddedId
-    private RoleId Roleid = new RoleId(); 
+    private Id id = new Id(); 
 	
     @ManyToOne
     @JoinColumn(
@@ -184,7 +181,9 @@ public class RoleProgram extends BaseEntity {
 		this.rowInfo = new RowInfo();
 	}	
 
-	
+	//@GeneratedValue(strategy = GenerationType.TABLE, generator = "id_Rolep")	
+    //@Column(name = "id_Rolep", nullable = false)
+	//private Long idp;
 	// Constructors without the common fields
 	public RoleProgram(Long id) {
 		super();
@@ -203,8 +202,8 @@ public class RoleProgram extends BaseEntity {
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
 		super();
 
-        this.Roleid.roleId = role.getId();
-        this.Roleid.programId = program.getId(); 
+        this.id.roleId = role.getId();
+        this.id.programId = program.getId(); 
 		//this.id = id;
 		/* Example of assignment
 		this.type = type;
@@ -272,7 +271,7 @@ public class RoleProgram extends BaseEntity {
 	
 */	@Override
 	public Serializable getIdForMessages() {
-		return Roleid.roleId + Roleid.programId;
+		return id.roleId + id.programId;
 	}
 
 	
@@ -521,15 +520,6 @@ public class RoleProgram extends BaseEntity {
 	}
 
 
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
+	
 	
 }
