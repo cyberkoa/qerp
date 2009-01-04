@@ -52,6 +52,19 @@ public class SecurityFinderService extends BaseService implements ISecurityFinde
 		User obj = (User) find(User.class, id);
 		return obj;
 	}
+	
+	public UserPassword findUserPassword(Long id) {
+		UserPassword obj=null;
+		try
+		{
+			obj = (UserPassword) find(UserPassword.class, id);
+		}
+		catch (DoesNotExistException e)
+		{
+			
+		}
+		return obj;
+	}
 
 	public User authenticateUser(String login, String password) throws AuthenticationException {
 		User user = null;

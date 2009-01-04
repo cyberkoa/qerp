@@ -109,6 +109,14 @@ public class UserPassword extends BaseEntity {
 
 	// The need for a hashCode() method is discussed at http://www.hibernate.org/109.html
 
+	public String get_loaded_password() {
+		return _loaded_password;
+	}
+
+	public void set_loaded_password(String _loaded_password) {
+		this._loaded_password = _loaded_password;
+	}
+
 	@Override
 	public int hashCode() {
 		return getId() == null ? super.hashCode() : getId().hashCode();
@@ -192,6 +200,12 @@ public class UserPassword extends BaseEntity {
 	/**
 	 * This method provides a way for security officers to "reset" the userPassword.
 	 */
+	public void setAssignPassword(String newPassword)throws BusinessException {
+		if (StringUtil.isEmpty(newPassword)) {
+			throw new ValueRequiredException(this, "User_password");
+		}
+		this.password = newPassword;
+	}
 	void setPassword(String newPassword) throws BusinessException {
 
 		// Do all tests of userPassword size, content, history, etc. here...
@@ -205,6 +219,22 @@ public class UserPassword extends BaseEntity {
 		}
 
 		this.password = newPassword;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/*

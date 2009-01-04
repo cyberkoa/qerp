@@ -108,7 +108,10 @@ public class User extends BaseEntity {
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="user", targetEntity=UserProgram.class)
 	private List<UserProgram> userPrograms;
 	
-	
+	public User() {
+		super();
+		this.rowInfo = new RowInfo();
+	}	
 	
 	@Embedded
 	RowInfo rowInfo;
@@ -285,6 +288,8 @@ public class User extends BaseEntity {
 	}
 
 	public void setExpiryDate(java.sql.Timestamp expiryDate) {
+		java.util.Date today = new java.util.Date();
+		expiryDate = new java.sql.Timestamp(today.getTime());
 		this.expiryDate = expiryDate;
 	}
 
@@ -433,6 +438,10 @@ public class User extends BaseEntity {
 	 */
 	public void setUserPrograms(List<UserProgram> userPrograms) {
 		this.userPrograms = userPrograms;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.quesofttech.business.domain.security.Program;
 import com.quesofttech.business.domain.security.Role;
 import com.quesofttech.business.domain.security.User;
+import com.quesofttech.business.domain.security.UserPassword;
 import com.quesofttech.business.domain.security.dto.UserSearchFields;
 
 import com.quesofttech.business.common.exception.AuthenticationException;
@@ -19,10 +20,13 @@ public interface ISecurityFinderServiceRemote {
 	// User
 	
 	User findUser(Long id) throws DoesNotExistException;
+	
+	UserPassword findUserPassword(Long id) throws DoesNotExistException;
 
 	User findUserByLogin(String login) throws DoesNotExistException;
 
 	List<User> findUsers();
+	
 
 	List<User> findUsers(UserSearchFields searchFields, SearchOptions searchOptions);
 	
