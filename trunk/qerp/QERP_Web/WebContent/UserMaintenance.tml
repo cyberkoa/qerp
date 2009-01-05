@@ -13,12 +13,12 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
-           t:reorder="id,Login,FirstName,LastName,EmailAddress,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,Login,FirstName,LastName,EmailAddress,ExpiryDate,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="Users"
            t:row="User"
                    t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:exclude="sessionid,recordstatus,version,modifyapp,createapp,UserPassword"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="User.id">
@@ -35,7 +35,28 @@
                            <th><t:label t:for="id">id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
+                        <tr>
+                           <th><t:label t:for="Login">Login</t:label>:</th>
+                           <td>   <DIV style="display:${viewDisplayText};"> ${Login}</DIV><DIV style="display:${viewEditText};"> <input  t:type="TextField" t:id="Login" t:value="Login" t:maxLength="20" t:size="20" /> </DIV></td>
+                       </tr>
                        <tr>
+                           <th><t:label t:for="Salutation">Salutation</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Salutation" t:value="Salutation" t:maxLength="10" t:size="10" /> </td>
+                       </tr>
+                      
+                       <tr>
+                           <th><t:label t:for="FirstName">FirstName</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="FirstName" t:value="FirstName" t:maxLength="30" t:size="30" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="LastName">LastName</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="LastName" t:value="LastName" t:maxLength="30" t:size="30" /> </td>
+                       </tr>                       
+                       <tr>
+                           <th><t:label t:for="Telephone">Telephone</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Telephone" t:value="Telephone" t:maxLength="15" t:size="15" /> </td>
+                       </tr>
+                        <tr>
                            <th><t:label t:for="EmailAddress">EmailAddress</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="EmailAddress" t:value="EmailAddress" t:maxLength="50" t:size="50" /> </td>
                        </tr>
@@ -44,28 +65,8 @@
                            <td><input  t:type="DateField" t:id="ExpiryDate" t:value="ExpiryDate" /></td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="FirstName">FirstName</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="FirstName" t:value="FirstName" t:maxLength="30" t:size="30" /> </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="LastName">LastName</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="LastName" t:value="LastName" t:maxLength="30" t:size="30" /> </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="Login">Login</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Login" t:value="Login" t:maxLength="20" t:size="20" /> </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="Salutation">Salutation</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Salutation" t:value="Salutation" t:maxLength="10" t:size="10" /> </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="Telephone">Telephone</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Telephone" t:value="Telephone" t:maxLength="15" t:size="15" /> </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="UserPassword">UserPassword</t:label>:</th>
-                           <td>   <input  t:type="PasswordField" t:id="UserPassword" t:value="UserPassword" t:maxLength="20" t:size="20" /> </td>
+                           <th><DIV style="display:${viewEditText};"> <t:label t:for="UserPassword">UserPassword</t:label>:</DIV></th>
+                           <td>  <DIV style="display:${viewEditText};">  <input  t:type="PasswordField" t:id="UserPassword" t:value="UserPassword" t:maxLength="20" t:size="20" /></DIV> </td>
                        </tr>
                                </table>
                </td>
