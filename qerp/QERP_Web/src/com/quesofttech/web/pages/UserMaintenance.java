@@ -109,6 +109,12 @@ public class UserMaintenance extends SimpleBasePage {
     private java.sql.Timestamp ExpiryDate;
     public java.util.Date getExpiryDate()
     {
+    	
+    	System.out.println("is it here error? lao eh");
+       if (ExpiryDate==null)
+       {
+    	   return null;   
+       }       
        return SqlTimestamptoDateUtilDate(ExpiryDate);
     }
 
@@ -117,7 +123,9 @@ public class UserMaintenance extends SimpleBasePage {
     	//java.util.Date jDate = 
         //    new java.util.Date(sDate.getTime());
 
-       this.ExpiryDate = utilDateToSqlTimestamp(ExpiryDate);
+    	System.out.println("is it here error?");
+    	this.ExpiryDate = utilDateToSqlTimestamp(ExpiryDate);
+    	System.out.println("hopefully is here");
     }
     //===============================
 
@@ -300,6 +308,7 @@ public class UserMaintenance extends SimpleBasePage {
     void assignToDatabase(User user){
        user.setId(id);       
        user.setEmailAddress(EmailAddress);
+       
        user.setExpiryDate(utilDateToSqlTimestamp(ExpiryDate));
        user.setFirstName(FirstName);
        user.setLastName(LastName);
@@ -313,7 +322,9 @@ public class UserMaintenance extends SimpleBasePage {
     {
        this.id = user.getId();
        this.EmailAddress = user.getEmailAddress();
+       System.out.println("lao eh ..going to assigntolocalvariable liao");       
        this.ExpiryDate = user.getExpiryDate();
+       System.out.println("lao eh ..after assigntolocalvariable liao");
        this.FirstName = user.getFirstName();
        this.LastName = user.getLastName();
        this.Login = user.getLogin();
