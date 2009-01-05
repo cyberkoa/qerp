@@ -297,8 +297,8 @@ rowInfo.setRecordStatus("A");
 	}
 
 	public void setExpiryDate(java.sql.Timestamp expiryDate) {
-		java.util.Date today = new java.util.Date();
-		expiryDate = new java.sql.Timestamp(today.getTime());
+		//java.util.Date today = new java.util.Date();
+		///expiryDate = new java.sql.Timestamp(today.getTime());
 		this.expiryDate = expiryDate;
 	}
 
