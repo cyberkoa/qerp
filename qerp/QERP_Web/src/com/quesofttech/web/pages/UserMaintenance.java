@@ -26,16 +26,19 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
+import com.quesofttech.web.util.*;
 import org.apache.tapestry5.annotations.ApplicationState;
 public class UserMaintenance extends SimpleBasePage {
 // Default defination.
-	public static java.util.Date SqlTimestamptoDateUtilDate(java.sql.Timestamp timestamp) {
+	/*public static java.util.Date SqlTimestamptoDateUtilDate(java.sql.Timestamp timestamp) {
 	    long milliseconds = timestamp.getTime() + (timestamp.getNanos() / 1000000);
 	    return new java.util.Date(milliseconds);
 	}
 	private static final java.sql.Timestamp utilDateToSqlTimestamp(java.util.Date utilDate) {
 		return new java.sql.Timestamp(utilDate.getTime());
 		}
+		*/
+	private DateTimeConvert dateConv = new DateTimeConvert();
     private String _strMode = "";
     private User UserDetail;
     private User _User;
@@ -115,7 +118,7 @@ public class UserMaintenance extends SimpleBasePage {
        {
     	   return null;   
        }       
-       return SqlTimestamptoDateUtilDate(ExpiryDate);
+       return dateConv.SqlTimestamptoDateUtilDate(ExpiryDate);
     }
 
     public void setExpiryDate(java.util.Date ExpiryDate)
@@ -123,8 +126,8 @@ public class UserMaintenance extends SimpleBasePage {
     	//java.util.Date jDate = 
         //    new java.util.Date(sDate.getTime());
 
-    	System.out.println("is it here error?");
-    	this.ExpiryDate = utilDateToSqlTimestamp(ExpiryDate);
+    	System.out.println("is it here error?");    	
+    	this.ExpiryDate = dateConv.utilDateToSqlTimestamp(ExpiryDate);
     	System.out.println("hopefully is here");
     }
     //===============================
@@ -309,7 +312,7 @@ public class UserMaintenance extends SimpleBasePage {
        user.setId(id);       
        user.setEmailAddress(EmailAddress);
        
-       user.setExpiryDate(utilDateToSqlTimestamp(ExpiryDate));
+       user.setExpiryDate(dateConv.utilDateToSqlTimestamp(ExpiryDate));
        user.setFirstName(FirstName);
        user.setLastName(LastName);
        user.setLogin(Login);
