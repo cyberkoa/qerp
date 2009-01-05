@@ -156,6 +156,15 @@ public class User extends BaseEntity {
 	@PrePersist
 	void prePersist() throws BusinessException {
 		validate();
+rowInfo.setRecordStatus("A");
+		
+	    java.util.Date today = new java.util.Date();
+	    //System.out.println(today.getTime());
+	    
+	    //rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
+	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+	    //rowInfo.setCreateDate(rowInfo.getModifyDate());
+	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());
 	}
 
 	@PostLoad
