@@ -298,19 +298,19 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 */	
 	
 	public void addBomDetail(Long id,BomDetail bomdetail) throws BusinessException{
-		BomDetail BomDetailLine1 = new BomDetail();
-		System.out.println("finding id:" + id);
+		//BomDetail BomDetailLine1 = new BomDetail();
+		//System.out.println("finding id:" + id);
 		BOM bomheader = findBOM(id);
 		//salesOrderLine1.setSalesOrder(salesOrder);
-		System.out.println("found id:" + id);
-		BomDetailLine1.setLocation(bomdetail.getLocation());
-		BomDetailLine1.setQuantityRequired(bomdetail.getQuantityRequired());
-		BomDetailLine1.setScrapFactor(bomdetail.getScrapFactor());
-		BomDetailLine1.setStartDate(bomdetail.getStartDate());
-		//BomDetailLine1.setBom(bomdetail.getBom());
-		BomDetailLine1.setMaterial(bomdetail.getMaterial());
-		BomDetailLine1.setEndDate(bomdetail.getEndDate());
-		bomheader.addBomDetail(BomDetailLine1);
+		//System.out.println("found id:" + id);
+		///BomDetailLine1.setLocation(bomdetail.getLocation());
+		//BomDetailLine1.setQuantityRequired(bomdetail.getQuantityRequired());
+		//BomDetailLine1.setScrapFactor(bomdetail.getScrapFactor());
+		//BomDetailLine1.setStartDate(bomdetail.getStartDate());
+		//BomDetailLine1.setBom(bomheader);
+		//BomDetailLine1.setMaterial(bomdetail.getMaterial());
+		//BomDetailLine1.setEndDate(bomdetail.getEndDate());
+		bomheader.addBomDetail(bomdetail);
 	}
 	@SuppressWarnings("unchecked")
 	public List<BomDetail> findBomDetailsByBomID(Long id) throws DoesNotExistException

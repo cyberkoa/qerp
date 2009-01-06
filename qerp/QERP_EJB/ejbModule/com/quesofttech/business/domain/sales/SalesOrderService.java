@@ -139,6 +139,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		salesOrderLine.setCustomerPOLine(salesOrderMaterial.getCustomerPOLine());
 		salesOrderLine.setMaterial(salesOrderMaterial.getMaterial());
 		*/
+		//System.out.println(salesOrder.toString());s
 		salesOrder.addSalesOrderMaterial(salesOrderMaterial);
 	}
 	
