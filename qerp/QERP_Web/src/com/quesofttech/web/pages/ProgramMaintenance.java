@@ -206,7 +206,7 @@ public class ProgramMaintenance extends SecureBasePage {
            {
                ProgramDetail = _Programs.get(int_SelectedRow - 1);
            }
-           ProgramDetail = _Programs.get(_Programs.size() - 1);
+           //ProgramDetail = _Programs.get(_Programs.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";
@@ -287,6 +287,8 @@ public class ProgramMaintenance extends SecureBasePage {
     	   		System.out.println("getVisit().getMyLoginId():" + getVisit().getMyLoginId());
                program.setModifyLogin(getVisit().getMyLoginId());
                program.setCreateLogin(getVisit().getMyLoginId());
+               program.setCreateApp(this.getClass().getSimpleName());
+               program.setModifyApp(this.getClass().getSimpleName());  
            assignToDatabase(program);
            getProgramService().addProgram(program);
        }

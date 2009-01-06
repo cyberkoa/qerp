@@ -1,7 +1,7 @@
 <html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
-<head> <title>User Authorized Program Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<head> <title>UserProgram Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
-
+<h3>UserProgram Maintenance</h3>
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
@@ -9,15 +9,16 @@
    <form t:type="form" t:id="UserProgramForm" t:zone="zoneFormView" >
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
-       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/DeleteRecord24.png" /></button></t:actionlink>
-       <div style="height:300px;width:900px;overflow:auto">
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbardel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
-           t:id="grid" 
+           t:id="Grid"
+           t:reorder="id,UserNameDesc,programdesc,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="UserPrograms"
            t:row="UserProgram"
-                   t:rowsPerPage="5"
+                   t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:exclude="sessionid,recordstatus,version"
+           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="UserProgram.id">
@@ -35,18 +36,18 @@
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="User">User</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="User" t:value="User" t:maxLength="20" t:size="20" /> </td>
-                       </tr>
-                       <tr>
                            <th><t:label t:for="Program">Program</t:label>:</th>
-                           <td>   <select  t:type="select" t:id="program" t:model="programs" encoder="programs" t:value="program" /> </td>                      
+                           <td>   <select  t:type="select" t:id="program" t:model="programs" encoder="programs" t:value="program" />  </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="IsAllowed">Is Allowed</t:label>:</th>
+                           <th><t:label t:for="User">User</t:label>:</th>
+                           <td>    <select  t:type="select" t:id="user" t:model="users" encoder="users" t:value="user" />  </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="IsAllowed">IsAllowed</t:label>:</th>
                            <td>   <input  t:type="Checkbox" t:id="IsAllowed" t:value="IsAllowed" t:maxLength="1" t:size="1" /> </td>
                        </tr>
-                  </table>
+                               </table>
                </td>
            </tr>
        </table>

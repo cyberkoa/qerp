@@ -185,7 +185,7 @@ public class RoleProgramMaintenance extends SimpleBasePage {
            {
                RoleProgramDetail = _RolePrograms.get(int_SelectedRow - 1);
            }
-           RoleProgramDetail = _RolePrograms.get(_RolePrograms.size() - 1);
+           //RoleProgramDetail = _RolePrograms.get(_RolePrograms.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";
