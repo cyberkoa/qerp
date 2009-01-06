@@ -15,6 +15,7 @@ import com.quesofttech.web.base.SecureBasePage;
 import com.quesofttech.web.model.base.GenericSelectModel;
 import com.quesofttech.web.state.Visit;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Retain;
 import org.apache.tapestry5.annotations.Property;
@@ -182,6 +183,26 @@ public class BomMaintenance extends SecureBasePage {
            assignToLocalVariable(BOMDetail);
        }
     }
+    @InjectPage
+	 private BomDetailMaintenance detailPage;
+	 Object onActionFrombtnDetail(Long id)
+	 {
+		 try
+		 {
+			 _form.clearErrors();
+			// System.out.println("Number: " + this.Number);
+			 //detailPage.setHeaderCode(this.Number);
+			  detailPage.setHeaderID(id);
+			return detailPage;
+		 }
+		 catch (Exception e)
+		 {
+			 _form.recordError(getMessages().get(e.getMessage()));
+			 return null;
+		 }
+	 }
+    
+    
     private int getRcdLocation( Long id)  throws BusinessException
     {
       int int_return ,int_i;
