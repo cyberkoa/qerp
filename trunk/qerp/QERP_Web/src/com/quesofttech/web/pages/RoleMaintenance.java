@@ -128,7 +128,7 @@ public class RoleMaintenance extends SecureBasePage {
            {
                RoleDetail = _Roles.get(int_SelectedRow - 1);
            }
-           RoleDetail = _Roles.get(_Roles.size() - 1);
+           //RoleDetail = _Roles.get(_Roles.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";
