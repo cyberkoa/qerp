@@ -335,7 +335,7 @@ public class BomDetailMaintenance extends SimpleBasePage {
        bomDetail.setQuantityRequired(quantityRequired);
        bomDetail.setScrapFactor(scrapFactor);
        bomDetail.setStartDate(DateConv.utilDateToSqlTimestamp(startDate));
-       bomDetail.setBom(BOMHeader);
+       //bomDetail.setBom(BOMHeader);
        bomDetail.setMaterial(Material);
        bomDetail.setRecordStatus("A");
     }
