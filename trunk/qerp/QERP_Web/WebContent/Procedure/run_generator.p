@@ -13,19 +13,22 @@ DEFINE VARIABLE  str_classname AS CHARACTER   NO-UNDO.
 /*   `fk_Customer` bigint(20) default NULL".    */
 
 
-pc_value = " `UserProgram_id` bigint(20) default NULL,
- `fk_Program` bigint(20) NOT NULL,
-  `fk_User` bigint(20) NOT NULL,
-  `userp_IsAllowed` bit(1) NOT NULL
-".
+pc_value = "  `v_id` bigint(20) NOT NULL,
+  `bomd_endDate` datetime NOT NULL,
+  `bomd_Location` varchar(255) NOT NULL,
+  `bomd_quantityRequired` double NOT NULL,
+  `bomd_scrapFactor` double NOT NULL,
+  `bomd_startDate` datetime NOT NULL,
+     `fk_BOM` bigint(20) default NULL,
+  `fk_Material` bigint(20) default NULL".
  
   
 
 /*     SalesOrderMaterial */
-str_formid = 'UserProgram'.
-str_subject = 'UserProgram'.
-str_classname = 'userProgram'.
-    str_module = 'security'.
+str_formid = 'BomDetail'.
+str_subject = 'BomDetail'.
+str_classname = 'bomDetail'.
+    str_module = 'general'.
 
 
 

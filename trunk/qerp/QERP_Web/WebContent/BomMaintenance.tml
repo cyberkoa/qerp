@@ -47,6 +47,7 @@
                </td>
            </tr>
        </table>
+       <t:actionlink  t:id="btnDetail" t:context="${id}"> Detail Page </t:actionlink>
    <t:errors />
    </form>
 </t:block>
