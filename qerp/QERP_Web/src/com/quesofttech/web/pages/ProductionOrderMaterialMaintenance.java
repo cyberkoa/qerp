@@ -238,7 +238,7 @@ public class ProductionOrderMaterialMaintenance extends SecureBasePage {
 	           ProductionOrderMaterialDetail = _ProductionOrderMaterials.get(int_SelectedRow - 1);
 	       }
 	       myState="U";
-	       ProductionOrderMaterialDetail = _ProductionOrderMaterials.get(_ProductionOrderMaterials.size() - 1);
+	       //ProductionOrderMaterialDetail = _ProductionOrderMaterials.get(_ProductionOrderMaterials.size() - 1);
 	       viewDisplayText="Block";
 	       viewEditText="none";
 	       assignToLocalVariable(ProductionOrderMaterialDetail);

@@ -267,7 +267,7 @@ public class CompanyMaintenance extends SimpleBasePage {
 	           CompanyDetail = _Companys.get(int_SelectedRow - 1);
 	       }
 	       myState="U";
-	       CompanyDetail = _Companys.get(_Companys.size() - 1);
+	      // CompanyDetail = _Companys.get(_Companys.size() - 1);
 	       viewDisplayText="Block";
 	       viewEditText="none";
 	       assignToLocalVariable(CompanyDetail);

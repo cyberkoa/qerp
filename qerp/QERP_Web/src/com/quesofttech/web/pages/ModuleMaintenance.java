@@ -176,7 +176,7 @@ public class ModuleMaintenance extends SimpleBasePage {
            {
                ModuleDetail = _Modules.get(int_SelectedRow - 1);
            }
-           ModuleDetail = _Modules.get(_Modules.size() - 1);
+           //ModuleDetail = _Modules.get(_Modules.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";

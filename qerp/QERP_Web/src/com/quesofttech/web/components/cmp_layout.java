@@ -221,12 +221,12 @@ public class cmp_layout extends SimpleBasePage
 				    			_TreeView[i_Subjects] = _TreeView[i_Subjects]
 								 + " <tr id='" + _TR_ID + "-" + _Loop + "' class='a'>"
 								 + "<td><div class='tier2'>"
-								 + "<a href='" + p.getCode()  + "'  target=" 
+								 + "<div><a href='" + p.getCode()  + "'  target=" 
 								 + (char)34 + "_self" +  (char)34 +  "   class='doc'>"
-								 + "</a>" 
+								 + "</a></div><div>" 
 								 + "<a href='" + p.getCode()  + "'  target=" 
 								 + (char)34 + "_self" +  (char)34 +  "  >"
-								 + p.getDescription()  + "</a></div></td>  " +
+								 + p.getDescription()  + "</a></div></div></td>  " +
 								 "</tr>";		    			
 				    		}		    
 			    		// TODO: Need to change to Dynamic Server name instead of Localhost.

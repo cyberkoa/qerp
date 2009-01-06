@@ -175,7 +175,7 @@ public class BomMaintenance extends SecureBasePage {
            {
                BOMDetail = _BOMs.get(int_SelectedRow - 1);
            }
-           BOMDetail = _BOMs.get(_BOMs.size() - 1);
+           //BOMDetail = _BOMs.get(_BOMs.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";

@@ -198,7 +198,7 @@ void RefreshRecords()
            MaterialTypeDetail = _MaterialTypes.get(int_SelectedRow - 1);
        }
        myState="U";
-       MaterialTypeDetail = _MaterialTypes.get(_MaterialTypes.size() - 1);
+       //MaterialTypeDetail = _MaterialTypes.get(_MaterialTypes.size() - 1);
        viewDisplayText="Block";
        viewEditText="none";
        assignToLocalVariable(MaterialTypeDetail);
