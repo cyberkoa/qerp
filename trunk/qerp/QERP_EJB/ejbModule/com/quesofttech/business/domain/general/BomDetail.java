@@ -282,7 +282,7 @@ public class BomDetail extends BaseEntity {
 		}
 		*/
 		 
-		throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
+		//throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
 	}
 	
 	

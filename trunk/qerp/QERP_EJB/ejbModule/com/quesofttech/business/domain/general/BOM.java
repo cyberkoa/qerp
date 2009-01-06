@@ -391,15 +391,10 @@ public class BOM extends BaseEntity {
 	
 	public void addBomDetail(BomDetail bomDetail)
 	{
-		if(this.bomDetails==null) bomDetails = new ArrayList<BomDetail>();
-		
-		bomDetails.add(bomDetail);
-		
-		if (!bomDetails.contains(bomDetail)) {
+		if (!bomDetails.contains(bomDetail)) {			
 			bomDetails.add(bomDetail);
-			/* Maintain the bidirectional relationship . */
-			//bomDetail.setBom(this);
-		}
+			bomDetail.setBom(this);
+		}		
 	}
 
 
