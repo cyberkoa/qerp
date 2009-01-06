@@ -171,6 +171,7 @@ public class UserProgram extends BaseEntity {
 	*/
 	public UserProgram() {
 		super();
+		this.rowInfo = new RowInfo();
 	}	
 
 	
@@ -486,7 +487,14 @@ public class UserProgram extends BaseEntity {
 
 
 
-
+  public String getUserNameDesc()
+  {
+	  return user.getLogin();
+  }
+  public String getProgramDesc()
+  {
+	  return program.getDescription();
+  }
 
 	/**
 	 * @return the user
@@ -502,6 +510,7 @@ public class UserProgram extends BaseEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 
 
 	/**
