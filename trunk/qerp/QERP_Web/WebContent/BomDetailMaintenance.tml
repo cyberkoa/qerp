@@ -13,7 +13,7 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
-           t:reorder="createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,materialdesc,startdate,enddate,quantityRequired,scrapfactor,location,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="BomDetails"
            t:row="BomDetail"
                    t:rowsPerPage="10"
