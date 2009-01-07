@@ -18,7 +18,7 @@
            t:id="Grid"
            t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:reorder="id,PluralLabel,ShortForm,SingularLabel,Symbol,Unit,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,Unit,PluralLabel,ShortForm,SingularLabel,Symbol,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
@@ -35,6 +35,10 @@
                        <tr>
                            <th><t:label t:for="id">id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Unit">Unit</t:label>:</th>
+                           <td>  <DIV style="display:${viewDisplayText};"> ${Unit}</DIV><DIV style="display:${viewEditText};">  <input  t:type="TextField" t:id="Unit" t:value="Unit" t:maxLength="10" t:size="10" /> </DIV></td>
                        </tr>
                       
                        <tr>
@@ -53,10 +57,7 @@
                            <th><t:label t:for="Symbol">Symbol</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="Symbol" t:value="Symbol" t:maxLength="5" t:size="5" /> </td>
                        </tr>
-                       <tr>
-                           <th><t:label t:for="Unit">Unit</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Unit" t:value="Unit" t:maxLength="10" t:size="10" /> </td>
-                       </tr>
+                       
                                </table>
                </td>
            </tr>
