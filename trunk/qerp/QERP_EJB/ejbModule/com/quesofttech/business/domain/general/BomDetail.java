@@ -520,6 +520,10 @@ public class BomDetail extends BaseEntity {
 		this.material = material;
 	}
 
+	public String getMaterialdesc()
+	{
+		return material.getCode();
+	}
 	
 	
 	
