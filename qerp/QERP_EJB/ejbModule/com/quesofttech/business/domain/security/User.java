@@ -453,4 +453,23 @@ rowInfo.setRecordStatus("A");
 		this.id = id;
 	}
 	
+	public void addUserRole(UserRole userRole) {
+		if (!userRoles.contains(userRole)) {
+			userRoles.add(userRole);
+			/* Maintain the bidirectional relationship with my child, UserRole. */
+			userRole.setUser(this);
+		}
+	}
+	
+	public void removeUserRole(UserRole userRole) {
+		if (userRoles.contains(userRole)) {
+			userRoles.remove(userRole);
+			/* Maintain the bidirectional relationship with my child, UserRole. */
+			userRole.setUser(null);
+		}
+	}
+
+	
+
+	
 }

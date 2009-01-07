@@ -465,8 +465,26 @@ public class UserRole extends BaseEntity {
 	public void setModifyTimestamp(java.sql.Timestamp modifyTimestamp) {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
 	}
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		if (this.user != user) {
+			if (this.user != null) {
+				/* Maintain the bidirectional relationship with my parent, User. */
+				this.user.removeUserRole(this);
+			}
+			this.user = user;
+			if (user != null) {
+				/* Maintain the bidirectional relationship with my parent, User. */
+				user.addUserRole(this);
+			}
+		}
+	}
 
 
+	
 
 	
 }
