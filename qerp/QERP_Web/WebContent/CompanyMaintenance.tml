@@ -13,8 +13,9 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="grid"           
-           t:reorder="code,codename,createlogin,createtimestamp,modifyLogin,modifytimestamp"
+           t:reorder="id,code,name,createlogin,createtimestamp,modifyLogin,modifytimestamp"
            t:source="Companys"
+           t:exclude="codename,sessionid,recordstatus,version,modifyapp,createapp"
            t:row="Company"
                    t:rowsPerPage="10"
            t:pagerPosition="both"
@@ -42,7 +43,7 @@
                        </tr>
                        <tr>
                            <th><t:label t:for="code">code</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="code" t:value="code" t:maxLength="10" t:size="10" /> </td>
+                           <td> <DIV style="display:${viewDisplayText};"> ${code}</DIV><DIV style="display:${viewEditText};">   <input  t:type="TextField" t:id="code" t:value="code" t:maxLength="10" t:size="10" /> </DIV>s</td>
                        </tr>
                        <tr>
                            <th><t:label t:for="name">name</t:label>:</th>

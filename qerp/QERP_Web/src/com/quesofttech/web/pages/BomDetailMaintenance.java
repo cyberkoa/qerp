@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
+import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.general.*;
 import com.quesofttech.business.domain.inventory.*;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
@@ -237,6 +238,15 @@ public class BomDetailMaintenance extends SimpleBasePage {
     {
        this.Material = Material;
     }
+    public String getMaterialCode()
+    {
+    	if(Material==null)
+    	{
+    		return "";
+    	}
+    	else
+    	return Material.getCodeDescription();
+    }
     //===============================
     void RefreshRecords()
     {
@@ -303,10 +313,11 @@ public class BomDetailMaintenance extends SimpleBasePage {
     }
 
 
-    Object onFailure()
+    Object onFailure() 
     {
-       _form.clearErrors();
-       _form.recordError(getMessages().get("Record_Save_Error"));
+       //_form.clearErrors();
+    	if(!_form.getHasErrors())
+    		_form.recordError(getMessages().get("Record_Save_Error"));
        return blockFormView;
     }
 
@@ -316,16 +327,36 @@ public class BomDetailMaintenance extends SimpleBasePage {
     }
 
 
+    void FormValidation() throws Exception
+    {
+    	if (scrapFactor<=0)
+		 {    		
+			 	throw new Exception("Scrap Factor must not less than or equal to 0");			    
+		 }
+    	if (quantityRequired<=0)
+		 {    		
+			 	throw new Exception("Scrap Factor must not less than or equal to 0");			    
+		 }
+    }
     void onValidateForm() {
-       if ("U"== myState)
-       {
-           _UpdateRecord();
-       }
-       else
-       if ("A" == myState)
-       {
-           _AddRecord();
-       }
+    	try
+    	{
+    	   FormValidation();
+	       if ("U"== myState)
+	       {
+	           _UpdateRecord();
+	       }
+	       else
+	       if ("A" == myState)
+	       {
+	           _AddRecord();
+	       }
+    	}
+    	catch (Exception e)
+    	{
+    		_form.clearErrors();
+    		_form.recordError(e.getLocalizedMessage());
+    	}
     }
 
     void assignToDatabase(BomDetail bomDetail){
@@ -518,6 +549,8 @@ public class BomDetailMaintenance extends SimpleBasePage {
     	 
     	 return _temp;
      }
+     
+    
 
 
 }
