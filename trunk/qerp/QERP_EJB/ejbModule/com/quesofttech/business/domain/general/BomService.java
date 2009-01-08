@@ -53,11 +53,12 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	@SuppressWarnings("unchecked")
 	public BOM findBOMByMaterial(Material material, String type) throws DoesNotExistException {
 		Query q = _em.createQuery("select bom from BOM bom " +
-				                  " where bom.rowInfo.recordStatus='A' AND bom.material=:material" +
-				                  " AND bom.type=:type" +
+				                  " where bom.rowInfo.recordStatus='A' " +
+				                  " AND bom.material.id = :materialId " +
+				                  " AND bom.type = :type" +
 				                  " order by bom.id");
 		
-		q.setParameter("material", material);
+		q.setParameter("materialId", material.getId());
 		q.setParameter("type", type);
 		
 		List l = q.getResultList();
