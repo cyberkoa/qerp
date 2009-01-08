@@ -30,6 +30,19 @@ import org.apache.tapestry5.annotations.ApplicationState;
 
 
 public class MaterialTypeMaintenance extends SecureBasePage {
+	private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
 private String _strMode = "";
 private MaterialType MaterialTypeDetail;
 private MaterialType _MaterialType;
@@ -44,11 +57,13 @@ private long lng_CurrentID;
 private String viewDisplayText="", viewEditText="";
 public String getViewDisplayText()
 {
+	refreshDisplay();
      return viewDisplayText;
 }
 
 public String getviewEditText()
 {
+	refreshDisplay();
      return viewEditText;
 }
 
@@ -202,6 +217,10 @@ void RefreshRecords()
        viewDisplayText="Block";
        viewEditText="none";
        assignToLocalVariable(MaterialTypeDetail);
+   }
+   else
+   {
+	   myState="A"; // If no List then should be in A mode instead of Update mode.
    }
 }
 private int getRcdLocation( Long id)  throws BusinessException

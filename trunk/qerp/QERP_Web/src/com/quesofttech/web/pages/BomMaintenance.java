@@ -34,6 +34,20 @@ import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 public class BomMaintenance extends SecureBasePage {
 // Default defination.
+	
+	private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
     private String _strMode = "";
     private BOM BOMDetail;
     private BOM _BOM;
@@ -49,11 +63,13 @@ public class BomMaintenance extends SecureBasePage {
     private String viewDisplayText="", viewEditText="";
     public String getViewDisplayText()
     {
+    	refreshDisplay();
      return viewDisplayText;
     }
 
     public String getviewEditText()
     {
+    	refreshDisplay();
          return viewEditText;
     }
 
@@ -132,7 +148,13 @@ public class BomMaintenance extends SecureBasePage {
 		return getBusinessServicesLocator().getMaterialServiceRemote();
 	}
 
-	
+	public String getMaterialCode()
+	{
+		String _temp = "";
+		if (material!=null)
+			_temp = material.getCodeDescription();
+		return _temp;
+	}
 	private Material material;
 	public Material getMaterial()
 	{
@@ -181,6 +203,10 @@ public class BomMaintenance extends SecureBasePage {
            viewDisplayText="Block";
            viewEditText="none";
            assignToLocalVariable(BOMDetail);
+       }
+       else
+       {
+    	   myState="A"; // If no List then should be in A mode instead of Update mode.
        }
     }
     @InjectPage

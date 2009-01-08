@@ -38,6 +38,19 @@ public class UserMaintenance extends SimpleBasePage {
 		return new java.sql.Timestamp(utilDate.getTime());
 		}
 		*/
+	private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
 	private DateTimeConvert dateConv = new DateTimeConvert();
     private String _strMode = "";
     private User UserDetail;
@@ -54,11 +67,13 @@ public class UserMaintenance extends SimpleBasePage {
     private String viewDisplayText="", viewEditText="";
     public String getViewDisplayText()
     {
+    	refreshDisplay();
      return viewDisplayText;
     }
 
     public String getviewEditText()
     {
+    	refreshDisplay();
          return viewEditText;
     }
 
@@ -252,6 +267,10 @@ public class UserMaintenance extends SimpleBasePage {
            viewDisplayText="Block";
            viewEditText="none";
            assignToLocalVariable(UserDetail);
+       }
+       else
+       {
+    	   myState="A"; // If no List then should be in A mode instead of Update mode.
        }
     }
     private int getRcdLocation( Long id)  throws BusinessException

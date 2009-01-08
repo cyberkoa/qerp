@@ -31,7 +31,19 @@ import org.apache.tapestry5.annotations.OnEvent;
 public class CompanyMaintenance extends SimpleBasePage {
 	
 // TabSet Column
-	
+	private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
 	@Persist
     private String _activePanel;
 
@@ -68,11 +80,13 @@ public class CompanyMaintenance extends SimpleBasePage {
 	private String viewDisplayText="", viewEditText="";
 	public String getViewDisplayText()
 	{
+		refreshDisplay();
 	     return viewDisplayText;
 	}
 	
 	public String getviewEditText()
 	{
+		refreshDisplay();
 	     return viewEditText;
 	}
 	
@@ -272,6 +286,10 @@ public class CompanyMaintenance extends SimpleBasePage {
 	       viewEditText="none";
 	       assignToLocalVariable(CompanyDetail);
 	   }
+	   else
+       {
+    	   myState="A"; // If no List then should be in A mode instead of Update mode.
+       }
 	}
 	private int getRcdLocation( Long id)  throws BusinessException
 	{

@@ -276,6 +276,30 @@ PROCEDURE RefreshRecords:
     MESSAGE '    ' + '       viewEditText="none";'.
     MESSAGE '    ' + '       assignToLocalVariable(' + str_formid + 'Detail);'.
     MESSAGE '    ' + '   ' + CHR(125).
+    
+    MESSAGE '             else'.
+    MESSAGE '            ' + CHR(123).
+    MESSAGE '           	   myState="A"; // If no List then should be in A mode instead of Update mode.'.
+    MESSAGE '            ' + CHR(125).
+    MESSAGE '    ' + CHR(125).
+END PROCEDURE.
+
+PROCEDURE getRefreshDisplay:
+    MESSAGE 'private void refreshDisplay()'.
+    MESSAGE '    ' + CHR(123).
+    
+
+   
+    MESSAGE '        if(myState.equals("U"))'.
+	MESSAGE '        ' + CHR(123).
+    MESSAGE '            viewDisplayText="Block";'.
+    MESSAGE '            viewEditText="none";'.
+	MESSAGE '        ' + CHR(125).
+    MESSAGE '        else'.
+	MESSAGE '        ' + CHR(123).
+    MESSAGE '   		 viewDisplayText="none";'.
+    MESSAGE '	         viewEditText="Block";'.
+	MESSAGE '        ' + CHR(125).
     MESSAGE '    ' + CHR(125).
 END PROCEDURE.
 
@@ -531,6 +555,7 @@ MESSAGE '    ' + 'private long lng_CurrentID;'.
 MESSAGE "// End of  Default defination. ".
 GetFormContent().
 RUN RefreshRecords.
+RUN getRefreshDisplay.
 RUN getRcdLocation.
 RUN getBlock.
 RUN onSuccess.
