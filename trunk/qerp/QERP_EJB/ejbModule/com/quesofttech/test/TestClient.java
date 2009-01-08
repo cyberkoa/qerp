@@ -24,9 +24,10 @@ import com.quesofttech.business.domain.finance.iface.*;
 import com.quesofttech.business.domain.finance.*;
 import com.quesofttech.business.domain.sales.dto.*;
 import com.quesofttech.business.domain.general.*;
-
+import com.quesofttech.business.domain.general.iface.*;
 
 import com.quesofttech.business.common.exception.*;
+import com.quesofttech.util.*;
 
 //import com.quesofttech.session.MaterialTestBeanRemote;
 
@@ -52,8 +53,9 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		//addProductionOrder();
 		//addSalesOrderMaterial();
 	    //updateMaterial((long)1453);
-		testReflectionGetMethods(UOM.class);
+		//testReflectionGetMethods(UOM.class);
 	    //testReflectionToString();
+		testBOMExplosion();
 	}
 	
 	private static InitialContext GetContext()
@@ -74,7 +76,57 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		{
 			return null;
 		}
+	}	
+	
+	
+	
+	private static void testBOMExplosion() {
+		
+		
+		
+		
+		InitialContext context=null;
+		IBomServiceRemote beanRemote = null;
+		BomTree bomTree = null;
+		//ResourceBundle      bundle = null;
+
+	     // bundle = ResourceBundle.getBundle("materialType", Locale.getDefault(), TestClient.class.getClassLoader());
+	     // String jndiName = bundle.getString("jndi.session.ejb");
+		try
+		{
+			context = GetContext();
+			 beanRemote = (IBomServiceRemote) context.lookup(BomService.class.getSimpleName()+"Remote");
+			 if(beanRemote!=null) {
+				try  {
+					bomTree = beanRemote.buildBomTree(findMaterial((long)100), "P");
+				}
+				catch(BusinessException e) {
+				  System.out.println("[Business Exception] " + e.getMessage());
+				  e.printStackTrace();
+				}
+			 }
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+/* I rethrow it as runtime exception as there is really no need to continue if an exception happens and I
+* do not want to catch it everywhere.
+*/ 
+			throw new RuntimeException(e);
+		}
+		/*
+		for(TreeNode<BomTreeNodeData> tn : bomTree.toList())
+		{
+			System.out.println("[ ] " + tn.data.getBomDetail().getMaterialdesc());
+		}
+		*/
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	private static void testReflectionGetMethods(Class cls)
 	{

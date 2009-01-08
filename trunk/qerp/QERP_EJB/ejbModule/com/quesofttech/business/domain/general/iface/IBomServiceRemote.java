@@ -5,6 +5,8 @@ import java.util.List;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.general.BOM;import com.quesofttech.business.domain.general.BomDetail;
+import com.quesofttech.business.domain.general.BomTree;
+import com.quesofttech.business.domain.inventory.Material;
 
 /**
  * The <code>IBOMServiceRemote</code> bean exposes the business methods
@@ -43,6 +45,10 @@ public interface IBomServiceRemote {
 	List<BomDetail> findBomDetailsByBomId(Long bomId) throws DoesNotExistException;
 	
 	List<BomDetail> findBomDetailsByBom(BOM bom) throws DoesNotExistException;
-	
+		
+	List<BomDetail> findBomDetailsByParentMaterial(Material material,String type) throws DoesNotExistException;
 
+	BomTree buildBomTree(Material material, String type) throws DoesNotExistException;
+	
+	
 }
