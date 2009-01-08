@@ -60,14 +60,16 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		q.setParameter("material", material);
 		q.setParameter("type", type);
 		
-		List<BOM> l = q.getResultList();
+		List l = q.getResultList();
+		
+		System.out.println("[findBOMByMaterial] No of records found : " + l.size() );
 		
 		if(l.size() != 1)
 		{
 			return null;
 		}
 		else
-		return l.get(0);
+		return (BOM)l.get(0);
 	}
 
 	
