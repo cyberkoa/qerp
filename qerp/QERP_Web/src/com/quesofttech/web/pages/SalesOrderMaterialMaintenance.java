@@ -40,7 +40,19 @@ import org.apache.tapestry5.annotations.ApplicationState;
 
 
 public class SalesOrderMaterialMaintenance extends SecureBasePage {
-	
+	private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
 	/*public SalesOrderMaterialMaintenance() throws BusinessException{
 	  	List<Material> list = null;
     	try {
@@ -58,11 +70,13 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	private String viewDisplayText="", viewEditText="";
 	public String getViewDisplayText()
 	{
+		refreshDisplay();
 		return viewDisplayText;
 	}
 
 	public String getviewEditText()
 	{
+		refreshDisplay();
 		return viewEditText;
 	}
 	@Persist
@@ -245,9 +259,9 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     		   assignToLocalVariable(SalesOrderMaterialDetail);
        		}
     	   else
-    	   {
-    		   System.out.println("refresh record. you shouldn't be here");
-    	   }
+           {
+        	   myState="A"; // If no List then should be in A mode instead of Update mode.
+           }
     	}
     	catch(Exception be)
     	{

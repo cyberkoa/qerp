@@ -37,6 +37,19 @@ import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 public class ProductionOrderMaintenance extends SecureBasePage {
 
+	private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
 	
 	//===============================================================
 	//			Material ComboBox
@@ -141,11 +154,13 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	private String viewDisplayText="", viewEditText="";
 	public String getViewDisplayText()
 	{
+		refreshDisplay();
 	     return viewDisplayText;
 	}
 	
 	public String getviewEditText()
 	{
+		refreshDisplay();
 	     return viewEditText;
 	}
 	
@@ -303,6 +318,10 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	       viewEditText="none";
 	       assignToLocalVariable(ProductionOrderDetail);
 	   }
+	   else
+       {
+    	   myState="A"; // If no List then should be in A mode instead of Update mode.
+       }
 	}
 	private int getRcdLocation( Long id)  throws BusinessException
 	{

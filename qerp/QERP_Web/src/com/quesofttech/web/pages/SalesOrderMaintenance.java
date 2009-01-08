@@ -60,7 +60,19 @@ interface Delegate
 
 public class SalesOrderMaintenance extends SecureBasePage {
 	
-	
+	private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
 /*
 	void onActivate()
 	{
@@ -96,11 +108,13 @@ public class SalesOrderMaintenance extends SecureBasePage {
 	
 	public String getViewDisplayText()
 	{
+		refreshDisplay();
 		return viewDisplayText;
 	}
 
 	public String getviewEditText()
 	{
+		refreshDisplay();
 		return viewEditText;
 	}
 	
@@ -314,6 +328,10 @@ public class SalesOrderMaintenance extends SecureBasePage {
 				viewEditText="none";
 			   assignToLocalVariable(SalesOrderDetail);
 			}
+			else
+		       {
+		    	   myState="A"; // If no List then should be in A mode instead of Update mode.
+		       }
 		}
 		
 		private int getRcdLocation( Long id)  throws BusinessException

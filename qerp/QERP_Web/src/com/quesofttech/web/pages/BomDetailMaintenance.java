@@ -53,14 +53,30 @@ public class BomDetailMaintenance extends SimpleBasePage {
     @Persist
     private Long _HeaderId;
 // End of  Default defination.
+    
+    private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
     private String viewDisplayText="", viewEditText="";
     public String getViewDisplayText()
     {
-     return viewDisplayText;
+		refreshDisplay();    	 
+		return viewDisplayText;
     }
 
     public String getviewEditText()
     {
+    	refreshDisplay();  
          return viewEditText;
     }
 
@@ -277,11 +293,15 @@ public class BomDetailMaintenance extends SimpleBasePage {
            {
                BomDetailDetail = _BomDetails.get(int_SelectedRow - 1);
            }
-           BomDetailDetail = _BomDetails.get(_BomDetails.size() - 1);
+           //BomDetailDetail = _BomDetails.get(_BomDetails.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";
            assignToLocalVariable(BomDetailDetail);
+       }
+       else
+       {
+    	   myState="A"; // If no List then should be in A mode instead of Update mode.
        }
     }
     private int getRcdLocation( Long id)  throws BusinessException
@@ -307,8 +327,10 @@ public class BomDetailMaintenance extends SimpleBasePage {
 
     Object onSuccess()
     {
+    	System.out.println("1 onSuccess:" + myState);
        _form.clearErrors();
        RefreshRecords();
+       System.out.println("2 onSuccess:" + myState);
        return blockFormView;
     }
 
@@ -316,6 +338,7 @@ public class BomDetailMaintenance extends SimpleBasePage {
     Object onFailure() 
     {
        //_form.clearErrors();
+    	System.out.println("onFailure:" + myState);
     	if(!_form.getHasErrors())
     		_form.recordError(getMessages().get("Record_Save_Error"));
        return blockFormView;
@@ -329,19 +352,27 @@ public class BomDetailMaintenance extends SimpleBasePage {
 
     void FormValidation() throws Exception
     {
+    	System.out.println("scrapFactor:" + scrapFactor);
     	if (scrapFactor<=0)
 		 {    		
 			 	throw new Exception("Scrap Factor must not less than or equal to 0");			    
 		 }
     	if (quantityRequired<=0)
 		 {    		
-			 	throw new Exception("Scrap Factor must not less than or equal to 0");			    
+			 	throw new Exception("Quantity Required must not less than or equal to 0");			    
 		 }
+    	
+    	if(startDate.after(endDate))
+    	{
+    		throw new Exception("Start Date Can not greater than End Date");
+    	}
     }
     void onValidateForm() {
+    	
     	try
     	{
     	   FormValidation();
+    	   System.out.println("am i here?");
 	       if ("U"== myState)
 	       {
 	           _UpdateRecord();

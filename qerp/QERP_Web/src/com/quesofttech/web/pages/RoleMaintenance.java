@@ -39,14 +39,29 @@ public class RoleMaintenance extends SecureBasePage {
     @Persist
     private long lng_CurrentID;
 // End of  Default defination.
+    private void refreshDisplay()
+    {
+    	if(myState.equals("U"))
+	   	 {
+		         viewDisplayText="Block";
+		         viewEditText="none";
+	   	 }
+	   	 else
+	   	 {
+	   		 viewDisplayText="none";
+		         viewEditText="Block";    		 
+	   	 }
+    }
     private String viewDisplayText="", viewEditText="";
     public String getViewDisplayText()
     {
+    	refreshDisplay();
      return viewDisplayText;
     }
 
     public String getviewEditText()
     {
+    	refreshDisplay();
          return viewEditText;
     }
 
@@ -133,6 +148,10 @@ public class RoleMaintenance extends SecureBasePage {
            viewDisplayText="Block";
            viewEditText="none";
            assignToLocalVariable(RoleDetail);
+       }
+       else
+       {
+    	   myState="A"; // If no List then should be in A mode instead of Update mode.
        }
     }
     private int getRcdLocation( Long id)  throws BusinessException

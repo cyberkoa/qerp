@@ -116,13 +116,13 @@ public class cmp_layout extends SimpleBasePage
 	
 	
 	
-	//@InjectPage
-	//private Index IndexPage;
-	void onActionFromactionSignOff()
+	@InjectPage
+	private Index IndexPage;
+	Object onActionFromactionSignOff()
 	{
 		getVisit().setLoggedIn(false);
 		
-		//return IndexPage;
+		return IndexPage;
 	}
 	// _ProgramTypeNum is to let the tree view know the Particular
 	// Program type should locate at which location base on id.

@@ -37,11 +37,11 @@
                        </tr>
                        <tr>
                            <th><t:label t:for="Type">Type</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </td>
+                           <td>   <DIV style="display:${viewDisplayText};"> ${Type}</DIV><DIV style="display:${viewEditText};">  <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </DIV> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>
-                           <td>    <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </td>
+                           <td>   <DIV style="display:${viewDisplayText};"> ${MaterialCode}</DIV><DIV style="display:${viewEditText};">   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </DIV> </td>
                        </tr>
                                </table>
                </td>
