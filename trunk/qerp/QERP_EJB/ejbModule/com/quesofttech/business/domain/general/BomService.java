@@ -152,10 +152,10 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	public List<BomDetail> findBomDetailsByBomId(Long bomId) throws DoesNotExistException {
 		BOM bom = findBOM(bomId);
 				
-		Query q = _em.createQuery("select bomDetail from BomDetail bomDetail where bomDetail.bom = :bom AND bomDetail.rowInfo.recordStatus='A'" + 
+		Query q = _em.createQuery("select bomDetail from BomDetail bomDetail where bomDetail.bom.id = :bomId AND bomDetail.rowInfo.recordStatus='A'" + 
 				" order by bomDetail.id");
 		
-		q.setParameter("bom", bom);
+		q.setParameter("bomId", bomId);
 		
 		List l = q.getResultList();
 		return l;
@@ -163,10 +163,10 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	
 	public List<BomDetail> findBomDetailsByBom(BOM bom) throws DoesNotExistException {
 				
-		Query q = _em.createQuery("select bomDetail from BomDetail bomDetail where bomDetail.bom = :bom AND bomDetail.rowInfo.recordStatus='A'" + 
+		Query q = _em.createQuery("select bomDetail from BomDetail bomDetail where bomDetail.bom.id = :bomId AND bomDetail.rowInfo.recordStatus='A'" + 
 				" order by bomDetail.id");
 		
-		q.setParameter("bom", bom);
+		q.setParameter("bomId", bom.getId());
 		
 		List l = q.getResultList();
 		return l;
@@ -175,15 +175,18 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	
 	public List<BomDetail> findBomDetailsByParentMaterial(Material material,String type) throws DoesNotExistException {
 		
-		BOM bom = this.findBOMByMaterial(material, type);
+		//BOM bom = this.findBOMByMaterial(material, type);
 		
-		Query q = _em.createQuery("select bomDetail from BomDetail bomDetail where bomDetail = :bom AND bomDetail.rowInfo.recordStatus='A'" + 
+		//return findBomDetailsByBom(bom);
+		
+		Query q = _em.createQuery("select bomDetail from BomDetail bomDetail where bomDetail.bom.material.id = :materialId AND bomDetail.rowInfo.recordStatus='A'" + 
 				" order by bomDetail.id");
 		
-		q.setParameter("bom", bom);
+		q.setParameter("materialId", material.getId());
 		
 		List l = q.getResultList();
 		return l;
+		
 	}
 	
 	
@@ -204,6 +207,9 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		
 		BomDetail bomDetail = new BomDetail();
 		bomDetail.setBom(bom);
+		bomDetail.setMaterial(material);
+		
+		// Default and scrap factor and quantity required as 1, as this value will be used to calculate children corresponding value
 		bomDetail.setScrapFactor(1.0);
         bomDetail.setQuantityRequired(1.0);
         
@@ -214,6 +220,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	    calendar.add(Calendar.MONTH, 1); // Add 1 month
 		bomDetail.setEndDate(new java.sql.Timestamp(calendar.getTime().getTime()));
 		
+		// Prepare bomTreeNodeData
 		BomTreeNodeData bomTreeNodeData = new BomTreeNodeData();
 		
 		bomTreeNodeData.setBomDetail(bomDetail);
@@ -221,7 +228,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		BomTreeNode bomTreeNode = new BomTreeNode();
 		
 		bomTreeNode.setData(bomTreeNodeData);
-		bomTreeNode.setLevel(1);
+		bomTreeNode.setLevel(0);
 		bomTreeNode.setParent(null);
 		
 		
@@ -250,7 +257,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		List<BomDetail> childrenBomDetail = null;
 		
 		try	{ 
-			childrenBomDetail = this.findBomDetailsByBom(bom);
+			childrenBomDetail = this.findBomDetailsByParentMaterial(bomDetail.getMaterial(), type);
 		}
 		catch(DoesNotExistException e) {
 			return;
@@ -280,6 +287,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		
 		for(TreeNode<BomTreeNodeData> childBomTreeNode : bomTreeNode.getChildren())
 		{
+			System.out.println("[Inside for getChildren] Material : " + childBomTreeNode.data.getBomDetail().getMaterial().getCodeDescription() );
 			this.explode(childBomTreeNode, type);
 		}
 		

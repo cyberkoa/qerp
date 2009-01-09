@@ -113,12 +113,14 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 */ 
 			throw new RuntimeException(e);
 		}
-		/*
-		for(TreeNode<BomTreeNodeData> tn : bomTree.toList())
+		
+		if(bomTree.toList().size() > 0)
 		{
-			System.out.println("[ ] " + tn.data.getBomDetail().getMaterialdesc());
+			for(TreeNode<BomTreeNodeData> tn : bomTree.toList())
+			{
+				System.out.println("[ ] " + tn.data.getBomDetail().getMaterialdesc());
+			}
 		}
-		*/
 	}
 	
 	
