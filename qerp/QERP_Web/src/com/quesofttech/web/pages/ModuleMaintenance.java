@@ -25,7 +25,7 @@ import org.apache.tapestry5.services.Request;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-public class ModuleMaintenance extends SimpleBasePage {
+public class ModuleMaintenance extends SecureBasePage {
 // Default defination.
 	private void refreshDisplay()
     {

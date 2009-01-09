@@ -28,7 +28,7 @@ import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.OnEvent;
-public class CompanyMaintenance extends SimpleBasePage {
+public class CompanyMaintenance extends SecureBasePage {
 	
 // TabSet Column
 	private void refreshDisplay()

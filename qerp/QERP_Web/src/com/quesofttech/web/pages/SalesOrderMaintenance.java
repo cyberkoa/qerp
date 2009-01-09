@@ -252,15 +252,26 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		}
 		
 
+		public String getCustomeDesc()
+		{
+			String _temp = "";
+			if (customer!=null)
+			{
+				_temp = customer.getCodeName();
+			}
+			return _temp;
+				
+				
+		}
 		
 		public Customer getCustomer()
 		{
-			System.out.println("here get customer");
+			
 		   return customer;
 		}
 		public void setCustomer(Customer customer)
 		{
-			System.out.println("here set customer");
+			
 		   this.customer = customer;
 		}
 		
