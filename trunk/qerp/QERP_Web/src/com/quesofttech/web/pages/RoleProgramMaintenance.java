@@ -30,7 +30,7 @@ import org.apache.tapestry5.services.Request;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-public class RoleProgramMaintenance extends SimpleBasePage {
+public class RoleProgramMaintenance extends SecureBasePage {
 // Default defination.
     private String _strMode = "";
     private RoleProgram RoleProgramDetail;

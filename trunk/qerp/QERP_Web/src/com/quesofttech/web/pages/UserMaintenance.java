@@ -28,7 +28,7 @@ import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import com.quesofttech.web.util.*;
 import org.apache.tapestry5.annotations.ApplicationState;
-public class UserMaintenance extends SimpleBasePage {
+public class UserMaintenance extends SecureBasePage {
 // Default defination.
 	/*public static java.util.Date SqlTimestamptoDateUtilDate(java.sql.Timestamp timestamp) {
 	    long milliseconds = timestamp.getTime() + (timestamp.getNanos() / 1000000);

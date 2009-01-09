@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 import com.quesofttech.web.util.*;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
-public class BomDetailMaintenance extends SimpleBasePage {
+public class BomDetailMaintenance extends SecureBasePage {
 // Default defination.
 	private DateTimeConvert DateConv = new DateTimeConvert();
 	
