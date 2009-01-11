@@ -13,13 +13,7 @@
        <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"  ><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
  	   <button onclick="popup('popUpDiv')" type="button"><img src="images/filterRecord24.png" /> </button>
        <div id="blanket" style="display:none;"></div>
-	
- 
-       
-       
-       
-       
-       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+	   <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
           
            <t:GRID
            t:id="grid" 
@@ -51,7 +45,7 @@
                        </tr>                       
                        <tr>
                            <th><t:label t:for="customer">Customer</t:label>:</th>
-                           <td>   <select  t:type="select" t:id="customer" t:model="customers" encoder="customers" t:value="customer" /> </td>                      
+                           <td><DIV style="display:${viewDisplayText};"> ${CustomeDesc}</DIV> <DIV style="display:${viewEditText};">   <select  t:type="select" t:id="customer" t:model="customers" encoder="customers" t:value="customer" />  </DIV> </td>                      
                        </tr>
                        <tr>
                            <th><t:label t:for="CustomerPO">Customer PO</t:label>:</th>

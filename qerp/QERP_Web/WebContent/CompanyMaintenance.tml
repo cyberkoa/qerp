@@ -27,7 +27,7 @@
            </t:parameter>
            </t:GRID>
        </div>
-       
+        <t:errors />
        <div t:type="t5components/TabSet"
 	    panelIds="list:'Company','Address'"
 	    activePanelId="activePanel">
@@ -43,7 +43,7 @@
                        </tr>
                        <tr>
                            <th><t:label t:for="code">code</t:label>:</th>
-                           <td> <DIV style="display:${viewDisplayText};"> ${code}</DIV><DIV style="display:${viewEditText};">   <input  t:type="TextField" t:id="code" t:value="code" t:maxLength="10" t:size="10" /> </DIV>s</td>
+                           <td> <DIV style="display:${viewDisplayText};"> ${code}</DIV><DIV style="display:${viewEditText};">   <input  t:type="TextField" t:id="code" t:value="code" t:maxLength="10" t:size="10" /> </DIV></td>
                        </tr>
                        <tr>
                            <th><t:label t:for="name">name</t:label>:</th>
@@ -95,7 +95,7 @@
 	    </div>
 	    </div>
        
-   <t:errors />
+   
    </form>
 </t:block>
 </body>

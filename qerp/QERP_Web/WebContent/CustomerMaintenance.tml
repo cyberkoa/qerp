@@ -55,7 +55,7 @@
            </tr>
        </table>
 	    </div>
-	
+	 <t:errors />
 	    <div id="Address" style="display:none;">
 	        <table id="main2">
            <tr>
@@ -115,7 +115,7 @@
 	    </div>
 	
 	</div>
-   <t:errors />
+   
    </form>
 </t:block>
 </body>
