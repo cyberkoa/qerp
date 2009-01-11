@@ -37,6 +37,14 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 		List l = q.getResultList();
 		return l;
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Material> findMaterialsExceptFinishGood() {
+		Query q = _em.createQuery("select m from Material m where m.rowInfo.recordStatus='A' and m.materialtype.isForSale='1' order by m.id");
+		List l = q.getResultList();
+		return l;
+	}
 
 	public void updateMaterial(Material material) throws BusinessException {
 		
@@ -59,7 +67,7 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 	@SuppressWarnings("unchecked")
 	public List<Material> findForSaleMaterials() {
 		Query q = _em.createQuery("select m from Material m where m.rowInfo.recordStatus='A' AND m.materialType.rowInfo.recordStatus='A' AND " +
-				"m.materialType.isForSale=TRUE");
+				"m.materialType.isForSale=FALSE");
 		List l = q.getResultList();
 		return l;
 	}
