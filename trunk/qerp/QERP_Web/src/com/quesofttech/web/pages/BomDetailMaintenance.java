@@ -123,7 +123,15 @@ public class BomDetailMaintenance extends SecureBasePage {
 
     public void setendDate(java.util.Date endDate)
     {
-       this.endDate = DateConv.utilDateToSqlTimestamp(endDate);
+    	try
+    	{
+    		this.endDate = DateConv.utilDateToSqlTimestamp(endDate);    		
+    	}
+    	catch (Exception e)
+    	{
+    		_form.recordError(e.getMessage());
+    	}
+       
     }
     //===============================
 
@@ -191,7 +199,15 @@ public class BomDetailMaintenance extends SecureBasePage {
 
     public void setstartDate(java.util.Date startDate)
     {
-       this.startDate = DateConv.utilDateToSqlTimestamp(startDate);
+    	try
+    	{
+    		this.startDate = DateConv.utilDateToSqlTimestamp(startDate);    		
+    	}
+    	catch (Exception e)
+    	{
+    		_form.recordError(e.getMessage());
+    	}
+       
     }
     //===============================
 
@@ -268,7 +284,7 @@ public class BomDetailMaintenance extends SecureBasePage {
     {
     	List<Material> list = null;	  	
     	try {    		
-    		list = this.getMaterialService().findMaterials();           
+    		list = this.getMaterialService().findForSaleMaterials();           
     	}
     	catch (DoesNotExistException e) {}
     	
@@ -338,9 +354,20 @@ public class BomDetailMaintenance extends SecureBasePage {
     Object onFailure() 
     {
        //_form.clearErrors();
-    	System.out.println("onFailure:" + myState);
-    	if(!_form.getHasErrors())
+    	try {
+    	System.out.println("onFailure:" + myState + ", " );
+    	System.out.println("onFailure:" + _form.getHasErrors());
+    	}
+    	catch (Exception e)
+    	{
+    		System.out.println("Error: " + e.getMessage());
+    		_form.recordError(getMessages().get(e.getMessage()));
+    	}
+    	if(_form.getHasErrors())
+    	{
     		_form.recordError(getMessages().get("Record_Save_Error"));
+    	}
+    		
        return blockFormView;
     }
 
@@ -385,8 +412,8 @@ public class BomDetailMaintenance extends SecureBasePage {
     	}
     	catch (Exception e)
     	{
-    		_form.clearErrors();
-    		_form.recordError(e.getLocalizedMessage());
+    		//_form.clearErrors();
+    		_form.recordError(e.getMessage());
     	}
     }
 

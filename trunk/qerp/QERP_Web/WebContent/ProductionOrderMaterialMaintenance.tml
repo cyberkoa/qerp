@@ -27,6 +27,7 @@
            </t:parameter>
            </t:GRID>
        </div>
+        <t:errors />
        <h3>Production Order Number : ${headercode}</h3>
        <table id="main">
            <tr>
@@ -54,7 +55,7 @@
                </td>
            </tr>
        </table>
-   <t:errors />
+   
    </form>
 </t:block>
 </body>

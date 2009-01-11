@@ -27,6 +27,7 @@
            </t:parameter>
            </t:GRID>
        </div>
+        <t:errors />
        <table id="main">
            <tr>
                <td>
@@ -51,7 +52,7 @@
                </td>
            </tr>
        </table>
-   <t:errors />
+  
    </form>
 </t:block>
 </body>
