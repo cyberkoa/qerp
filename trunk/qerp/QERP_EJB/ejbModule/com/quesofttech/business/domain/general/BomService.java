@@ -225,6 +225,15 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		
 		bomTreeNodeData.setBomDetail(bomDetail);
 		
+		// Set the quantity required as 1 to initial the BOM explosion
+		bomTreeNodeData.setTreeActualQuantityRequired(1.00);
+		bomTreeNodeData.setTreeOriginalQuantityRequired(1.00);
+		
+		bomTreeNodeData.setTreeActualValue(1.00);
+		bomTreeNodeData.setTreeOriginalValue(1.00);
+		
+		
+		
 		BomTreeNode bomTreeNode = new BomTreeNode();
 		
 		bomTreeNode.setData(bomTreeNodeData);
@@ -232,14 +241,19 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		bomTreeNode.setParent(null);
 		
 		
-		
+		// Start the explosion
 		this.explode(bomTreeNode, type);
 		
 		
+		System.out.println("After explode");
+				
+		// Declare a bomTree
+		BomTree bomTree = new BomTree();
+		// Set bomTreeNode as RootElement
+		bomTree.setRootElement(bomTreeNode);
 		
-		
-		
-		return null;
+		System.out.println("[BomService.java] bomTree.toList().size() = " + bomTree.toList().size());
+		return bomTree;
 	}
 	
 	
@@ -270,6 +284,8 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 			childBomTreeNodeData.setBomDetail(childBomDetail);
 			childBomTreeNodeData.setTreeActualQuantityRequired(childBomDetail.getQuantityRequired() * childBomDetail.getScrapFactor() * bomTreeNodeData.getTreeActualQuantityRequired());
 			childBomTreeNodeData.setTreeOriginalQuantityRequired(childBomDetail.getQuantityRequired() * bomTreeNodeData.getTreeOriginalQuantityRequired());
+			
+			// Temporary not used , until costing module design firm
 			//childBomTreeNodeData.setTreeActualValue(treeActualValue);
 			//childBomTreeNodeData.setTreeOriginalValue(treeOriginalValue);
 			
@@ -287,7 +303,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		
 		for(TreeNode<BomTreeNodeData> childBomTreeNode : bomTreeNode.getChildren())
 		{
-			System.out.println("[Inside for getChildren] Material : " + childBomTreeNode.data.getBomDetail().getMaterial().getCodeDescription() );
+			//System.out.println("[Inside for getChildren] Material : " + childBomTreeNode.data.getBomDetail().getMaterial().getCodeDescription() );
 			this.explode(childBomTreeNode, type);
 		}
 		

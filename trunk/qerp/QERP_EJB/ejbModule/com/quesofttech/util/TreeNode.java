@@ -42,7 +42,7 @@ import java.util.TreeSet;
 import java.util.ArrayList;
 
 
-public class TreeNode<T> {
+public class TreeNode<T> implements Serializable {
 	
 	
 	public int level;
