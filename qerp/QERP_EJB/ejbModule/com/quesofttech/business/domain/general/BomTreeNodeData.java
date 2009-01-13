@@ -62,12 +62,16 @@ public class BomTreeNodeData implements Serializable {
 	
 	private double treeScrapFactor = 1.0;
 	
+	// This one take scrapFactor into consideration
 	private Double treeActualQuantityRequired = 0.0;
 
+	// This one does not take scrapFactor into consideration
 	private Double treeOriginalQuantityRequired = 0.0;
 	
+	// This one take scrapFactor into consideration	
 	private Double treeActualValue = 0.0;
 
+	// This one does not take scrapFactor into consideration
 	private Double treeOriginalValue = 0.0;
 
 	

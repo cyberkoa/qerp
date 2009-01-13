@@ -289,10 +289,15 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		
 		BomService bomService = new BomService();
 		
+		try
+		{
+			bomTree = bomService.buildBomTree(salesOrderMaterial.getMaterial(), "P");
+		}
+		catch(BusinessException be)
+		{
+		}		
 		
-		
-		
-		
+		//bomTree.getRoot().
 		
 		
 		

@@ -1,6 +1,7 @@
 package com.quesofttech.util;
 
 import java.io.Serializable;
+import java.io.IOException;
 //import java.sql.Date;
 //import java.sql.Time;
 //import java.sql.Timestamp;
@@ -42,7 +43,7 @@ import java.util.TreeSet;
 import java.util.ArrayList;
 
 
-public class Tree<T> {
+public class Tree<T> implements Serializable {
 	 
     private TreeNode<T> root;
      
@@ -53,6 +54,9 @@ public class Tree<T> {
         super();
     }
  
+
+        
+    
     /**
      * Return the root Node of the tree.
      * @return the root element.
@@ -98,8 +102,14 @@ public class Tree<T> {
      */
     private void walk(TreeNode<T> element, List<TreeNode<T>> list) {
         list.add(element);
+        //System.out.println("[walk] Level : " +  element.level);
         for (TreeNode<T> data : element.getChildren()) {
             walk(data, list);
         }
     }
+    
+    
+    
+    
+    
 }

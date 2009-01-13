@@ -83,8 +83,6 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 	private static void testBOMExplosion() {
 		
 		
-		
-		
 		InitialContext context=null;
 		IBomServiceRemote beanRemote = null;
 		BomTree bomTree = null;
@@ -114,12 +112,24 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 			throw new RuntimeException(e);
 		}
 		
+		if(bomTree==null) 
+		{
+			System.out.println("bomTree is null");
+			return;
+		}
 		if(bomTree.toList().size() > 0)
 		{
+			System.out.println("size : " + bomTree.toList().size());
+			
 			for(TreeNode<BomTreeNodeData> tn : bomTree.toList())
 			{
-				System.out.println("[ ] " + tn.data.getBomDetail().getMaterialdesc());
+				System.out.println("[Level] : " + tn.level);
+				if(tn.data==null) 
+					 System.out.println("data is null");
+				else
+				  System.out.println("[TestBomExplosion] Material : " + tn.data.getBomDetail().getMaterial().getCodeDescription() + " Qty Required : " + tn.data.getTreeOriginalQuantityRequired());
 			}
+			
 		}
 	}
 	
