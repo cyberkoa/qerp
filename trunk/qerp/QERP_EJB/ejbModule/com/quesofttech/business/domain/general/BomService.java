@@ -14,6 +14,7 @@ import javax.persistence.Query;
 
 
 import com.quesofttech.util.TreeNode;
+import com.quesofttech.util.iface.IComparer;
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
@@ -25,6 +26,7 @@ import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.iface.IBomServiceLocal;
 import com.quesofttech.business.domain.general.iface.IBomServiceRemote;
+
 
 
 
@@ -256,8 +258,13 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		return bomTree;
 	}
 	
-	
-	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type) {
+	/**
+	 * 
+	 * @param bomTreeNode Initial TreeNode that to be explode for current level
+	 * @param type Type of Bom
+	 * @param comparer  A delegate interface, to determine whether child should be added to tree as node or not
+	 */
+	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type, IComparer comparer) {
 		
 		
 		BomTreeNodeData bomTreeNodeData = bomTreeNode.getData();
@@ -279,37 +286,54 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		
 		for(BomDetail childBomDetail : childrenBomDetail)
 		{
-			// Create a bom node data
-			BomTreeNodeData childBomTreeNodeData = new BomTreeNodeData();			
-			childBomTreeNodeData.setBomDetail(childBomDetail);
-			childBomTreeNodeData.setTreeActualQuantityRequired(childBomDetail.getQuantityRequired() * childBomDetail.getScrapFactor() * bomTreeNodeData.getTreeActualQuantityRequired());
-			childBomTreeNodeData.setTreeOriginalQuantityRequired(childBomDetail.getQuantityRequired() * bomTreeNodeData.getTreeOriginalQuantityRequired());
 			
-			// Temporary not used , until costing module design firm
-			//childBomTreeNodeData.setTreeActualValue(treeActualValue);
-			//childBomTreeNodeData.setTreeOriginalValue(treeOriginalValue);
-			
-			BomTreeNode childBomTreeNode = new BomTreeNode();
-					
-			childBomTreeNode.setData(childBomTreeNodeData);
-			childBomTreeNode.setLevel(bomTreeNode.getLevel() + 1);
-			childBomTreeNode.setParent(bomTreeNode);
-			
-			bomTreeNode.addChild(childBomTreeNode);
-			
-			// Instead of directly explode to lowest level, putting it out in another for loop to a allow per level explosion
-			//this.explode(childBomTreeNode, type);
+			if(comparer.compare()) // Condition
+			{
+				// Create a bom node data
+				BomTreeNodeData childBomTreeNodeData = new BomTreeNodeData();			
+				childBomTreeNodeData.setBomDetail(childBomDetail);
+				childBomTreeNodeData.setTreeActualQuantityRequired(childBomDetail.getQuantityRequired() * childBomDetail.getScrapFactor() * bomTreeNodeData.getTreeActualQuantityRequired());
+				childBomTreeNodeData.setTreeOriginalQuantityRequired(childBomDetail.getQuantityRequired() * bomTreeNodeData.getTreeOriginalQuantityRequired());
+				
+				// Temporary not used , until costing module design firm
+				//childBomTreeNodeData.setTreeActualValue(treeActualValue);
+				//childBomTreeNodeData.setTreeOriginalValue(treeOriginalValue);
+				
+				BomTreeNode childBomTreeNode = new BomTreeNode();
+						
+				childBomTreeNode.setData(childBomTreeNodeData);
+				childBomTreeNode.setLevel(bomTreeNode.getLevel() + 1);
+				childBomTreeNode.setParent(bomTreeNode);
+				
+				bomTreeNode.addChild(childBomTreeNode);
+				
+				// Instead of directly explode to lowest level, putting it out in another for loop to a allow per level explosion
+				//this.explode(childBomTreeNode, type);
+			}
 		}
 		
 		for(TreeNode<BomTreeNodeData> childBomTreeNode : bomTreeNode.getChildren())
 		{
 			//System.out.println("[Inside for getChildren] Material : " + childBomTreeNode.data.getBomDetail().getMaterial().getCodeDescription() );
-			this.explode(childBomTreeNode, type);
+			this.explode(childBomTreeNode, type,comparer);
 		}
 		
 		
-	}		
+	}
 	
+	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type) {
+		
+		// Pass true to as comparer
+		explode(bomTreeNode,type, new IComparer() 
+		                          { 
+			                       public boolean compare() 
+			                       { 
+			                    	    return true;
+			                       } 
+			                      } 
+		
+		);
+	}
 	
 /*	
 	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type) {
@@ -356,5 +380,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		}
 		return l;
 	}
+	
+
 	
 }

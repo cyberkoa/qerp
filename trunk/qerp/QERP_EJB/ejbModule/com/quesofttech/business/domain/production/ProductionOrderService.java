@@ -21,6 +21,12 @@ import com.quesofttech.business.domain.production.ProductionOrderOperation;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 
+import com.quesofttech.business.domain.general.BomDetail;
+import com.quesofttech.business.domain.general.BomTree;
+import com.quesofttech.business.domain.general.BomService;
+
+import com.quesofttech.business.domain.inventory.Material;
+import com.quesofttech.business.domain.inventory.MaterialType;
 
 @Stateless
 @Local(IProductionOrderServiceLocal.class)
@@ -231,6 +237,27 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		List l = q.getResultList();
 		return l;
 	}
+	
+	public void releaseWorkOrder(Material material) throws DoesNotExistException
+	{
+	    BomService bomService = new BomService();	
+	    BomTree bomTree = null;
+	    
+		bomTree = bomService.buildBomTree(material, "P");
+		
+		
+	    /*
+		List<BomDetail> childrenBomDetail = null;
+		
+		try	{ 
+			childrenBomDetail = bomService.findBomDetailsByParentMaterial(material, "P");
+		}
+		catch(DoesNotExistException e) {
+			return; // no child
+		}
+		*/
+	}
+	
 	
 	
 }
