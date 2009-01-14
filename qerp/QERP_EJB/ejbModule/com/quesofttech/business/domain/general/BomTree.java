@@ -70,16 +70,5 @@ public class BomTree extends Tree<BomTreeNodeData> implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
-
-	public Serializable getIdForMessages() {
-		return getId();
-	}
-
-	
-
-
-
 	
 }

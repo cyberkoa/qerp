@@ -80,5 +80,8 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 		return l;
 	}
 	
-	
+	public boolean isProduced(Material material)
+	{
+		return material.getMaterialType().isProduced();
+	}
 }
