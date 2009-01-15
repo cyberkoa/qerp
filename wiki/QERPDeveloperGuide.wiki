@@ -1,0 +1,20 @@
+#summary QERP Developer Guide.
+
+= Introduction =
+
+QERP is developed using Java programming language
+ * [http://tapestry.apache.org/tapestry5/ Tapestry 5] framework for frontend Web UI
+ * EJB3 for backend
+
+Currently, QERP is developed to run on [http://geronimo.apache.org/ Apache Geronimo] only. In the future, we have plan to make the code to run on [http://www.jboss.org/ JBoss], [https://glassfish.dev.java.net/ GlassFish] and etc. 
+
+----
+
+= Details =
+
+<wiki:comment>
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+</wiki:comment>
