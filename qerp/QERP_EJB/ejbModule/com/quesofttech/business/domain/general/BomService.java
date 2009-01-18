@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 
 import com.quesofttech.util.TreeNode;
-import com.quesofttech.util.iface.IComparer;
+import com.quesofttech.util.iface.ITreeNodeFilter;
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
@@ -262,9 +262,9 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	 * 
 	 * @param bomTreeNode Initial TreeNode that to be explode for current level
 	 * @param type Type of Bom
-	 * @param comparer  A delegate interface, to determine whether child should be added to tree as node or not
+	 * @param treeNodeFilter  A delegate interface, to determine whether child should be added to tree as node or not
 	 */
-	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type, IComparer comparer) {
+	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type, ITreeNodeFilter treeNodeFilter) {
 		
 		
 		BomTreeNodeData bomTreeNodeData = bomTreeNode.getData();
@@ -287,7 +287,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		for(BomDetail childBomDetail : childrenBomDetail)
 		{
 			
-			if(comparer.compare()) // Condition
+			if(treeNodeFilter.filter(childBomDetail)) // Condition
 			{
 				// Create a bom node data
 				BomTreeNodeData childBomTreeNodeData = new BomTreeNodeData();			
@@ -315,7 +315,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 		for(TreeNode<BomTreeNodeData> childBomTreeNode : bomTreeNode.getChildren())
 		{
 			//System.out.println("[Inside for getChildren] Material : " + childBomTreeNode.data.getBomDetail().getMaterial().getCodeDescription() );
-			this.explode(childBomTreeNode, type,comparer);
+			this.explode(childBomTreeNode, type,treeNodeFilter);
 		}
 		
 		
@@ -324,12 +324,12 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type) {
 		
 		// Pass true to as comparer
-		explode(bomTreeNode,type, new IComparer() 
+		explode(bomTreeNode,type, new ITreeNodeFilter() 
 		                          { 
-			                       public boolean compare() 
-			                       { 
-			                    	    return true;
-			                       } 
+			                       public boolean filter(Object obj)
+			                       {
+			                    	   return true;
+			                       }
 			                      } 
 		
 		);
