@@ -13,6 +13,7 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
+           t:model="bommodel"
            t:reorder="id,type,MaterialCode,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="BOMs"
            t:row="BOM"
@@ -23,6 +24,11 @@
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="BOM.id">
                    ${BOM.id}
+               </t:actionlink>
+           </t:parameter>
+           <t:parameter name="bomDetailSelectCell">
+               <t:actionlink  t:id="btnDetail" t:context="${BOM.id}"> 
+                   <button>Detail</button>
                </t:actionlink>
            </t:parameter>
            </t:GRID>
@@ -48,8 +54,7 @@
                </td>
            </tr>
        </table>
-       <t:actionlink  t:id="btnDetail" t:context="${id}"> Detail Page </t:actionlink>
-  
+      
    </form>
 </t:block>
 </body>

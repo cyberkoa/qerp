@@ -37,6 +37,10 @@ import com.quesofttech.web.util.*;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 public class BomDetailMaintenance extends SecureBasePage {
 // Default defination.
+	void onActionFromtoolbarback()
+    {
+    	
+    }
 	private DateTimeConvert DateConv = new DateTimeConvert();
 	
     private String _strMode = "";

@@ -31,10 +31,12 @@ import org.apache.tapestry5.Block;
 import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
+import org.apache.tapestry5.services.BeanModelSource;
 import org.apache.tapestry5.services.Request;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
+import org.apache.tapestry5.beaneditor.BeanModel;
 public class ProductionOrderMaintenance extends SecureBasePage {
 
 	private void refreshDisplay()
@@ -51,6 +53,30 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   	 }
     }
 	
+
+	@Inject
+    private BeanModelSource beanModelSource;
+
+	@Inject
+    private ComponentResources modelResources;
+	
+	@SuppressWarnings("unchecked")
+	@Property
+	@Retain
+	private BeanModel _productOrderModel;
+	
+	
+	void ModelRefresh()
+	{
+		if(_productOrderModel==null){
+		_productOrderModel = beanModelSource.createDisplayModel(ProductionOrder.class,modelResources.getMessages());
+		_productOrderModel.add("ProductionOrderDetailSelect",null);
+		_productOrderModel.get("ProductionOrderDetailSelect").label("Detail");
+			//_salesOrderMaterialModel.
+//			_salesOrderMaterialModel.include(//arg0)
+			
+		}
+	}
 	//===============================================================
 	//			Material ComboBox
 	//===============================================================
@@ -277,6 +303,7 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	//===============================
 	void RefreshRecords()
 	{
+		ModelRefresh();
 		 // ComboBox Refresh	
 		List<Material> list = null;
 	  	List<SalesOrder> list_so = null;
