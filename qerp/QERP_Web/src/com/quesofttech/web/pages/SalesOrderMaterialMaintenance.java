@@ -10,6 +10,8 @@ import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
 import com.quesofttech.business.domain.sales.Customer;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.inventory.Material;
+import org.apache.tapestry5.beaneditor.BeanModel;
+
 
 //import com.quesofttech.business.domain.sales.iface.ISalesOrderMaterialServiceRemote;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
@@ -19,6 +21,9 @@ import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
 import com.quesofttech.web.model.base.GenericSelectModel;
 import com.quesofttech.web.state.Visit;
+import com.sun.org.apache.xml.internal.serializer.utils.Messages;
+import com.sun.xml.internal.ws.api.message.Message;
+
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Retain;
@@ -32,7 +37,7 @@ import org.apache.tapestry5.Block;
 import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
-import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.services.*;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
@@ -40,17 +45,37 @@ import org.apache.tapestry5.annotations.ApplicationState;
 
 
 public class SalesOrderMaterialMaintenance extends SecureBasePage {
+	
+	
+	
+	@Inject
+    private BeanModelSource beanModelSource;
+
+	@Inject
+    private ComponentResources resources;
+	
+	@SuppressWarnings("unchecked")
+	@Property
+	@Retain
+	private BeanModel _salesOrderMaterialModel;
+
+   /* public BeanModel getModel() {
+        BeanModel model = beanModelSource.create(User.class, false, resources);
+        model.add("delete", null);
+        return model;
+    }
+	*/
 	private void refreshDisplay()
     {
     	if(myState.equals("U"))
 	   	 {
-		         viewDisplayText="Block";
-		         viewEditText="none";
+	         viewDisplayText="Block";
+	         viewEditText="none";
 	   	 }
 	   	 else
 	   	 {
 	   		 viewDisplayText="none";
-		         viewEditText="Block";    		 
+		     viewEditText="Block";    		 
 	   	 }
     }
 	/*public SalesOrderMaterialMaintenance() throws BusinessException{
@@ -64,8 +89,6 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 
 
 	}*/
-	
-	
 	
 	private String viewDisplayText="", viewEditText="";
 	public String getViewDisplayText()
@@ -149,6 +172,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	}
 	public void setPrice(Double Price)
 	{
+	
 	   this.Price = Price;
 	}
 
@@ -178,8 +202,6 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	{
 	   this.QuantityShipped = QuantityShipped;
 	}
-
-	
 	
     @Inject
     private PropertyAccess _access;
@@ -213,6 +235,18 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 
 	void RefreshRecords()
 	{
+		
+		
+		if(_salesOrderMaterialModel==null){
+			_salesOrderMaterialModel = beanModelSource.createDisplayModel(SalesOrderMaterial.class,resources.getMessages());
+			_salesOrderMaterialModel.add("ConvertSO",null);
+			_salesOrderMaterialModel.get("ConvertSO").label("Convert SO to WO");
+			//_salesOrderMaterialModel.
+//			_salesOrderMaterialModel.include(//arg0)
+			
+		}
+		
+		
 		List<Material> list = null;
     	try {
            list = this.getMaterialService().findForSaleMaterials();
@@ -463,7 +497,11 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     	   }
     	}
 	}
-	
+	void onActionFromToolbarconvertSO()
+	{
+		System.out.println("clicked");
+	}
+
 	void onActionFromtoolbarDel(Long id)
 	{
 		if (id!=null) {
@@ -521,7 +559,14 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	
 	
 	public List<SalesOrderMaterial> getSalesOrderMaterials() {
-	   return _SalesOrderMaterials;
+		//beanModelSource.
+		//_SalesOrderMaterials = beanModelSource.create(SalesOrderMaterial.class, true,"");
+		//create(SalesOrderMaterial.class, "esting");
+		//_SalesOrderMaterials = beanModelSource.create(SalesOrderMaterial.class, false, test);
+	
+		//_SalesOrderMaterials.
+		//_SalesOrderMaterials.
+		   return _SalesOrderMaterials;
 	}
 	
 	
