@@ -526,6 +526,12 @@ public class BomDetail extends BaseEntity {
 	}
 	
 	
+	public String getMaterialDesc()
+	{
+		return material.getCodeDescription();
+	}
+	
+	
 	
 	
 }
