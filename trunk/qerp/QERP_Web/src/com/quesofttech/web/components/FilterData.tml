@@ -17,7 +17,7 @@
 							</tr>
 						</table>
 						<div >
-							<t:submit t:id="btnFilter">Filter</t:submit>
+							<t:submit t:id="btnFilter" value="Submit"></t:submit>
 						</div>
 					</td>
 				</tr>
