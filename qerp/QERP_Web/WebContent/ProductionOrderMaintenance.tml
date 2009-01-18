@@ -13,6 +13,7 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="grid" 
+           t:model="productOrderModel"
            t:source="ProductionOrders"
            t:row="ProductionOrder"
            t:rowsPerPage="10"
@@ -23,6 +24,11 @@
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="ProductionOrder.id">
                    ${ProductionOrder.id}
+               </t:actionlink>
+           </t:parameter>
+           <t:parameter name="ProductionOrderDetailSelectCell">
+               <t:actionlink  t:id="btnDetail" t:context="${ProductionOrder.id}"> 
+                   <button>Detail</button>
                </t:actionlink>
            </t:parameter>
            </t:GRID>
@@ -61,7 +67,7 @@
                </td>
            </tr>
        </table>
-       <t:actionlink  t:id="btnDetail" t:context="${id}"> Detail Page </t:actionlink>
+       
    
    </form>
 </t:block>

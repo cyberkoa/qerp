@@ -10,6 +10,7 @@ import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
 import com.quesofttech.business.domain.inventory.MaterialType;
 import com.quesofttech.business.domain.inventory.iface.IMaterialTypeServiceRemote;
 import com.quesofttech.business.domain.sales.SalesOrder;
+import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
@@ -29,6 +30,7 @@ import org.apache.tapestry5.corelib.components.Checkbox;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.BeanModelSource;
 import org.apache.tapestry5.services.Request;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
@@ -42,6 +44,8 @@ import org.apache.tapestry5.ioc.services.*;
 import com.quesofttech.business.domain.sales.Customer;
 import com.quesofttech.business.domain.sales.iface.ICustomerServiceRemote;
 import org.apache.tapestry5.annotations.InjectPage;
+import org.apache.tapestry5.beaneditor.BeanModel;
+
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 
@@ -62,6 +66,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 	
 	private void refreshDisplay()
     {
+		ModelRefresh();
     	if(myState.equals("U"))
 	   	 {
 		         viewDisplayText="Block";
@@ -73,6 +78,22 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		         viewEditText="Block";    		 
 	   	 }
     }
+	
+	
+	
+	@Inject
+    private BeanModelSource beanModelSource;
+
+	@Inject
+    private ComponentResources modelResources;
+	
+	@SuppressWarnings("unchecked")
+	@Property
+	@Retain
+	private BeanModel _salesOrderModel;
+	
+	
+	
 /*
 	void onActivate()
 	{
@@ -296,9 +317,24 @@ public class SalesOrderMaintenance extends SecureBasePage {
 			    }
 			);
 		}
-		
+		void ModelRefresh()
+		{
+			//if(_salesOrderModel==null){
+				_salesOrderModel = beanModelSource.createDisplayModel(SalesOrder.class,modelResources.getMessages());
+				_salesOrderModel.add("SalesOrderDetailSelect",null);
+				_salesOrderModel.get("SalesOrderDetailSelect").label("Detail");
+				//_salesOrderMaterialModel.
+//				_salesOrderMaterialModel.include(//arg0)
+				
+			//}
+		}
 		void RefreshRecords(Delegate delegate)
 		{
+			System.out.println("refresh 1");
+			ModelRefresh();
+			
+			System.out.println("refresh 2");
+			
 			List<Customer> list = null;
 	    	try {
 	           list = this.getCustomerService().findCustomers();
@@ -383,6 +419,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		void setupRender() {
 		   System.out.println("setuprender");
 		   //_filterData.injectResources(resources);
+		   ModelRefresh();
 		   RefreshRecords();
 		}
 		

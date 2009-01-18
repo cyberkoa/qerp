@@ -39,6 +39,10 @@ public class ProductionOrderMaterialMaintenance extends SecureBasePage {
 	//===============================================================
 	//			Material ComboBox
 	//===============================================================
+	void onActionFromtoolbarback()
+    {
+    	
+    }
 	@Property
 	@Persist
 	@SuppressWarnings("unused")

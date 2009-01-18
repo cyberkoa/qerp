@@ -42,7 +42,7 @@
 	
 </head>
 
-<body onload="collapseAllRows();">
+<body onload="collapseAllRows();   history.forward();" >
 <div>
 	<div id="doc3" width="100%">
 	    <div id="hd" style="text-align: center;">

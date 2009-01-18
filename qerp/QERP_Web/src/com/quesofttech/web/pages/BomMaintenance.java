@@ -8,6 +8,7 @@ import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.iface.IBomServiceRemote;
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
+import com.quesofttech.business.domain.production.ProductionOrder;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
@@ -28,10 +29,12 @@ import org.apache.tapestry5.Block;
 import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
+import org.apache.tapestry5.services.BeanModelSource;
 import org.apache.tapestry5.services.Request;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
+import org.apache.tapestry5.beaneditor.BeanModel;
 public class BomMaintenance extends SecureBasePage {
 // Default defination.
 	
@@ -170,8 +173,30 @@ public class BomMaintenance extends SecureBasePage {
 	//===============================================================
 	
     //===============================
+	@Inject
+    private BeanModelSource beanModelSource;
+
+	@Inject
+    private ComponentResources modelResources;
+	
+	@SuppressWarnings("unchecked")
+	@Property
+	@Retain
+	private BeanModel _bomModel;
+	void ModelRefresh()
+	{
+		if(_bomModel==null){
+			_bomModel = beanModelSource.createDisplayModel(BOM.class,modelResources.getMessages());
+			_bomModel.add("bomDetailSelect",null);
+			_bomModel.get("bomDetailSelect").label("Detail");
+			//_salesOrderMaterialModel.
+//			_salesOrderMaterialModel.include(//arg0)
+			
+		}
+	}
     void RefreshRecords()
     {    	
+    	ModelRefresh();
     	List<Material> list = null;	  	
     	try {    		
     		list = this.getMaterialService().findMaterials();           
@@ -371,6 +396,7 @@ public class BomMaintenance extends SecureBasePage {
            }
        }
     }
+    
 
     void onActionFromtoolbarDel(Long id)
     {

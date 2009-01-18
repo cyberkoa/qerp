@@ -19,6 +19,7 @@
            t:id="grid" 
            t:source="SalesOrders"
            t:row="SalesOrder"
+           t:model="salesOrderModel"
 		   t:rowsPerPage="10"
 		   t:reorder="id,customerpo,docno,doctype,customercode,createLogin,createtimestamp,modifylogin,modifytimestamp"
 		   t:exclude="sessionid,recordstatus,version,customerp,modifyapp,createapp,customername"
@@ -27,6 +28,11 @@
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="SalesOrder.id">
                    ${SalesOrder.id}
+               </t:actionlink>
+           </t:parameter>
+           <t:parameter name="SalesOrderDetailSelectCell">
+               <t:actionlink t:id="btnDetail" t:context="${SalesOrder.id}"  >
+                   <button>Detail</button>
                </t:actionlink>
            </t:parameter>
            </t:GRID>
@@ -61,7 +67,7 @@
                </td>
            </tr>
        </table>
-       <t:actionlink  t:id="btnDetail" t:context="${id}"> Detail Page </t:actionlink>
+       
    <t:errors />
    </form>
    	<div id="popUpDiv" style="display:none;width:auto;">

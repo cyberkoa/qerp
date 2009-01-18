@@ -47,7 +47,10 @@ import org.apache.tapestry5.annotations.ApplicationState;
 public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	
 	
-	
+	void onActionFromtoolbarback()
+    {
+    	
+    }
 	@Inject
     private BeanModelSource beanModelSource;
 
