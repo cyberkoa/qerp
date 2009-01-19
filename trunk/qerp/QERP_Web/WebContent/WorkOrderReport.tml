@@ -69,8 +69,13 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 	</tr>
 	<tr>
 		<td>
-			<t:TableTemplate datasource="MaterialDatasource" headers="titles">
-			</t:TableTemplate>
+			<b>Raw Material:-</b>			
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<b>Raw Material:-</b>			
 		</td>
 	</tr>
 	
