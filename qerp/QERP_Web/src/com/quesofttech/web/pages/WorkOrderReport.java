@@ -43,7 +43,7 @@ import com.quesofttech.web.model.base.GenericSelectModel;
 
 
 
-public class workorderlisting extends SecureBasePage {
+public class WorkOrderReport extends SecureBasePage {
 	private Material materiallists;
 	
 	private List<String> _titles;
