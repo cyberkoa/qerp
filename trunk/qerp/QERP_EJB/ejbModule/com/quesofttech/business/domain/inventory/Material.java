@@ -40,6 +40,8 @@ import com.quesofttech.business.domain.embeddable.Address;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.embeddable.Dimension;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
+import com.quesofttech.business.domain.general.BomDetail;
+import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.UOM;
 import com.quesofttech.business.domain.security.User;
 import com.quesofttech.util.StringUtil;
@@ -116,6 +118,11 @@ public class Material extends BaseEntity {
 	private UOM baseUOM;
 	
 	
+	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=BOM.class)
+	private List<BOM> boms;
+	
+	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=BomDetail.class)
+	private List<BOM> bomDetails;
 	
 	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=SalesOrderMaterial.class)
 	private List<SalesOrderMaterial> salesOrderMaterials;
@@ -465,6 +472,55 @@ public class Material extends BaseEntity {
 
 	
 	
+	
+	/**
+	 * @return the boms
+	 */
+	public List<BOM> getBoms() {
+		return boms;
+	}
+
+
+	/**
+	 * @param boms the boms to set
+	 */
+	public void setBoms(List<BOM> boms) {
+		this.boms = boms;
+	}
+
+
+	/**
+	 * @return the bomDetails
+	 */
+	public List<BOM> getBomDetails() {
+		return bomDetails;
+	}
+
+
+	/**
+	 * @param bomDetails the bomDetails to set
+	 */
+	public void setBomDetails(List<BOM> bomDetails) {
+		this.bomDetails = bomDetails;
+	}
+
+
+	/**
+	 * @return the salesOrderMaterials
+	 */
+	public List<SalesOrderMaterial> getSalesOrderMaterials() {
+		return salesOrderMaterials;
+	}
+
+
+	/**
+	 * @param salesOrderMaterials the salesOrderMaterials to set
+	 */
+	public void setSalesOrderMaterials(List<SalesOrderMaterial> salesOrderMaterials) {
+		this.salesOrderMaterials = salesOrderMaterials;
+	}
+
+
 	// Useful properties
 	/*
 	 *  Property : Code - Description
@@ -482,6 +538,21 @@ public class Material extends BaseEntity {
 	public String getMaterialTypeDesc(){
 		if(materialType!=null) return materialType.getTypeDescription();
 		else return "";
+	}
+	
+	
+	// methods
+	
+	public BOM getBomByType(String type)
+	{
+		for(BOM bom : boms)
+		{
+			if(bom.getType()==type)
+			{
+				return bom;
+			}
+		}
+		return null;
 	}
 	
 }

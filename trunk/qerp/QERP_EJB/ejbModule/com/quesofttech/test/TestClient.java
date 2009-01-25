@@ -55,7 +55,8 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 	    //updateMaterial((long)1453);
 		//testReflectionGetMethods(UOM.class);
 	    //testReflectionToString();
-		testBOMExplosion();
+		//testBOMExplosion();
+		testConvertSOM2ProdO();
 	}
 	
 	private static InitialContext GetContext()
@@ -78,7 +79,39 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		}
 	}	
 	
-	
+
+	private static void testConvertSOM2ProdO() {
+		
+		
+		InitialContext context=null;
+		ISalesOrderServiceRemote beanRemote = null;
+		//BomTree bomTree = null;
+		//ResourceBundle      bundle = null;
+
+	     // bundle = ResourceBundle.getBundle("materialType", Locale.getDefault(), TestClient.class.getClassLoader());
+	     // String jndiName = bundle.getString("jndi.session.ejb");
+		try
+		{
+			context = GetContext();
+			 beanRemote = (ISalesOrderServiceRemote) context.lookup(SalesOrderService.class.getSimpleName()+"Remote");
+			 if(beanRemote!=null) {
+				try  {
+					beanRemote.convertOrderMaterialToProductionOrder(findSalesOrderMaterial((long)50));
+				}
+				catch(BusinessException e) {
+				  System.out.println("[Business Exception] " + e.getMessage());
+				  e.printStackTrace();
+				}
+			 }
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+/* I rethrow it as runtime exception as there is really no need to continue if an exception happens and I
+* do not want to catch it everywhere.
+*/ 
+			throw new RuntimeException(e);
+		}
+	}
 	
 	private static void testBOMExplosion() {
 		
@@ -579,7 +612,41 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		
 	}
 	
-	
+	private static SalesOrderMaterial findSalesOrderMaterial(Long id) throws DoesNotExistException  {
+		//material.setMaterialType();
+		
+		InitialContext context=null;
+		ISalesOrderServiceRemote beanRemote = null;
+		//ResourceBundle      bundle = null;
+
+	     // bundle = ResourceBundle.getBundle("materialType", Locale.getDefault(), TestClient.class.getClassLoader());
+	     // String jndiName = bundle.getString("jndi.session.ejb");
+		try
+		{
+			context = GetContext();
+			 beanRemote = (ISalesOrderServiceRemote) context.lookup(SalesOrderService.class.getSimpleName()+"Remote");
+			 if(beanRemote!=null) {
+				try  {
+					return beanRemote.findSalesOrderMaterial(id);
+				}
+				catch(BusinessException e) {
+				  System.out.println("[Business Exception] " + e.getMessage());
+				  e.printStackTrace();
+				  return null;
+				}
+			 }
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+/* I rethrow it as runtime exception as there is really no need to continue if an exception happens and I
+* do not want to catch it everywhere.
+*/ 
+			throw new RuntimeException(e);
+			
+		}
+		return null;
+		
+	}
 	
 	
 }

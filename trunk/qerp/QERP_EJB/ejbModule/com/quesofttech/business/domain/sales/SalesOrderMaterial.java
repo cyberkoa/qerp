@@ -568,4 +568,14 @@ public class SalesOrderMaterial extends BaseEntity {
 	
 
 	
+	/*
+	 * Properties
+	 */
+	
+	public String getDocNoMaterial()
+	{
+		return this.getSalesOrder().getDocNo() + "-" + this.material.getCode();
+	}
+	
+	
 }

@@ -33,10 +33,14 @@ import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.inventory.Material;
 
+import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.business.common.exception.GenericBusinessException;
 import com.quesofttech.util.StringUtil;
+import com.quesofttech.util.TreeNode;
+import com.quesofttech.util.iface.ITreeNodeFilter;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -66,6 +70,8 @@ public class BOM extends BaseEntity {
 	@Column(name = "bom_Type", length = 1, nullable = false)
 	private String type;
 	
+	@Column(name = "bom_Code", length = 10)
+	private String code;
 	
 	@Embedded
 	RowInfo rowInfo;
@@ -406,6 +412,184 @@ public class BOM extends BaseEntity {
 	public void setMaterial(Material material) {
 		this.material = material;
 	}
+
+
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+	/**
+	 * @return the bomDetails
+	 */
+	public List<BomDetail> getBomDetails() {
+		return bomDetails;
+	}
+
+
+	/**
+	 * @param bomDetails the bomDetails to set
+	 */
+	public void setBomDetails(List<BomDetail> bomDetails) {
+		this.bomDetails = bomDetails;
+	}
+	
+
+	
+	// methods
+	
+	public BomTree buildBomTree() throws DoesNotExistException {
+		//TreeSet<BomTreeNodeData> bomTreeSet = new TreeSet<BomTreeNodeData>();
+		//System.out.println("build1");
+		//BOM bom = this.findBOMByMaterial(material, type);
+		//System.out.println("build12");
+		// Create a virtual BomDetail record for the root Material, to set the calculated value 
+		
+		BomDetail bomDetail = new BomDetail();
+		bomDetail.setBom(this);
+		bomDetail.setMaterial(material);
+		
+		// Default and scrap factor and quantity required as 1, as this value will be used to calculate children corresponding value
+		bomDetail.setScrapFactor(1.0);
+        bomDetail.setQuantityRequired(1.0);
+        
+	    java.util.Calendar calendar = Calendar.getInstance();
+
+		bomDetail.setStartDate(new java.sql.Timestamp(calendar.getTime().getTime()));
+		
+	    calendar.add(Calendar.MONTH, 1); // Add 1 month
+		bomDetail.setEndDate(new java.sql.Timestamp(calendar.getTime().getTime()));
+		
+		// Prepare bomTreeNodeData
+		BomTreeNodeData bomTreeNodeData = new BomTreeNodeData();
+		
+		bomTreeNodeData.setBomDetail(bomDetail);
+		
+		// Set the quantity required as 1 to initial the BOM explosion
+		bomTreeNodeData.setTreeActualQuantityRequired(1.00);
+		bomTreeNodeData.setTreeOriginalQuantityRequired(1.00);
+		
+		bomTreeNodeData.setTreeActualValue(1.00);
+		bomTreeNodeData.setTreeOriginalValue(1.00);
+		
+		
+		
+		BomTreeNode bomTreeNode = new BomTreeNode();
+		
+		bomTreeNode.setData(bomTreeNodeData);
+		bomTreeNode.setLevel(0);
+		bomTreeNode.setParent(null);
+		
+		
+		// Start the explosion
+		this.explode(bomTreeNode, type);
+		
+		
+		System.out.println("After explode");
+				
+		// Declare a bomTree
+		BomTree bomTree = new BomTree();
+		// Set bomTreeNode as RootElement
+		bomTree.setRootElement(bomTreeNode);
+		
+		System.out.println("[BomService.java] bomTree.toList().size() = " + bomTree.toList().size());
+		return bomTree;
+	}
+	
+	/**
+	 * 
+	 * @param bomTreeNode Initial TreeNode that to be explode for current level
+	 * @param type Type of Bom
+	 * @param treeNodeFilter  A delegate interface, to determine whether child should be added to tree as node or not
+	 */
+	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type, ITreeNodeFilter treeNodeFilter) {
+		
+		
+		BomTreeNodeData bomTreeNodeData = bomTreeNode.getData();
+		
+		if(bomTreeNodeData==null) return;
+		BomDetail bomDetail = bomTreeNodeData.getBomDetail();
+		
+		if(bomDetail==null) return;
+		//BOM bom = bomDetail.getBom();
+		
+		//List<BomDetail> childrenBomDetail = null;
+		
+			//childrenBomDetail = this.findBomDetailsByParentMaterial(bomDetail.getMaterial(), type);
+
+		
+		for(BomDetail childBomDetail : this.bomDetails)
+		{
+			
+			if(this.type == type && treeNodeFilter.filter(childBomDetail)) // Condition
+			{
+				// Create a bom node data
+				BomTreeNodeData childBomTreeNodeData = new BomTreeNodeData();			
+				childBomTreeNodeData.setBomDetail(childBomDetail);
+				childBomTreeNodeData.setTreeActualQuantityRequired(childBomDetail.getQuantityRequired() * childBomDetail.getScrapFactor() * bomTreeNodeData.getTreeActualQuantityRequired());
+				childBomTreeNodeData.setTreeOriginalQuantityRequired(childBomDetail.getQuantityRequired() * bomTreeNodeData.getTreeOriginalQuantityRequired());
+				
+				// Temporary not used , until costing module design firm
+				//childBomTreeNodeData.setTreeActualValue(treeActualValue);
+				//childBomTreeNodeData.setTreeOriginalValue(treeOriginalValue);
+				
+				BomTreeNode childBomTreeNode = new BomTreeNode();
+						
+				childBomTreeNode.setData(childBomTreeNodeData);
+				childBomTreeNode.setLevel(bomTreeNode.getLevel() + 1);
+				childBomTreeNode.setParent(bomTreeNode);
+				
+				bomTreeNode.addChild(childBomTreeNode);
+				
+				// Instead of directly explode to lowest level, putting it out in another for loop to a allow per level explosion
+				//this.explode(childBomTreeNode, type);
+			}
+		}
+		
+		for(TreeNode<BomTreeNodeData> childBomTreeNode : bomTreeNode.getChildren())
+		{
+			//System.out.println("[Inside for getChildren] Material : " + childBomTreeNode.data.getBomDetail().getMaterial().getCodeDescription() );
+			this.explode(childBomTreeNode, type,treeNodeFilter);
+		}
+		
+		
+	}
+	
+	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type) {
+		
+		// Pass true to as filter
+		explode(bomTreeNode,type, new ITreeNodeFilter() 
+		                          { 
+			                       public boolean filter(Object obj)
+			                       {
+			                    	   return true;
+			                       }
+			                      } 
+		
+		);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

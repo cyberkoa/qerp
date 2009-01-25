@@ -203,9 +203,9 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	
 	public BomTree buildBomTree(Material material, String type) throws DoesNotExistException {
 		//TreeSet<BomTreeNodeData> bomTreeSet = new TreeSet<BomTreeNodeData>();
-		System.out.println("build1");
+		//System.out.println("build1");
 		BOM bom = this.findBOMByMaterial(material, type);
-		System.out.println("build12");
+		//System.out.println("build12");
 		// Create a virtual BomDetail record for the root Material, to set the calculated value 
 		
 		BomDetail bomDetail = new BomDetail();
@@ -324,7 +324,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	
 	private void explode(TreeNode<BomTreeNodeData> bomTreeNode, String type) {
 		
-		// Pass true to as comparer
+		// Pass true to as filter
 		explode(bomTreeNode,type, new ITreeNodeFilter() 
 		                          { 
 			                       public boolean filter(Object obj)
