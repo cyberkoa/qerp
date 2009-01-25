@@ -1,5 +1,6 @@
 package com.quesofttech.business.domain.sales;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,13 +28,16 @@ import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.BomDetail;
 import com.quesofttech.business.domain.general.BomTree;
+import com.quesofttech.business.domain.general.BomTreeNode;
 import com.quesofttech.business.domain.general.BomService;
+import com.quesofttech.business.domain.general.BomTreeNodeData;
 
 
 import com.quesofttech.business.domain.production.ProductionOrder;
 import com.quesofttech.business.domain.production.ProductionOrderOperation;
 import com.quesofttech.business.domain.production.ProductionOrderMaterial;
 import com.quesofttech.business.domain.production.ProductionOrderService;
+import com.quesofttech.util.TreeNode;
 
 
 @Stateless
@@ -283,23 +287,103 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 			
 	}
 	
-	public void OrderedMaterialToWorkOrder(SalesOrderMaterial salesOrderMaterial)
+	public void convertOrderMaterialToProductionOrder(SalesOrderMaterial salesOrderMaterial)
 	{
+		List<ProductionOrder> productionOrders = new ArrayList<ProductionOrder>(); 
+		//ProductionOrderService productionOrderService = new ProductionOrderService();
+		
 		BomTree bomTree = null;
+		BOM bom = null;
+		//BomService bomService = new BomService();
+		System.out.println("SO Material : " + salesOrderMaterial.getMaterial());
 		
-		BomService bomService = new BomService();
-		
-		try
+		if(salesOrderMaterial != null && salesOrderMaterial.getMaterial() != null) 
 		{
-			bomTree = bomService.buildBomTree(salesOrderMaterial.getMaterial(), "P");
+			//try {	
+			 bom = salesOrderMaterial.getMaterial().getBomByType("P");
+		    //}
+			//catch(NullPointerException e)
+			//{
+
+			//}		
+			try 
+			{
+			 bom.buildBomTree();
+			}
+			catch(BusinessException be)
+			{
+				
+			}
 		}
-		catch(BusinessException be)
+		
+		List<TreeNode<BomTreeNodeData>> bomTreeNodeList = bomTree.toList();
+		
+		for(TreeNode<BomTreeNodeData> node : bomTreeNodeList)
 		{
-		}		
-		
-		//bomTree.getRoot().
-		
-		
+		 
+			try
+			{
+				if(node.getData().getBomDetail().getMaterial().getMaterialType().isProduced())
+				{
+					ProductionOrder productionOrder = new ProductionOrder();
+					
+					// temporary
+					productionOrder.setDocNo("0");
+					productionOrder.setQuantityOrder(node.getData().getTreeOriginalQuantityRequired() * salesOrderMaterial.getQuantityOrder());
+					
+					productionOrder.setMaterial(node.getData().getBomDetail().getMaterial());
+					
+					// Do a phantom explosion
+					
+					List<TreeNode<BomTreeNodeData>> productionOrderChildren = new ArrayList<TreeNode<BomTreeNodeData>>(node.getChildren());
+					System.out.println("[Before phantom explosion] :" + productionOrderChildren.size());
+					for(int i=0; i < productionOrderChildren.size();++i)
+					{
+					  TreeNode<BomTreeNodeData> child = productionOrderChildren.get(i);
+					  
+					  // If is phantom type (isJIT = true indicates it is a phantom type)
+					  if(child.getData().getBomDetail().getMaterial().getMaterialType().isJIT())
+					  {
+						  // Add the children to the end of the list
+						  productionOrderChildren.addAll(child.getChildren());
+					  }
+					}
+					
+					
+					System.out.println("[After phantom explosion] :" + productionOrderChildren.size());
+					/*
+					// After phantom explosion , productionOrderChildren should contain all the production order materials					
+					for(TreeNode<BomTreeNodeData> child : productionOrderChildren)
+					{
+						ProductionOrderMaterial productionOrderMaterial = new ProductionOrderMaterial();
+						
+						productionOrderMaterial.setMaterial(child.getData().getBomDetail().getMaterial());
+						productionOrderMaterial.setProductionOrder(productionOrder);
+						productionOrderMaterial.setQuantityConsumed(0.0);
+						productionOrderMaterial.setQuantityRequired(child.getData().getTreeOriginalQuantityRequired() * productionOrder.getQuantityOrder());
+						
+						
+						// Add the productionOrderMaterial
+						productionOrder.addProductionOrderMaterial(productionOrderMaterial);
+					}
+					// Insert the productionOrder to db
+					productionOrderService.addProductionOrder(productionOrder);
+				    // Added to list (for future , to have a addProductionOrders function to insert record by list
+				    productionOrders.add(productionOrder);
+					*/
+					
+				}
+				
+				
+			}
+			catch(Exception e)
+			{
+				//throw e;
+			}
+			
+			
+			
+		}
 		
 	}
 	

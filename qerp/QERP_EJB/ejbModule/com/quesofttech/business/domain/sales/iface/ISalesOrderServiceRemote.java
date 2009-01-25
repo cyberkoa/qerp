@@ -36,5 +36,6 @@ public interface ISalesOrderServiceRemote {
 	
 	List<SalesOrder> findSalesOrdersBySearchFieldsRange(SalesOrderSearchFields lower, SalesOrderSearchFields upper,SearchOptions options) throws DoesNotExistException;
 	List<SalesOrder> findSalesOrdersBySearchFields(SalesOrderSearchFields searchFields,SearchOptions options) throws DoesNotExistException;
-	
+
+	public void convertOrderMaterialToProductionOrder(SalesOrderMaterial salesOrderMaterial);
 }

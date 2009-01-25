@@ -67,7 +67,7 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 	@SuppressWarnings("unchecked")
 	public List<Material> findForSaleMaterials() {
 		Query q = _em.createQuery("select m from Material m where m.rowInfo.recordStatus='A' AND m.materialType.rowInfo.recordStatus='A' AND " +
-				"m.materialType.isForSale=FALSE");
+				"m.materialType.isForSale=true");
 		List l = q.getResultList();
 		return l;
 	}
@@ -75,7 +75,7 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 	@SuppressWarnings("unchecked")
 	public List<Material> findProducedMaterials() {
 		Query q = _em.createQuery("select m from Material m where m.rowInfo.recordStatus='A' AND m.materialType.rowInfo.recordStatus='A' AND " +
-				"m.materialType.isProduced=TRUE");
+				"m.materialType.isProduced=true");
 		List l = q.getResultList();
 		return l;
 	}
