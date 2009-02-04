@@ -122,7 +122,7 @@ public class Material extends BaseEntity {
 	private List<BOM> boms;
 	
 	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=BomDetail.class)
-	private List<BOM> bomDetails;
+	private List<BomDetail> bomDetails;
 	
 	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=SalesOrderMaterial.class)
 	private List<SalesOrderMaterial> salesOrderMaterials;
@@ -203,15 +203,18 @@ public class Material extends BaseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		return (obj == this) || (obj instanceof User) && getId() != null && ((User) obj).getId().equals(this.getId());
+		return (obj == this) || (obj instanceof Material) && getId() != null && ((Material) obj).getId().equals(this.getId());
 	}
 
+	
 	// The need for a hashCode() method is discussed at http://www.hibernate.org/109.html
 
 	@Override
 	public int hashCode() {
 		return getId() == null ? super.hashCode() : getId().hashCode();
 	}	
+	
+	
 	
 	@Override
 	public Serializable getIdForMessages() {
@@ -492,7 +495,7 @@ public class Material extends BaseEntity {
 	/**
 	 * @return the bomDetails
 	 */
-	public List<BOM> getBomDetails() {
+	public List<BomDetail> getBomDetails() {
 		return bomDetails;
 	}
 
@@ -500,7 +503,7 @@ public class Material extends BaseEntity {
 	/**
 	 * @param bomDetails the bomDetails to set
 	 */
-	public void setBomDetails(List<BOM> bomDetails) {
+	public void setBomDetails(List<BomDetail> bomDetails) {
 		this.bomDetails = bomDetails;
 	}
 
@@ -545,12 +548,23 @@ public class Material extends BaseEntity {
 	
 	public BOM getBomByType(String type)
 	{
-		for(BOM bom : boms)
+		System.out.println("boms = " + getBoms());
+		
+		if(boms != null)
 		{
-			if(bom.getType()==type)
+			for(BOM bom : boms)
 			{
-				return bom;
+				//System.out.println("[Material.java] getBomByType() : " + bom.getType() + " type : " + type);
+				if(bom.getType().equals(type))
+				{
+					//System.out.println("Before return bom");
+					return bom;
+				}
 			}
+		}
+		else
+		{
+			System.out.println("[Material.java] boms is null");
 		}
 		return null;
 	}
