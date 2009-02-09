@@ -1,0 +1,34 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"> 
+<form t:type="form" t:id="SearchForm">
+			<table id="main">
+				<tr>
+					<td>
+						<table id="input">
+						    <tr>
+						      <th><td> Lower </td><td> Upper </td></th>
+						    </tr>
+							<tr>
+								<th>Material Code</th>
+								<td><input t:type="TextField" t:id="lowerMaterialCode"  t:value="lowerMaterialCode" size="10" maxLength="10" /></td><td><input t:type="TextField" t:id="upperMaterialCode" t:value="upperMaterialCode" size="10" maxLength="10" /></td>
+							</tr>
+							<tr>
+								<th>Qty Order</th>
+								<td><input t:type="TextField" t:id="lowerQtyOrder" t:value="lowerQtyOrder" size="10" maxLength="10" /></td><td><input t:type="TextField" t:id="upperQtyOrder" t:value="upperQtyOrder" size="10" maxLength="10" /></td>							
+							</tr>
+							
+							tr>
+								<th>Price</th>
+								<td><input t:type="TextField" t:id="lowerPrice" t:value="lowerPrice" size="10" maxLength="10" /></td><td><input t:type="TextField" t:id="upperPrice" t:value="upperPrice" size="10" maxLength="10" /></td>							
+							</tr>
+						</table>
+						<div >
+							<t:submit t:id="btnFilter" value="Submit"></t:submit>
+						</div>
+					</td>
+				</tr>
+			</table>
+	 		<br/>
+	 		<p style="font-size:9px;">Please key in lower and upper limit to filter data</p>
+	 		<br/>	
+</form>
+</t:container>

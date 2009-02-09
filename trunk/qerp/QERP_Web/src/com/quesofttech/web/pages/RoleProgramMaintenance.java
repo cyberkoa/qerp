@@ -295,6 +295,12 @@ public class RoleProgramMaintenance extends SecureBasePage {
            _form.recordError(getMessages().get("RoleProgram_add_problem"));
        }
     }
+    
+    void test()
+    {
+    	RoleProgram test = new RoleProgram();
+    	test.getIdForMessages().toString();
+    }
 
     void _UpdateRecord(){
        RoleProgram roleProgram = new RoleProgram();
@@ -377,6 +383,7 @@ public class RoleProgramMaintenance extends SecureBasePage {
 
     Object onActionFromSelect(long id)
     {
+    	test();
        _form.clearErrors();
        myState = "U";
        _strMode = "U";

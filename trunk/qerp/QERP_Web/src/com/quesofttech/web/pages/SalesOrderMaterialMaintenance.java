@@ -7,7 +7,9 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.common.exception.DuplicateAlternateKeyException;
 import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
+import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.sales.Customer;
+import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.inventory.Material;
 import org.apache.tapestry5.beaneditor.BeanModel;
@@ -15,10 +17,14 @@ import org.apache.tapestry5.beaneditor.BeanModel;
 
 //import com.quesofttech.business.domain.sales.iface.ISalesOrderMaterialServiceRemote;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
+import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
+import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
+//import com.quesofttech.web.components.FilterData;
+import com.quesofttech.web.components.FilterDataSalesOrderMaterial;
 import com.quesofttech.web.model.base.GenericSelectModel;
 import com.quesofttech.web.state.Visit;
 //import com.sun.org.apache.xml.internal.serializer.utils.Messages;
@@ -42,6 +48,10 @@ import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 
+//interface Delegate
+//{
+//	List<SalesOrderMaterial> bindData();
+//}
 
 
 public class SalesOrderMaterialMaintenance extends SecureBasePage {
@@ -235,18 +245,49 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	{
 	   this.material = material;
 	}
-
+	 @Component
+	 @Property
+	 private FilterDataSalesOrderMaterial _filterData;
+	 
+	 @Persist
+	 @Property
+	 private SalesOrderMaterialSearchFields lowerSFs;
+	 
+	 @Persist
+	 @Property
+	 private SalesOrderMaterialSearchFields upperSFs;
+	 
 	void RefreshRecords()
+	{
+		RefreshRecords( new Delegate() 
+		{ public List<SalesOrderMaterial> bindData() 
+			{ 
+			try { 
+				 if(lowerSFs==null&&upperSFs==null)
+				   return getSalesOrderService().findSalesOrderMaterialsBySalesOrderId(_headerIDLng);
+				 else
+				 {
+                	SearchOptions options = new SearchOptions();
+            	 
+                	//return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(lower, upper, options)
+            	    return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(_filterData.getLowerSearchFields(), _filterData.getUpperSearchFields(),options);
+				 } 
+			    } 
+			catch(BusinessException be) {} 
+			
+			return null;} 
+		    }
+		);
+	}
+
+	void RefreshRecords(Delegate delegate)
 	{
 		
 		
 		if(_salesOrderMaterialModel==null){
 			_salesOrderMaterialModel = beanModelSource.createDisplayModel(SalesOrderMaterial.class,resources.getMessages());
 			_salesOrderMaterialModel.add("ConvertSO",null);
-			_salesOrderMaterialModel.get("ConvertSO").label("Convert SO to WO");
-			//_salesOrderMaterialModel.
-//			_salesOrderMaterialModel.include(//arg0)
-			
+			_salesOrderMaterialModel.get("ConvertSO").label("Convert SO to WO");			
 		}
 		
 		
@@ -260,18 +301,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 
 		try
     	{
-    	//	if (_headerId.isEmpty() || _headerId==null)
-    //		{
-    	//		_headerId = "0";
-    		//}
-    	
-    		//_headerIDLng.getLong(_headerId);
-    		//_headerIDLng = Long.parseLong(_headerId);
-    		//_headerIDLng = Long.valueOf(_headerId).longValue();
-    		System.out.println("going to check liao");
-    		//_headerIDLng = 1L;
-    	   _SalesOrderMaterials = getSalesOrderService().findSalesOrderMaterialsBySalesOrderId(_headerIDLng);
-    	   System.out.println("going to check liao 1");
+    	   _SalesOrderMaterials = getSalesOrderService().findSalesOrderMaterialsBySalesOrderId(_headerIDLng);    	   
     	   if(_SalesOrderMaterials!=null && !_SalesOrderMaterials.isEmpty())
        		{
     		   System.out.println("refresh record.  i should be here");
@@ -369,6 +399,11 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 			   {
 			       _AddRecord();
 			   }
+			   else
+					if("F" == myState)
+					{
+						_FilterRecordSalesOrderMaterial();
+					}
 			}
 		catch (Exception e)
 		{
@@ -590,11 +625,54 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     {
     	_headerIDLng = id;
     }
-    /*String onPassivate() {
-    	System.out.println("onPassivate:" + _headerId);
-		return _headerId;
-		
-	}*/
+	
+	public void onFilterDataSalesOrderMaterial()
+	 {
+	   //SalesOrderSearchFields lowerSearchFields = null;
+	   //SalesOrderSearchFields upperSearchFields = null;
+	   
+	   System.out.println("Yes , trigger");
+	   
+	   lowerSFs = _filterData.getLowerSearchFields();
+	   upperSFs = _filterData.getUpperSearchFields();
+	   
+	   System.out.println("lowerSearchFields DocNo: " + lowerSFs.getDocNo());
+	   System.out.println("upperSearchFields DocNo: " + upperSFs.getDocNo());
+	   //myState = "F";
+	   //_strMode = "F";
+	   
+	   /*
+	   RefreshRecords( new Delegate() 
+	                      { 
+		                   public List<SalesOrder> bindData() 
+		                    { try 
+		                       { 
+		                    	 SearchOptions options = new SearchOptions();
+		                    	 
+		                    	 return getSalesOrderService().findSalesOrdersBySearchFieldsRange(_filterData.getLowerSearchFields(), _filterData.getUpperSearchFields(),options);
+		                       } 
+		                       catch(BusinessException be) {} 
+		                       
+		                       return null;
+		                   } 
+		                  });
+	   		*/
+	 }
+
+	 void _FilterRecordSalesOrderMaterial()
+	 {
+		 System.out.println("Yes , _FilterRecord");
+		   SalesOrderMaterialSearchFields lowerSearchFields = null;
+		   SalesOrderMaterialSearchFields upperSearchFields = null;
+		   			   
+		   lowerSearchFields = _filterData.getLowerSearchFields();
+		   upperSearchFields = _filterData.getUpperSearchFields();
+		   
+		  // System.out.println("_Filter : lowerSearchFields DocNo: " + lowerSearchFields.getDocNo());
+		  // System.out.println("_Filter : upperSearchFields DocNo: " + upperSearchFields.getDocNo());
+
+		 
+	 }
 
 	
 
