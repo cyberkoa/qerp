@@ -9,7 +9,7 @@
    <form t:type="form" t:id="RoleProgramForm" t:zone="zoneFormView" >
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
-       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbardel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:?"  t:id="toolbardel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
@@ -20,21 +20,14 @@
            t:pagerPosition="both"
            t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
-           <t:parameter name="idCell">
-               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="RoleProgram.id">
-                   ${RoleProgram.id}
-               </t:actionlink>
-           </t:parameter>
+           
            </t:GRID>
        </div>
        <table id="main">
            <tr>
                <td>
                    <table id="input">
-                       <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
-                           <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
-                       </tr>
+                      
                        <tr>
                            <th><t:label t:for="Program">Program</t:label>:</th>
                            <td>  <select  t:type="select" t:id="program" t:model="programs" encoder="programs" t:value="program" /> </td>

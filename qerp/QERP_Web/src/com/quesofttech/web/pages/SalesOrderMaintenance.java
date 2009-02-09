@@ -57,7 +57,7 @@ import org.apache.tapestry.commons.components.*;
 
 interface Delegate
 {
-	List<SalesOrder> bindData();
+	List<?> bindData();
 }
 
 
@@ -346,7 +346,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 			//try
 			//{
 			   //_SalesOrders = getSalesOrderService().findSalesOrders();
-				_SalesOrders = delegate.bindData();
+				_SalesOrders = (List<SalesOrder>)delegate.bindData();
 			//}
 			//catch(BusinessException be)
 			//{
