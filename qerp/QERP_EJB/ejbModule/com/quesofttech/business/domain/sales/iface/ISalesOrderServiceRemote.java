@@ -8,6 +8,7 @@ import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
+import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
 
 
 /**
@@ -36,6 +37,10 @@ public interface ISalesOrderServiceRemote {
 	
 	List<SalesOrder> findSalesOrdersBySearchFieldsRange(SalesOrderSearchFields lower, SalesOrderSearchFields upper,SearchOptions options) throws DoesNotExistException;
 	List<SalesOrder> findSalesOrdersBySearchFields(SalesOrderSearchFields searchFields,SearchOptions options) throws DoesNotExistException;
+
+	
+	List<SalesOrderMaterial> findSalesOrdersMaterialBySearchFieldsRange(SalesOrderMaterialSearchFields lower, SalesOrderMaterialSearchFields upper,SearchOptions options) throws DoesNotExistException;
+	List<SalesOrderMaterial> findSalesOrdersMaterialBySearchFields(SalesOrderMaterialSearchFields searchFields,SearchOptions options) throws DoesNotExistException;
 
 	public void convertOrderMaterialToProductionOrder(SalesOrderMaterial salesOrderMaterial);
 }

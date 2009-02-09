@@ -24,7 +24,7 @@ import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceLocal;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
-
+import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
 import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.BomDetail;
 import com.quesofttech.business.domain.general.BomTree;
@@ -226,7 +226,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		
 	}
 	
-	
+
 	public List<SalesOrder> findSalesOrdersBySearchFieldsRange(SalesOrderSearchFields lower,SalesOrderSearchFields upper,SearchOptions options)
 	throws DoesNotExistException
 	{
@@ -286,7 +286,74 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		return l;
 			
 	}
+	//========================================================================================
+	// SalesOrderMaterial Search.
+	//========================================================================================
+
+	public List<SalesOrderMaterial> findSalesOrdersMaterialBySearchFieldsRange(SalesOrderMaterialSearchFields lower,SalesOrderMaterialSearchFields upper,SearchOptions options)
+	throws DoesNotExistException
+	{
+
+		QueryBuilder builder = new QueryBuilder();
+		
+		builder.append("select so from SalesOrderMaterial so");
+		//builder.appendBetween("so.rowInfo.recordStatus", lower.getRecordStatus(),upper.getRecordStatus(),true);
+		builder.appendBetween("so.material.code", lower.getMaterial(),upper.getMaterial(),true);
+		builder.appendBetween("so.price", lower.getPrice(),upper.getPrice(),true);
+		builder.appendBetween("so.quantityOrder", lower.getQtyOrder(),upper.getQtyOrder(),true);
+		
+		/*
+		builder.appendLikeIgnoreCaseSkipEmpty("u.firstName", search.getFirstName());
+		builder.appendLikeIgnoreCaseSkipEmpty("u.lastName", search.getLastName());
+		builder.appendLikeIgnoreCaseSkipEmpty("u.emailAddress", search.getEmailAddress());
+		builder.appendComparison("u.expiryDate", ComparisonOperator.EQ, search.getExpiryDate());
+		builder.appendEqualsSkipEmpty("u.version", search.getVersion());
+		*/
+		if (options.getSortColumnNames().size() == 0) {
+			builder.append(" order by so.salesorder.docNo");
+		}
 	
+		Query q = builder.createQuery(_em, options, "so");
+	    System.out.println(builder.getQueryString());
+		List l = q.getResultList();
+	
+		return l;
+
+	
+	}
+	
+	public List<SalesOrderMaterial> findSalesOrdersMaterialBySearchFields(SalesOrderMaterialSearchFields search,SearchOptions options)
+	throws DoesNotExistException
+	{		
+		QueryBuilder builder = new QueryBuilder();
+		/*
+		builder.append("select so from SalesOrder so");
+		builder.appendBetween("so.recordStatus", search.getRecordStatus());
+		builder.appendLikeIgnoreCaseSkipEmpty("u.login", search.getLogin());
+		builder.appendEqualsSkipEmpty("u.salutation", search.getSalutation());
+		builder.appendLikeIgnoreCaseSkipEmpty("u.firstName", search.getFirstName());
+		builder.appendLikeIgnoreCaseSkipEmpty("u.lastName", search.getLastName());
+		builder.appendLikeIgnoreCaseSkipEmpty("u.emailAddress", search.getEmailAddress());
+		builder.appendComparison("u.expiryDate", ComparisonOperator.EQ, search.getExpiryDate());
+		builder.appendEqualsSkipEmpty("u.version", search.getVersion());
+		 */
+		if (options!=null && options.getSortColumnNames().size() > 0) 
+		{}
+		else{
+			builder.append(" order by u.login");
+		}
+	
+		Query q = builder.createQuery(_em, options, "u");
+	
+		List l = q.getResultList();
+	
+		return l;
+			
+	}
+	//========================================================================================
+	// SalesOrderMaterial Search.
+	//========================================================================================
+
 	public void convertOrderMaterialToProductionOrder(SalesOrderMaterial salesOrderMaterial)
 	{
 		List<ProductionOrder> productionOrders = new ArrayList<ProductionOrder>(); 
