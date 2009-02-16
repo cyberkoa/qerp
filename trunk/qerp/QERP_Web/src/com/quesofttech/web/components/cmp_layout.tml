@@ -20,6 +20,7 @@
 		   position:absolute;
 		   z-index: 9001; /*ooveeerrrr nine thoussaaaannnd*/
 		   top:0px;
+		   height:300px;
 		   left:0px;
 		   width:100%;
 		}

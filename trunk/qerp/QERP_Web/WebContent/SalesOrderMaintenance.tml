@@ -11,7 +11,7 @@
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
        <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"  ><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
- 	   <button onclick="popup('popUpDiv')" type="button"><img src="images/filterRecord24.png" /> </button>
+ 	   <button onclick="filterWindow.showCenter(true);" type="button"><img src="images/filterRecord24.png" /> </button>
        <div id="blanket" style="display:none;"></div>
 	   <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
           
@@ -70,12 +70,9 @@
        
    <t:errors />
    </form>
-   	<div id="popUpDiv" style="display:none;width:auto;">
+   	 <div t:id="filterWindow">
 	 	<div t:type="filterData" t:id="filterData"  />
 
 		<a href="#" onclick="popup('popUpDiv')">Click Me To Close</a>
-	</div>
-</t:block>
-
-</body>
+	</div></t:block></body>
 </html>

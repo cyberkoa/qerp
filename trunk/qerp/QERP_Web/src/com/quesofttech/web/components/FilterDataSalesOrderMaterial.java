@@ -20,12 +20,12 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 
 	@Component(id = "lowerMaterialCode")
 	private TextField _lowerMaterialCode;
-	private Material lowerMaterialCode;
+	private String lowerMaterialCode;
 
 	
 	@Component(id = "upperMaterialCode")
 	private TextField _upperMaterialCode;
-	private Material upperMaterialCode;
+	private String upperMaterialCode;
 	
 	@Component(id = "lowerQtyOrder")
 	private TextField _lowerQtyOrder;
@@ -71,14 +71,17 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 	
 	void onSubmitFromSearchForm() {
 		System.out.println("onActionFrombtnFilter");
-		
-		lowerSearchFields.setMaterial(lowerMaterialCode);		
+		Material lowmat = new Material();
+		Material upper = new Material();
+		lowmat.setCode(lowerMaterialCode);		
+		lowerSearchFields.setMaterial(lowmat);		
 		lowerSearchFields.setRecordStatus("A");
 		lowerSearchFields.setPrice(lowerPrice);
 		lowerSearchFields.setQtyOrder(lowerQtyOrder);
 
+		upper.setCode(upperMaterialCode);
 		upperSearchFields.setRecordStatus("A");
-		upperSearchFields.setMaterial(upperMaterialCode);
+		upperSearchFields.setMaterial(upper);
 		upperSearchFields.setPrice(upperPrice);
 		upperSearchFields.setQtyOrder(upperQtyOrder);
 		
@@ -127,6 +130,54 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 		resources.triggerEvent("successFromFilterDataSalesOrderMaterial", new Object[] {}, null);
 		
 		//return null;
+	}
+
+	public String getLowerMaterialCode() {
+		return lowerMaterialCode;
+	}
+
+	public void setLowerMaterialCode(String lowerMaterialCode) {
+		this.lowerMaterialCode = lowerMaterialCode;
+	}
+
+	public String getUpperMaterialCode() {
+		return upperMaterialCode;
+	}
+
+	public void setUpperMaterialCode(String upperMaterialCode) {
+		this.upperMaterialCode = upperMaterialCode;
+	}
+
+	public double getLowerQtyOrder() {
+		return lowerQtyOrder;
+	}
+
+	public void setLowerQtyOrder(double lowerQtyOrder) {
+		this.lowerQtyOrder = lowerQtyOrder;
+	}
+
+	public double getUpperQtyOrder() {
+		return upperQtyOrder;
+	}
+
+	public void setUpperQtyOrder(double upperQtyOrder) {
+		this.upperQtyOrder = upperQtyOrder;
+	}
+
+	public double getLowerPrice() {
+		return lowerPrice;
+	}
+
+	public void setLowerPrice(double lowerPrice) {
+		this.lowerPrice = lowerPrice;
+	}
+
+	public double getUpperPrice() {
+		return upperPrice;
+	}
+
+	public void setUpperPrice(double upperPrice) {
+		this.upperPrice = upperPrice;
 	}
 
 
