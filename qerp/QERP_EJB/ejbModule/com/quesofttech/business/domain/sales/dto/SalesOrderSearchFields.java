@@ -17,7 +17,7 @@ public class SalesOrderSearchFields extends BaseSearchFields implements Serializ
 	private String docNo;
 	private Customer customer = new Customer();
 	private String customerCode = null;
-    private Material material = new Material();
+    private String material = null;
 	private String recordStatus = null;
 	private Integer version = null;
 
@@ -50,14 +50,14 @@ public class SalesOrderSearchFields extends BaseSearchFields implements Serializ
 	/**
 	 * @return the material
 	 */
-	public Material getMaterial() {
+	public String getMaterial() {
 		return material;
 	}
 
 	/**
 	 * @param material the material to set
 	 */
-	public void setMaterial(Material material) {
+	public void setMaterial(String material) {
 		this.material = material;
 	}
 
