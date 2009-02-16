@@ -109,7 +109,7 @@ function toggle(div_id) {
 				blanket_height = document.body.parentNode.scrollHeight;
 			}
 		}
-		var blanket = document.getElementById('blanket');
+		var blanket = document.getElementById(popUpDivVar);
 		blanket.style.height = blanket_height + 'px';
 		var popUpDiv = document.getElementById(popUpDivVar);
 		popUpDiv_height=blanket_height/2-150;//150 is half popup's height

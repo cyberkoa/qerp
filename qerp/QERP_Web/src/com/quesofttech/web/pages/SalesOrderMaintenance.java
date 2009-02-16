@@ -63,7 +63,11 @@ interface Delegate
 
 
 public class SalesOrderMaintenance extends SecureBasePage {
-	
+	 @Component(parameters = {"width=300", "height=300", 
+			 "style=bluelighting", "show=false","modal=true", "title=literal:Filter Window"})
+	@Property
+	private QERPWindow _filterWindow;
+	 
 	private void refreshDisplay()
     {
 		ModelRefresh();

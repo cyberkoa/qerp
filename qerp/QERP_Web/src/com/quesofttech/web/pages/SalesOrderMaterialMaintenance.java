@@ -25,6 +25,7 @@ import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
 //import com.quesofttech.web.components.FilterData;
 import com.quesofttech.web.components.FilterDataSalesOrderMaterial;
+import com.quesofttech.web.components.QERPWindow;
 import com.quesofttech.web.model.base.GenericSelectModel;
 import com.quesofttech.web.state.Visit;
 //import com.sun.org.apache.xml.internal.serializer.utils.Messages;
@@ -47,7 +48,7 @@ import org.apache.tapestry5.services.*;
 import org.omg.CosTransactions._SubtransactionAwareResourceStub;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-
+import org.apache.tapestry.commons.components.Window;
 //interface Delegate
 //{
 //	List<SalesOrderMaterial> bindData();
@@ -56,7 +57,11 @@ import org.apache.tapestry5.annotations.ApplicationState;
 
 public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	
-	
+	@Component(parameters = {"width=300", "height=300", 
+			 "style=bluelighting", "show=false","modal=true", "title=literal:Filter Window"})
+	@Property
+	private QERPWindow _filterWindow;
+
 	void onActionFromtoolbarback()
     {
     	
@@ -247,7 +252,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	}
 	 @Component
 	 @Property
-	 private FilterDataSalesOrderMaterial _filterData;
+	 private FilterDataSalesOrderMaterial _filterDataSalesOrderMaterial;
 	 
 	 @Persist
 	 @Property
@@ -270,7 +275,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
                 	SearchOptions options = new SearchOptions();
             	 
                 	//return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(lower, upper, options)
-            	    return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(_filterData.getLowerSearchFields(), _filterData.getUpperSearchFields(),options);
+            	    return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(_filterDataSalesOrderMaterial.getLowerSearchFields(), _filterDataSalesOrderMaterial.getUpperSearchFields(),options);
 				 } 
 			    } 
 			catch(BusinessException be) {} 
@@ -633,8 +638,8 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	   
 	   System.out.println("Yes , trigger");
 	   
-	   lowerSFs = _filterData.getLowerSearchFields();
-	   upperSFs = _filterData.getUpperSearchFields();
+	   lowerSFs = _filterDataSalesOrderMaterial.getLowerSearchFields();
+	   upperSFs = _filterDataSalesOrderMaterial.getUpperSearchFields();
 	   
 	   System.out.println("lowerSearchFields DocNo: " + lowerSFs.getDocNo());
 	   System.out.println("upperSearchFields DocNo: " + upperSFs.getDocNo());
@@ -665,8 +670,8 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		   SalesOrderMaterialSearchFields lowerSearchFields = null;
 		   SalesOrderMaterialSearchFields upperSearchFields = null;
 		   			   
-		   lowerSearchFields = _filterData.getLowerSearchFields();
-		   upperSearchFields = _filterData.getUpperSearchFields();
+		   lowerSearchFields = _filterDataSalesOrderMaterial.getLowerSearchFields();
+		   upperSearchFields = _filterDataSalesOrderMaterial.getUpperSearchFields();
 		   
 		  // System.out.println("_Filter : lowerSearchFields DocNo: " + lowerSearchFields.getDocNo());
 		  // System.out.println("_Filter : upperSearchFields DocNo: " + upperSearchFields.getDocNo());
