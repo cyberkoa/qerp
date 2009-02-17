@@ -75,12 +75,11 @@
                     </table>
                </td>
            </tr>
-       </table>
-  
-   </form>
-   <div t:id="filterWindow">   
+       </table>  
+   </form>   
+</t:block>
+<div t:id="filterWindow">   
 	 	<div t:type="filterDataSalesOrderMaterial" t:id="filterDataSalesOrderMaterial" />
 	</div>
-</t:block>
 </body>
 </html>

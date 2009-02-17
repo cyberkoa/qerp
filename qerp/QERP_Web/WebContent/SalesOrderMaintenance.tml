@@ -70,9 +70,9 @@
        
    <t:errors />
    </form>
-   	 <div t:id="filterWindow">
+   	 </t:block><div t:id="filterWindow">
 	 	<div t:type="filterData" t:id="filterData"  />
 
-		<a href="#" onclick="popup('popUpDiv')">Click Me To Close</a>
-	</div></t:block></body>
+		
+	</div></body>
 </html>
