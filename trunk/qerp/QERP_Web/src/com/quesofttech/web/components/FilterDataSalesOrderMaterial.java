@@ -13,8 +13,6 @@ import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
 import com.quesofttech.web.base.SecureBasePage;
 
-
-
 public class FilterDataSalesOrderMaterial extends SecureBasePage
 {
 
@@ -68,23 +66,33 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
         System.out.println("in injectResources");
         //resources.triggerContextEvent(arg0, arg1, arg2)
     }
+    void onFailure()
+    {
+    	System.out.println("here failed");
+    }
 	
 	void onSubmitFromSearchForm() {
 		System.out.println("onActionFrombtnFilter");
 		Material lowmat = new Material();
 		Material upper = new Material();
+		System.out.println("onActionFrombtnFilter1");
 		lowmat.setCode(lowerMaterialCode);		
+		System.out.println("onActionFrombtnFilter2");
 		lowerSearchFields.setMaterial(lowmat);		
 		lowerSearchFields.setRecordStatus("A");
 		lowerSearchFields.setPrice(lowerPrice);
 		lowerSearchFields.setQtyOrder(lowerQtyOrder);
+		System.out.println("onActionFrombtnFilter3");
 
+		
 		upper.setCode(upperMaterialCode);
+		System.out.println("onActionFrombtnFilter5");
 		upperSearchFields.setRecordStatus("A");
 		upperSearchFields.setMaterial(upper);
+		System.out.println("onActionFrombtnFiltery");
 		upperSearchFields.setPrice(upperPrice);
 		upperSearchFields.setQtyOrder(upperQtyOrder);
-		
+		System.out.println("Upperfield:" + upperSearchFields.toString());
 		// Trigger the container event "onFilterData"
 		resources.triggerEvent("filterDataSalesOrderMaterial", new Object[] {}, null);
 		
