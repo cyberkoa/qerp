@@ -379,7 +379,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		_form.recordError("Page having error.  Please select/Add record and save again.");
 		return blockFormView;
 	}
-	Object onSuccess()
+	Object onSuccessFromSalesOrderMaterialForm()
 	{
 		_form.clearErrors();
 	   RefreshRecords();
@@ -393,7 +393,8 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	}
 	
 	
-	void onValidateForm() {
+	void onValidateFormFromSalesOrderMaterialForm() {
+		
 		try{
 			   if ("U"== myState)
 			   {
@@ -414,6 +415,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		{
 			_form.recordError(getMessages().get("Record_Update_Error"));
 		}
+		System.out.println("mystate:" + myState);
 		
 	}
 	
