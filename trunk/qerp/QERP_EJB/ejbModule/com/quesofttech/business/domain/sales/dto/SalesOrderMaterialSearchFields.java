@@ -23,6 +23,17 @@ public class SalesOrderMaterialSearchFields extends BaseSearchFields implements 
 	private Integer version = null;
 
 	/*
+	public String toString(){
+		StringBuffer buff = new StringBuffer();
+		buff.append("SalesOrderMaterialSearchFields:[");
+		buff.append("qtyOrder=" + qtyOrder + ",");
+		buff.append("price=" + price + ",");
+		buff.append("customerCode=" + customerCode + ",");
+		buff.append("material.Code=" + material.getCode() + ",");
+		buff.append("recordStatus=" + recordStatus + "]");
+		return buff.toString();
+	}
+	
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("SalesOrderSearchFields: [");
