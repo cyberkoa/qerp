@@ -50,7 +50,7 @@ public class ApplicationConfigurationService extends BaseService implements IApp
 	}
 
 	public void logicalDeleteApplicationConfiguration(ApplicationConfiguration applicationConfiguration) throws BusinessException {
-		applicationConfiguration.rowInfo.setRecordStatus("D");
+		applicationConfiguration.setRecordStatus("D");
 		updateApplicationConfiguration(applicationConfiguration);
 	}
 	

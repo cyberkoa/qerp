@@ -99,11 +99,8 @@ public class SalesOrder extends BaseEntity {
 	
 	
 	
-	
-	
-	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
 	/*
@@ -210,9 +207,9 @@ public class SalesOrder extends BaseEntity {
 		return getId();
 	}
 
-	
+/*	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		
 		// Default the document type
 		docType = "S"; 
@@ -232,7 +229,7 @@ public class SalesOrder extends BaseEntity {
 		
 	    System.out.println(this.toString());
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -242,9 +239,9 @@ public class SalesOrder extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -257,7 +254,7 @@ public class SalesOrder extends BaseEntity {
 		//setModifyDateTime(modifyDate,modifyTime);		
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -269,7 +266,7 @@ public class SalesOrder extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

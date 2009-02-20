@@ -50,7 +50,7 @@ public class CustomerService extends BaseService implements ICustomerServiceLoca
 	}
 
 	public void logicalDeleteCustomer(Customer customer) throws BusinessException {
-		customer.rowInfo.setRecordStatus("D");
+		customer.setRecordStatus("D");
 		updateCustomer(customer);
 	}
 	

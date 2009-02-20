@@ -78,8 +78,8 @@ public class Module extends BaseEntity {
 	@Column(name = "module_IsBasic")
 	private Boolean  isBasic;
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 		
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="module", targetEntity=Program.class)
@@ -187,9 +187,9 @@ public class Module extends BaseEntity {
 		return getId();
 	}
 
-	
+/*	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -205,7 +205,7 @@ public class Module extends BaseEntity {
 		//toString();
 				
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 		//System.out.println("This is postPersist in MT");
@@ -215,9 +215,9 @@ public class Module extends BaseEntity {
 	void postLoad() {
 		//_loaded_password = password;
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		
 		if(rowInfo.getRecordStatus()!="D")
 		{
@@ -231,7 +231,7 @@ public class Module extends BaseEntity {
 		//setModifyDateTime(modifyDate,modifyTime);		
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -243,7 +243,7 @@ public class Module extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

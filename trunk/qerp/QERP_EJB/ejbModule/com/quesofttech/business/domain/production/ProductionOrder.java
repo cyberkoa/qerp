@@ -92,15 +92,15 @@ public class ProductionOrder extends BaseEntity {
 	
 	
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderMaterial.class)
+	@OneToMany(cascade= {CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderMaterial.class)
 	private List<ProductionOrderMaterial> productionOrderMaterials;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderOperation.class)
+	@OneToMany(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderOperation.class)
 	private List<ProductionOrderOperation> productionOrderOperations;	
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	public ProductionOrder() {
 		super();
@@ -198,8 +198,13 @@ public class ProductionOrder extends BaseEntity {
 
 	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
+		super.prePersist();
+		System.out.println("prePersist of ProductionOrder");
+		/*
 		validate();
+		
+		
 		
 		rowInfo.setRecordStatus("A");
 		
@@ -208,6 +213,7 @@ public class ProductionOrder extends BaseEntity {
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 		System.out.println("[PrePersist] " + rowInfo.getCreateLogin());
+		*/
 	}
 
 	@PostPersist
@@ -219,9 +225,13 @@ public class ProductionOrder extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
+		
+		super.preUpdate();
+		System.out.println("preUpdate of ProductionOrder");
+		
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -232,7 +242,7 @@ public class ProductionOrder extends BaseEntity {
 		
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -243,14 +253,16 @@ public class ProductionOrder extends BaseEntity {
 		// There's no need to remove me from the parent(s) - that's the caller's
 		// responsibility (and for performance, it might not bother)
 	}
-
-	public void validate() throws BusinessException {
-
+	
+	
+	public void validate() throws BusinessException  {
+        
+		System.out.println("[ProductionOrder] validate");
 		
 		// Validate syntax...
 
 		if (StringUtil.isEmpty(docNo)) {
-			//System.out.println("Yeah");
+			System.out.println("[ProductionOrder] DocNo is blank");
 			throw new ValueRequiredException(this, "ProductionOrder_DocNo");
 		}
 
@@ -307,7 +319,7 @@ public class ProductionOrder extends BaseEntity {
 		this.rowInfo.setRecordStatus(recordStatus);
 	}
 
-
+/*
 
 	public String getSessionId() {
 		return rowInfo.getSessionId();
@@ -317,7 +329,7 @@ public class ProductionOrder extends BaseEntity {
 	public void setSessionId(String sessionId) {
 		this.rowInfo.setSessionId(sessionId);
 	}
-
+*/
 
 
 	public String getCreateLogin() {
@@ -501,9 +513,11 @@ public class ProductionOrder extends BaseEntity {
 	
 	public void addProductionOrderMaterial(ProductionOrderMaterial productionOrderMaterial) {
 		if (!productionOrderMaterials.contains(productionOrderMaterial)) {
-			productionOrderMaterials.add(productionOrderMaterial);
+			System.out.println("add new production Order Material");
 			/* Maintain the bidirectional relationship . */
 			productionOrderMaterial.setProductionOrder(this);
+			productionOrderMaterials.add(productionOrderMaterial);
+			
 		}
 	}
 

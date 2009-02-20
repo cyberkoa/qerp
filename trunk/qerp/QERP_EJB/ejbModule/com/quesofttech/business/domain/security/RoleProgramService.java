@@ -50,7 +50,7 @@ public class RoleProgramService extends BaseService implements IRoleProgramServi
 	}
 
 	public void logicalDeleteRoleProgram(RoleProgram roleProgram) throws BusinessException {
-		roleProgram.rowInfo.setRecordStatus("D");
+		roleProgram.setRecordStatus("D");
 		updateRoleProgram(roleProgram);
 	}
 	

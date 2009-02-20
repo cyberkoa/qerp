@@ -38,6 +38,7 @@ import com.quesofttech.business.common.exception.GenericBusinessException;
 import com.quesofttech.util.StringUtil;
 
 import java.util.List;
+import java.util.logging.Logger;
 //import java.util.ArrayList;
 
 @Entity
@@ -77,11 +78,11 @@ public class ProductionOrderMaterial extends BaseEntity {
 	*/
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	// Foreign keys
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.REFRESH)
     @JoinColumn(name="fk_ProductionOrder")	
 	private ProductionOrder productionOrder;
 	
@@ -189,9 +190,11 @@ public class ProductionOrderMaterial extends BaseEntity {
 		return getId();
 	}
 
-	
+    /*	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
+		System.out.println("prePersist of ProductionOrderMaterial");
+		
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -200,9 +203,9 @@ public class ProductionOrderMaterial extends BaseEntity {
 
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
-				
+        				
 	}
-
+    */
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -213,8 +216,13 @@ public class ProductionOrderMaterial extends BaseEntity {
 
 	}
 
+	/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
+		super.preUpdate();
+		System.out.println("preUpdate of ProductionOrderMaterial");
+		
+		
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -225,7 +233,8 @@ public class ProductionOrderMaterial extends BaseEntity {
 		
 		
 	}
-
+    */
+	
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -237,7 +246,7 @@ public class ProductionOrderMaterial extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

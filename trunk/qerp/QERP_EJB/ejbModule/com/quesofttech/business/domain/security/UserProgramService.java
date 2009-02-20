@@ -50,7 +50,7 @@ public class UserProgramService extends BaseService implements IUserProgramServi
 	}
 
 	public void logicalDeleteUserProgram(UserProgram userProgram) throws BusinessException {
-		userProgram.rowInfo.setRecordStatus("D");
+		userProgram.setRecordStatus("D");
 		updateUserProgram(userProgram);
 	}
 	

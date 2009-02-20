@@ -8,6 +8,7 @@ import java.util.Calendar;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -39,6 +40,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 //	@PersistenceContext(unitName = "QERP_EJB")
 //	protected EntityManager _em;
 
+	
 	// BOM
 
 	public BOM findBOM(Long id) throws DoesNotExistException {
@@ -83,7 +85,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	}
 
 	public void logicalDeleteBOM(BOM bom) throws BusinessException {
-		bom.rowInfo.setRecordStatus("D");
+		bom.setRecordStatus("D");
 		updateBOM(bom);
 	}
 	
@@ -108,7 +110,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	}
 
 	public void logicalDeleteBomDetail(BomDetail bomDetail) throws BusinessException {
-		bomDetail.rowInfo.setRecordStatus("D");
+		bomDetail.setRecordStatus("D");
 		updateBomDetail(bomDetail);
 	}
 	

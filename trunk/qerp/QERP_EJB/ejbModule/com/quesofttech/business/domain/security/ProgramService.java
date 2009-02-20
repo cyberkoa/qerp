@@ -52,7 +52,7 @@ public class ProgramService extends BaseService implements IProgramServiceLocal,
 	}
 
 	public void logicalDeleteProgram(Program program) throws BusinessException {
-		program.rowInfo.setRecordStatus("D");
+		program.setRecordStatus("D");
 		updateProgram(program);
 	}
 	

@@ -58,21 +58,22 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 	
 	
 	public void updateProductionOrder(ProductionOrder productionOrder) throws BusinessException {	
-		System.out.println(productionOrder.toString());
+		System.out.println("[updateProductionOrder] before merging");
 		productionOrder = (ProductionOrder) merge(productionOrder);
+		System.out.println("[updateProductionOrder] after merging");
 	}
 
 	public void logicalDeleteProductionOrder(ProductionOrder productionOrder) throws BusinessException {
-		productionOrder.rowInfo.setRecordStatus("D");
+		productionOrder.setRecordStatus("D");
 		
 		for(ProductionOrderOperation productionOrderOperation : productionOrder.getProductionOrderOperations())
 		{
-			productionOrderOperation.rowInfo.setRecordStatus("D");
+			productionOrderOperation.setRecordStatus("D");
 		}
 		
 		for(ProductionOrderMaterial productionOrderMaterial : productionOrder.getProductionOrderMaterials())
 		{
-			productionOrderMaterial.rowInfo.setRecordStatus("D");
+			productionOrderMaterial.setRecordStatus("D");
 		}
 		
 		updateProductionOrder(productionOrder);
@@ -112,7 +113,7 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 	
 	
 	public void logicalDeleteProductionOrderOperation(ProductionOrderOperation productionOrderOperation) throws BusinessException {
-		productionOrderOperation.rowInfo.setRecordStatus("D");
+		productionOrderOperation.setRecordStatus("D");
 						
 		updateProductionOrderOperation(productionOrderOperation);
 	}
@@ -192,7 +193,7 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 	
 	
 	public void logicalDeleteProductionOrderMaterial(ProductionOrderMaterial productionOrderMaterial) throws BusinessException {
-		productionOrderMaterial.rowInfo.setRecordStatus("D");
+		productionOrderMaterial.setRecordStatus("D");
 						
 		updateProductionOrderMaterial(productionOrderMaterial);
 	}

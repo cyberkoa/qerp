@@ -29,6 +29,8 @@ import com.quesofttech.business.domain.general.iface.*;
 import com.quesofttech.business.common.exception.*;
 import com.quesofttech.util.*;
 
+import com.quesofttech.business.domain.embeddable.RowInfo;
+
 //import com.quesofttech.session.MaterialTestBeanRemote;
 
 
@@ -38,7 +40,26 @@ public class TestClient {
 	 * @param args
 	 */
 
+	static RowInfo rowInfo =null;
+	
 	public static void main(String[] args) {
+		
+		rowInfo = new RowInfo();
+		
+		rowInfo.setCreateApp("TestClient");
+		rowInfo.setModifyApp("TestClient");
+		rowInfo.setCreateLogin("test");
+		rowInfo.setModifyLogin("test");
+		rowInfo.setSessionId("ABC");
+		rowInfo.setRecordStatus("A");
+		
+	    java.util.Date today = new java.util.Date();
+
+	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());	
+		
+		
+		
 		/* get a initial context. By default the settings in the file
 		 * jndi.properties are used.
 		 * You can explicitly set up properties instead of using the file.
@@ -57,6 +78,7 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 	    //testReflectionToString();
 		//testBOMExplosion();
 		testConvertSOM2ProdO();
+		//testMaterialLazyFetch();
 	}
 	
 	private static InitialContext GetContext()
@@ -79,6 +101,35 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		}
 	}	
 	
+	private static void testMaterialLazyFetch() {
+		
+		InitialContext context=null;
+		IMaterialServiceRemote beanRemote = null;
+		try
+		{
+			context = GetContext();
+			 beanRemote = (IMaterialServiceRemote) context.lookup(MaterialService.class.getSimpleName()+"Remote");
+			 if(beanRemote!=null) {
+				try  {
+					beanRemote.findMaterial((long)100).getBomByType("P");
+				}
+				catch(BusinessException e) {
+				  System.out.println("[Business Exception] " + e.getMessage());
+				  e.printStackTrace();
+				}
+			 }
+		} catch (NamingException e)
+		{
+			e.printStackTrace();
+/* I rethrow it as runtime exception as there is really no need to continue if an exception happens and I
+* do not want to catch it everywhere.
+*/ 
+			throw new RuntimeException(e);
+		}
+		
+		
+	}
+	
 
 	private static void testConvertSOM2ProdO() {
 		
@@ -96,7 +147,8 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 			 beanRemote = (ISalesOrderServiceRemote) context.lookup(SalesOrderService.class.getSimpleName()+"Remote");
 			 if(beanRemote!=null) {
 				try  {
-					beanRemote.convertOrderMaterialToProductionOrder(findSalesOrderMaterial((long)50));
+					
+					beanRemote.convertOrderMaterialToProductionOrder(rowInfo,findSalesOrderMaterial((long)50));
 				}
 				catch(BusinessException e) {
 				  System.out.println("[Business Exception] " + e.getMessage());

@@ -71,8 +71,8 @@ public class Role extends BaseEntity {
 	@Column(name = "role_Description", length = 100)
 	private String description;
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	/*
    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER, mappedBy="roles")
    @JoinTable(name = "UserRole",
@@ -184,9 +184,9 @@ public class Role extends BaseEntity {
 		return getId();
 	}
 
-	
+	/*
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -200,7 +200,7 @@ public class Role extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());		
 				
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -210,9 +210,9 @@ public class Role extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -223,7 +223,7 @@ public class Role extends BaseEntity {
 		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -235,7 +235,7 @@ public class Role extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 	
 		// Validate syntax...
 

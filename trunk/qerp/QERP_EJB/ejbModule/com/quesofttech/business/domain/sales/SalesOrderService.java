@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -31,12 +32,16 @@ import com.quesofttech.business.domain.general.BomTree;
 import com.quesofttech.business.domain.general.BomTreeNode;
 import com.quesofttech.business.domain.general.BomService;
 import com.quesofttech.business.domain.general.BomTreeNodeData;
+import com.quesofttech.business.domain.general.iface.IBomServiceLocal;
 
 
 import com.quesofttech.business.domain.production.ProductionOrder;
 import com.quesofttech.business.domain.production.ProductionOrderOperation;
 import com.quesofttech.business.domain.production.ProductionOrderMaterial;
-import com.quesofttech.business.domain.production.ProductionOrderService;
+import com.quesofttech.business.domain.production.iface.IProductionOrderServiceLocal;
+
+
+import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.util.TreeNode;
 
 
@@ -49,7 +54,30 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 //	@PersistenceContext(unitName = "QERP_EJB")
 //	protected EntityManager _em;
 
+	@EJB(beanName="BomService")
+	private IBomServiceLocal bomService;
+
+	/**
+	 * @param bomService the bomService to set
+	 */
+	public void setBomService(IBomServiceLocal bomService) {
+		this.bomService = bomService;
+	}
+	
+	@EJB(beanName="ProductionOrderService")
+	private IProductionOrderServiceLocal productionOrderService;
+	
+	
+	
 	// SalesOrder
+	
+	/**
+	 * @param productionOrderService the productionOrderService to set
+	 */
+	public void setProductionOrderService(
+			IProductionOrderServiceLocal productionOrderService) {
+		this.productionOrderService = productionOrderService;
+	}
 
 	public SalesOrder findSalesOrder(Long id) throws DoesNotExistException {
 		SalesOrder salesOrder = (SalesOrder) find(SalesOrder.class, id);
@@ -121,11 +149,11 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	}
 
 	public void logicalDeleteSalesOrder(SalesOrder salesOrder) throws BusinessException {
-		salesOrder.rowInfo.setRecordStatus("D");
+		salesOrder.setRecordStatus("D");
 		
 		for(SalesOrderMaterial salesOrderMaterial : salesOrder.getSalesOrderMaterials())
 		{
-			salesOrderMaterial.rowInfo.setRecordStatus("D");
+			salesOrderMaterial.setRecordStatus("D");
 		}
 		updateSalesOrder(salesOrder);
 	}
@@ -184,7 +212,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	}
 	
 	public void logicalDeleteSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) throws BusinessException {
-		salesOrderMaterial.rowInfo.setRecordStatus("D");
+		salesOrderMaterial.setRecordStatus("D");
 		//updateSalesOrder(salesOrderMaterial);
 	}
 	
@@ -354,48 +382,70 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	// SalesOrderMaterial Search.
 	//========================================================================================
 
-	public void convertOrderMaterialToProductionOrder(SalesOrderMaterial salesOrderMaterial)
+	public void convertOrderMaterialToProductionOrder(RowInfo rowInfo, SalesOrderMaterial salesOrderMaterial)
 	{
 		List<ProductionOrder> productionOrders = new ArrayList<ProductionOrder>(); 
 		//ProductionOrderService productionOrderService = new ProductionOrderService();
 		
 		BomTree bomTree = null;
 		BOM bom = null;
-		//BomService bomService = new BomService();
+		
 		System.out.println("SO Material : " + salesOrderMaterial.getMaterial());
 		
 		if(salesOrderMaterial != null && salesOrderMaterial.getMaterial() != null) 
 		{
 			//try {	
-			 bom = salesOrderMaterial.getMaterial().getBomByType("P");
+			// bom = salesOrderMaterial.getMaterial().getBomByType("P");
 		    //}
 			//catch(NullPointerException e)
 			//{
 
-			//}		
-			try 
-			{
-			 bom.buildBomTree();
-			}
-			catch(BusinessException be)
-			{
-				
-			}
+			//}	
+			// if(bom!=null)
+			 //{
+			   try 
+			   {
+				   bomTree =  bomService.buildBomTree(salesOrderMaterial.getMaterial(), "P");
+			   }
+			   catch(BusinessException be)
+			   {
+				   System.out.println("[SalesOrderService.java] Error calling bomService.buildBomTree");
+			   }
+			// }
+			// else // Bom does not maintain
+			// {
+			//	 // Bom does not maintain , please maintain
+			//	 System.out.println("[SalesOrderService.java] bom = null");
+			//	 return;
+			// }
 		}
+		
+		// if buildBomTree does not success, end the conversion process
+		if(bomTree == null) return;
+		
 		
 		List<TreeNode<BomTreeNodeData>> bomTreeNodeList = bomTree.toList();
 		
+		//for(TreeNode<BomTreeNodeData> node : bomTreeNodeList)
+		//{
+		//	System.out.println("BomDetail Id : " + node.getData().getBomDetail().getId());
+		//}
+		
+		//List<ProductionOrder> productionOrders = new ArrayList<ProductionOrder>();
+		int j = 0;
 		for(TreeNode<BomTreeNodeData> node : bomTreeNodeList)
 		{
 		 
 			try
 			{
+				System.out.println("BomDetail Id : " + node.getData().getBomDetail().getId());
 				if(node.getData().getBomDetail().getMaterial().getMaterialType().isProduced())
 				{
 					ProductionOrder productionOrder = new ProductionOrder();
 					
 					// temporary
-					productionOrder.setDocNo("0");
+					++j;
+					productionOrder.setDocNo(Integer.toString(j));
 					productionOrder.setQuantityOrder(node.getData().getTreeOriginalQuantityRequired() * salesOrderMaterial.getQuantityOrder());
 					
 					productionOrder.setMaterial(node.getData().getBomDetail().getMaterial());
@@ -416,28 +466,59 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 					  }
 					}
 					
+					productionOrder.setCreateApp(rowInfo.getCreateApp());
+					productionOrder.setModifyApp(rowInfo.getModifyApp());
+					productionOrder.setCreateLogin(rowInfo.getCreateLogin());
+					productionOrder.setModifyLogin(rowInfo.getModifyLogin());
+					//productionOrder.setSessionId(rowInfo.getSessionId());
+					
+					//productionOrder.setRecordStatus(rowInfo.getRecordStatus());
+					//productionOrder.setCreateTimestamp(rowInfo.getCreateTimestamp());
+					//productionOrder.setModifyTimestamp(rowInfo.getModifyTimestamp());
+
+					
+					// Insert the productionOrder to db
+					//productionOrderService.addProductionOrder(productionOrder);
 					
 					System.out.println("[After phantom explosion] :" + productionOrderChildren.size());
-					/*
+					List<ProductionOrderMaterial> productionOrderMaterials = new ArrayList<ProductionOrderMaterial>();
 					// After phantom explosion , productionOrderChildren should contain all the production order materials					
 					for(TreeNode<BomTreeNodeData> child : productionOrderChildren)
 					{
 						ProductionOrderMaterial productionOrderMaterial = new ProductionOrderMaterial();
 						
 						productionOrderMaterial.setMaterial(child.getData().getBomDetail().getMaterial());
-						productionOrderMaterial.setProductionOrder(productionOrder);
+						//productionOrderMaterial.setProductionOrder(productionOrder);
 						productionOrderMaterial.setQuantityConsumed(0.0);
 						productionOrderMaterial.setQuantityRequired(child.getData().getTreeOriginalQuantityRequired() * productionOrder.getQuantityOrder());
+						productionOrderMaterial.setCreateApp(rowInfo.getCreateApp());
+						productionOrderMaterial.setModifyApp(rowInfo.getModifyApp());
+						productionOrderMaterial.setCreateLogin(rowInfo.getCreateLogin());
+						productionOrderMaterial.setModifyLogin(rowInfo.getModifyLogin());
+						//productionOrderMaterial.setSessionId(rowInfo.getSessionId());
+						productionOrderMaterial.setRecordStatus(rowInfo.getRecordStatus());
+						productionOrderMaterial.setCreateTimestamp(rowInfo.getCreateTimestamp());
+						productionOrderMaterial.setModifyTimestamp(rowInfo.getModifyTimestamp());
 						
-						
-						// Add the productionOrderMaterial
+						//productionOrderMaterials.add(productionOrderMaterial);
 						productionOrder.addProductionOrderMaterial(productionOrderMaterial);
+
 					}
-					// Insert the productionOrder to db
+					
 					productionOrderService.addProductionOrder(productionOrder);
+					// update the production order with the production order materials
+					//productionOrderService.updateProductionOrder(productionOrder);
+					
+					
+					// Add the productionOrderMaterial
+					
+					//for(ProductionOrderMaterial pom : productionOrderMaterials)
+					//	productionOrder.addProductionOrderMaterial(pom);
+										
+
 				    // Added to list (for future , to have a addProductionOrders function to insert record by list
 				    productionOrders.add(productionOrder);
-					*/
+					
 					
 				}
 				
@@ -445,6 +526,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 			}
 			catch(Exception e)
 			{
+				System.out.println(e);
 				//throw e;
 			}
 			

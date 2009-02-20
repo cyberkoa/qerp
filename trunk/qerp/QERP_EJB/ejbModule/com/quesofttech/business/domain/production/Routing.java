@@ -74,8 +74,8 @@ public class Routing extends BaseEntity {
 	private String sequenceType;
 
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
 	@ManyToOne
@@ -176,9 +176,9 @@ public class Routing extends BaseEntity {
 		return getId();
 	}
 
-	
+	/*
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -189,7 +189,7 @@ public class Routing extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 				
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -199,9 +199,9 @@ public class Routing extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -212,7 +212,7 @@ public class Routing extends BaseEntity {
 		
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -224,7 +224,7 @@ public class Routing extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

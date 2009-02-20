@@ -118,18 +118,18 @@ public class Material extends BaseEntity {
 	private UOM baseUOM;
 	
 	
-	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=BOM.class)
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="material", targetEntity=BOM.class)
 	private List<BOM> boms;
 	
-	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=BomDetail.class)
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="material", targetEntity=BomDetail.class)
 	private List<BomDetail> bomDetails;
 	
-	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy="material", targetEntity=SalesOrderMaterial.class)
+	@OneToMany(cascade=CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy="material", targetEntity=SalesOrderMaterial.class)
 	private List<SalesOrderMaterial> salesOrderMaterials;
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 
 	
@@ -221,9 +221,9 @@ public class Material extends BaseEntity {
 		return getId();
 	}
 
-	
+	/*
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		System.out.println("prePersist in Material");
 		validate();	    
 		java.util.Date today = new java.util.Date();
@@ -234,14 +234,14 @@ public class Material extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());
 		
 	}
-
+    */
 	@PostLoad
 	void postLoad() {
 		//_loaded_password = password;
 	}
-
+    /*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -251,7 +251,7 @@ public class Material extends BaseEntity {
 		System.out.println(today.getTime());
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	}
-
+    */
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -263,7 +263,7 @@ public class Material extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...
@@ -550,7 +550,7 @@ public class Material extends BaseEntity {
 	{
 		System.out.println("boms = " + getBoms());
 		
-		if(boms != null)
+		if(this.getBoms() != null)
 		{
 			for(BOM bom : boms)
 			{

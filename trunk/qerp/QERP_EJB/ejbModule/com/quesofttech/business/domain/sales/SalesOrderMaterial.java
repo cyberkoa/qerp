@@ -87,8 +87,8 @@ public class SalesOrderMaterial extends BaseEntity {
 	*/
 		
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
 	/*
@@ -202,9 +202,9 @@ public class SalesOrderMaterial extends BaseEntity {
 		return getId();
 	}
 
-	
+/*	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		
@@ -215,14 +215,12 @@ public class SalesOrderMaterial extends BaseEntity {
 	    java.util.Date today = new java.util.Date();
 	    System.out.println("[SalesOrderLine.java] prePersist");
 	    
-	    //rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
-	    //rowInfo.setCreateDate(rowInfo.getModifyDate());
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());	
 				
 	    System.out.println(this.toString());
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -232,9 +230,9 @@ public class SalesOrderMaterial extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -243,13 +241,11 @@ public class SalesOrderMaterial extends BaseEntity {
 		
 			java.util.Date today = new java.util.Date();
 
-			//rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
+
 			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 		
-		//setModifyDateTime(modifyDate,modifyTime);	
-		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -261,7 +257,7 @@ public class SalesOrderMaterial extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

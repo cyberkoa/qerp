@@ -50,7 +50,7 @@ public class RoutingService extends BaseService implements IRoutingServiceLocal,
 	}
 
 	public void logicalDeleteRouting(Routing routing) throws BusinessException {
-		routing.rowInfo.setRecordStatus("D");
+		routing.setRecordStatus("D");
 		updateRouting(routing);
 	}
 	

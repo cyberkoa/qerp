@@ -50,7 +50,7 @@ public class RoleService extends BaseService implements IRoleServiceLocal, IRole
 	}
 
 	public void logicalDeleteRole(Role role) throws BusinessException {
-		role.rowInfo.setRecordStatus("D");
+		role.setRecordStatus("D");
 		updateRole(role);
 	}
 	

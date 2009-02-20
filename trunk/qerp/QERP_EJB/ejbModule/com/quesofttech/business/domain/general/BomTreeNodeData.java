@@ -45,7 +45,8 @@ public class BomTreeNodeData implements Serializable {
 	
 	private BomDetail bomDetail = null;
 	
-	
+	// cyberkoa : material in bomDetail is not loaded with data automatically, use this to try
+	private Material material = null;
 	
 	//private Material material = null;
 
@@ -162,6 +163,63 @@ public class BomTreeNodeData implements Serializable {
 	public void setTreeOriginalValue(Double treeOriginalValue) {
 		this.treeOriginalValue = treeOriginalValue;
 	}
+
+	/**
+	 * @return the material
+	 */
+	public Material getMaterial() {
+		return material;
+	}
+
+	/**
+	 * @param material the material to set
+	 */
+	public void setMaterial(Material material) {
+		this.material = material;
+	}
+
+	/**
+	 * @return the actualQuantityRequired
+	 */
+	public Double getActualQuantityRequired() {
+		return actualQuantityRequired;
+	}
+
+	/**
+	 * @param actualQuantityRequired the actualQuantityRequired to set
+	 */
+	public void setActualQuantityRequired(Double actualQuantityRequired) {
+		this.actualQuantityRequired = actualQuantityRequired;
+	}
+
+	/**
+	 * @return the originalQuantityRequired
+	 */
+	public Double getOriginalQuantityRequired() {
+		return originalQuantityRequired;
+	}
+
+	/**
+	 * @param originalQuantityRequired the originalQuantityRequired to set
+	 */
+	public void setOriginalQuantityRequired(Double originalQuantityRequired) {
+		this.originalQuantityRequired = originalQuantityRequired;
+	}
+
+	/**
+	 * @return the treeScrapFactor
+	 */
+	public double getTreeScrapFactor() {
+		return treeScrapFactor;
+	}
+
+	/**
+	 * @param treeScrapFactor the treeScrapFactor to set
+	 */
+	public void setTreeScrapFactor(double treeScrapFactor) {
+		this.treeScrapFactor = treeScrapFactor;
+	}
+	
 	
 	
 }
