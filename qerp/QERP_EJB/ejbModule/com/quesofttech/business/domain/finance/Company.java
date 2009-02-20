@@ -93,8 +93,8 @@ public class Company extends BaseEntity {
 	
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
 	/*
@@ -199,9 +199,9 @@ public class Company extends BaseEntity {
 		return getId();
 	}
 
-	
+	/*
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -212,7 +212,7 @@ public class Company extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 				
 	}
-
+    */
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -222,9 +222,9 @@ public class Company extends BaseEntity {
 	void postLoad() {
 
 	}
-
+    /*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -235,7 +235,7 @@ public class Company extends BaseEntity {
 		
 		
 	}
-
+    */
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -247,7 +247,7 @@ public class Company extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	protected void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

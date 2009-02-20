@@ -58,7 +58,7 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 	}
 	
 	public void logicalDeleteMaterial(Material material) throws BusinessException {
-		material.rowInfo.setRecordStatus("D");
+		material.setRecordStatus("D");
 		updateMaterial(material);
 	}
 	

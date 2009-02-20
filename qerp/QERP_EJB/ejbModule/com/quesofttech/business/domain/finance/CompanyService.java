@@ -50,7 +50,7 @@ public class CompanyService extends BaseService implements ICompanyServiceLocal,
 	}
 
 	public void logicalDeleteCompany(Company company) throws BusinessException {
-		company.rowInfo.setRecordStatus("D");
+		company.setRecordStatus("D");
 		updateCompany(company);
 	}
 	

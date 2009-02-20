@@ -50,7 +50,7 @@ public class MaterialTypeService extends BaseService implements IMaterialTypeSer
 	}
 
 	public void logicalDeleteMaterialType(MaterialType materialType) throws BusinessException {
-		materialType.rowInfo.setRecordStatus("D");
+		materialType.setRecordStatus("D");
 		updateMaterialType(materialType);
 	}
 	

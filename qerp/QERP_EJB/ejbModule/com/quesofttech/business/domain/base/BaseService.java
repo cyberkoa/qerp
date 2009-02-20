@@ -66,6 +66,10 @@ public abstract class BaseService {
 		}
 		try {
 			System.out.println("just before persist in Base");
+			
+			//validate(entity);
+			//prePersist(entity);
+			
 			_em.persist(entity);
 			
 			// [OpenJPA] An explicit flush is needed as no exception will be thrown immediately when unique constraint hit at databases level
@@ -96,6 +100,9 @@ public abstract class BaseService {
 			throw new IllegalArgumentException("merge(entity) has been given a null entity.");
 		}
 		try {
+			
+			//validate(entity);
+			//preUpdate(entity);
 			entity = _em.merge(entity);
 		}
 		catch (Exception e) {
@@ -144,4 +151,34 @@ public abstract class BaseService {
 
 	}
 
+	/*
+	protected Boolean validate(BaseEntity baseEntity)
+	{
+		return true;
+	}
+
+	protected Boolean prePersist(BaseEntity baseEntity)
+	{
+		
+		baseEntity.setRecordStatus("A");
+		
+	    java.util.Date today = new java.util.Date();
+
+	    baseEntity.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+	    baseEntity.setCreateTimestamp(baseEntity.getModifyTimestamp());
+	    
+		return true;
+	}	
+	
+	protected Boolean preUpdate(BaseEntity baseEntity)
+	{
+				
+	    java.util.Date today = new java.util.Date();
+
+	    baseEntity.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+	    
+		return true;
+	}
+	*/
+	
 }

@@ -113,8 +113,8 @@ public class User extends BaseEntity {
 		this.rowInfo = new RowInfo();
 	}	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
 	public String toString() {
@@ -152,9 +152,9 @@ public class User extends BaseEntity {
 	public Serializable getIdForMessages() {
 		return getId();
 	}
-
+/*
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 rowInfo.setRecordStatus("A");
 		
@@ -166,13 +166,13 @@ rowInfo.setRecordStatus("A");
 	    //rowInfo.setCreateDate(rowInfo.getModifyDate());
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());
 	}
-
+*/
 	@PostLoad
 	void postLoad() {
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -181,7 +181,7 @@ rowInfo.setRecordStatus("A");
 
 			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -193,7 +193,7 @@ rowInfo.setRecordStatus("A");
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		// Validate syntax...
 

@@ -50,7 +50,7 @@ public class UomService extends BaseService implements IUomServiceLocal, IUomSer
 	}
 
 	public void logicalDeleteUOM(UOM uom) throws BusinessException {
-		uom.rowInfo.setRecordStatus("D");
+		uom.setRecordStatus("D");
 		updateUOM(uom);
 	}
 	

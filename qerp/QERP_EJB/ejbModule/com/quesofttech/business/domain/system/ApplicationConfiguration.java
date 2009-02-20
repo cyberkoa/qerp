@@ -70,8 +70,8 @@ public class ApplicationConfiguration extends BaseEntity {
 	private Boolean isEnabled = true;
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	/*
 	@ManyToOne
@@ -172,9 +172,9 @@ public class ApplicationConfiguration extends BaseEntity {
 		return getId();
 	}
 
-	
+/*	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -185,7 +185,7 @@ public class ApplicationConfiguration extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 				
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -195,9 +195,9 @@ public class ApplicationConfiguration extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -208,7 +208,7 @@ public class ApplicationConfiguration extends BaseEntity {
 		
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -220,7 +220,7 @@ public class ApplicationConfiguration extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

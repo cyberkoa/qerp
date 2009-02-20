@@ -18,12 +18,10 @@
 		<jta-data-source>qerp</jta-data-source>
 		<non-jta-data-source>qerp</non-jta-data-source>
         <jar-file>QERP_EJB.jar</jar-file>
-        <class>
-        com.quesofttech.business.domain.security.UserPassword</class>
-        <class>
-        com.quesofttech.business.domain.security.UserProgram</class>
-        <class>
-        com.quesofttech.business.domain.security.UserRole</class>        
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties> 
+        	<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+        </properties>       
     </persistence-unit>
  
 </persistence>

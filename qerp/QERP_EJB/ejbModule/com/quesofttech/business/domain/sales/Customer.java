@@ -92,8 +92,8 @@ public class Customer extends BaseEntity {
 	Address address;
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
 	
@@ -195,9 +195,9 @@ public class Customer extends BaseEntity {
 		return getId();
 	}
 
-	
+/*	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -212,7 +212,7 @@ public class Customer extends BaseEntity {
 	    System.out.println("[CreateTimestamp] " + rowInfo.getCreateTimestamp());
 				
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -222,9 +222,9 @@ public class Customer extends BaseEntity {
 	void postLoadl() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -237,7 +237,7 @@ public class Customer extends BaseEntity {
 		//setModifyDateTime(modifyDate,modifyTime);		
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -249,7 +249,7 @@ public class Customer extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

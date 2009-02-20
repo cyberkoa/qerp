@@ -148,8 +148,8 @@ public class UserRole extends BaseEntity {
 	//private String type;
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
 	
@@ -257,9 +257,9 @@ public class UserRole extends BaseEntity {
 		return id.userId + id.roleId;
 	}
 
-	
+/*	
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -273,7 +273,7 @@ public class UserRole extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());	
 				
 	}
-
+*/
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -283,9 +283,9 @@ public class UserRole extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			validate();
@@ -296,7 +296,7 @@ public class UserRole extends BaseEntity {
 		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -308,7 +308,7 @@ public class UserRole extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

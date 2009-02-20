@@ -50,7 +50,7 @@ public class ModuleService extends BaseService implements IModuleServiceLocal, I
 	}
 
 	public void logicalDeleteModule(Module module) throws BusinessException {
-		module.rowInfo.setRecordStatus("D");
+		module.setRecordStatus("D");
 		updateModule(module);
 	}
 	

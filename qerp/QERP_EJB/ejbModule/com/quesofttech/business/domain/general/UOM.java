@@ -82,8 +82,8 @@ public class UOM extends BaseEntity {
 
 
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	/*
 	@ManyToOne
@@ -184,9 +184,9 @@ public class UOM extends BaseEntity {
 		return getId();
 	}
 
-	
+	/*
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -197,7 +197,7 @@ public class UOM extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 				
 	}
-
+    */
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -207,9 +207,9 @@ public class UOM extends BaseEntity {
 	void postLoad() {
 
 	}
-
+/*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 			try
@@ -227,7 +227,7 @@ public class UOM extends BaseEntity {
 		
 		
 	}
-
+*/
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -239,7 +239,7 @@ public class UOM extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...

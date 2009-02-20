@@ -1,5 +1,6 @@
 package com.quesofttech.business.domain.sales.iface;
 
+
 import java.util.List;
 
 import com.quesofttech.business.common.exception.BusinessException;
@@ -9,7 +10,7 @@ import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
-
+import com.quesofttech.business.domain.embeddable.RowInfo;
 
 /**
  * The <code>ISalesOrderServiceRemote</code> bean exposes the business methods
@@ -42,5 +43,5 @@ public interface ISalesOrderServiceRemote {
 	List<SalesOrderMaterial> findSalesOrdersMaterialBySearchFieldsRange(SalesOrderMaterialSearchFields lower, SalesOrderMaterialSearchFields upper,SearchOptions options) throws DoesNotExistException;
 	List<SalesOrderMaterial> findSalesOrdersMaterialBySearchFields(SalesOrderMaterialSearchFields searchFields,SearchOptions options) throws DoesNotExistException;
 
-	public void convertOrderMaterialToProductionOrder(SalesOrderMaterial salesOrderMaterial);
+	void convertOrderMaterialToProductionOrder(RowInfo rowInfo, SalesOrderMaterial salesOrderMaterial);
 }

@@ -126,22 +126,22 @@ public class UserPassword extends BaseEntity {
 	public Serializable getIdForMessages() {
 		return getId();
 	}
-
+/*
 	@PrePersist
 	void prePersistOfUserPassword() throws BusinessException {
 		validate();
 	}
-
+*/
 	@PostLoad
 	void postLoadOfUserPassword() {
 		_loaded_password = password;
 	}
-
+/*
 	@PreUpdate
 	void preUpdateOfUserPassword() throws BusinessException {
 		validate();
 	}
-
+*/
 	@PreRemove
 	void preRemoveOfUserPassword() throws BusinessException {
 		// Check business rules here, eg.
@@ -153,7 +153,7 @@ public class UserPassword extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		// Validate syntax...
 

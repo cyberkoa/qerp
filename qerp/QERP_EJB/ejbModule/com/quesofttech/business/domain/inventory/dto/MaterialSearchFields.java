@@ -20,7 +20,7 @@ public class MaterialSearchFields implements Serializable {
 	private Integer version = null;
 	
 	@Embedded
-	RowInfo rowInfo;
+	RowInfo rowInfo_1;
 
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
@@ -69,90 +69,4 @@ public class MaterialSearchFields implements Serializable {
 	}
 
 
-    //RowInfo field
-	
-	public String getRecordStatus() {
-		return rowInfo.getRecordStatus();
-	}
-
-
-
-	public void setRecordStatus(String recordStatus) {
-		this.rowInfo.setRecordStatus(recordStatus);
-	}
-
-
-
-	public String getSessionId() {
-		return rowInfo.getSessionId();
-	}
-
-
-	public void setSessionId(String sessionId) {
-		this.rowInfo.setSessionId(sessionId);
-	}
-
-
-
-	public String getCreateLogin() {
-		return rowInfo.getCreateLogin();
-	}
-
-
-
-	public void setCreateLogin(String createLogin) {
-		this.rowInfo.setCreateLogin(createLogin);
-	}
-
-
-
-	public String getCreateApp() {
-		return rowInfo.getCreateApp();
-	}
-
-
-
-	public void setCreateApp(String createApp) {
-		this.rowInfo.setCreateApp(createApp);
-	}
-
-
-	public java.sql.Timestamp getCreateTimestamp() {
-		return rowInfo.getCreateTimestamp();
-	}
-
-	public void setCreateTimestamp(java.sql.Timestamp createTimestamp) {
-		this.rowInfo.setCreateTimestamp(createTimestamp);
-	}
-    
-
-	public String getModifyLogin() {
-		return rowInfo.getModifyLogin();
-	}
-
-	public void setModifyLogin(String modifyLogin) {
-		this.rowInfo.setModifyLogin(modifyLogin);
-	}
-
-
-
-	public String getModifyApp() {
-		return rowInfo.getModifyApp();
-	}
-
-
-
-	public void setModifyApp(String modifyApp) {
-		this.rowInfo.setModifyApp(modifyApp);
-	}
-
-
-
-	public java.sql.Timestamp getModifyTimestamp() {
-		return rowInfo.getModifyTimestamp();
-	}
-
-	public void setModifyTimestamp(java.sql.Timestamp modifyTimestamp) {
-		this.rowInfo.setModifyTimestamp(modifyTimestamp);
-	}
 }

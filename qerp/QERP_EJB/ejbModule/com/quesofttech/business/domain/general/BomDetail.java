@@ -89,11 +89,11 @@ public class BomDetail extends BaseEntity {
 	
 	
 	
-	@Embedded
-	RowInfo rowInfo;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_BOM")	
 	private BOM bom;
 
@@ -106,7 +106,7 @@ public class BomDetail extends BaseEntity {
 	 */
 	
 	// Child material
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_Material")	
 	private Material material;
 	
@@ -206,9 +206,9 @@ public class BomDetail extends BaseEntity {
 		return getId();
 	}
 
-	
+	/*
 	@PrePersist
-	void prePersist() throws BusinessException {
+	protected void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -219,7 +219,7 @@ public class BomDetail extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 				
 	}
-
+    */
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -229,9 +229,9 @@ public class BomDetail extends BaseEntity {
 	void postLoad() {
 
 	}
-
+    /*
 	@PreUpdate
-	void preUpdate() throws BusinessException {
+	protected void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
 
@@ -243,7 +243,7 @@ public class BomDetail extends BaseEntity {
 		
 		
 	}
-
+    */
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -255,7 +255,7 @@ public class BomDetail extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException {
+	public void validate() throws BusinessException  {
 
 		
 		// Validate syntax...
@@ -520,6 +520,8 @@ public class BomDetail extends BaseEntity {
 		this.material = material;
 	}
 
+	
+	//  Properties
 	public String getMaterialCode()
 	{
 		return material.getCode();
@@ -532,6 +534,13 @@ public class BomDetail extends BaseEntity {
 	}
 	
 	
+	// Helper function
 	
+	public List<BomDetail> getChildrenBomDetail()
+	{
+		//this.material.getBoms()
+		
+		return null;
+	}
 	
 }
