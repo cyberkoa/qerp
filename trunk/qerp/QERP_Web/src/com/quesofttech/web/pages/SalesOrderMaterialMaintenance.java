@@ -268,12 +268,18 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		{ public List<SalesOrderMaterial> bindData() 
 			{ 
 			try { 
+				//System.out.println("LowerFS:" + lowerSFs.toString());
+				//System.out.println("upperSFs:" + upperSFs.toString());
 				 if(lowerSFs==null&&upperSFs==null)
+				 {
+				   System.out.println("nothing. refresh normally");
 				   return getSalesOrderService().findSalesOrderMaterialsBySalesOrderId(_headerIDLng);
+				 }
 				 else
 				 {
                 	SearchOptions options = new SearchOptions();
             	 
+                	System.out.println("filtering. refresh with filter");
                 	//return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(lower, upper, options)
             	    return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(_filterDataSalesOrderMaterial.getLowerSearchFields(), _filterDataSalesOrderMaterial.getUpperSearchFields(),options);
 				 } 
@@ -306,7 +312,9 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 
 		try
     	{
-    	   _SalesOrderMaterials = getSalesOrderService().findSalesOrderMaterialsBySalesOrderId(_headerIDLng);    	   
+    	   //_SalesOrderMaterials = getSalesOrderService().findSalesOrderMaterialsBySalesOrderId(_headerIDLng);
+    	   _SalesOrderMaterials = (List<SalesOrderMaterial>) delegate.bindData();
+    	   //(List<SalesOrder>)delegate.bindData();
     	   if(_SalesOrderMaterials!=null && !_SalesOrderMaterials.isEmpty())
        		{
     		   System.out.println("refresh record.  i should be here");
