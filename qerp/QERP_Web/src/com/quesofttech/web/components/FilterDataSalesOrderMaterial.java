@@ -73,26 +73,26 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 	
 	void onSubmitFromSearchForm() {
 		System.out.println("onActionFrombtnFilter");
-		Material lowmat = new Material();
-		Material upper = new Material();
+		//Material lowmat = new Material();
+		//Material upper = new Material();
 		System.out.println("onActionFrombtnFilter1");
-		lowmat.setCode(lowerMaterialCode);		
+		//lowmat.setCode(lowerMaterialCode);		
 		System.out.println("onActionFrombtnFilter2");
-		lowerSearchFields.setMaterial(lowmat);		
+		lowerSearchFields.setMaterial(lowerMaterialCode);		
 		lowerSearchFields.setRecordStatus("A");
 		lowerSearchFields.setPrice(lowerPrice);
 		lowerSearchFields.setQtyOrder(lowerQtyOrder);
 		System.out.println("onActionFrombtnFilter3");
 
 		
-		upper.setCode(upperMaterialCode);
+		//upper.setCode(upperMaterialCode);
 		System.out.println("onActionFrombtnFilter5");
 		upperSearchFields.setRecordStatus("A");
-		upperSearchFields.setMaterial(upper);
+		upperSearchFields.setMaterial(upperMaterialCode);
 		System.out.println("onActionFrombtnFiltery");
 		upperSearchFields.setPrice(upperPrice);
 		upperSearchFields.setQtyOrder(upperQtyOrder);
-		System.out.println("Upperfield:" + upperSearchFields.toString());
+		//System.out.println("Upperfield:" + upperSearchFields.toString());
 		// Trigger the container event "onFilterData"
 		resources.triggerEvent("filterDataSalesOrderMaterial", new Object[] {}, null);
 		

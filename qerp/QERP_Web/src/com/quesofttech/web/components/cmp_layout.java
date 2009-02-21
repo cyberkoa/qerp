@@ -77,7 +77,7 @@ public class cmp_layout extends SimpleBasePage
 			for(Module p : Modules)
 			{			
 				
-				System.out.println("This is the output data: " + p.toString());
+				//System.out.println("This is the output data: " + p.toString());
 				_subjects.add(p.getDescription());
 				_modules.add(p.getCode());
 				//_modules[i] = p.getCode();
@@ -101,7 +101,7 @@ public class cmp_layout extends SimpleBasePage
 			for(Module p : Modules)
 			{			
 				
-				System.out.println("This is the output data: " + p.toString());
+				//System.out.println("This is the output data: " + p.toString());
 				//_subjects[i] = p.getDescription();
 				//_modules[i] = p.getCode();
 				i++;
@@ -271,15 +271,15 @@ System.out.println("the tree size is :" + _subjects.size());
 	    	
 	    	for(int i_Loop=0;i_Loop<_subjects.size();i_Loop++)
 	    	{
-	    		System.out.println("here");
+	    		//System.out.println("here");
 	    		if (! _TreeView[i_Loop].equals(""))
 	    		{
 	    			_Details_output[i_Loop] = _TreeView[i_Loop];   
-	    			System.out.println("the tree contains is :" + _TreeView[i_Loop]);
+	    			//System.out.println("the tree contains is :" + _TreeView[i_Loop]);
 	    		}
 	    		else 
 	    		{
-	    			System.out.println("the tree contains is blank");
+	    			//System.out.println("the tree contains is blank");
 	    			_Details_output[i_Loop] = "<br><br><B><H1>N/A</H1></B>";
 	    		}
 	    		
