@@ -326,10 +326,10 @@ public class SecurityFinderService extends BaseService implements ISecurityFinde
 		
 		for(Program p : programsOfUser)
 		{
-			System.out.println("in Program p:");
+			//System.out.println("in Program p:");
 			if(!(programs.contains(p)))
 			{
-				System.out.println("adding record program P");
+				//System.out.println("adding record program P");
 				programs.add(p);
 			}
 		}
