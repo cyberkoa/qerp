@@ -273,6 +273,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		builder.appendComparison("u.expiryDate", ComparisonOperator.EQ, search.getExpiryDate());
 		builder.appendEqualsSkipEmpty("u.version", search.getVersion());
 		*/
+		System.out.println("SalesOrder:" + builder.getQueryString());
 		if (options.getSortColumnNames().size() == 0) {
 			builder.append(" order by so.docNo");
 		}
@@ -306,6 +307,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		else{
 			builder.append(" order by u.login");
 		}
+		System.out.println("SalesOrder:" + builder.getQueryString());
 	
 		Query q = builder.createQuery(_em, options, "u");
 	
@@ -325,10 +327,12 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		QueryBuilder builder = new QueryBuilder();
 		
 		builder.append("select so from SalesOrderMaterial so");
-		//builder.appendBetween("so.rowInfo.recordStatus", lower.getRecordStatus(),upper.getRecordStatus(),true);
+		System.out.println("material code lower:" + lower.getMaterial());
+		System.out.println("Price lower:" + lower.getPrice());
+		builder.appendBetween("so.rowInfo.recordStatus", lower.getRecordStatus(),upper.getRecordStatus(),true);
 		builder.appendBetween("so.material.code", lower.getMaterial(),upper.getMaterial(),true);
 		builder.appendBetween("so.price", lower.getPrice(),upper.getPrice(),true);
-		builder.appendBetween("so.quantityOrder", lower.getQtyOrder(),upper.getQtyOrder(),true);
+		//builder.appendBetween("so.quantityOrder", lower.getQtyOrder(),upper.getQtyOrder(),true);
 		
 		/*
 		builder.appendLikeIgnoreCaseSkipEmpty("u.firstName", search.getFirstName());
@@ -337,9 +341,10 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		builder.appendComparison("u.expiryDate", ComparisonOperator.EQ, search.getExpiryDate());
 		builder.appendEqualsSkipEmpty("u.version", search.getVersion());
 		*/
-		if (options.getSortColumnNames().size() == 0) {
-			builder.append(" order by so.salesorder.docNo");
-		}
+		System.out.println("SalesOrderMaterial:" + builder.getQueryString());
+		//if (options.getSortColumnNames().size() == 0) {
+		//	builder.append(" order by so.material.code");
+		//}
 	
 		Query q = builder.createQuery(_em, options, "so");
 	    System.out.println(builder.getQueryString());
@@ -370,6 +375,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		else{
 			builder.append(" order by u.login");
 		}
+		System.out.println("SalesOrderMatserial:" + builder.getQueryString());
 	
 		Query q = builder.createQuery(_em, options, "u");
 	

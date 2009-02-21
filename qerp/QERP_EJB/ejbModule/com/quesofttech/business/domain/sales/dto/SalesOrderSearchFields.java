@@ -103,6 +103,14 @@ public class SalesOrderSearchFields extends BaseSearchFields implements Serializ
 		this.docNo = docNo;
 	}
 
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 
 
 
