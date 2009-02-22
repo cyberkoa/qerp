@@ -5,6 +5,7 @@ import javax.naming.Context;
 //import javax.naming.spi.*;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.List;
@@ -80,6 +81,13 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		testConvertSOM2ProdO();
 		//testMaterialLazyFetch();
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	private static InitialContext GetContext()
 	{

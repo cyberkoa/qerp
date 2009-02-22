@@ -345,6 +345,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		//if (options.getSortColumnNames().size() == 0) {
 		//	builder.append(" order by so.material.code");
 		//}
+		System.out.println("findSalesOrdersMaterialBySearchFieldsRange: " + builder.getQueryString());
 	
 		Query q = builder.createQuery(_em, options, "so");
 	    System.out.println(builder.getQueryString());
@@ -377,6 +378,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		}
 		System.out.println("SalesOrderMatserial:" + builder.getQueryString());
 	
+		System.out.println("findSalesOrdersMaterialBySearchFields: " + builder.getQueryString());
 		Query q = builder.createQuery(_em, options, "u");
 	
 		List l = q.getResultList();
