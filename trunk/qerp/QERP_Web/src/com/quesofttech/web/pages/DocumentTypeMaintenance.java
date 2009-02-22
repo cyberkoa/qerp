@@ -1,0 +1,411 @@
+package com.quesofttech.web.pages;
+import java.io.IOException;
+import java.util.List;
+import javax.annotation.Resource;
+import com.quesofttech.business.common.exception.BusinessException;
+import com.quesofttech.business.domain.general.DocumentType;
+import com.quesofttech.business.domain.general.iface.IDocumentTypeServiceRemote;
+import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
+import com.quesofttech.web.base.SimpleBasePage;
+import com.quesofttech.web.base.SecureBasePage;
+import com.quesofttech.web.state.Visit;
+import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.Persist;
+import org.apache.tapestry5.annotations.Retain;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.corelib.components.Submit;
+import org.apache.tapestry5.corelib.components.TextField;
+import org.apache.tapestry5.corelib.components.Checkbox;
+import org.apache.tapestry5.Block;
+import org.apache.tapestry5.corelib.components.Grid;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.Request;
+import org.slf4j.Logger;
+import org.apache.tapestry5.annotations.ApplicationState;
+public class DocumentTypeMaintenance extends SecureBasePage {
+// Default defination.
+    private String _strMode = "";
+    private DocumentType DocumentTypeDetail;
+    private DocumentType _DocumentType;
+    @Persist
+    private List<DocumentType> _DocumentTypes;
+    @Inject
+    private Logger _logger;
+    @Inject
+    private Block blockFormView;
+    @Persist
+    private long lng_CurrentID;
+// End of  Default defination.
+    private String viewDisplayText="", viewEditText="";
+    public String getViewDisplayText()
+    {
+     return viewDisplayText;
+    }
+
+    public String getviewEditText()
+    {
+         return viewEditText;
+    }
+
+    @Component(id = "DocumentTypeForm")
+    private Form _form;
+    @Persist
+    private int int_SelectedRow;
+
+    @ApplicationState
+    private String myState;
+
+    @Component(id = "GRID")
+    private Grid _Grid;
+
+    //===============================
+    // Text Component for id
+    @Component(id = "id")
+    private TextField _id;
+    private Long id;
+    public Long getid()
+    {
+       return id;
+    }
+
+    public void setid(Long id)
+    {
+       this.id = id;
+    }
+    //===============================
+
+    //===============================
+    // Text Component for Category
+    @Component(id = "Category")
+    private TextField _Category;
+    private Long Category;
+    public Long getCategory()
+    {
+       return Category;
+    }
+
+    public void setCategory(Long Category)
+    {
+       this.Category = Category;
+    }
+    //===============================
+
+    //===============================
+    // Text Component for Prefix
+    @Component(id = "Prefix")
+    private TextField _Prefix;
+    private String Prefix;
+    public String getPrefix()
+    {
+       return Prefix;
+    }
+
+    public void setPrefix(String Prefix)
+    {
+       this.Prefix = Prefix;
+    }
+    //===============================
+
+    //===============================
+    // Text Component for RunningNo
+    @Component(id = "RunningNo")
+    private TextField _RunningNo;
+    private Long RunningNo;
+    public Long getRunningNo()
+    {
+       return RunningNo;
+    }
+
+    public void setRunningNo(Long RunningNo)
+    {
+       this.RunningNo = RunningNo;
+    }
+    //===============================
+
+    //===============================
+    // Text Component for DocType
+    @Component(id = "DocType")
+    private TextField _DocType;
+    private String DocType;
+    public String getDocType()
+    {
+       return DocType;
+    }
+
+    public void setDocType(String DocType)
+    {
+       this.DocType = DocType;
+    }
+    //===============================
+    void RefreshRecords()
+    {
+       try
+       {
+           _DocumentTypes = getDocumentTypeService().findDocumentTypes();
+       }
+       catch(BusinessException be)
+       {
+
+       }
+       if(_DocumentTypes!=null && !_DocumentTypes.isEmpty())
+       {
+           if(int_SelectedRow==0)
+           {
+               DocumentTypeDetail = _DocumentTypes.get(_DocumentTypes.size() - 1);
+           }
+           else
+           {
+               DocumentTypeDetail = _DocumentTypes.get(int_SelectedRow - 1);
+           }
+           DocumentTypeDetail = _DocumentTypes.get(_DocumentTypes.size() - 1);
+           myState="U";
+           viewDisplayText="Block";
+           viewEditText="none";
+           assignToLocalVariable(DocumentTypeDetail);
+       }
+             else
+            {
+                      myState="A"; // If no List then should be in A mode instead of Update mode.
+            }
+    }
+private void refreshDisplay()
+    {
+        if(myState.equals("U"))
+        {
+            viewDisplayText="Block";
+            viewEditText="none";
+        }
+        else
+        {
+                    viewDisplayText="none";
+            viewEditText="Block";
+        }
+    }
+    private int getRcdLocation( Long id)  throws BusinessException
+    {
+      int int_return ,int_i;
+      int_i = 0;
+      int_return = 0;
+      for(DocumentType p : _DocumentTypes)
+       {
+          int_i++;
+          if((long)p.getId().intValue()==id)
+           {
+                      int_return = int_i;
+           }
+       }
+       return int_return;
+    }
+
+    public Block getBlock() {
+       return blockFormView;
+    }
+
+
+    Object onSuccess()
+    {
+       _form.clearErrors();
+       RefreshRecords();
+       return blockFormView;
+    }
+
+
+    Object onFailure()
+    {
+       _form.clearErrors();
+       _form.recordError(getMessages().get("Record_Save_Error"));
+       return blockFormView;
+    }
+
+
+    void setupRender() {
+       RefreshRecords();
+    }
+
+
+    void onValidateForm() {
+       if ("U"== myState)
+       {
+           _UpdateRecord();
+       }
+       else
+       if ("A" == myState)
+       {
+           _AddRecord();
+       }
+    }
+
+    void assignToDatabase(DocumentType documentType){
+       documentType.setId(id);
+       documentType.setCatergory(Category);
+       documentType.setPrefix(Prefix);
+       documentType.setRunningNo(RunningNo);
+       documentType.setType(DocType);
+       documentType.setRecordStatus("A");
+       java.util.Date today = new java.util.Date();
+       documentType.setSessionId("");
+       documentType.setVersion((long)1);
+       
+       documentType.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+       System.out.println("documenttype:" + documentType.toString());
+    }
+    void assignToLocalVariable(DocumentType documentType)
+    {
+       this.id = documentType.getId();
+       this.Category = documentType.getCatergory();
+       this.Prefix = documentType.getPrefix();
+       this.RunningNo = documentType.getRunningNo();
+       this.DocType = documentType.getType();
+    }
+    void _AddRecord()
+    {
+       DocumentType documentType = new DocumentType();
+       try {
+    	   System.out.println("1: " + getVisit().getMyLoginId());
+               documentType.setModifyLogin(getVisit().getMyLoginId());
+               documentType.setCreateLogin(getVisit().getMyLoginId());
+               System.out.println("2: " );
+               documentType.setCreateApp(this.getClass().getSimpleName());
+               documentType.setModifyApp(this.getClass().getSimpleName());               
+               java.util.Date today = new java.util.Date();
+               documentType.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
+               System.out.println("3: " );
+           assignToDatabase(documentType);
+           System.out.println("4: " );
+           getDocumentTypeService().addDocumentType(documentType);
+           System.out.println("5: " );
+       }
+       catch (Exception e) {
+           _logger.info("DocumentType_Add_problem");
+           e.printStackTrace();
+           _form.recordError(getMessages().get("DocumentType_add_problem"));
+       }
+    }
+
+    void _UpdateRecord(){
+       DocumentType documentType = new DocumentType();
+       try
+       {
+           documentType = getDocumentTypeService().findDocumentType(id);
+       }
+       catch(BusinessException be)
+       {
+
+       }
+       if(documentType !=null)
+       {
+           try {
+               documentType.setModifyLogin(getVisit().getMyLoginId());
+               assignToDatabase(documentType);
+               getDocumentTypeService().updateDocumentType(documentType);
+           }
+           catch (BusinessException e) {
+               _form.recordError(_DocType, e.getLocalizedMessage());
+           }
+       catch (Exception e) {
+               _logger.info("DocumentType_update_problem");
+               e.printStackTrace();
+               _form.recordError(getMessages().get("DocumentType_update_problem"));
+           }
+       }
+    }
+
+
+    void _DeleteRecord(Long id) {
+       DocumentType documentType = new DocumentType();
+       try
+       {
+           documentType = getDocumentTypeService().findDocumentType(id);
+       }
+       catch(BusinessException be)
+       {
+
+       }
+       if(documentType!=null)
+       {
+           try {
+               documentType.setModifyLogin(getVisit().getMyLoginId());
+               getDocumentTypeService().logicalDeleteDocumentType(documentType);
+               if(int_SelectedRow!=0)
+               {
+                   int_SelectedRow--;
+               }
+               RefreshRecords();
+           }
+               catch (BusinessException e) {
+               _form.recordError(_DocType, e.getLocalizedMessage());
+       }
+           catch (Exception e) {
+               _logger.info("DocumentType_Delete_problem");
+               e.printStackTrace();
+               _form.recordError(getMessages().get("DocumentType_Delete_problem"));
+           }
+       }
+    }
+
+    void onActionFromtoolbarDel(Long id)
+    {
+            if (id!=null){
+       _form.clearErrors();
+       myState = "D";
+       _strMode = "D";
+       _DeleteRecord(id);
+            }
+    }
+
+    Object onActionFromToolbarAdd ()
+    {
+       _form.clearErrors();
+       myState = "A";
+       _strMode = "A";
+       return blockFormView;
+    }
+
+    Object onActionFromSelect(long id)
+    {
+       _form.clearErrors();
+       myState = "U";
+       _strMode = "U";
+       lng_CurrentID = id;
+       try
+       {
+           DocumentTypeDetail = getDocumentTypeService().findDocumentType(id);
+           int_SelectedRow = getRcdLocation(id);
+       }
+       catch(BusinessException be)
+       {
+
+       }
+
+       if(DocumentTypeDetail!=null){
+           viewDisplayText="Block";
+           viewEditText="none";
+           assignToLocalVariable(DocumentTypeDetail);
+           return blockFormView;
+       }
+       return null;
+    }
+
+    private IDocumentTypeServiceRemote getDocumentTypeService() {
+    	
+       return getBusinessServicesLocator().getDocumentTypeServiceRemote();
+    }
+
+
+    public List<DocumentType> getDocumentTypes() {
+       return _DocumentTypes;
+    }
+
+
+    public DocumentType getDocumentType() throws BusinessException{
+       return _DocumentType;
+    }
+
+
+     public void setDocumentType(DocumentType tb) {
+       _DocumentType = tb;
+    }
+
+}
