@@ -151,6 +151,9 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 	public IUserPasswordServiceRemote getUserPasswordServiceRemote(){
 		return (IUserPasswordServiceRemote) getService(UserPasswordService.class.getSimpleName()+"Remote");
 	}
+	public IDocumentTypeServiceRemote getDocumentTypeServiceRemote(){
+		return (IDocumentTypeServiceRemote) getService(DocumentTypeService.class.getSimpleName() + "Remote");
+	}
 
 	
 	

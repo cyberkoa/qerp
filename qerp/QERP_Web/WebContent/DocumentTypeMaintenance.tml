@@ -1,0 +1,62 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Document Type Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<h3>Document Type Maintenance</h3>
+<t:zone t:id="zoneFormView" show="slidedown">
+    <t:delegate to="block" />
+</t:zone>
+<t:block id="blockFormView">
+   <form t:type="form" t:id="DocumentTypeForm" t:zone="zoneFormView" >
+       <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+       <button type="submit"><img  src="images/saveRecord24.png" /></button>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbardel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+           <t:GRID
+           t:id="Grid"
+           t:reorder="createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:source="DocumentTypes"
+           t:row="DocumentType"
+                   t:rowsPerPage="10"
+           t:pagerPosition="both"
+           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:inPlace="literal:true">
+           <t:parameter name="idCell">
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="DocumentType.id">
+                   ${DocumentType.id}
+               </t:actionlink>
+           </t:parameter>
+           </t:GRID>
+       </div>
+       <table id="main">
+           <tr>
+               <td>
+                   <table id="input">
+                       <tr>
+                           <th><t:label t:for="id">id</t:label>:</th>
+                           <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Category">Category</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Category" t:value="Category" t:maxLength="20" t:size="20" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Prefix">Prefix</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Prefix" t:value="Prefix" t:maxLength="5" t:size="5" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="RunningNo">RunningNo</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="RunningNo" t:value="RunningNo" t:maxLength="20" t:size="20" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Type">Type</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </td>
+                       </tr>
+                               </table>
+               </td>
+           </tr>
+       </table>
+   <t:errors />
+   </form>
+</t:block>
+</body>
+</html>

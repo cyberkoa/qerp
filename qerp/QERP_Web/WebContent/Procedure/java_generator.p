@@ -206,7 +206,7 @@ PROCEDURE pimport:
     MESSAGE 'import org.apache.tapestry5.corelib.components.Grid;'.
     MESSAGE 'import org.apache.tapestry5.ioc.annotations.Inject;'.
     MESSAGE 'import org.apache.tapestry5.services.Request;'.
-    MESSAGE 'import org.omg.CosTransactions._SubtransactionAwareResourceStub;'.
+/*     MESSAGE 'import org.omg.CosTransactions._SubtransactionAwareResourceStub;'. */
     MESSAGE 'import org.slf4j.Logger;'.
     MESSAGE 'import org.apache.tapestry5.annotations.ApplicationState;'.
 END PROCEDURE.
@@ -363,6 +363,8 @@ PROCEDURE AddRecord:
     MESSAGE '    ' + '   try ' + CHR(123).
     MESSAGE '    ' + '           ' + str_classname + '.setModifyLogin(getVisit().getMyLoginId());'.
     MESSAGE '    ' + '           ' + str_classname + '.setCreateLogin(getVisit().getMyLoginId());'.
+    MESSAGE '    ' + '           ' + str_classname + '.setCreateApp(this.getClass().getSimpleName());'.
+    MESSAGE '    ' + '           ' + str_classname + '.setModifyApp(this.getClass().getSimpleName());'.
     MESSAGE '    ' + '       assignToDatabase(' + str_classname + ');'.
     MESSAGE '    ' + '       get' + str_formid + 'Service().add' + str_formid + '(' + str_classname + ');'.
     MESSAGE '    ' + '   ' + CHR(125).	
