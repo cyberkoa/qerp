@@ -2,6 +2,7 @@ package com.quesofttech.business.domain.production;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -24,9 +25,13 @@ import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.general.BomDetail;
 import com.quesofttech.business.domain.general.BomTree;
 import com.quesofttech.business.domain.general.BomService;
+import com.quesofttech.business.domain.general.iface.IBomServiceLocal;
 
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.MaterialType;
+
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceLocal;
+
 
 @Stateless
 @Local(IProductionOrderServiceLocal.class)
@@ -36,6 +41,10 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 //	@PersistenceContext(unitName = "QERP_EJB")
 //	protected EntityManager _em;
 
+	@EJB(beanName="DocumentTypeService")
+	private IDocumentTypeServiceLocal documentTypeService;	
+	
+	
 	// ProductionOrder
 
 	public ProductionOrder findProductionOrder(Long id) throws DoesNotExistException {
@@ -83,6 +92,10 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		
 		//try{
 		System.out.println("just before persist in ProductionOrderService");
+		
+		if(productionOrder.getDocNo()==0)
+		   productionOrder.setDocNo(documentTypeService.getNewDocumentNumber("P"));
+		
 		persist(productionOrder);
 		
 		System.out.println("just after persist in ProductionOrderService");

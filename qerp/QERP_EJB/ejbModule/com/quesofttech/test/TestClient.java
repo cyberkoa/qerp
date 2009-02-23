@@ -388,7 +388,7 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 	{
 		SalesOrder salesOrder = new SalesOrder();
 		
-		salesOrder.setDocNo("123");
+		//salesOrder.setDocNo("123");
 		salesOrder.setDocType("S");
 		//salesOrder.setCustomer(new Customer());
 		salesOrder.setCustomerPO("ABC123");
@@ -521,7 +521,7 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 	{
 		ProductionOrder productionOrder = new ProductionOrder();
 		
-		productionOrder.setDocNo("789");
+		//productionOrder.setDocNo("789");
 		productionOrder.setMaterial(null);
 		
 		productionOrder.setQuantityOrder((double)30);
