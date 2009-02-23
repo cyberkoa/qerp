@@ -69,8 +69,8 @@ public class ProductionOrder extends BaseEntity {
 
 	
 
-	@Column(name = "prodo_Number", length = 10, nullable = false)
-	private String docNo;
+	@Column(name = "prodo_Number", nullable = false)
+	private Long docNo;
 	
 	
 	// Example of field	
@@ -265,12 +265,12 @@ public class ProductionOrder extends BaseEntity {
 		System.out.println("[ProductionOrder] validate");
 		
 		// Validate syntax...
-
+        /*
 		if (StringUtil.isEmpty(docNo)) {
 			System.out.println("[ProductionOrder] DocNo is blank");
 			throw new ValueRequiredException(this, "ProductionOrder_DocNo");
 		}
-
+        */
 
 
 		/*
@@ -471,7 +471,7 @@ public class ProductionOrder extends BaseEntity {
 	/**
 	 * @return the docNo
 	 */
-	public String getDocNo() {
+	public Long getDocNo() {
 		return docNo;
 	}
 
@@ -479,7 +479,7 @@ public class ProductionOrder extends BaseEntity {
 	/**
 	 * @param docNo the docNo to set
 	 */
-	public void setDocNo(String docNo) {
+	public void setDocNo(Long docNo) {
 		this.docNo = docNo;
 	}
 
@@ -539,10 +539,10 @@ public class ProductionOrder extends BaseEntity {
 		if (material!=null) return material.getCode();
 		else return "";
 	}
-	public String getSalesOrderDoc()
+	public Long getSalesOrderDoc()
 	{
 		if(salesOrder!=null) return salesOrder.getDocNo();
-		else return "";
+		else return null;
 	}
 	
 }

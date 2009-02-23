@@ -61,13 +61,13 @@ public class SalesOrder extends BaseEntity {
 	
 	
 	// Example of field	
-	@Column(name = "soh_Number", length = 10, nullable = false)
-	private String docNo;
+	@Column(name = "so_Number", length = 10, nullable = false)
+	private Long docNo;
 	
-	@Column(name = "soh_CustomerPO", length = 20, nullable = false)
+	@Column(name = "so_CustomerPO", length = 20, nullable = false)
 	private String customerPO;
 	
-	@Column(name = "soh_DocType", length = 5, nullable = false)
+	@Column(name = "so_DocType", length = 5, nullable = false)
 	private String docType;
 
 	// Foreign keys
@@ -116,7 +116,7 @@ public class SalesOrder extends BaseEntity {
 
 	
 	// Constructors without the common fields
-	public SalesOrder(String docNo, String customerPO, String docType) {
+	public SalesOrder(Long docNo, String customerPO, String docType) {
 		
 		//super();
 		this();
@@ -130,7 +130,7 @@ public class SalesOrder extends BaseEntity {
 
 	// Constructors with all fields
 	public SalesOrder(/* all fields*/
-			String docNo, String customerPO, String docType,
+			Long docNo, String customerPO, String docType,
 			String recordStatus, String sessionId, String createLogin,
 			String createApp, Timestamp createTimestamp,
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
@@ -271,11 +271,12 @@ public class SalesOrder extends BaseEntity {
 		
 		// Validate syntax...
 
-		
+		/*
 		if (StringUtil.isEmpty(docNo)) {
 			//System.out.println("Yeah");
 			throw new ValueRequiredException(this, "SalesOrder_DocNo");
 		}
+        */
         
 		if (StringUtil.isEmpty(docType)) {
 			throw new ValueRequiredException(this, "SalesOrder_DocType");
@@ -476,7 +477,7 @@ public class SalesOrder extends BaseEntity {
 	/**
 	 * @return the docNo
 	 */
-	public String getDocNo() {
+	public Long getDocNo() {
 		return docNo;
 	}
 
@@ -484,7 +485,7 @@ public class SalesOrder extends BaseEntity {
 	/**
 	 * @param docNo the docNo to set
 	 */
-	public void setDocNo(String docNo) {
+	public void setDocNo(Long docNo) {
 		this.docNo = docNo;
 	}
 

@@ -26,6 +26,7 @@ import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceLocal;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceLocal;
 import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.BomDetail;
 import com.quesofttech.business.domain.general.BomTree;
@@ -57,6 +58,10 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	@EJB(beanName="BomService")
 	private IBomServiceLocal bomService;
 
+	@EJB(beanName="DocumentTypeService")
+	private IDocumentTypeServiceLocal documentTypeService;	
+	
+	
 	/**
 	 * @param bomService the bomService to set
 	 */
@@ -178,7 +183,9 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	
 	public void addSalesOrder(SalesOrder salesOrder) throws BusinessException {
 		
-		
+		if(salesOrder.getDocNo()==0)
+			   salesOrder.setDocNo(documentTypeService.getNewDocumentNumber("S"));
+
 		
 		
 		persist(salesOrder);
@@ -453,7 +460,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 					
 					// temporary
 					++j;
-					productionOrder.setDocNo(Integer.toString(j));
+					//productionOrder.setDocNo(Integer.toString(j));
 					productionOrder.setQuantityOrder(node.getData().getTreeOriginalQuantityRequired() * salesOrderMaterial.getQuantityOrder());
 					
 					productionOrder.setMaterial(node.getData().getBomDetail().getMaterial());

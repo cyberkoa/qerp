@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.base.BaseService;
+import com.quesofttech.business.domain.security.User;
 import com.quesofttech.business.domain.system.DocumentType;
 import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceLocal;
 import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
@@ -37,12 +38,14 @@ public class DocumentTypeService extends BaseService implements IDocumentTypeSer
 		List l = q.getResultList();
 		return l;
 	}
-/*
+
 	public DocumentType findDocumentTypeByType(String type) {
-		DocumentType documentType = _em.find(DocumentType.class, id);
-		return documentType;
+		Query q = _em.createQuery("select documentType from DocumentType documentType where documentType.rowInfo.recordStatus='A' where documentType.type = :type");
+		q.setParameter("type", type);
+		DocumentType obj = (DocumentType) q.getSingleResult();
+		return obj;
 	}
-*/
+
 	
 	
 	public void updateDocumentType(DocumentType documentType) throws BusinessException {		
@@ -78,6 +81,16 @@ public class DocumentTypeService extends BaseService implements IDocumentTypeSer
 	public Long getNewDocumentNumber(Long id) throws BusinessException 
 	{
 		DocumentType documentType = findDocumentType(id);
+		
+		documentType.setRunningNo(documentType.getRunningNo() + 1);
+		updateDocumentType(documentType);
+		
+		return documentType.getRunningNo();
+	}
+	
+	public Long getNewDocumentNumber(String type) throws BusinessException 
+	{
+		DocumentType documentType = findDocumentTypeByType(type);
 		
 		documentType.setRunningNo(documentType.getRunningNo() + 1);
 		updateDocumentType(documentType);
