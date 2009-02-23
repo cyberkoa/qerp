@@ -238,7 +238,7 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		List l = q.getResultList();
 		return l;
 	}
-	
+	/*
 	public void releaseWorkOrder(Material material) throws DoesNotExistException
 	{
 	    BomService bomService = new BomService();	
@@ -247,7 +247,7 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		bomTree = bomService.buildBomTree(material, "P");
 		
 		
-	    /*
+	    
 		List<BomDetail> childrenBomDetail = null;
 		
 		try	{ 
@@ -256,9 +256,9 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		catch(DoesNotExistException e) {
 			return; // no child
 		}
-		*/
+		
 	}
-	
+	*/
 	
 	
 }
