@@ -32,6 +32,7 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.inventory.MaterialType;
+import com.quesofttech.business.domain.system.DocumentType;
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.util.StringUtil;
 
@@ -78,7 +79,11 @@ public class SalesOrder extends BaseEntity {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="salesOrder", targetEntity=SalesOrderMaterial.class)
 	private List<SalesOrderMaterial> salesOrderMaterials; // = new List<<ForeignTable>>();
-			
+		
+	@ManyToOne
+    @JoinColumn(name="fk_DocumentType")	
+	private DocumentType documentType;
+	
 	/*
 	@ManyToOne
     @JoinColumn(name="fk_SalesPerson")	
@@ -497,13 +502,42 @@ public class SalesOrder extends BaseEntity {
 		return docType;
 	}
 
-
+	
 	/**
 	 * @param docType the docType to set
 	 */
 	public void setDocType(String docType) {
 		this.docType = docType;
 	}
+
+	
+	
+	
+	
+
+	
+	
+	/**
+	 * @return the documentType
+	 */
+	public DocumentType getDocumentType() {
+		return documentType;
+	}
+
+
+	/**
+	 * @param documentType the documentType to set
+	 */
+	public void setDocumentType(DocumentType documentType) {
+		this.documentType = documentType;
+	}
+
+	
+	
+	
+	/*
+	    Helper methods
+	 */
 
 	public void addSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) {
 		if (!salesOrderMaterials.contains(salesOrderMaterial)) {
