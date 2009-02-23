@@ -62,6 +62,10 @@ public class DocumentType extends BaseEntity {
 	@Column(name = "doct_Type", length = 1, nullable = false)
 	private String type;
 	
+	// Example of field	
+	@Column(name = "doct_Description", length = 100, nullable = false)
+	private String description;
+	
 	@Column(name = "doct_Prefix", length = 5)
 	private String prefix;
 	
@@ -235,14 +239,14 @@ public class DocumentType extends BaseEntity {
 		
 		// Validate syntax...
 
-		//if (StringUtil.isEmpty(type)) {
+		if (StringUtil.isEmpty(type)) {
 			//System.out.println("Yeah");
-		//	throw new ValueRequiredException(this, "MaterialType_Type");
-		//}
+			throw new ValueRequiredException(this, "DocumentType_Type");
+		}
 
-		//if (StringUtil.isEmpty(description)) {
-		//	throw new ValueRequiredException(this, "MaterialType_Description");
-		//}
+		if (StringUtil.isEmpty(description)) {
+			throw new ValueRequiredException(this, "DocumentType_Description");
+		}
 
 		/*
 		if (StringUtil.isEmpty(lastName)) {
@@ -257,7 +261,7 @@ public class DocumentType extends BaseEntity {
 		}
 		*/
 		 
-		throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
+		//throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
 	}
 	
 	

@@ -265,22 +265,40 @@ public class BomDetail extends BaseEntity {
 		//	throw new ValueRequiredException(this, "MaterialType_Type");
 		//}
 
-		//if (StringUtil.isEmpty(description)) {
-		//	throw new ValueRequiredException(this, "MaterialType_Description");
-		//}
-
-		/*
-		if (StringUtil.isEmpty(lastName)) {
-			throw new ValueRequiredException(this, "User_lastName");
+		if (quantityRequired == 0.0 ) {
+			throw new ValueRequiredException(this, "BomDetail_QuantityRequired");
 		}
-		*/
 
+		if (scrapFactor == 0.0 ) {
+			throw new ValueRequiredException(this, "BomDetail_ScrapFactor");
+		}
+
+		
+		if (startDate!=null) {
+			throw new ValueRequiredException(this, "BomDetail_StartDate");
+		}
+		
+		if (endDate!=null) {
+			throw new ValueRequiredException(this, "BomDetail_EndDate");
+		}
+
+		
+		
 		// Validate semantics...
-		/*	
-		if (expiryDate != null && loginId.equals(ADMIN_LOGINID)) {
-			throw new GenericBusinessException("User_expirydate_not_permitted_for_user", new Object[] { ADMIN_LOGINID });
+			
+		if (startDate.after(endDate)) {
+			throw new GenericBusinessException("BomDetail_StartDate_Later_Than_EndDate", new Object[] { startDate,endDate });
 		}
-		*/
+
+		if (quantityRequired < 0.0 ) {
+			throw new GenericBusinessException("BomDetail_QuantityRequired_Must_Positive", new Object[] { quantityRequired });
+		}
+
+		if (scrapFactor < 0.0 ) {
+			throw new GenericBusinessException("BomDetail_ScrapFactor_Must_Positive", new Object[] { scrapFactor });
+		}
+
+		
 		 
 		//throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
 	}
