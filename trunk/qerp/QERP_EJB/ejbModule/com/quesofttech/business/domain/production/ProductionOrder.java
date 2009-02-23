@@ -514,8 +514,24 @@ public class ProductionOrder extends BaseEntity {
 	public void setProductionOrderOperations(List<ProductionOrderOperation> productionOrderOperations) {
 		this.productionOrderOperations = productionOrderOperations;
 	}
-
+		
 	
+	/**
+	 * @return the documentType
+	 */
+	public DocumentType getDocumentType() {
+		return documentType;
+	}
+
+
+	/**
+	 * @param documentType the documentType to set
+	 */
+	public void setDocumentType(DocumentType documentType) {
+		this.documentType = documentType;
+	}
+
+
 	public void addProductionOrderMaterial(ProductionOrderMaterial productionOrderMaterial) {
 		if (!productionOrderMaterials.contains(productionOrderMaterial)) {
 			System.out.println("add new production Order Material");

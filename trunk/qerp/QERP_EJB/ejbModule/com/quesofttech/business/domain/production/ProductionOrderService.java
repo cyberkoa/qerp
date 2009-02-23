@@ -94,7 +94,10 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		System.out.println("just before persist in ProductionOrderService");
 		
 		if(productionOrder.getDocNo()==0)
-		   productionOrder.setDocNo(documentTypeService.getNewDocumentNumber("P"));
+		{
+		   productionOrder.setDocumentType(documentTypeService.getNextNumberByType("P"));
+		   productionOrder.setDocNo(productionOrder.getDocumentType().getRunningNo());
+		}
 		
 		persist(productionOrder);
 		

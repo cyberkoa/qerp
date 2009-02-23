@@ -25,5 +25,5 @@ public interface IDocumentTypeServiceRemote {
 	
 	void logicalDeleteDocumentType(DocumentType documentType) throws BusinessException;
 
-	Long getNewDocumentNumber(String type) throws BusinessException;
+	DocumentType getNextNumberByType(String type) throws BusinessException;
 }
