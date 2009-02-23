@@ -13,21 +13,19 @@ DEFINE VARIABLE  str_classname AS CHARACTER   NO-UNDO.
 /*   `fk_Customer` bigint(20) default NULL".    */
 
 
-pc_value = "  `v_id` bigint(20) NOT NULL,
-  `bomd_endDate` datetime NOT NULL,
-  `bomd_Location` varchar(255) NOT NULL,
-  `bomd_quantityRequired` double NOT NULL,
-  `bomd_scrapFactor` double NOT NULL,
-  `bomd_startDate` datetime NOT NULL,
-     `fk_BOM` bigint(20) default NULL,
-  `fk_Material` bigint(20) default NULL".
+pc_value = " `DocumentType_id` bigint(20) NOT NULL,
+  `doct_Category` bigint(20) NOT NULL,
+  `doct_Prefix` varchar(5) default NULL,
+  `doct_RunningNo` bigint(20) NOT NULL,
+  `doct_DocType` varchar(1) NOT NULL
+".
  
   
 
 /*     SalesOrderMaterial */
-str_formid = 'BomDetail'.
-str_subject = 'BomDetail'.
-str_classname = 'bomDetail'.
+str_formid = 'DocumentType'.
+str_subject = 'Document Type'.
+str_classname = 'documentType'.
     str_module = 'general'.
 
 
