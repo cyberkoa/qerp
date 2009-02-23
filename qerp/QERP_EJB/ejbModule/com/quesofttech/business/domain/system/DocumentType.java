@@ -1,4 +1,4 @@
-package com.quesofttech.business.domain.general;
+package com.quesofttech.business.domain.system;
 
 import java.io.Serializable;
 //import java.sql.Date;
@@ -87,8 +87,7 @@ public class DocumentType extends BaseEntity {
 
 	public DocumentType() {
 		super();
-	    this.rowInfo = new RowInfo();
-	    
+	        //this.rowInfo = new RowInfo();
 	}	
 
 	
@@ -134,11 +133,6 @@ public class DocumentType extends BaseEntity {
 		StringBuffer buf = new StringBuffer();
 		buf.append("DocumentType: [");
 		buf.append("id=" + id + ", ");
-		buf.append("Type=" + type + ", ");
-		buf.append("Category=" + catergory + ", ");
-		buf.append("runningNo=" + runningNo + ", ");
-		buf.append("Prefix=" + prefix + ", ");
-		
 
 		/* All fields
 		buf.append("type=" + type + ", ");
@@ -263,7 +257,7 @@ public class DocumentType extends BaseEntity {
 		}
 		*/
 		 
-		//throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
+		throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
 	}
 	
 	
@@ -423,16 +417,6 @@ public class DocumentType extends BaseEntity {
 
 	public void setModifyTimestamp(java.sql.Timestamp modifyTimestamp) {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
-	}
-
-
-	public Long getCatergory() {
-		return catergory;
-	}
-
-
-	public void setCatergory(Long catergory) {
-		this.catergory = catergory;
 	}
 
 	

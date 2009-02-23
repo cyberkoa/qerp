@@ -1,10 +1,11 @@
-package com.quesofttech.business.domain.general.iface;
+package com.quesofttech.business.domain.system.iface;
 
 import java.util.List;
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.domain.general.DocumentType;
+import com.quesofttech.business.domain.system.DocumentType;
+
 
 /**
  * The <code>IDocumentTypeServiceRemote</code> bean exposes the business methods

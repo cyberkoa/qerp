@@ -1,4 +1,4 @@
-package com.quesofttech.business.domain.general;
+package com.quesofttech.business.domain.system;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import javax.persistence.Query;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.base.BaseService;
-import com.quesofttech.business.domain.general.DocumentType;
-import com.quesofttech.business.domain.general.iface.IDocumentTypeServiceLocal;
-import com.quesofttech.business.domain.general.iface.IDocumentTypeServiceRemote;
+import com.quesofttech.business.domain.system.DocumentType;
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceLocal;
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
 
 @Stateless
 @Local(IDocumentTypeServiceLocal.class)
@@ -74,4 +74,15 @@ public class DocumentTypeService extends BaseService implements IDocumentTypeSer
 		}
 		*/
 	}
+	
+	public Long getNewDocumentNumber(Long id) throws BusinessException 
+	{
+		DocumentType documentType = findDocumentType(id);
+		
+		documentType.setRunningNo(documentType.getRunningNo() + 1);
+		updateDocumentType(documentType);
+		
+		return documentType.getRunningNo();
+	}
+	
 }

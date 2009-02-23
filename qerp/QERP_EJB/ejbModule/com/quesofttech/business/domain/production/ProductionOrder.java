@@ -34,6 +34,8 @@ import com.quesofttech.business.domain.production.ProductionOrderOperation;
 
 import com.quesofttech.business.domain.sales.SalesOrder;
 
+import com.quesofttech.business.domain.system.DocumentType;
+
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.base.BaseEntity;
@@ -85,11 +87,12 @@ public class ProductionOrder extends BaseEntity {
 	
 	@ManyToOne
     @JoinColumn(name="fk_SalesOrder")	
-	private SalesOrder salesOrder;	
+	private SalesOrder salesOrder;
 	
 	
-
-	
+	@ManyToOne
+    @JoinColumn(name="fk_DocumentType")	
+	private DocumentType documentType;
 	
 	
 	@OneToMany(cascade= {CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderMaterial.class)
@@ -201,6 +204,8 @@ public class ProductionOrder extends BaseEntity {
 	protected void prePersist() throws BusinessException {
 		super.prePersist();
 		System.out.println("prePersist of ProductionOrder");
+		
+		
 		/*
 		validate();
 		
