@@ -22,6 +22,7 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.GenericBusinessException;
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.business.domain.base.BaseEntity;
+import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.util.StringUtil;
 
 /**
@@ -32,6 +33,10 @@ import com.quesofttech.util.StringUtil;
 @SuppressWarnings("serial")
 public class UserPassword extends BaseEntity {
 
+	public UserPassword() {
+		super();
+		this.rowInfo = new RowInfo();
+	}	
 	//For Postgresql : @SequenceGenerator(name = "material_sequence", sequenceName = "material_id_seq")
 	//Generic solution : (Use a table named PrimaryKeys, with 2 fields , tableName &  keyField)
 	@TableGenerator(  name="userpassword_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="userpassword", valueColumnName="keyField")	

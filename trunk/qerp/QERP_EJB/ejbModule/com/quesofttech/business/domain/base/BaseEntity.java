@@ -179,10 +179,8 @@ public abstract class BaseEntity implements Serializable {
 	
 		validate();
 		
-		rowInfo.setRecordStatus("A");
-		
+		rowInfo.setRecordStatus("A");		
 	    java.util.Date today = new java.util.Date();
-
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 		System.out.println("[PrePersist] " + rowInfo.getCreateLogin());
