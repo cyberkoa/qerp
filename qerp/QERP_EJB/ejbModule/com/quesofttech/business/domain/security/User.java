@@ -127,6 +127,7 @@ public class User extends BaseEntity {
 		buf.append("lastName=" + lastName + ", ");
 		buf.append("emailAddress=" + emailAddress + ", ");
 		buf.append("expiryDate=" + expiryDate + ", ");
+	
 		buf.append("telephone=" + telephone + ", ");
 		buf.append("version=" + version);
 		buf.append("]");
