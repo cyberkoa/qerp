@@ -91,7 +91,7 @@ public class DocumentType extends BaseEntity {
 
 	public DocumentType() {
 		super();
-	        //this.rowInfo = new RowInfo();
+		//this.rowInfo = new RowInfo();
 	}	
 
 	
@@ -104,6 +104,26 @@ public class DocumentType extends BaseEntity {
 		this.description = description;
 		*/
 	//}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public Long getCatergory() {
+		return catergory;
+	}
+
+
+	public void setCatergory(Long catergory) {
+		this.catergory = catergory;
+	}
 
 
 	// Constructors with all fields
