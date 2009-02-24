@@ -3,8 +3,8 @@ import java.io.IOException;
 import java.util.List;
 import javax.annotation.Resource;
 import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.domain.general.DocumentType;
-import com.quesofttech.business.domain.general.iface.IDocumentTypeServiceRemote;
+import com.quesofttech.business.domain.system.DocumentType;
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
@@ -91,8 +91,24 @@ public class DocumentTypeMaintenance extends SecureBasePage {
        this.Category = Category;
     }
     //===============================
+    
+    /*
+    @Component(id = "Description")
+    private TextField _description;
+    private String Description;
+    
+    
+    
 
-    //===============================
+    public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+*/
+	//===============================
     // Text Component for Prefix
     @Component(id = "Prefix")
     private TextField _Prefix;
@@ -139,7 +155,7 @@ public class DocumentTypeMaintenance extends SecureBasePage {
        this.DocType = DocType;
     }
     //===============================
-    void RefreshRecords()
+    void RefreshRecords() throws Exception
     {
        try
        {
@@ -170,7 +186,7 @@ public class DocumentTypeMaintenance extends SecureBasePage {
                       myState="A"; // If no List then should be in A mode instead of Update mode.
             }
     }
-private void refreshDisplay()
+private void refreshDisplay() throws Exception
     {
         if(myState.equals("U"))
         {
@@ -199,12 +215,12 @@ private void refreshDisplay()
        return int_return;
     }
 
-    public Block getBlock() {
+    public Block getBlock()  throws Exception{
        return blockFormView;
     }
 
 
-    Object onSuccess()
+    Object onSuccess() throws Exception
     {
        _form.clearErrors();
        RefreshRecords();
@@ -212,7 +228,7 @@ private void refreshDisplay()
     }
 
 
-    Object onFailure()
+    Object onFailure() throws Exception
     {
        _form.clearErrors();
        _form.recordError(getMessages().get("Record_Save_Error"));
@@ -220,12 +236,12 @@ private void refreshDisplay()
     }
 
 
-    void setupRender() {
+    void setupRender()  throws Exception{
        RefreshRecords();
     }
 
 
-    void onValidateForm() {
+    void onValidateForm()  throws Exception{
        if ("U"== myState)
        {
            _UpdateRecord();
@@ -247,7 +263,8 @@ private void refreshDisplay()
        java.util.Date today = new java.util.Date();
        documentType.setSessionId("");
        documentType.setVersion((long)1);
-       
+       documentType.setModifyApp(this.getClass().getSimpleName());
+       documentType.setModifyLogin(getVisit().getMyLoginId());       
        documentType.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
        System.out.println("documenttype:" + documentType.toString());
     }
@@ -262,25 +279,18 @@ private void refreshDisplay()
     void _AddRecord()
     {
        DocumentType documentType = new DocumentType();
-       try {
-    	   System.out.println("1: " + getVisit().getMyLoginId());
-               documentType.setModifyLogin(getVisit().getMyLoginId());
-               documentType.setCreateLogin(getVisit().getMyLoginId());
-               System.out.println("2: " );
-               documentType.setCreateApp(this.getClass().getSimpleName());
-               documentType.setModifyApp(this.getClass().getSimpleName());               
-               java.util.Date today = new java.util.Date();
-               documentType.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
-               System.out.println("3: " );
-           assignToDatabase(documentType);
-           System.out.println("4: " );
-           getDocumentTypeService().addDocumentType(documentType);
-           System.out.println("5: " );
+       try {   	   
+               
+		   documentType.setCreateLogin(getVisit().getMyLoginId());               
+		   documentType.setCreateApp(this.getClass().getSimpleName());		                 
+		   java.util.Date today = new java.util.Date();
+		   documentType.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
+		       
+		   assignToDatabase(documentType);           
+		   getDocumentTypeService().addDocumentType(documentType);
        }
        catch (Exception e) {
-           _logger.info("DocumentType_Add_problem");
-           e.printStackTrace();
-           _form.recordError(getMessages().get("DocumentType_add_problem"));
+    	   _form.recordError(e.getMessage());
        }
     }
 
@@ -292,7 +302,7 @@ private void refreshDisplay()
        }
        catch(BusinessException be)
        {
-
+    	   _form.recordError(be.getMessage());
        }
        if(documentType !=null)
        {
@@ -302,12 +312,10 @@ private void refreshDisplay()
                getDocumentTypeService().updateDocumentType(documentType);
            }
            catch (BusinessException e) {
-               _form.recordError(_DocType, e.getLocalizedMessage());
+        	   _form.recordError(e.getMessage());
            }
        catch (Exception e) {
-               _logger.info("DocumentType_update_problem");
-               e.printStackTrace();
-               _form.recordError(getMessages().get("DocumentType_update_problem"));
+    	   _form.recordError(e.getMessage());
            }
        }
     }
@@ -321,7 +329,7 @@ private void refreshDisplay()
        }
        catch(BusinessException be)
        {
-
+    	   _form.recordError(be.getMessage());
        }
        if(documentType!=null)
        {
@@ -335,12 +343,10 @@ private void refreshDisplay()
                RefreshRecords();
            }
                catch (BusinessException e) {
-               _form.recordError(_DocType, e.getLocalizedMessage());
+            	   _form.recordError(e.getMessage());
        }
            catch (Exception e) {
-               _logger.info("DocumentType_Delete_problem");
-               e.printStackTrace();
-               _form.recordError(getMessages().get("DocumentType_Delete_problem"));
+        	   _form.recordError(e.getMessage());
            }
        }
     }
@@ -355,7 +361,7 @@ private void refreshDisplay()
             }
     }
 
-    Object onActionFromToolbarAdd ()
+    Object onActionFromToolbarAdd () throws Exception
     {
        _form.clearErrors();
        myState = "A";
@@ -363,7 +369,7 @@ private void refreshDisplay()
        return blockFormView;
     }
 
-    Object onActionFromSelect(long id)
+    Object onActionFromSelect(long id) throws Exception
     {
        _form.clearErrors();
        myState = "U";

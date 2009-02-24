@@ -384,7 +384,8 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	Object onFailure()
 	{
 		//System.out.println("onFailure lah");
-		_form.recordError("Page having error.  Please select/Add record and save again.");
+		
+		//_form.recordError("Page having error.  Please select/Add record and save again.");
 		return blockFormView;
 	}
 	Object onSuccessFromSalesOrderMaterialForm()
@@ -401,9 +402,9 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	}
 	
 	
-	void onValidateFormFromSalesOrderMaterialForm() {
+	void onValidateFormFromSalesOrderMaterialForm() throws BusinessException {
 		
-		try{
+		//try{
 			   if ("U"== myState)
 			   {
 			       _UpdateRecord();
@@ -418,12 +419,12 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 					{
 						_FilterRecordSalesOrderMaterial();
 					}
-			}
-		catch (Exception e)
-		{
-			_form.recordError(getMessages().get("Record_Update_Error"));
-		}
-		System.out.println("mystate:" + myState);
+		//	}
+		//catch (Exception e)
+		//{
+		//	_form.recordError(getMessages().get("Record_Update_Error"));
+		//}
+		//System.out.println("mystate:" + myState);
 		
 	}
 	
@@ -451,7 +452,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	   this.material = salesOrderMaterial.getMaterial();
 	}
 	
-	void _AddRecord()
+	void _AddRecord()  
 	{
         SalesOrderMaterial salesOrderMaterial = new SalesOrderMaterial();
         try {
@@ -466,26 +467,22 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
             getSalesOrderService().addSalesOrderMaterial(_headerIDLng, salesOrderMaterial);
         }
     	catch (BusinessException e) {
-    			_form.recordError(e.getLocalizedMessage());
+    			_form.recordError(e.getMessage());
     	}  
     	catch (Exception e) {
-    		   _logger.info("Record_Add_Error");
-    		   e.printStackTrace();
-    		   _form.recordError(getMessages().get("Record_Add_Error"));
+    		_form.recordError(e.getMessage());
     	}
 	}
 	
-	void _UpdateRecord(){
+	void _UpdateRecord()  {
         SalesOrderMaterial salesOrderMaterial = new SalesOrderMaterial();
         try
-        {
+       {
             salesOrderMaterial = getSalesOrderService().findSalesOrderMaterial(id);
         }
     	catch(BusinessException be)
     	{
-    	   _logger.info("Record_Deleted_By_Others");
-    	   be.printStackTrace();
-    	   _form.recordError(getMessages().get("Record_Deleted_By_Others"));			
+    		_form.recordError(be.getMessage());			
     	}
         if(salesOrderMaterial !=null)
         {
@@ -496,14 +493,12 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
             	
                 assignToDatabase(salesOrderMaterial);
                 getSalesOrderService().updateSalesOrderMaterial(salesOrderMaterial);
-                }
+               }
     		catch (BusinessException e) {	
-    				_form.recordError(e.getLocalizedMessage());
+    			_form.recordError(e.getMessage());
     		}
     		catch (Exception e) {
-    		   _logger.info("Record_Update_Error");
-    		   e.printStackTrace();
-    		   _form.recordError(getMessages().get("Record_Update_Error"));
+    			_form.recordError(e.getMessage());
            }
         }
 	}
@@ -517,9 +512,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     	}
     	   catch(BusinessException be)
     		{
-    			_logger.info("Record_Deleted_By_Others");
-    			   be.printStackTrace();
-    			   _form.recordError(getMessages().get("Record_Deleted_By_Others"));
+    		   _form.recordError(be.getMessage());
     		}
     	   
     	if(salesOrderMaterial!=null)
@@ -541,12 +534,10 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     	   
     	   	}
            catch (BusinessException e) {
-               _form.recordError(_id, e.getLocalizedMessage());
+        	   _form.recordError(e.getMessage());
            }
     	   catch (Exception e) {
-    				   _logger.info("Record_Delete_Error");
-    				   e.printStackTrace();
-    				   _form.recordError(getMessages().get("Record_Delete_Error"));
+    		   _form.recordError(e.getMessage());
     	   }
     	}
 	}
@@ -584,21 +575,22 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
             SalesOrderMaterialDetail = getSalesOrderService().findSalesOrderMaterial(id);
             //SalesOrderMaterialDetail
             int_SelectedRow = getRcdLocation(id);
+            if(SalesOrderMaterialDetail!=null)
+            {
+                assignToLocalVariable(SalesOrderMaterialDetail);
+                return blockFormView;
+            }
         }
         catch(BusinessException be)
         {
-        	
+        	_form.recordError(be.getMessage());
         }
         catch (Exception e)
         {
-        	System.out.println("error liao la" + e.getMessage());
+        	_form.recordError(e.getMessage());
         }
         
-        if(SalesOrderMaterialDetail!=null)
-        {
-            assignToLocalVariable(SalesOrderMaterialDetail);
-            return blockFormView;
-        }
+        
         return null;
 	}
 	

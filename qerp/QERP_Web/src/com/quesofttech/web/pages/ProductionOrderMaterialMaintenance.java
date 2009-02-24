@@ -508,13 +508,13 @@ public class ProductionOrderMaterialMaintenance extends SecureBasePage {
 	 @Persist
 	 private Long _headerid;
 	 @Persist
-	 private String _headerCode;
-	 public void setHeaderCode(String _value)
+	 private long _headerCode;
+	 public void setHeaderCode(long _value)
 	 {
 		 System.out.println("headercode:" + _value);
 		 _headerCode = _value;
 	 }
-	 public String getheadercode()
+	 public long getheadercode()
 	 {
 		 System.out.println("ID:" + _headerid);
 		 if(_headerid!=null)
@@ -531,10 +531,10 @@ public class ProductionOrderMaterialMaintenance extends SecureBasePage {
 			 
 			 
 		 }
-		 if(_headerCode==null)
-		 {
-			 _headerCode = "N/A";
-		 }
+		// if(_headerCode==null)
+		// {
+		//	 _headerCode = "N/A";
+		// }
 		 return _headerCode;
 		 
 	 }
