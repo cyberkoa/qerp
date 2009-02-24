@@ -221,13 +221,13 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	// Text Component for Number
 	@Component(id = "Number")
 	private TextField _Number;
-	private String Number;
-	public String getNumber()
+	private long Number;
+	public long getNumber()
 	{
 	   return Number;
 	}
 	
-	public void setNumber(String Number)
+	public void setNumber(long Number)
 	{
 	   this.Number = Number;
 	}

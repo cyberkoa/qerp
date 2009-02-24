@@ -44,6 +44,8 @@ import com.quesofttech.business.domain.finance.CompanyService;
 
 import com.quesofttech.business.domain.security.iface.*;
 import com.quesofttech.business.domain.security.*;
+import com.quesofttech.business.domain.system.DocumentTypeService;
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
 
 import com.quesofttech.business.domain.production.iface.IRoutingServiceRemote;
 import com.quesofttech.business.domain.production.RoutingService;
@@ -151,6 +153,7 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 	public IUserPasswordServiceRemote getUserPasswordServiceRemote(){
 		return (IUserPasswordServiceRemote) getService(UserPasswordService.class.getSimpleName()+"Remote");
 	}
+	
 	public IDocumentTypeServiceRemote getDocumentTypeServiceRemote(){
 		return (IDocumentTypeServiceRemote) getService(DocumentTypeService.class.getSimpleName() + "Remote");
 	}

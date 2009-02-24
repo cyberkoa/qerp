@@ -337,6 +337,10 @@ public class UserMaintenance extends SecureBasePage {
        user.setLogin(Login);
        user.setSalutation(Salutation);
        user.setTelephone(Telephone);
+       user.setModifyLogin(getVisit().getMyLoginId());              
+       user.setModifyApp(this.getClass().getSimpleName());               
+       java.util.Date today = new java.util.Date();
+       user.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
        //user.setUserPassword(UserPassword);
        user.setRecordStatus("A");
     }
@@ -358,8 +362,11 @@ public class UserMaintenance extends SecureBasePage {
     {
        User user = new User();
        try {
-               user.setModifyLogin(getVisit().getMyLoginId());
-               user.setCreateLogin(getVisit().getMyLoginId());
+    	   	   user.setCreateLogin(getVisit().getMyLoginId());
+    	   	   user.setCreateApp(this.getClass().getSimpleName());
+    	   	   
+               
+               //user.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
            assignToDatabase(user);
            //getUserService().create(user);
            getUserMgrService().createUser(user, UserPassword);

@@ -11,6 +11,7 @@ import com.quesofttech.business.domain.sales.iface.*;
 import com.quesofttech.business.domain.general.iface.*;
 import com.quesofttech.business.domain.finance.iface.ICompanyServiceRemote;
 import com.quesofttech.business.domain.security.iface.*;
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
 import com.quesofttech.business.domain.production.iface.IRoutingServiceRemote;
 import com.quesofttech.business.domain.production.iface.IProductionOrderServiceRemote;
 public interface IBusinessServicesLocator {
@@ -44,6 +45,7 @@ public interface IBusinessServicesLocator {
 	public abstract IModuleServiceRemote getModuleServiceRemote();
 	public abstract IRoleProgramServiceRemote getRoleProgramServiceRemote();
 	public abstract IUserPasswordServiceRemote getUserPasswordServiceRemote();
+	//public abstract IUserPasswordServiceRemote getUserPasswordServiceRemote();
 	public abstract IDocumentTypeServiceRemote getDocumentTypeServiceRemote();
 	
 	/**

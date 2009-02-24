@@ -68,7 +68,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 	@Property
 	private QERPWindow _filterWindow;
 	 
-	private void refreshDisplay()
+	private void refreshDisplay()  throws Exception
     {
 		ModelRefresh();
     	if(myState.equals("U"))
@@ -131,13 +131,13 @@ public class SalesOrderMaintenance extends SecureBasePage {
 	}
 	private String viewDisplayText="", viewEditText="";
 	
-	public String getViewDisplayText()
+	public String getViewDisplayText()  throws Exception
 	{
 		refreshDisplay();
 		return viewDisplayText;
 	}
 
-	public String getviewEditText()
+	public String getviewEditText() throws Exception
 	{
 		refreshDisplay();
 		return viewEditText;
@@ -164,7 +164,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 	
 	 @InjectPage
 	 private SalesOrderMaterialMaintenance salesorderDetail1;
-	 Object onActionFrombtnDetail(Long id)
+	 Object onActionFrombtnDetail(Long id)  throws Exception
 	 {
 		 _form.clearErrors();
 		 salesorderDetail1.setHeaderID(id);
@@ -252,13 +252,13 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		@Component(id = "Number")
 		private TextField _Number;
 		
-		private String Number;
-		public String getNumber()
+		private long Number;
+		public long getNumber()
 		{
 		   return Number;
 		}
 		
-		public void setNumber(String Number)
+		public void setNumber(long Number)
 		{
 		   this.Number = Number;
 		}
@@ -300,7 +300,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		   this.customer = customer;
 		}
 		
-		void RefreshRecords()
+		void RefreshRecords()  
 		{
 			RefreshRecords( new Delegate() 
 			{ public List<SalesOrder> bindData() 
@@ -421,7 +421,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		
 		
 		void setupRender() {
-		   System.out.println("setuprender");
+		   
 		   //_filterData.injectResources(resources);
 		   ModelRefresh();
 		   RefreshRecords();
@@ -448,7 +448,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 			}
 			catch (Exception e)
 			{
-				_form.recordError("Error Description" + e.getMessage());
+				_form.recordError(e.getMessage());
 			}
 		}
 		
@@ -488,9 +488,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		    }
 			
 			catch (Exception e) {
-				   _logger.info("Record_Add_Error");
-				   e.printStackTrace();
-				   _form.recordError(getMessages().get("Record_Add_Error"));
+				_form.recordError(e.getMessage());
 			}
 		}
 		
@@ -502,7 +500,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 			}
 		    catch(BusinessException be)
 		    {
-		
+		    	_form.recordError(be.getMessage());
 		    }
 			if(salesOrder !=null)
 			{
@@ -516,17 +514,10 @@ public class SalesOrderMaintenance extends SecureBasePage {
 					getSalesOrderService().updateSalesOrder(salesOrder);
 				}
 				catch (BusinessException e) {
-					if(e instanceof DuplicatePrimaryKeyException  || e instanceof DuplicateAlternateKeyException)
-					{
-						_form.recordError(_Number, e.getLocalizedMessage());
-					}
-					else	
-						_form.recordError(e.getLocalizedMessage());
+					_form.recordError(e.getMessage());
 				}
 				catch (Exception e) {
-				   _logger.info("Record_Update_Error");
-				   e.printStackTrace();
-				   _form.recordError(getMessages().get("Record_Update_Error"));
+					_form.recordError(e.getMessage());
 		       }
 			}
 		}
@@ -540,9 +531,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 				}
 				   catch(BusinessException be)
 					{
-						_logger.info("Record_Deleted_By_Others");
-						   be.printStackTrace();
-						   _form.recordError(getMessages().get("Record_Deleted_By_Others"));
+					   _form.recordError(be.getMessage());
 					}
 				
 				if(salesOrder!=null)
@@ -562,17 +551,15 @@ public class SalesOrderMaintenance extends SecureBasePage {
 					  RefreshRecords();
 				   }
 			       catch (BusinessException e) {
-			           _form.recordError(_Number, e.getLocalizedMessage());
+			    	   _form.recordError(e.getMessage());
 			       }
 				   catch (Exception e) {
-							   _logger.info("Record_Delete_Error");
-							   e.printStackTrace();
-							   _form.recordError(getMessages().get("Record_Delete_Error"));
+					   _form.recordError(e.getMessage());
 				   }
 				}
 		}
 		
-		void onActionFromtoolbarDel(Long id)
+		void onActionFromtoolbarDel(Long id) throws Exception
 		{
 			if (id!=null) {
 				_form.clearErrors();
@@ -582,7 +569,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 			}	   		   
 		}
 		
-		Object onActionFromToolbarAdd ()
+		Object onActionFromToolbarAdd () throws Exception
 		{
 			_form.clearErrors();
 			customer=null;
@@ -593,7 +580,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		   return blockFormView;
 		}
 		
-		Object onActionFromSelect(long id)
+		Object onActionFromSelect(long id) throws Exception
 		{
 			
 			System.out.println("[onActionFromSelect] Id = " + id);
