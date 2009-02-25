@@ -90,7 +90,7 @@ public class BOM extends BaseEntity {
 
 	public BOM() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 		//this.bomDetails = new List<BomDetail>();
 		
 	}	

@@ -110,7 +110,7 @@ public class User extends BaseEntity {
 	
 	public User() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 	
 	//@Embedded

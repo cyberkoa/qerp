@@ -110,7 +110,7 @@ public class SalesOrderMaterial extends BaseEntity {
 	
 	public SalesOrderMaterial() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	

@@ -118,7 +118,7 @@ public class BomDetail extends BaseEntity {
 
 	public BomDetail() {
 		super();
-	        this.rowInfo = new RowInfo();
+	        
 	}	
 
 	

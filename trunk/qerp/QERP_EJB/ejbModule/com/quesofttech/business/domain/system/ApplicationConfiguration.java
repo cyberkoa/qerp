@@ -84,7 +84,7 @@ public class ApplicationConfiguration extends BaseEntity {
 
 	public ApplicationConfiguration() {
 		super();
-	        this.rowInfo = new RowInfo();
+	        
 	}	
 
 	

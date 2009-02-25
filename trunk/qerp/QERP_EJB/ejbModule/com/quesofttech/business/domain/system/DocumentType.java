@@ -91,7 +91,7 @@ public class DocumentType extends BaseEntity {
 
 	public DocumentType() {
 		super();
-		//this.rowInfo = new RowInfo();
+
 	}	
 
 	

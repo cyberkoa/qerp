@@ -125,7 +125,7 @@ public class MaterialType extends BaseEntity {
 	
 	public MaterialType() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	public MaterialType(MaterialType materialType)
@@ -159,7 +159,7 @@ public class MaterialType extends BaseEntity {
 			String createApp, Timestamp createTimestamp,
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
 		this();
-		this.rowInfo = new RowInfo();
+		
 		this.id = id;
 		this.type = type;
 		this.description = description;

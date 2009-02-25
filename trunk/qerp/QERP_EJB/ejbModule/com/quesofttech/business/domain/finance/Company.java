@@ -104,7 +104,7 @@ public class Company extends BaseEntity {
 	public Company() {
 		super();	
 		
-		this.rowInfo = new RowInfo();
+		
 		this.address = new Address();
 	}	
 

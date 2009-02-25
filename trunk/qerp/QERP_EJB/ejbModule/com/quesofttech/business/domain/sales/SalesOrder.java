@@ -115,7 +115,7 @@ public class SalesOrder extends BaseEntity {
 	
 	public SalesOrder() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 		this.salesOrderMaterials = new ArrayList<SalesOrderMaterial>();
 	}	
 

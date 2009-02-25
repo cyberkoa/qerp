@@ -87,7 +87,7 @@ public class Module extends BaseEntity {
 	
 	public Module() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	// Constructors without the common fields
@@ -120,7 +120,7 @@ public class Module extends BaseEntity {
 			String createApp, Timestamp createTimestamp,
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
 		super();
-		this.rowInfo = new RowInfo();
+		
 		this.id = id;
 		this.code = code;
 		this.description = description;

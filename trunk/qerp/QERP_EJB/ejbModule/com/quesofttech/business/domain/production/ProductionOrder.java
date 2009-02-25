@@ -107,7 +107,7 @@ public class ProductionOrder extends BaseEntity {
 	
 	public ProductionOrder() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 		this.productionOrderMaterials = new ArrayList<ProductionOrderMaterial>();
 		this.productionOrderOperations = new ArrayList<ProductionOrderOperation>();
 	}	
