@@ -171,7 +171,7 @@ public class UserProgram extends BaseEntity {
 	*/
 	public UserProgram() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	

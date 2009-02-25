@@ -135,7 +135,7 @@ public class Material extends BaseEntity {
 	
 	public Material() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 		this.dimension = new Dimension();
 		
 		// TODO Auto-generated constructor stub

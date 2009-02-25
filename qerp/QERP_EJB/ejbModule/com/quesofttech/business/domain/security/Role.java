@@ -91,7 +91,7 @@ public class Role extends BaseEntity {
 
 	public Role() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	

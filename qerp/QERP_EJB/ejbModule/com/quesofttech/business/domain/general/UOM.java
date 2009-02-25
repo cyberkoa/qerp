@@ -96,7 +96,7 @@ public class UOM extends BaseEntity {
 
 	public UOM() {
 		super();
-	        this.rowInfo = new RowInfo();
+	        
 	}	
 
 	

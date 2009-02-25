@@ -88,7 +88,7 @@ public class Routing extends BaseEntity {
 
 	public Routing() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	

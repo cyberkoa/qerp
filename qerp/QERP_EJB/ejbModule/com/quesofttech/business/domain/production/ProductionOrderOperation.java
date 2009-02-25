@@ -96,7 +96,7 @@ public class ProductionOrderOperation extends BaseEntity {
 	
 	public ProductionOrderOperation() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	

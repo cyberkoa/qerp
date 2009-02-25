@@ -178,7 +178,7 @@ public class RoleProgram extends BaseEntity {
 	*/
 	public RoleProgram() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	//@GeneratedValue(strategy = GenerationType.TABLE, generator = "id_Rolep")	

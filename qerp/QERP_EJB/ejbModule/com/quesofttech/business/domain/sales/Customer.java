@@ -103,7 +103,7 @@ public class Customer extends BaseEntity {
 	public Customer() {
 		super();
 		this.address = new Address();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	

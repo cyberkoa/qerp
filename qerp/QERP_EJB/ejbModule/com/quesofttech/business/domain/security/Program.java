@@ -96,7 +96,7 @@ public class Program extends BaseEntity {
 	
 	public Program() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	

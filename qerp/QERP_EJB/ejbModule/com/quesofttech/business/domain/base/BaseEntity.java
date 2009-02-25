@@ -21,6 +21,11 @@ public abstract class BaseEntity implements Serializable {
 	@Embedded
 	protected RowInfo rowInfo;
 	
+	public BaseEntity()
+	{
+		this.rowInfo = new RowInfo();
+	}
+	
 	public abstract Serializable getIdForMessages();
 
 	/**

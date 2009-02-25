@@ -101,7 +101,7 @@ public class ProductionOrderMaterial extends BaseEntity {
 	
 	public ProductionOrderMaterial() {
 		super();
-		this.rowInfo = new RowInfo();
+		
 	}	
 
 	
