@@ -182,8 +182,8 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	
 	
 	public void addSalesOrder(SalesOrder salesOrder) throws BusinessException {
-		
-		if(salesOrder.getDocNo()==0)
+		System.out.println("salesOrder.getDocNo:" + salesOrder.getDocNo());
+		if(salesOrder.getDocNo()==0 || salesOrder.getDocNo()==null)
 		{
 			salesOrder.setDocumentType(documentTypeService.getNextNumberByType("S"));
 			salesOrder.setDocNo(salesOrder.getDocumentType().getRunningNo());
