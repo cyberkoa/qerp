@@ -454,7 +454,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		void assignToDatabase(SalesOrder salesOrder){
 		   salesOrder.setId(id);
 		   salesOrder.setCustomerPO(CustomerPO);
-		   salesOrder.setDocNo(Number);
+		   //salesOrder.setDocNo(Number);
 		   salesOrder.setDocType(DocType);
 		   //salesOrder.setversion(version);
 		   salesOrder.setCustomer(customer);
@@ -477,6 +477,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 			SalesOrder salesOrder = new SalesOrder();
 			try 
 			{				
+				salesOrder.setDocNo(0L);
 				salesOrder.setCreateLogin(getVisit().getMyLoginId());
 				salesOrder.setModifyLogin(getVisit().getMyLoginId());
 				salesOrder.setCreateApp(this.getClass().getSimpleName());

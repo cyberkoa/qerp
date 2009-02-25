@@ -47,7 +47,7 @@
                        </tr>
                        <tr>
                            <th><t:label t:for="Number">Number</t:label>:</th>
-                           <td>  <DIV style="display:${viewDisplayText};"> ${Number}</DIV> <DIV style="display:${viewEditText};">  <input  t:type="TextField" t:id="Number" t:value="Number" t:maxLength="10" t:size="10" /> </DIV> </td>
+                           <td>  ${Number} <DIV style="display:none">  <input  t:type="TextField" t:id="Number" t:value="Number" /> </DIV> </td>
                        </tr>                       
                        <tr>
                            <th><t:label t:for="customer">Customer</t:label>:</th>
