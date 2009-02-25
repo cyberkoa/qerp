@@ -13,7 +13,7 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
-           t:reorder="id,Category,Prefix,RunningNo,Type,Description,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,catergory,Prefix,RunningNo,Type,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="DocumentTypes"
            t:row="DocumentType"
                    t:rowsPerPage="10"
@@ -36,8 +36,8 @@
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="Category">Category</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Category" t:value="Category" t:maxLength="20" t:size="20" /> </td>
+                           <th><t:label t:for="catergory">catergory</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="catergory" t:value="catergory" t:maxLength="20" t:size="20" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Prefix">Prefix</t:label>:</th>
@@ -52,10 +52,7 @@
                            <td>   <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                        
-                       <!--<tr>
-                           <th><t:label t:for="Description">Description</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Description" t:value="Description" t:maxLength="100" t:size="100" /> </td>
-                       </tr>-->
+                     
                                </table>
                </td>
            </tr>
