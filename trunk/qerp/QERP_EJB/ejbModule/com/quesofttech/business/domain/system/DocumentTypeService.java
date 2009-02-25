@@ -40,7 +40,7 @@ public class DocumentTypeService extends BaseService implements IDocumentTypeSer
 	}
 
 	public DocumentType findDocumentTypeByType(String type) {
-		Query q = _em.createQuery("select documentType from DocumentType documentType where documentType.rowInfo.recordStatus='A' where documentType.type = :type");
+		Query q = _em.createQuery("SELECT documentType FROM DocumentType documentType WHERE documentType.rowInfo.recordStatus='A' AND documentType.type = :type");
 		q.setParameter("type", type);
 		DocumentType obj = (DocumentType) q.getSingleResult();
 		return obj;
