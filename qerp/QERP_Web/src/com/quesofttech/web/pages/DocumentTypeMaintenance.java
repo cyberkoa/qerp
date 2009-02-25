@@ -78,17 +78,17 @@ public class DocumentTypeMaintenance extends SecureBasePage {
 
     //===============================
     // Text Component for Category
-    @Component(id = "Category")
-    private TextField _Category;
-    private Long Category;
-    public Long getCategory()
+    @Component(id = "Catergory")
+    private TextField _Catergory;
+    private Long Catergory;
+    public Long getCatergory()
     {
-       return Category;
+       return Catergory;
     }
 
-    public void setCategory(Long Category)
+    public void setCatergory(Long Catergory)
     {
-       this.Category = Category;
+       this.Catergory = Catergory;
     }
     //===============================
     
@@ -142,17 +142,17 @@ public class DocumentTypeMaintenance extends SecureBasePage {
 
     //===============================
     // Text Component for DocType
-    @Component(id = "DocType")
-    private TextField _DocType;
-    private String DocType;
-    public String getDocType()
+    @Component(id = "Type")
+    private TextField _Type;
+    private String Type;
+    public String getType()
     {
-       return DocType;
+       return Type;
     }
 
-    public void setDocType(String DocType)
+    public void setType(String Type)
     {
-       this.DocType = DocType;
+       this.Type = Type;
     }
     //===============================
     void RefreshRecords() throws Exception
@@ -255,10 +255,11 @@ private void refreshDisplay() throws Exception
 
     void assignToDatabase(DocumentType documentType){
        documentType.setId(id);
-       documentType.setCatergory(Category);
+       //documentType.setDescription("test");
+       documentType.setCatergory(Catergory);
        documentType.setPrefix(Prefix);
        documentType.setRunningNo(RunningNo);
-       documentType.setType(DocType);
+       documentType.setType(Type);
        documentType.setRecordStatus("A");
        java.util.Date today = new java.util.Date();
        documentType.setSessionId("");
@@ -271,10 +272,10 @@ private void refreshDisplay() throws Exception
     void assignToLocalVariable(DocumentType documentType)
     {
        this.id = documentType.getId();
-       this.Category = documentType.getCatergory();
+       this.Catergory = documentType.getCatergory();
        this.Prefix = documentType.getPrefix();
        this.RunningNo = documentType.getRunningNo();
-       this.DocType = documentType.getType();
+       this.Type = documentType.getType();
     }
     void _AddRecord()
     {
