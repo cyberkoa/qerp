@@ -251,13 +251,13 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		@Component(id = "Number")
 		private TextField _Number;
 		
-		private long Number;
-		public long getNumber()
+		private Long Number;
+		public Long getNumber()
 		{
 		   return Number;
 		}
 		
-		public void setNumber(long Number)
+		public void setNumber(Long Number)
 		{
 		   this.Number = Number;
 		}
