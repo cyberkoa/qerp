@@ -63,8 +63,8 @@ public class DocumentType extends BaseEntity {
 	private String type;
 	
 	// Example of field	
-	@Column(name = "doct_Description", length = 100, nullable = false)
-	private String description;
+	//@Column(name = "doct_Description", length = 100, nullable = false)
+	//private String description;
 	
 	@Column(name = "doct_Prefix", length = 5)
 	private String prefix;
@@ -106,14 +106,7 @@ public class DocumentType extends BaseEntity {
 	//}
 
 
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 
 
 	public Long getCatergory() {
@@ -264,9 +257,9 @@ public class DocumentType extends BaseEntity {
 			throw new ValueRequiredException(this, "DocumentType_Type");
 		}
 
-		if (StringUtil.isEmpty(description)) {
-			throw new ValueRequiredException(this, "DocumentType_Description");
-		}
+		//if (StringUtil.isEmpty(description)) {
+		//	throw new ValueRequiredException(this, "DocumentType_Description");
+		//}
 
 		/*
 		if (StringUtil.isEmpty(lastName)) {
