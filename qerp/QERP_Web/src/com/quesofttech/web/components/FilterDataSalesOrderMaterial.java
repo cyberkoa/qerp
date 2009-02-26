@@ -41,6 +41,9 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 	private TextField _upperPrice;
 	private double upperPrice;
 	
+	private Long lowerSalesOrderId;
+	private Long upperSalesOrderId;
+	
     @Inject
     private ComponentResources resources;
 	
@@ -81,7 +84,7 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 		lowerSearchFields.setMaterial(lowerMaterialCode);		
 		lowerSearchFields.setRecordStatus("A");
 		lowerSearchFields.setPrice(lowerPrice);
-		lowerSearchFields.setQtyOrder(lowerQtyOrder);
+		lowerSearchFields.setQuantityOrder(lowerQtyOrder);
 		System.out.println("onActionFrombtnFilter3");
 
 		
@@ -91,7 +94,7 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 		upperSearchFields.setMaterial(upperMaterialCode);
 		System.out.println("onActionFrombtnFiltery");
 		upperSearchFields.setPrice(upperPrice);
-		upperSearchFields.setQtyOrder(upperQtyOrder);
+		upperSearchFields.setQuantityOrder(upperQtyOrder);
 		//System.out.println("Upperfield:" + upperSearchFields.toString());
 		// Trigger the container event "onFilterData"
 		resources.triggerEvent("filterDataSalesOrderMaterial", new Object[] {}, null);
@@ -186,6 +189,30 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 
 	public void setUpperPrice(double upperPrice) {
 		this.upperPrice = upperPrice;
+	}
+	/**
+	 * @return the lowerSalesOrderId
+	 */
+	public Long getLowerSalesOrderId() {
+		return lowerSalesOrderId;
+	}
+	/**
+	 * @param lowerSalesOrderId the lowerSalesOrderId to set
+	 */
+	public void setLowerSalesOrderId(Long lowerSalesOrderId) {
+		this.lowerSalesOrderId = lowerSalesOrderId;
+	}
+	/**
+	 * @return the upperSalesOrderId
+	 */
+	public Long getUpperSalesOrderId() {
+		return upperSalesOrderId;
+	}
+	/**
+	 * @param upperSalesOrderId the upperSalesOrderId to set
+	 */
+	public void setUpperSalesOrderId(Long upperSalesOrderId) {
+		this.upperSalesOrderId = upperSalesOrderId;
 	}
 
 
