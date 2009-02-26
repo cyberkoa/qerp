@@ -186,6 +186,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		if(salesOrder.getDocNo()==0 || salesOrder.getDocNo()==null)
 		{
 			salesOrder.setDocumentType(documentTypeService.getNextNumberByType("S"));
+			salesOrder.setDocType(salesOrder.getDocumentType().getType());
 			salesOrder.setDocNo(salesOrder.getDocumentType().getRunningNo());
 		}
 		
