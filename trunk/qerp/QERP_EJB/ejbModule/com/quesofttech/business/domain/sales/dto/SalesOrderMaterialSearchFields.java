@@ -14,8 +14,9 @@ import com.quesofttech.business.domain.sales.*;
 public class SalesOrderMaterialSearchFields extends BaseSearchFields implements Serializable {
 
 	private String docNo;
-	private double qtyOrder;
-	private double price;
+	private Double quantityOrder;
+	private Double price;
+	private Long salesOrderId;
 	//private Customer customer = new Customer();
 	private String customerCode = null;
     //private String material = new Material();
@@ -91,20 +92,35 @@ public class SalesOrderMaterialSearchFields extends BaseSearchFields implements 
 		this.docNo = docNo;
 	}
 
-	public double getQtyOrder() {
-		return qtyOrder;
+
+
+	/**
+	 * @return the quantityOrder
+	 */
+	public Double getQuantityOrder() {
+		return quantityOrder;
 	}
 
-	public void setQtyOrder(double qtyOrder) {
-		this.qtyOrder = qtyOrder;
+	/**
+	 * @param quantityOrder the quantityOrder to set
+	 */
+	public void setQuantityOrder(Double quantityOrder) {
+		this.quantityOrder = quantityOrder;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+
+	/**
+	 * @return the price
+	 */
+	public Double getPrice() {
+		return price;
 	}
 
 	public String getCustomerCode() {
@@ -121,6 +137,20 @@ public class SalesOrderMaterialSearchFields extends BaseSearchFields implements 
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	/**
+	 * @return the salesOrderId
+	 */
+	public Long getSalesOrderId() {
+		return salesOrderId;
+	}
+
+	/**
+	 * @param salesOrderId the salesOrderId to set
+	 */
+	public void setSalesOrderId(Long salesOrderId) {
+		this.salesOrderId = salesOrderId;
 	}
 
 
