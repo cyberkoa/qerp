@@ -11,8 +11,10 @@ import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.sales.Customer;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
+import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.inventory.Material;
 import org.apache.tapestry5.beaneditor.BeanModel;
+
 
 
 //import com.quesofttech.business.domain.sales.iface.ISalesOrderMaterialServiceRemote;
@@ -437,6 +439,12 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	   //salesOrderMaterial.setversion(version);
 	   salesOrderMaterial.setMaterial(material);
 	   salesOrderMaterial.setRecordStatus("A");
+	   
+	   
+	   java.util.Date today = new java.util.Date();	   
+	   salesOrderMaterial.setModifyApp(this.getClass().getSimpleName());
+	   salesOrderMaterial.setModifyLogin(getVisit().getMyLoginId());       
+	   salesOrderMaterial.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	}
 	
 	void assignToLocalVariable(SalesOrderMaterial salesOrderMaterial)
@@ -543,6 +551,19 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	void onActionFromToolbarconvertSO()
 	{
 		System.out.println("clicked");
+		RowInfo rowInfo = new RowInfo();
+		
+		java.util.Date today = new java.util.Date();	   
+		rowInfo.setModifyApp(this.getClass().getSimpleName());
+		rowInfo.setModifyLogin(getVisit().getMyLoginId());       
+		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+		rowInfo.setModifyApp(this.getClass().getSimpleName());
+		rowInfo.setModifyLogin(getVisit().getMyLoginId());       
+		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+		rowInfo.setSessionId("");
+		rowInfo.setRecordStatus("A");
+		
+		//getSalesOrderService().convertOrderMaterialToProductionOrder(rowInfo, salesOrderMaterial);
 	}
 
 	void onActionFromtoolbarDel(Long id)

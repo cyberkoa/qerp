@@ -84,7 +84,9 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 		lowerSearchFields.setMaterial(lowerMaterialCode);		
 		lowerSearchFields.setRecordStatus("A");
 		lowerSearchFields.setPrice(lowerPrice);
+
 		lowerSearchFields.setQuantityOrder(lowerQtyOrder);
+
 		System.out.println("onActionFrombtnFilter3");
 
 		
@@ -94,7 +96,10 @@ public class FilterDataSalesOrderMaterial extends SecureBasePage
 		upperSearchFields.setMaterial(upperMaterialCode);
 		System.out.println("onActionFrombtnFiltery");
 		upperSearchFields.setPrice(upperPrice);
+
 		upperSearchFields.setQuantityOrder(upperQtyOrder);
+		//upperSearchFields.setQtyOrder(upperQtyOrder);
+
 		//System.out.println("Upperfield:" + upperSearchFields.toString());
 		// Trigger the container event "onFilterData"
 		resources.triggerEvent("filterDataSalesOrderMaterial", new Object[] {}, null);

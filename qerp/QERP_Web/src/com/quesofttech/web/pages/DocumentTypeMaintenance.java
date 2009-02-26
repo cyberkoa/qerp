@@ -92,7 +92,7 @@ public class DocumentTypeMaintenance extends SecureBasePage {
     }
     //===============================
     
-    /*
+ 
     @Component(id = "Description")
     private TextField _description;
     private String Description;
@@ -107,7 +107,7 @@ public class DocumentTypeMaintenance extends SecureBasePage {
 	public void setDescription(String description) {
 		Description = description;
 	}
-*/
+
 	//===============================
     // Text Component for Prefix
     @Component(id = "Prefix")
@@ -255,7 +255,7 @@ private void refreshDisplay() throws Exception
 
     void assignToDatabase(DocumentType documentType){
        documentType.setId(id);
-       //documentType.setDescription("test");
+       documentType.setDescription(Description);
        documentType.setCatergory(Catergory);
        documentType.setPrefix(Prefix);
        documentType.setRunningNo(RunningNo);
@@ -272,6 +272,7 @@ private void refreshDisplay() throws Exception
     void assignToLocalVariable(DocumentType documentType)
     {
        this.id = documentType.getId();
+       this.Description = documentType.getDescription();
        this.Catergory = documentType.getCatergory();
        this.Prefix = documentType.getPrefix();
        this.RunningNo = documentType.getRunningNo();
