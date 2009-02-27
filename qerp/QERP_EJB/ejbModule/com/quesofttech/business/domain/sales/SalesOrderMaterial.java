@@ -97,7 +97,7 @@ public class SalesOrderMaterial extends BaseEntity {
 	*/
 	
 	// Foreign keys
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.REFRESH})
     @JoinColumn(name="fk_SalesOrder")	
 	private SalesOrder salesOrder;
 	
