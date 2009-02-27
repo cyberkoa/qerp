@@ -68,7 +68,7 @@ public class SalesOrder extends BaseEntity {
 	@Column(name = "so_CustomerPO", length = 20, nullable = false)
 	private String customerPO;
 	
-	@Column(name = "so_DocType", length = 5, nullable = false)
+	@Column(name = "so_DocType", length = 5)
 	private String docType;
 
 	// Foreign keys
@@ -77,7 +77,7 @@ public class SalesOrder extends BaseEntity {
 	private Customer customer;
 	
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="salesOrder", targetEntity=SalesOrderMaterial.class)
+	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy="salesOrder", targetEntity=SalesOrderMaterial.class)
 	private List<SalesOrderMaterial> salesOrderMaterials; // = new List<<ForeignTable>>();
 		
 	@ManyToOne
@@ -282,11 +282,11 @@ public class SalesOrder extends BaseEntity {
 			throw new ValueRequiredException(this, "SalesOrder_DocNo");
 		}
         */
-        
+        /*
 		if (StringUtil.isEmpty(docType)) {
 			throw new ValueRequiredException(this, "SalesOrder_DocType");
 		}
-        
+        */
 		/*
 		if (StringUtil.isEmpty(lastName)) {
 			throw new ValueRequiredException(this, "User_lastName");
