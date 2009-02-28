@@ -82,7 +82,7 @@ public class ProductionOrderMaterial extends BaseEntity {
 	//RowInfo rowInfo_1;
 	
 	// Foreign keys
-	@ManyToOne(cascade=CascadeType.REFRESH)
+	@ManyToOne(cascade={CascadeType.REFRESH})
     @JoinColumn(name="fk_ProductionOrder")	
 	private ProductionOrder productionOrder;
 	
