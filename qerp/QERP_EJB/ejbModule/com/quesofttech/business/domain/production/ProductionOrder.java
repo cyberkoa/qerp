@@ -95,10 +95,10 @@ public class ProductionOrder extends BaseEntity {
 	private DocumentType documentType;
 	
 	
-	@OneToMany(cascade= {CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderMaterial.class)
+	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderMaterial.class)
 	private List<ProductionOrderMaterial> productionOrderMaterials;
 	
-	@OneToMany(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderOperation.class)
+	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy="productionOrder", targetEntity=ProductionOrderOperation.class)
 	private List<ProductionOrderOperation> productionOrderOperations;	
 	
 	
