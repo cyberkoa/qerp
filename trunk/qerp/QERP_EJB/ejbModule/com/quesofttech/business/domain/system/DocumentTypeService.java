@@ -81,8 +81,11 @@ public class DocumentTypeService extends BaseService implements IDocumentTypeSer
 	public Long getNewDocumentNumber(Long id) throws BusinessException 
 	{
 		DocumentType documentType = findDocumentType(id);
+		System.out.println("[getNewDocumentNumber] after findDocumentType : " + documentType.getRunningNo());
 		
 		documentType.setRunningNo(documentType.getRunningNo() + 1);
+		
+		
 		updateDocumentType(documentType);
 		
 		return documentType.getRunningNo();
@@ -91,7 +94,7 @@ public class DocumentTypeService extends BaseService implements IDocumentTypeSer
 	public DocumentType getNextNumberByType(String type) throws BusinessException 
 	{
 		DocumentType documentType = findDocumentTypeByType(type);
-		
+		System.out.println("[getNextDocumentNumberByType] after findDocumentType : " + documentType.getRunningNo());	
 		documentType.setRunningNo(documentType.getRunningNo() + 1);
 		updateDocumentType(documentType);
 		

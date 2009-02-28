@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -88,6 +89,12 @@ public class ProductionOrder extends BaseEntity {
 	@ManyToOne
     @JoinColumn(name="fk_SalesOrder")	
 	private SalesOrder salesOrder;
+	
+	
+	@OneToOne
+    @JoinColumn(name="fk_SalesOrderMaterial")	
+	private SalesOrder salesOrderMaterial;
+	
 	
 	
 	@ManyToOne
