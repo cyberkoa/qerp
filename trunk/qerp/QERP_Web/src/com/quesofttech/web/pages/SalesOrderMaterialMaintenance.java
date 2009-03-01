@@ -8,6 +8,8 @@ import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.common.exception.DuplicateAlternateKeyException;
 import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
 import com.quesofttech.business.common.query.SearchOptions;
+import com.quesofttech.business.domain.production.ProductionOrder;
+import com.quesofttech.business.domain.production.iface.IProductionOrderServiceRemote;
 import com.quesofttech.business.domain.sales.Customer;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
@@ -30,6 +32,7 @@ import com.quesofttech.web.components.FilterDataSalesOrderMaterial;
 import com.quesofttech.web.components.QERPWindow;
 import com.quesofttech.web.model.base.GenericSelectModel;
 import com.quesofttech.web.state.Visit;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 //import com.sun.org.apache.xml.internal.serializer.utils.Messages;
 //import com.sun.xml.internal.ws.api.message.Message;
 
@@ -62,6 +65,50 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 			 "style=bluelighting", "show=false","modal=true", "title=literal:Filter Window"})
 	@Property
 	private QERPWindow _filterWindow;
+	
+	
+	// Check SO is being converted to Production Order already or not.
+	//@Property\
+	private boolean soConvert;
+	
+
+	public boolean isSoConvert() {
+		soConvert=false;
+		try
+		{
+			soConvert = false;
+			System.out.println("isSOConvert SODetail:" + _SalesOrderMaterial.toString() + ", " + _SalesOrderMaterial.getId());
+			List<ProductionOrder> productionorders = getProductionOrderService().findProductionOrderBySalesOrderMaterial(_SalesOrderMaterial);
+			System.out.println("productionorders.size():" + productionorders.size());
+			
+			if(productionorders.size()!=0)
+			{
+				System.out.println("so convert 1");
+				soConvert = false;						
+			}
+			else 
+			{
+				System.out.println("so convert 2");
+				soConvert = true;
+			}
+		}
+		catch (DoesNotExistException de)
+		{
+			System.out.println("so convert 3");
+			soConvert = true;			
+		}
+		catch (BusinessException be)
+		{
+			System.out.println("so convert 4");
+			soConvert = true;			
+		}
+		System.out.println("so convert result: " + soConvert);
+		return soConvert;
+	}
+
+	public void setSoConvert(boolean soConvert) {
+		this.soConvert = soConvert;
+	}
 
 	void onActionFromtoolbarback()
     {
@@ -285,7 +332,10 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
             	    return getSalesOrderService().findSalesOrdersMaterialBySearchFieldsRange(_filterDataSalesOrderMaterial.getLowerSearchFields(), _filterDataSalesOrderMaterial.getUpperSearchFields(),options);
 				 } 
 			    } 
-			catch(BusinessException be) {} 
+			catch(BusinessException be) {
+				
+				_form.recordError(be.getMessage());
+			} 
 			
 			return null;} 
 		    }
@@ -307,7 +357,9 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     	try {
            list = this.getMaterialService().findForSaleMaterials();
     	}
-    	catch (DoesNotExistException e) {}
+    	catch (DoesNotExistException e) {
+    		_form.recordError(e.getMessage());
+    	}
     	
         _materials = new GenericSelectModel<Material>(list,Material.class,"codeDescription","id",_access);
 
@@ -346,7 +398,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     	}
     	catch(Exception be)
     	{
-    		_form.recordError(getMessages().get("refresh problem"));
+    		_form.recordError(be.getMessage());
     	}
     	
 	}
@@ -398,14 +450,21 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	
 	
 	void setupRender() {
-		int_SelectedRow=0;
-		RefreshRecords();	   
+		try
+		{
+			int_SelectedRow=0;
+			RefreshRecords();
+		}
+		catch(Exception e)
+		{
+			_form.recordError(e.getMessage());
+		}
 	}
 	
 	
-	void onValidateFormFromSalesOrderMaterialForm() throws BusinessException {
+	void onValidateFormFromSalesOrderMaterialForm()  {
 		
-		//try{
+		try{
 			   if ("U"== myState)
 			   {
 			       _UpdateRecord();
@@ -420,12 +479,12 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 					{
 						_FilterRecordSalesOrderMaterial();
 					}
-		//	}
-		//catch (Exception e)
-		//{
-		//	_form.recordError(getMessages().get("Record_Update_Error"));
-		//}
-		//System.out.println("mystate:" + myState);
+			}
+		catch (Exception e)
+		{
+			_form.recordError(e.getMessage());
+		}
+	
 		
 	}
 	
@@ -548,11 +607,13 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     	   }
     	}
 	}
-	void onActionFromToolbarconvertSO()
+	void onActionFromConvertSOselect()
 	{
 		System.out.println("clicked");
 		RowInfo rowInfo = new RowInfo();
 		
+		try
+		{
 		java.util.Date today = new java.util.Date();	   
 		rowInfo.setModifyApp(this.getClass().getSimpleName());
 		rowInfo.setModifyLogin(getVisit().getMyLoginId());       
@@ -563,7 +624,12 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		rowInfo.setSessionId("");
 		rowInfo.setRecordStatus("A");
 		
-		//getSalesOrderService().convertOrderMaterialToProductionOrder(rowInfo, salesOrderMaterial);
+		getSalesOrderService().convertOrderMaterialToProductionOrder(rowInfo, SalesOrderMaterialDetail);
+		}
+		catch (Exception e)
+		{
+			_form.recordError(e.getMessage());
+		}
 	}
 
 	void onActionFromtoolbarDel(Long id)
@@ -618,6 +684,10 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	   return getBusinessServicesLocator().getSalesOrderServiceRemote();
 	}
 	
+	private IProductionOrderServiceRemote getProductionOrderService() {
+		   return getBusinessServicesLocator().getProductionOrderServiceRemote();
+		}
+	
 	private IMaterialServiceRemote getMaterialService() {
 		return getBusinessServicesLocator().getMaterialServiceRemote();
 	}
@@ -636,6 +706,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	
 	
 	public SalesOrderMaterial getSalesOrderMaterial() throws BusinessException{
+		System.out.print("getSalesOrder()" + _SalesOrderMaterial.getId());
 	   return _SalesOrderMaterial;
 	}
     

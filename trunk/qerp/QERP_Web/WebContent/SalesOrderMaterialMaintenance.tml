@@ -5,11 +5,12 @@
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
+
 <t:block id="blockFormView">
    <form t:type="form" t:id="SalesOrderMaterialForm" t:zone="zoneFormView" >
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
-       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID: ${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
        <button onclick="filterWindow.showCenter(true);" type="button"><img src="images/filterRecord24.png" /> </button>
        <t:pagelink t:page="SalesOrdermaintenance"  t:id="toolbarback" ><button><img src="images/backRecord24.png" /></button></t:pagelink>
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
@@ -29,11 +30,15 @@
                    ${SalesOrderMaterial.id}
                </t:actionlink>
            </t:parameter>
-           <t:parameter name="ConvertSOCell">
-               <t:actionlink t:id="ConvertSOselect" t:mixins="confirm" t:message="Are you sure you want to Convert?"   t:context="SalesOrderMaterial.id" >
-                   <button>Convert</button>
-               </t:actionlink>
-           </t:parameter>
+           
+	           <t:parameter name="ConvertSOCell">
+	           <t:if t:test="SoConvert">
+	               <t:actionlink t:id="ConvertSOselect" t:mixins="confirm" t:message="Are you sure you want to Convert?"   >
+	                   <button>Convert</button>
+	               </t:actionlink>
+	               </t:if>
+	           </t:parameter>
+           
            
            <t:parameter name="deleteCell">
              <t:actionlink t:id="convertSO" context="SalesOrderMaterial.id">Delete</t:actionlink>
@@ -77,6 +82,7 @@
            </tr>
        </table>  
    </form>   
+   ${SoConvert}
 </t:block>
 <div t:id="filterWindow">   
 	 	<div t:type="filterDataSalesOrderMaterial" t:id="filterDataSalesOrderMaterial" />
