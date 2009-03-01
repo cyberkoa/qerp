@@ -169,6 +169,28 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		List l = q.getResultList();
 		return l;
 	}
+	@SuppressWarnings("unchecked")
+	public List<ProductionOrder> findProductionOrderBySalesOrder(SalesOrder salesorder,Material material) throws DoesNotExistException {
+		
+		Query q = _em.createQuery("select prodo from ProductionOrder prodo where prodo.salesOrder = :salesorder and prodo.material = :material AND prodo.rowInfo.recordStatus='A'" +
+				" order by prodo.id");
+		q.setParameter("salesordermaterial", salesorder);
+		q.setParameter("material", material);
+		List l = q.getResultList();
+		return l;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductionOrder> findProductionOrderBySalesOrderMaterial(SalesOrderMaterial salesordermaterial) throws DoesNotExistException {
+		
+		Query q = _em.createQuery("select prodo from ProductionOrder prodo where prodo.salesOrderMaterial = :salesordermaterial AND prodo.rowInfo.recordStatus='A'" +
+				" order by prodo.id");
+		q.setParameter("salesordermaterial", salesordermaterial);
+		System.out.println(q.toString());
+		List l = q.getResultList();
+		return l;
+	}
 	
 	
 	// ProductionOrderMaterial

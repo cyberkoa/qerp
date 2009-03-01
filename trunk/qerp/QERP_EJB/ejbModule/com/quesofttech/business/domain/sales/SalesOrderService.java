@@ -544,7 +544,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 			}
 			catch(Exception e)
 			{
-				System.out.println(e);
+				System.out.println(e.getMessage());
 				//throw e;
 			}
 			
