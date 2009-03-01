@@ -34,6 +34,7 @@ import com.quesofttech.business.domain.production.ProductionOrderMaterial;
 import com.quesofttech.business.domain.production.ProductionOrderOperation;
 
 import com.quesofttech.business.domain.sales.SalesOrder;
+import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 
 import com.quesofttech.business.domain.system.DocumentType;
 
@@ -93,7 +94,9 @@ public class ProductionOrder extends BaseEntity {
 	
 	@OneToOne
     @JoinColumn(name="fk_SalesOrderMaterial")	
-	private SalesOrder salesOrderMaterial;
+	private SalesOrderMaterial salesOrderMaterial;
+	
+	
 	
 	
 	
@@ -539,6 +542,16 @@ public class ProductionOrder extends BaseEntity {
 	}
 
 
+	public SalesOrderMaterial getSalesOrderMaterial() {
+		return salesOrderMaterial;
+	}
+
+
+	public void setSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) {
+		this.salesOrderMaterial = salesOrderMaterial;
+	}
+
+
 	public void addProductionOrderMaterial(ProductionOrderMaterial productionOrderMaterial) {
 		if (!productionOrderMaterials.contains(productionOrderMaterial)) {
 			System.out.println("add new production Order Material");
@@ -567,5 +580,6 @@ public class ProductionOrder extends BaseEntity {
 		if(salesOrder!=null) return salesOrder.getDocNo();
 		else return null;
 	}
-	
+
+
 }
