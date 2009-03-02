@@ -48,7 +48,7 @@ public interface IProductionOrderServiceRemote {
 
 	// ProductionOrderMaterial
 	List<ProductionOrder> findProductionOrderBySalesOrder(SalesOrder salesorder, Material material)throws DoesNotExistException;
-	List<ProductionOrder> findProductionOrderBySalesOrderMaterial(SalesOrderMaterial salesordermaterial)throws DoesNotExistException;
+	List<ProductionOrder> findProductionOrderBySalesOrderMaterial(Long salesordermaterial)throws DoesNotExistException;
 	
 	
 	ProductionOrderMaterial findProductionOrderMaterial(Long id)throws DoesNotExistException;
