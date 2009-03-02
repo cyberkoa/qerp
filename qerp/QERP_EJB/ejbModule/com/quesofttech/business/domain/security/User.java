@@ -51,7 +51,7 @@ public class User extends BaseEntity {
 
 	//For Postgresql : @SequenceGenerator(name = "material_sequence", sequenceName = "material_id_seq")
 	//Generic solution : (Use a table named PrimaryKeys, with 2 fields , tableName &  keyField)
-	@TableGenerator(  name="user_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="User", valueColumnName="keyField")	
+	@TableGenerator(  name="User_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="User", valueColumnName="keyField")	
 	@Id
 	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
 	//For MSSQL      : @GeneratedValue(strategy = GenerationType.IDENTITY)
