@@ -39,7 +39,7 @@ public class UserPassword extends BaseEntity {
 	}	
 	//For Postgresql : @SequenceGenerator(name = "material_sequence", sequenceName = "material_id_seq")
 	//Generic solution : (Use a table named PrimaryKeys, with 2 fields , tableName &  keyField)
-	@TableGenerator(  name="userpassword_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="UserPassword", valueColumnName="keyField")	
+	@TableGenerator(  name="UserPassword_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="UserPassword", valueColumnName="keyField")	
 	@Id
 	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userpassword_sequence")
 	//For MSSQL      : @GeneratedValue(strategy = GenerationType.IDENTITY)
