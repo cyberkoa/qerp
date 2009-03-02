@@ -77,20 +77,24 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		try
 		{
 			soConvert = false;
-			System.out.println("isSOConvert SODetail:" + _SalesOrderMaterial.toString() + ", " + _SalesOrderMaterial.getId());
-			List<ProductionOrder> productionorders = getProductionOrderService().findProductionOrderBySalesOrderMaterial(_SalesOrderMaterial.getId());
-			System.out.println("productionorders.size():" + productionorders.size());
+			if(_SalesOrderMaterial!=null)
+			{
+				//System.out.println("isSOConvert SODetail:" + _SalesOrderMaterial.toString() + ", " + _SalesOrderMaterial.getId());
+				List<ProductionOrder> productionorders = getProductionOrderService().findProductionOrderBySalesOrderMaterial(_SalesOrderMaterial.getId());
+				//System.out.println("productionorders.size():" + productionorders.size());
+				
+				if(productionorders.size()!=0)
+				{
+					System.out.println("so convert 1");
+					soConvert = false;						
+				}
+				else 
+				{
+					System.out.println("so convert 2");
+					soConvert = true;
+				}
+			}
 			
-			if(productionorders.size()!=0)
-			{
-				System.out.println("so convert 1");
-				soConvert = false;						
-			}
-			else 
-			{
-				System.out.println("so convert 2");
-				soConvert = true;
-			}
 		}
 		catch (DoesNotExistException de)
 		{
