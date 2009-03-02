@@ -78,7 +78,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		{
 			soConvert = false;
 			System.out.println("isSOConvert SODetail:" + _SalesOrderMaterial.toString() + ", " + _SalesOrderMaterial.getId());
-			List<ProductionOrder> productionorders = getProductionOrderService().findProductionOrderBySalesOrderMaterial(_SalesOrderMaterial);
+			List<ProductionOrder> productionorders = getProductionOrderService().findProductionOrderBySalesOrderMaterial(_SalesOrderMaterial.getId());
 			System.out.println("productionorders.size():" + productionorders.size());
 			
 			if(productionorders.size()!=0)
