@@ -463,6 +463,8 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 					ProductionOrder productionOrder = new ProductionOrder();
 					// Set the bom (master card)
 					productionOrder.setBom(bomService.findBOM(bomTree.getId()));
+					
+					productionOrder.setSalesOrderMaterial(salesOrderMaterial);
 
 					//productionOrder.setDocNo(Integer.toString(j));
 					productionOrder.setQuantityOrder(node.getData().getTreeOriginalQuantityRequired() * salesOrderMaterial.getQuantityOrder());
