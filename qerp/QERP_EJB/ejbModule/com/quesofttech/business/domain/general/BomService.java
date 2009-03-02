@@ -254,6 +254,8 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 				
 		// Declare a bomTree
 		BomTree bomTree = new BomTree();
+		
+		bomTree.setId(bom.getId());
 		// Set bomTreeNode as RootElement
 		bomTree.setRootElement(bomTreeNode);
 		

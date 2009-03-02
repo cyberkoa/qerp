@@ -32,6 +32,8 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.inventory.Material;
+import com.quesofttech.business.domain.production.ProductionOrder;
+
 
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.common.exception.ValueRequiredException;
@@ -88,6 +90,10 @@ public class BOM extends BaseEntity {
 	private List<BomDetail> bomDetails; // = new List<<ForeignTable>>();
 	
 
+	@OneToMany(cascade={CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy="bom", targetEntity=BomDetail.class)
+	private List<ProductionOrder> productionOrders; // = new List<<ForeignTable>>();
+
+		
 	public BOM() {
 		super();
 		
@@ -444,6 +450,22 @@ public class BOM extends BaseEntity {
 	 */
 	public void setBomDetails(List<BomDetail> bomDetails) {
 		this.bomDetails = bomDetails;
+	}
+
+
+	/**
+	 * @return the productionOrders
+	 */
+	public List<ProductionOrder> getProductionOrders() {
+		return productionOrders;
+	}
+
+
+	/**
+	 * @param productionOrders the productionOrders to set
+	 */
+	public void setProductionOrders(List<ProductionOrder> productionOrders) {
+		this.productionOrders = productionOrders;
 	}
 	
 

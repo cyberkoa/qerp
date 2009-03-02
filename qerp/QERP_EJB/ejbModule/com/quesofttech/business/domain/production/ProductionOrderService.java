@@ -91,12 +91,22 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 	public void addProductionOrder(ProductionOrder productionOrder) throws BusinessException {
 		
 		//try{
-		System.out.println("just before persist in ProductionOrderService" + " DocNo : " + productionOrder.getDocNo());
+		System.out.println("just before persist in ProductionOrderService , productionOrder : " + productionOrder + " DocNo : " + productionOrder.getDocNo());
 		
-		if(productionOrder.getDocNo()==0||productionOrder.getDocNo()==null)
+		if(productionOrder.getDocNo()==null||productionOrder.getDocNo()==0)
 		{
+		   
 		   productionOrder.setDocumentType(documentTypeService.getNextNumberByType("P"));
-		   productionOrder.setDocNo(productionOrder.getDocumentType().getRunningNo());
+		   
+		   if(productionOrder.getDocumentType()!=null)
+		   {
+		      productionOrder.setDocNo(productionOrder.getDocumentType().getRunningNo());
+		   }
+		   else
+		   {
+			   // error
+			   System.out.println("DocType is null");
+		   }
 		}
 		
 		persist(productionOrder);
