@@ -578,8 +578,8 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	 Object onActionFrombtnDetail(Long id)
 	 {
 		 _form.clearErrors();
-		 System.out.println("Number: " + this.Number);
-		 detailPage.setHeaderCode(this.Number);
+		 //System.out.println("Number: " + this.Number);
+		 //detailPage.setHeaderCode(this.Number);
 		 detailPage.SetHeaderID(id);
 	    return detailPage;
 	 }
