@@ -184,6 +184,7 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 	@SuppressWarnings("unchecked")
 	public List<ProductionOrder> findProductionOrderBySalesOrderMaterial(SalesOrderMaterial salesordermaterial) throws DoesNotExistException {
 		
+		System.out.println("salesordermaterial(): " + salesordermaterial.toString() + ", " + salesordermaterial.getId());
 		Query q = _em.createQuery("select prodo from ProductionOrder prodo where prodo.salesOrderMaterial = :salesordermaterial AND prodo.rowInfo.recordStatus='A'" +
 				" order by prodo.id");
 		q.setParameter("salesordermaterial", salesordermaterial);
