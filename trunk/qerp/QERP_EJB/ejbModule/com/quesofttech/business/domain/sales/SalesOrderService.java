@@ -183,7 +183,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	
 	public void addSalesOrder(SalesOrder salesOrder) throws BusinessException {
 		System.out.println("salesOrder.getDocNo:" + salesOrder.getDocNo());
-		if(salesOrder.getDocNo()==0 || salesOrder.getDocNo()==null)
+		if(salesOrder.getDocNo()==null ||salesOrder.getDocNo()==0 )
 		{
 			salesOrder.setDocumentType(documentTypeService.getNextNumberByType("S"));
 			salesOrder.setDocType(salesOrder.getDocumentType().getType());
@@ -400,7 +400,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	// SalesOrderMaterial Search.
 	//========================================================================================
 
-	public void convertOrderMaterialToProductionOrder(RowInfo rowInfo, SalesOrderMaterial salesOrderMaterial)
+	public void convertOrderMaterialToProductionOrder(RowInfo rowInfo, SalesOrderMaterial salesOrderMaterial) throws Exception
 	{
 		List<ProductionOrder> productionOrders = new ArrayList<ProductionOrder>(); 
 		//ProductionOrderService productionOrderService = new ProductionOrderService();
@@ -448,9 +448,10 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		//{
 		//	System.out.println("BomDetail Id : " + node.getData().getBomDetail().getId());
 		//}
+		 
 		
 		//List<ProductionOrder> productionOrders = new ArrayList<ProductionOrder>();
-		int j = 0;
+          
 		for(TreeNode<BomTreeNodeData> node : bomTreeNodeList)
 		{
 		 
@@ -460,9 +461,9 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 				if(node.getData().getBomDetail().getMaterial().getMaterialType().isProduced())
 				{
 					ProductionOrder productionOrder = new ProductionOrder();
-					
-					// temporary
-					++j;
+					// Set the bom (master card)
+					productionOrder.setBom(bomService.findBOM(bomTree.getId()));
+
 					//productionOrder.setDocNo(Integer.toString(j));
 					productionOrder.setQuantityOrder(node.getData().getTreeOriginalQuantityRequired() * salesOrderMaterial.getQuantityOrder());
 					
@@ -499,7 +500,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 					//productionOrderService.addProductionOrder(productionOrder);
 					
 					System.out.println("[After phantom explosion] :" + productionOrderChildren.size());
-					List<ProductionOrderMaterial> productionOrderMaterials = new ArrayList<ProductionOrderMaterial>();
+					//List<ProductionOrderMaterial> productionOrderMaterials = new ArrayList<ProductionOrderMaterial>();
 					// After phantom explosion , productionOrderChildren should contain all the production order materials					
 					for(TreeNode<BomTreeNodeData> child : productionOrderChildren)
 					{
@@ -544,8 +545,8 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 			}
 			catch(Exception e)
 			{
-				System.out.println(e.getMessage());
-				//throw e;
+				//System.out.println(e.getMessage());
+				throw e;
 			}
 			
 			

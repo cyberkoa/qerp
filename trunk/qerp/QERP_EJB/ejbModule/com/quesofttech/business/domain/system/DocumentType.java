@@ -28,7 +28,12 @@ import javax.persistence.Embedded;
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.base.BaseEntity;
-import com.quesofttech.business.domain.embeddable.RowInfo;
+//import com.quesofttech.business.domain.embeddable.RowInfo;
+//import com.quesofttech.business.domain.production.ProductionOrderMaterial;
+import com.quesofttech.business.domain.production.ProductionOrder;
+import com.quesofttech.business.domain.sales.SalesOrder;
+
+
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.business.common.exception.GenericBusinessException;
 import com.quesofttech.util.StringUtil;
@@ -100,6 +105,15 @@ public class DocumentType extends BaseEntity {
 	private List<<ForeignTable>> <foreignTable>s; // = new List<<ForeignTable>>();
 	*/
 
+	
+	@OneToMany(cascade= {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy="documentType", targetEntity=SalesOrder.class)
+	private List<SalesOrder> salesOrders;
+	
+	@OneToMany(cascade= {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy="documentType", targetEntity=ProductionOrder.class)
+	private List<ProductionOrder> productionOrders;
+	
+	
+	
 	public DocumentType() {
 		super();
 
@@ -447,5 +461,38 @@ public class DocumentType extends BaseEntity {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
 	}
 
+
+	/**
+	 * @return the salesOrders
+	 */
+	public List<SalesOrder> getSalesOrders() {
+		return salesOrders;
+	}
+
+
+	/**
+	 * @param salesOrders the salesOrders to set
+	 */
+	public void setSalesOrders(List<SalesOrder> salesOrders) {
+		this.salesOrders = salesOrders;
+	}
+
+
+	/**
+	 * @return the productionOrders
+	 */
+	public List<ProductionOrder> getProductionOrders() {
+		return productionOrders;
+	}
+
+
+	/**
+	 * @param productionOrders the productionOrders to set
+	 */
+	public void setProductionOrders(List<ProductionOrder> productionOrders) {
+		this.productionOrders = productionOrders;
+	}
+
+	
 	
 }

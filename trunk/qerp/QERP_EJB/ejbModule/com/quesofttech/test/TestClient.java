@@ -158,7 +158,7 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 					
 					beanRemote.convertOrderMaterialToProductionOrder(rowInfo,findSalesOrderMaterial((long)850));
 				}
-				catch(BusinessException e) {
+				catch(Exception e) {
 				  System.out.println("[Business Exception] " + e.getMessage());
 				  e.printStackTrace();
 				}

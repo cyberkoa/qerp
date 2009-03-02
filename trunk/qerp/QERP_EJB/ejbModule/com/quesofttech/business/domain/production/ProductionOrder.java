@@ -36,6 +36,9 @@ import com.quesofttech.business.domain.production.ProductionOrderOperation;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 
+import com.quesofttech.business.domain.general.BOM;
+
+
 import com.quesofttech.business.domain.system.DocumentType;
 
 
@@ -97,7 +100,9 @@ public class ProductionOrder extends BaseEntity {
 	private SalesOrderMaterial salesOrderMaterial;
 	
 	
-	
+	@ManyToOne
+    @JoinColumn(name="fk_BOM")	
+	private BOM bom;
 	
 	
 	@ManyToOne
@@ -549,6 +554,21 @@ public class ProductionOrder extends BaseEntity {
 
 	public void setSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) {
 		this.salesOrderMaterial = salesOrderMaterial;
+	}
+	
+	/**
+	 * @return the bom
+	 */
+	public BOM getBom() {
+		return bom;
+	}
+
+
+	/**
+	 * @param bom the bom to set
+	 */
+	public void setBom(BOM bom) {
+		this.bom = bom;
 	}
 
 
