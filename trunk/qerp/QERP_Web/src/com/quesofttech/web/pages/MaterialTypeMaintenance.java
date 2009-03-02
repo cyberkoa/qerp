@@ -316,15 +316,14 @@ void _AddRecord()
 	catch (BusinessException e) {
 		if(e instanceof DuplicatePrimaryKeyException  || e instanceof DuplicateAlternateKeyException)
 		{
-			_form.recordError(_Type, e.getLocalizedMessage());
+			_form.recordError(e.getMessage());
+		
 		}
 		else
-			_form.recordError(e.getLocalizedMessage());
+			_form.recordError(e.getMessage());
 	}  
 	catch (Exception e) {
-		   _logger.info("Record_Add_Error");
-		   e.printStackTrace();
-		   _form.recordError(getMessages().get("Record_Add_Error"));
+		_form.recordError(e.getMessage());
 	}
 }
 
@@ -336,9 +335,7 @@ void _UpdateRecord(){
    }
 	catch(BusinessException be)
 	{
-	   _logger.info("Record_Deleted_By_Others");
-	   be.printStackTrace();
-	   _form.recordError(getMessages().get("Record_Deleted_By_Others"));			
+		_form.recordError(be.getMessage());			
 	}
    if(materialType !=null)
    {
@@ -352,15 +349,13 @@ void _UpdateRecord(){
 		catch (BusinessException e) {
 			if(e instanceof DuplicatePrimaryKeyException  || e instanceof DuplicateAlternateKeyException)
 			{
-				_form.recordError(_Type, e.getLocalizedMessage());
+				_form.recordError(e.getMessage());
 			}
 			else	
-				_form.recordError(e.getLocalizedMessage());
+				_form.recordError(e.getMessage());
 		}
 		catch (Exception e) {
-		   _logger.info("Record_Update_Error");
-		   e.printStackTrace();
-		   _form.recordError(getMessages().get("Record_Update_Error"));
+			_form.recordError(e.getMessage());
        }
    }
 }
@@ -374,9 +369,7 @@ void _DeleteRecord(Long id) {
    }
    catch(BusinessException be)
 	{
-		_logger.info("Record_Deleted_By_Others");
-		   be.printStackTrace();
-		   _form.recordError(getMessages().get("Record_Deleted_By_Others"));
+	   _form.recordError(be.getMessage());
 	}
    
    if(materialType!=null)
@@ -396,12 +389,10 @@ void _DeleteRecord(Long id) {
            RefreshRecords();
        }
        catch (BusinessException e) {
-           _form.recordError(_Type, e.getLocalizedMessage());
+    	   _form.recordError(e.getMessage());
        }
 	   catch (Exception e) {
-				   _logger.info("Record_Delete_Error");
-				   e.printStackTrace();
-				   _form.recordError(getMessages().get("Record_Delete_Error"));
+		   _form.recordError(e.getMessage());
 	   }
      
    }
