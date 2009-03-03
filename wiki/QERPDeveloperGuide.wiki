@@ -10,10 +10,10 @@ Currently, QERP is developed to run on [http://geronimo.apache.org/ Apache Geron
 
 ----
 
-= Details =
+= Contents =
 
-  * [Naming convention]
-  * [Coding style]
+  * [NamingConvention Naming Convention]
+  * [CodingStyle Coding Style]
  
 
 
