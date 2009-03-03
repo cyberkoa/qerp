@@ -611,27 +611,32 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
     	   }
     	}
 	}
-	void onActionFromConvertSOselect()
+	void onActionFromConvertSOselect(Long id) throws BusinessException
 	{
-		System.out.println("clicked");
-		RowInfo rowInfo = new RowInfo();
-		
 		try
-		{
-		java.util.Date today = new java.util.Date();	   
-		rowInfo.setModifyApp(this.getClass().getSimpleName());
-		rowInfo.setModifyLogin(getVisit().getMyLoginId());       
-		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
-		rowInfo.setModifyApp(this.getClass().getSimpleName());
-		rowInfo.setModifyLogin(getVisit().getMyLoginId());       
-		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
-		rowInfo.setSessionId("");
-		rowInfo.setRecordStatus("A");
-		
-		getSalesOrderService().convertOrderMaterialToProductionOrder(rowInfo, SalesOrderMaterialDetail);
+		{	
+			System.out.println("clicked");
+			RowInfo rowInfo = new RowInfo();
+			System.out.println("clicked 2 ");
+			SalesOrderMaterial salesordermaterialConvert = getSalesOrderService().findSalesOrderMaterial(id);
+				
+			java.util.Date today = new java.util.Date();	   
+			rowInfo.setModifyApp(this.getClass().getSimpleName());
+			System.out.println("clicked 3 ");
+			rowInfo.setModifyLogin(getVisit().getMyLoginId());       
+			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+			rowInfo.setModifyApp(this.getClass().getSimpleName());
+			System.out.println("clicked 4 ");
+			rowInfo.setModifyLogin(getVisit().getMyLoginId());       
+			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+			rowInfo.setSessionId("");
+			rowInfo.setRecordStatus("A");
+			
+			getSalesOrderService().convertOrderMaterialToProductionOrder(rowInfo, salesordermaterialConvert);
 		}
 		catch (Exception e)
 		{
+			System.out.println("Error onActionFromConvertSOselect erroro:" + e.getMessage());
 			_form.recordError(e.getMessage());
 		}
 	}
