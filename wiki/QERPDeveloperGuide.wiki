@@ -12,6 +12,11 @@ Currently, QERP is developed to run on [http://geronimo.apache.org/ Apache Geron
 
 = Details =
 
+  * [Naming convention]
+  * [Coding style]
+ 
+
+
 <wiki:comment>
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
