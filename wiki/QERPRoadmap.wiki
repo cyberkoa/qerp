@@ -6,18 +6,19 @@ Roadmap shows the plan and schedule and feature list for each development milest
 
 = Details =
 
- ||*Milestone*                         || *Target*  ||
- ||  [ Roadmap_Alpha_0.10 Alpha 0.10 ] || Q1 2009 ||
- ||  [ Roadmap_Alpha_0.20 Alpha 0.20 ] || Q4 2009 ||
- ||  [ Roadmap_Alpha_0.30 Alpha 0.30 ] || Q2 2010 ||
- ||  [ Roadmap_Beta_0.50 Beta 0.50 ]   || Q1 2011 ||
- ||  [ Roadmap_Beta_0.60 Beta 0.60 ]   || Q2 2011 ||
- ||  [ Roadmap_Beta_0.70 Beta 0.70 ]   || Q3 2011 ||
- ||  [ Roadmap_Beta_0.80 Beta 0.80 ]   || Q4 2011 ||
- ||  [ Roadmap_Beta_0.90 Beta 0.90 ]   || Q1 2012 ||
- ||  [ Roadmap_RC_1 RC 1 ]             || Q2 2012 ||
- ||  [ Roadmap_RC_2 RC 2 ]             || Q3 2012 ||
- ||  [ Roadmap_Release Release 1.00 ]  || Q4 2012 ||
+ ||    *Milestone*                   || *Target* ||
+ ||  [Roadmap_Alpha_0.10 Alpha 0.10] || Q1 2009  ||
+ ||  [Roadmap_Alpha_0.20 Alpha 0.20] || Q4 2009  ||
+ ||  [Roadmap_Alpha_0.30 Alpha 0.30] || Q2 2010  ||
+ ||  [Roadmap_Alpha_0.40 Alpha 0.40] || Q3 2010  ||
+ ||  [Roadmap_Beta_0.50 Beta 0.50]   || Q1 2011  ||
+ ||  [Roadmap_Beta_0.60 Beta 0.60]   || Q2 2011  ||
+ ||  [Roadmap_Beta_0.70 Beta 0.70]   || Q3 2011  ||
+ ||  [Roadmap_Beta_0.80 Beta 0.80]   || Q4 2011  ||
+ ||  [Roadmap_Beta_0.90 Beta 0.90]   || Q1 2012  ||
+ ||  [Roadmap_RC_1 RC 1]             || Q2 2012  ||
+ ||  [Roadmap_RC_2 RC 2]             || Q3 2012  ||
+ ||  [Roadmap_Release Release 1.00]  || Q4 2012  ||
 
 
 <wiki:comment>
