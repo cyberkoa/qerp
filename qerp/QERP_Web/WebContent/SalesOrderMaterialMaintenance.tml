@@ -33,7 +33,7 @@
            
 	           <t:parameter name="ConvertSOCell">
 	           <t:if t:test="SoConvert">
-	               <t:actionlink t:id="ConvertSOselect" t:mixins="confirm" t:message="Are you sure you want to Convert?"   >
+	               <t:actionlink t:id="ConvertSOselect" t:mixins="confirm" t:message="Are you sure you want to Convert?"  t:context="SalesOrderMaterial.id" >
 	                   <button>Convert</button>
 	               </t:actionlink>
 	               </t:if>
