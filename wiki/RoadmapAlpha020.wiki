@@ -1,0 +1,26 @@
+#summary Alpha_0.20
+
+= Introduction =
+
+The aim of Alpha 0.20 is to refactor the source code , to optimize the power of OOP programming. 
+
+
+= Tasks =
+
+== General ==
+  
+  * To refactor code to comply the naming convention and coding style stated in [QERPDeveloperGuide Developer Guide]
+  * Upgrade to jumpstart-4.x
+  * Upgrade Apache Geronimo to 2.1.4 (if already released)
+  * Remove unnecessary import , and eliminate the build warnings
+
+== Web UI ==
+  
+  * Redesign the class hierarchy 
+  * Write a more generic classes for Filter
+  * Write a standard maintenance app engine 
+  * More user friendly UI improvement
+
+== EJB ==
+  * Redesign the class hierarchy
+  
