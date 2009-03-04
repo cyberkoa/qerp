@@ -18,10 +18,7 @@
 		<jta-data-source>qerp</jta-data-source>
 		<non-jta-data-source>qerp</non-jta-data-source>
         <jar-file>QERP_EJB.jar</jar-file>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        <properties> 
-        	<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
-        </properties>       
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>       
     </persistence-unit>
  
 </persistence>
