@@ -14,10 +14,11 @@ public class MaterialSearchFields implements Serializable {
 
 	private String code = "";
 	private String description = "";
-	private MaterialType type = null;
+	private String type = "";
 	//private java.sql.Date createDate = null;
 	//private String recordStatus = null;
 	private Integer version = null;
+	private String recordStatus = "";
 	
 	@Embedded
 	RowInfo rowInfo_1;
@@ -27,7 +28,7 @@ public class MaterialSearchFields implements Serializable {
 		buf.append("MaterialSearchFields: [");
 		buf.append("code=" + code + ", ");
 		buf.append("description=" + description + ", ");
-		buf.append("type=" + type.getType() + ", ");
+		buf.append("type=" + type + ", ");
 		//buf.append("create date=" + createDate + ", ");
 		//buf.append("record status=" + recordStatus + ", ");
 		buf.append("version=" + version);
@@ -52,10 +53,10 @@ public class MaterialSearchFields implements Serializable {
 	}
 
 	public String getType() {
-		return type.getType();
+		return type;
 	}
 
-	public void setType(MaterialType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -66,6 +67,14 @@ public class MaterialSearchFields implements Serializable {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public String getRecordStatus() {
+		return recordStatus;
+	}
+
+	public void setRecordStatus(String recordStatus) {
+		this.recordStatus = recordStatus;
 	}
 
 

@@ -11,10 +11,15 @@ import javax.persistence.Query;
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
+import com.quesofttech.business.common.query.QueryBuilder;
+import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.base.BaseService;
 import com.quesofttech.business.domain.inventory.Material;
+import com.quesofttech.business.domain.inventory.dto.*;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceLocal;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
+import com.quesofttech.business.domain.sales.SalesOrderMaterial;
+import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
 
 @Stateless
 @Local(IMaterialServiceLocal.class)
@@ -51,6 +56,7 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 		System.out.println("[MaterialService - updateMaterial]\n" +  material.getMaterialType().toString());
 		material = (Material) merge(material);
 	}
+	
 
 	public void addMaterial(Material material) throws BusinessException {	
 		persist(material);
@@ -83,5 +89,47 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 	public boolean isProduced(Material material)
 	{
 		return material.getMaterialType().isProduced();
+	}
+	
+	
+	
+	
+	
+	
+	public List<Material> findMaterialBySearchFieldsRange(MaterialSearchFields lower,MaterialSearchFields upper,SearchOptions options)
+	throws DoesNotExistException
+	{
+
+		QueryBuilder builder = new QueryBuilder();
+		
+		builder.append("select so from Material so");
+		builder.appendBetween("so.rowInfo.recordStatus", lower.getRecordStatus(),upper.getRecordStatus(),true);
+		builder.appendBetween("so.code", lower.getCode(),upper.getCode(),true);
+		builder.appendBetween("so.description", lower.getDescription(),upper.getDescription(),true);
+		builder.appendBetween("so.materialtype.type", lower.getType(),upper.getType(),true);
+		
+		Query q = builder.createQuery(_em, options, "so");
+	    System.out.println(builder.getQueryString());
+		List l = q.getResultList();
+	
+		return l;
+
+	
+	}
+	
+	public List<Material> findMaterialBySearchFields(MaterialSearchFields search,SearchOptions options) 
+	throws DoesNotExistException
+	{		
+		QueryBuilder builder = new QueryBuilder();
+		
+		if (options!=null && options.getSortColumnNames().size() > 0) 
+		{}
+		else{
+			builder.append(" order by u.id");
+		}
+		Query q = builder.createQuery(_em, options, "u");	
+		List l = q.getResultList();	
+		return l;
+			
 	}
 }
