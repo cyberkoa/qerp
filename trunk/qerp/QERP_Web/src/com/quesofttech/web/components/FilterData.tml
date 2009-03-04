@@ -15,6 +15,10 @@
 								<th>Customer Code</th>
 								<td><input t:type="TextField" t:id="lowerCustomerCode" t:value="lowerCustomerCode" size="10" maxLength="10" /></td><td><input t:type="TextField" t:id="upperCustomerCode" t:value="upperCustomerCode" size="10" maxLength="10" /></td>							
 							</tr>
+							<tr>
+								<th>Customer PO</th>
+								<td><input t:type="TextField" t:id="lowerCustomerPO" t:value="lowerCustomerPO" size="20" maxLength="20" /></td><td><input t:type="TextField" t:id="upperCustomerpo" t:value="upperCustomerpo" size="20" maxLength="20" /></td>							
+							</tr>
 						</table>
 						<div >
 							<t:submit t:id="btnFilter" value="Submit"></t:submit>
