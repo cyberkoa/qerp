@@ -7,18 +7,18 @@ Roadmap shows the plan and schedule and feature list for each development milest
 == Details ==
 
 || *Milestone*                        ||  *Feature Summary*                          || *Target*   ||
-|| [Roadmap_Alpha_0.10 Alpha 0.10]    ||  Sales, Inventory(1/2),BOM, Production(1/2) || Q1 2009    ||
-|| [Roadmap_Alpha_0.20 Alpha 0.20]    ||  Code Refactoring                           || Q2 2009    ||
-|| [Roadmap_Alpha_0.30 Alpha 0.30]    ||  Purchasing system,Inventory, Production    || Q4 2009    ||
-|| [Roadmap_Alpha_0.40 Alpha 0.40]    ||  Bug fixing                                 || Q1 2010    ||
-|| [Roadmap_Beta_0.50 Beta 0.50]      ||  Stock Take System                          || Q2 2010    ||
-|| [Roadmap_Beta_0.60 Beta 0.60]      ||  Improve system design   (All modules)      || Q4 2010    ||
-|| [Roadmap_Beta_0.70 Beta 0.70]      ||  Flow based operation                       || Q2 2011    ||
-|| [Roadmap_Beta_0.80 Beta 0.80]      ||  Material Resource Planning(MRP)            || Q4 2011    ||
-|| [Roadmap_Beta_0.90 Beta 0.90]      ||  Supply Chain Management (SCM)              || Q1 2012    ||
-|| [Roadmap_RC_1 Release Candidate 1] ||  Code frozen. Bugs fixing only              || April 2012 ||
-|| [Roadmap_RC_2 Release Candidate 2] ||  Bugs fixing and layout change only         || May 2012   ||
-|| [Roadmap_Release Release 1.00]     ||  Manual and Help                            || June 2012  ||
+|| [RoadmapAlpha010 Alpha 0.10]    ||  Sales, Inventory(1/2),BOM, Production(1/2) || Q1 2009    ||
+|| [RoadmapAlpha020 Alpha 0.20]    ||  Code Refactoring                           || Q2 2009    ||
+|| [RoadmapAlpha030 Alpha 0.30]    ||  Purchasing system,Inventory, Production    || Q4 2009    ||
+|| [RoadmapAlpha040 Alpha 0.40]    ||  Bug fixing                                 || Q1 2010    ||
+|| [RoadmapBeta050 Beta 0.50]      ||  Stock Take System                          || Q2 2010    ||
+|| [RoadmapBeta060 Beta 0.60]      ||  Improve system design   (All modules)      || Q4 2010    ||
+|| [RoadmapBeta070 Beta 0.70]      ||  Flow based operation                       || Q2 2011    ||
+|| [RoadmapBeta080 Beta 0.80]      ||  Material Resource Planning(MRP)            || Q4 2011    ||
+|| [RoadmapBeta090 Beta 0.90]      ||  Supply Chain Management (SCM)              || Q1 2012    ||
+|| [RoadmapRC1 Release Candidate 1] ||  Code frozen. Bugs fixing only              || April 2012 ||
+|| [RoadmapRC2 Release Candidate 2] ||  Bugs fixing and layout change only         || May 2012   ||
+|| [RoadmapRelease100 Release 1.00]     ||  Manual and Help                            || June 2012  ||
 
 
 <wiki:comment>
