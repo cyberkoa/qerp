@@ -7,12 +7,19 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.common.exception.DuplicateAlternateKeyException;
 import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
+import com.quesofttech.business.common.query.SearchOptions;
 
 import com.quesofttech.web.common.ContextFixer;
+import com.quesofttech.web.components.FilterData;
+import com.quesofttech.web.components.FilterDataMaterial;
+import com.quesofttech.web.components.QERPWindow;
 import com.quesofttech.business.domain.general.UOM;
 import com.quesofttech.business.domain.general.iface.IUomServiceRemote;
 import com.quesofttech.business.domain.inventory.*;
+import com.quesofttech.business.domain.inventory.dto.MaterialSearchFields;
 import com.quesofttech.business.domain.inventory.iface.*;
+import com.quesofttech.business.domain.sales.SalesOrder;
+import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
@@ -33,6 +40,7 @@ import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.services.Request;
+import org.omg.CORBA.exception_type;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 
@@ -43,6 +51,48 @@ import com.quesofttech.web.model.base.GenericSelectModel;
 
 
 public class MaterialMaintenance extends SecureBasePage {
+	
+	//===============Filter window=========================
+	@Component(parameters = {"width=300", "height=300", 
+			 "style=bluelighting", "show=false","modal=true", "title=literal:Filter Window"})
+	@Property
+	private QERPWindow _filterWindow;
+	
+	@Component
+	@Property
+	private FilterDataMaterial _filterDataMaterial;
+	 
+	 
+	 @Persist
+	 @Property
+	 private MaterialSearchFields lowerSFs;
+	 
+	 @Persist
+	 @Property
+	 private MaterialSearchFields upperSFs;
+	 
+	 public void onFilterDataMaterial()
+	 {
+	   lowerSFs = _filterDataMaterial.getLowerSearchFields();
+	   upperSFs = _filterDataMaterial.getUpperSearchFields();	   
+	 }
+
+	 void _FilterRecord()
+	 {		
+		   MaterialSearchFields lowerSearchFields = null;
+		   MaterialSearchFields upperSearchFields = null;
+		   			   
+		   lowerSearchFields = _filterDataMaterial.getLowerSearchFields();
+		   upperSearchFields = _filterDataMaterial.getUpperSearchFields();
+	 }
+	 
+	
+	
+	
+	//===============End of Filter Window==================
+	
+	
+	
 	private void refreshDisplay()
     {
     	if(myState.equals("U"))
@@ -59,8 +109,7 @@ public class MaterialMaintenance extends SecureBasePage {
 
 	Object onFailure()
 	{
-		_form.clearErrors();
-		//System.out.println("onFailure lah");
+		_form.clearErrors();		
 		_form.recordError(getMessages().get("Record_Save_Error"));
 		return blockFormView;
 	}
@@ -287,8 +336,31 @@ public class MaterialMaintenance extends SecureBasePage {
 	
 	//@Component(id = "materialType")
 	//private Select _MaterialType;
+	void RefreshRecords() throws Exception
+	{
+		RefreshRecords( new Delegate() 
+		{ public List<Material> bindData() 
+			{ 
+			try { 
+				 if(lowerSFs==null&&upperSFs==null)
+				   return getMaterialService().findMaterials();
+				 else
+				 {
+                	SearchOptions options = new SearchOptions();
+            	 
+            	    return getMaterialService().findMaterialBySearchFieldsRange(_filterDataMaterial.getLowerSearchFields(), _filterDataMaterial.getUpperSearchFields(),options);
+				 } 
+			    } 
+			catch(BusinessException be) {} 
+			
+			return null;} 
+		    }
+		);
+		
+	}
 	
-	void RefreshRecords() throws BusinessException
+	
+	void RefreshRecords(Delegate delegate) throws BusinessException
 	{
 		List<MaterialType> materialTypes = null;
 		List<UOM> uoms = null;
@@ -296,17 +368,17 @@ public class MaterialMaintenance extends SecureBasePage {
     	try {
            materialTypes = this.getMaterialTypeService().findMaterialTypes();
     	}
-    	catch (DoesNotExistException e) {}
+    	catch (DoesNotExistException e) {
+    		_form.recordError(e.getMessage());
+    	}
        	try {       
            uoms = this.getUOMService().findUOMs();
     	}
-    	catch (DoesNotExistException e) {}
-    	
-    	System.out.println(uoms.getClass());
-    	
-    	for (UOM u : uoms)
-    	   System.out.println(u.getId());
-    	
+    	catch (DoesNotExistException e) {
+    		_form.recordError(e.getMessage());
+    	}
+    	    	
+    	 	
     	uomsSelect = null;
     	materialTypesSelect = null;
 		uomsSelect = new GenericSelectModel<UOM>(uoms,UOM.class,"shortForm","id",_access);
@@ -316,11 +388,11 @@ public class MaterialMaintenance extends SecureBasePage {
 		try
 		{
 			
-		   _Materials = getMaterialService().findMaterials();
+		   _Materials = (List<Material>)delegate.bindData();
 		}
-		catch(BusinessException be)
+		catch(Exception be)
 		{
-		
+			_form.recordError(be.getMessage());
 		}
 		
 		if(_Materials!=null && !_Materials.isEmpty())
@@ -335,19 +407,16 @@ public class MaterialMaintenance extends SecureBasePage {
 				MaterialDetail = _Materials.get(int_SelectedRow - 1);
 				
 			}	
-		       myState="U";
+			myState="U";
 			viewDisplayText="Block";
 			viewEditText="none";
-		   assignToLocalVariable(MaterialDetail);
+			assignToLocalVariable(MaterialDetail);
 		   
-		   // cyberkoa : The following code has been removed because is not needed, tested.
-		   //if(MaterialDetail.getMaterialType()!=null)
-		   //  this.findMaterialTypeInModel(MaterialDetail.getMaterialType().getId());
 		}
 		else
-	       {
-	    	   myState="A"; // If no List then should be in A mode instead of Update mode.
-	       }
+       {
+    	   myState="A"; // If no List then should be in A mode instead of Update mode.
+       }
 	}
 	
 	private int getRcdLocation( Long id)  throws BusinessException
@@ -372,7 +441,7 @@ public class MaterialMaintenance extends SecureBasePage {
 	}
 	
 	
-	Object onSuccess() throws BusinessException
+	Object onSuccessFromMaterialForm() throws BusinessException
 	{
 		try
 		{
@@ -403,7 +472,7 @@ public class MaterialMaintenance extends SecureBasePage {
 	}
 	
 	
-	void onValidateForm() throws BusinessException{
+	void onValidateFormFromMaterialForm() throws BusinessException{
 		try{
 			   if ("U"== myState)
 			   {
@@ -414,6 +483,11 @@ public class MaterialMaintenance extends SecureBasePage {
 			   {
 			       _AddRecord();
 			   }
+			   else
+				if("F" == myState)
+				{
+					_FilterRecord();
+				}
 			}
 		catch (BusinessException e) {
 			if(e instanceof DuplicatePrimaryKeyException  || e instanceof DuplicateAlternateKeyException)

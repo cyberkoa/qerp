@@ -332,34 +332,19 @@ public class SalesOrderMaintenance extends SecureBasePage {
 			//}
 		}
 		void RefreshRecords(Delegate delegate)
-		{
-			System.out.println("refresh 1");
+		{			
 			ModelRefresh();
-			
-			System.out.println("refresh 2");
-			
 			List<Customer> list = null;
 	    	try {
 	           list = this.getCustomerService().findCustomers();
 	    	}
-	    	catch (DoesNotExistException e) {}
-	    	
+	    	catch (DoesNotExistException e) {
+	    		_form.recordError(e.getMessage());
+	    	}	    	
 	        _customers = new GenericSelectModel<Customer>(list,Customer.class,"codeName","id",_access);
-
-			//try
-			//{
-			   //_SalesOrders = getSalesOrderService().findSalesOrders();
-				_SalesOrders = (List<SalesOrder>)delegate.bindData();
-			//}
-			//catch(BusinessException be)
-			//{
-			
-			//}
-			
+			_SalesOrders = (List<SalesOrder>)delegate.bindData();
 			if(_SalesOrders!=null && !_SalesOrders.isEmpty())
 			{	   
-				
-			   System.out.println("Total record selected : " + _SalesOrders.size());
 			   if(int_SelectedRow==0)
 				{
 				   SalesOrderDetail = _SalesOrders.get(_SalesOrders.size() - 1);
@@ -370,13 +355,12 @@ public class SalesOrderMaintenance extends SecureBasePage {
 					if(_SalesOrders.size()<int_SelectedRow)
 						int_SelectedRow = 1; // Once Smaller always reset to pointing to first record.
 					System.out.println("error is here: " + int_SelectedRow);
-					SalesOrderDetail = _SalesOrders.get(int_SelectedRow - 1);
-					
+					SalesOrderDetail = _SalesOrders.get(int_SelectedRow - 1);					
 				}	
-			   myState="U";
+				myState="U";
 				viewDisplayText="Block";
 				viewEditText="none";
-			   assignToLocalVariable(SalesOrderDetail);
+				assignToLocalVariable(SalesOrderDetail);
 			}
 			else
 		       {
@@ -635,51 +619,19 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		}
  
 		 public void onFilterData()
-		 {
-		   //SalesOrderSearchFields lowerSearchFields = null;
-		   //SalesOrderSearchFields upperSearchFields = null;
-		   
-		   System.out.println("Yes , trigger");
-		   
+		 {		   
 		   lowerSFs = _filterData.getLowerSearchFields();
 		   upperSFs = _filterData.getUpperSearchFields();
-		   
-		   System.out.println("lowerSearchFields DocNo: " + lowerSFs.getDocNo());
-		   System.out.println("upperSearchFields DocNo: " + upperSFs.getDocNo());
-		   //myState = "F";
-		   //_strMode = "F";
-		   
-		   /*
-		   RefreshRecords( new Delegate() 
-		                      { 
-			                   public List<SalesOrder> bindData() 
-			                    { try 
-			                       { 
-			                    	 SearchOptions options = new SearchOptions();
-			                    	 
-			                    	 return getSalesOrderService().findSalesOrdersBySearchFieldsRange(_filterData.getLowerSearchFields(), _filterData.getUpperSearchFields(),options);
-			                       } 
-			                       catch(BusinessException be) {} 
-			                       
-			                       return null;
-			                   } 
-			                  });
-		   		*/
 		 }
 
 		 void _FilterRecord()
-		 {
-			 System.out.println("Yes , _FilterRecord");
+		 {			
 			   SalesOrderSearchFields lowerSearchFields = null;
 			   SalesOrderSearchFields upperSearchFields = null;
 			   			   
 			   lowerSearchFields = _filterData.getLowerSearchFields();
 			   upperSearchFields = _filterData.getUpperSearchFields();
 			   
-			   System.out.println("_Filter : lowerSearchFields DocNo: " + lowerSearchFields.getDocNo());
-			   System.out.println("_Filter : upperSearchFields DocNo: " + upperSearchFields.getDocNo());
-
-			 
 		 }
 		 
 		 

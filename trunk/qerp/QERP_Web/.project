@@ -3,7 +3,6 @@
 	<name>QERP_Web</name>
 	<comment></comment>
 	<projects>
-		<project>QERP_EJB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
