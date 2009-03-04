@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
+import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.MaterialType;
+import com.quesofttech.business.domain.inventory.dto.MaterialSearchFields;
 
 
 /**
@@ -29,6 +31,8 @@ public interface IMaterialServiceRemote {
 	List<Material> findForSaleMaterials() throws DoesNotExistException;
 	List<Material> findProducedMaterials() throws DoesNotExistException;
 	List<Material> findMaterialsExceptFinishGood() throws DoesNotExistException;
+	public List<Material> findMaterialBySearchFieldsRange(MaterialSearchFields lower,MaterialSearchFields upper,SearchOptions options) throws DoesNotExistException;
+	public List<Material> findMaterialBySearchFields(MaterialSearchFields search,SearchOptions options)	throws DoesNotExistException;
 	
 	
 }
