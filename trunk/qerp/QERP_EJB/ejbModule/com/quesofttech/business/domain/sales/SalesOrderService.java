@@ -276,6 +276,8 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	
 		builder.appendBetween("so.customer.code", lower.getCustomerCode(),upper.getCustomerCode(),true);
 		builder.appendBetween("so.docNo",lower.getDocNo(),upper.getDocNo(),true);
+		builder.appendBetween("so.customerPO",lower.getCustomerPO(),upper.getCustomerPO(),true);
+		builder.appendBetween("so.rowInfo.recordStatus",lower.getRecordStatus(),upper.getRecordStatus(),true);
 		/*
 		builder.appendLikeIgnoreCaseSkipEmpty("u.firstName", search.getFirstName());
 		builder.appendLikeIgnoreCaseSkipEmpty("u.lastName", search.getLastName());

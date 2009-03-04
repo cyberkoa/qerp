@@ -14,12 +14,13 @@ import com.quesofttech.business.domain.sales.Customer;
 @SuppressWarnings("serial")
 public class SalesOrderSearchFields extends BaseSearchFields implements Serializable {
 
-	private String docNo;
+	private Long docNo;
 	private Customer customer = new Customer();
 	private String customerCode = null;
     private String material = null;
 	private String recordStatus = null;
 	private Integer version = null;
+	private String customerPO = null;
 
 	/*
 	public String toString() {
@@ -32,6 +33,14 @@ public class SalesOrderSearchFields extends BaseSearchFields implements Serializ
 	}
     */
 
+
+	public String getCustomerPO() {
+		return customerPO;
+	}
+
+	public void setCustomerPO(String customerPO) {
+		this.customerPO = customerPO;
+	}
 
 	/**
 	 * @return the customer
@@ -92,14 +101,14 @@ public class SalesOrderSearchFields extends BaseSearchFields implements Serializ
 	/**
 	 * @return the docNo
 	 */
-	public String getDocNo() {
+	public Long getDocNo() {
 		return docNo;
 	}
 
 	/**
 	 * @param docNo the docNo to set
 	 */
-	public void setDocNo(String docNo) {
+	public void setDocNo(Long docNo) {
 		this.docNo = docNo;
 	}
 
