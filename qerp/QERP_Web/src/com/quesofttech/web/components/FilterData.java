@@ -20,12 +20,12 @@ public class FilterData extends SecureBasePage
 
 	@Component(id = "lowerDocNo")
 	private TextField _lowerDocNo;
-	private String lowerDocNo;
+	private Long lowerDocNo;
 
 	
 	@Component(id = "upperDocNo")
 	private TextField _upperDocNo;
-	private String upperDocNo;
+	private Long upperDocNo;
 	
 	@Component(id = "lowerCustomerCode")
 	private TextField _lowerCustomerCode;
@@ -34,6 +34,15 @@ public class FilterData extends SecureBasePage
 	@Component(id = "upperCustomerCode")
 	private TextField _upperCustomerCode;
 	private String upperCustomerCode;
+	
+	
+	@Component(id = "lowerCustomerPO")
+	private TextField _lowerCustomerPO;
+	private String lowerCustomerPO;
+	
+	@Component(id = "upperCustomerPO")
+	private TextField _upperCustomerPO;
+	private String upperCustomerPO;
 	
 	
     @Inject
@@ -67,18 +76,41 @@ public class FilterData extends SecureBasePage
 		//System.out.println("lowerDocNo : " + lowerDocNo.toString());
 		//System.out.println("upperDocNo : " + upperDocNo.toString());
 		
+		lowerSearchFields.setCustomerCode(lowerCustomerCode);
+		upperSearchFields.setCustomerCode(upperCustomerCode);
+		
+		
 		lowerSearchFields.setDocNo(lowerDocNo);
 		lowerSearchFields.setRecordStatus("A");
 
 		upperSearchFields.setDocNo(upperDocNo);
 		upperSearchFields.setRecordStatus("A");
+		
+		lowerSearchFields.setCustomerPO(lowerCustomerPO);
 
+		upperSearchFields.setCustomerPO(upperCustomerPO);
 		// Trigger the container event "onFilterData"
 		resources.triggerEvent("filterData", new Object[] {}, null);
 		
 		System.out.println("onSubmitFromSearchForm");
 		//resources.getContainer().`
 		//return null;
+	}
+
+	public String getLowerCustomerPO() {
+		return lowerCustomerPO;
+	}
+
+	public void setLowerCustomerPO(String lowerCustomerPO) {
+		this.lowerCustomerPO = lowerCustomerPO;
+	}
+
+	public String getUpperCustomerPO() {
+		return upperCustomerPO;
+	}
+
+	public void setUpperCustomerPO(String upperCustomerPO) {
+		this.upperCustomerPO = upperCustomerPO;
 	}
 
 	/**
@@ -114,28 +146,28 @@ public class FilterData extends SecureBasePage
 	/**
 	 * @return the lowerDocNo
 	 */
-	public String getLowerDocNo() {
+	public Long getLowerDocNo() {
 		return lowerDocNo;
 	}
 
 	/**
 	 * @param lowerDocNo the lowerDocNo to set
 	 */
-	public void setLowerDocNo(String lowerDocNo) {
+	public void setLowerDocNo(Long lowerDocNo) {
 		this.lowerDocNo = lowerDocNo;
 	}
 
 	/**
 	 * @return the upperDocNo
 	 */
-	public String getUpperDocNo() {
+	public Long getUpperDocNo() {
 		return upperDocNo;
 	}
 
 	/**
 	 * @param upperDocNo the upperDocNo to set
 	 */
-	public void setUpperDocNo(String upperDocNo) {
+	public void setUpperDocNo(Long upperDocNo) {
 		this.upperDocNo = upperDocNo;
 	}
 
