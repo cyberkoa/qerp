@@ -261,6 +261,7 @@ private void refreshDisplay() throws Exception
        documentType.setRunningNo(RunningNo);
        documentType.setType(Type);
        documentType.setRecordStatus("A");
+       //documentType.setDescription("test");
        java.util.Date today = new java.util.Date();
        documentType.setSessionId("");
        documentType.setVersion((long)1);

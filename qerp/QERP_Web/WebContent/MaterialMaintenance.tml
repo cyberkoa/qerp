@@ -13,6 +13,7 @@
        <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
        <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <button onclick="filterWindow.showCenter(true);" type="button"><img src="images/filterRecord24.png" /> </button>
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="grid" 
@@ -83,5 +84,8 @@
    
    </form>
 </t:block>
+<div t:id="filterWindow">
+ 	<div t:type="filterDataMaterial" t:id="filterDataMaterial"  />		
+</div>
 </body>
 </html>
