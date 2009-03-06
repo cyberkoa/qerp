@@ -44,10 +44,18 @@ import com.quesofttech.web.model.base.GenericSelectModel;
 
 public class WorkOrderReport extends SecureBasePage {
 	private Material materiallists;
+	private Long _productionOrderid;
+	
+	
 	
 	private List<String> _titles;
 	@Persist
 	private List<?> _materiallists;
+	
+	public void setProductionOrderID(Long productionorderid)
+	{
+		this._productionOrderid = productionorderid;
+	}
 	
 	public List<String> getTitles()
 	{

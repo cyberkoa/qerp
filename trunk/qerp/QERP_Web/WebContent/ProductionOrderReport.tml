@@ -1,0 +1,42 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Sales Order Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<h3>Production Order Report</h3>
+<t:zone t:id="zoneFormView" show="slidedown">
+    <t:delegate to="block" />
+</t:zone>
+
+<t:block id="blockFormView">
+   <form t:type="form" t:id="ProductionOrderReportForm" t:zone="zoneFormView" >
+	<table width="500" border="1">
+		<tr>
+			<td colspan="2">
+			<h2> Selection Criteria</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Production Order No:
+			</td>
+			<td>
+				<select  t:type="select" 
+				t:id="ProductionOrder" 
+				t:model="ProductionOrderSelect" 
+				encoder="ProductionOrderSelect" 
+				t:value="ProductionOrder" width="200px"/> 
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+				<t:actionlink				
+				t:id="toolbarPrint"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+			</td>
+		</tr>
+	</table>
+</form>
+</t:block >
+
+</body>
+</html>
