@@ -601,5 +601,17 @@ public class ProductionOrder extends BaseEntity {
 		else return null;
 	}
 
+	public String getDoctypeNo()
+	{
+		String docNo_1 = docNo.toString();
+		String docType_1 = documentType.getType();
+		String output = docNo_1 + docType_1;
+		if(output==null)
+		{
+			output = "N//A";		
+		}
+		return output;
+		
+	}
 
 }
