@@ -1,4 +1,4 @@
-package com.quesofttech.business.domain.system;
+package com.quesofttech.business.domain.inventory;
 
 import java.io.Serializable;
 //import java.sql.Date;
@@ -28,12 +28,7 @@ import javax.persistence.Embedded;
 
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.base.BaseEntity;
-//import com.quesofttech.business.domain.embeddable.RowInfo;
-//import com.quesofttech.business.domain.production.ProductionOrderMaterial;
-import com.quesofttech.business.domain.production.ProductionOrder;
-import com.quesofttech.business.domain.sales.SalesOrder;
-
-
+import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.business.common.exception.GenericBusinessException;
 import com.quesofttech.util.StringUtil;
@@ -42,20 +37,20 @@ import java.util.List;
 //import java.util.ArrayList;
 
 @Entity
-@Table(name = "DocumentType", uniqueConstraints = { @UniqueConstraint(columnNames = { "doct_Type" }) })
+@Table(name = "MaterialGroup", uniqueConstraints = { @UniqueConstraint(columnNames = { "matg_Group" }) })
 @SuppressWarnings("serial")
-public class DocumentType extends BaseEntity {
+public class MaterialGroup extends BaseEntity {
 	
 
-	//For Postgresql : @SequenceGenerator(name = "DocumentType_sequence", sequenceName = "DocumentType_id_seq")
+	//For Postgresql : @SequenceGenerator(name = "MaterialGroup_sequence", sequenceName = "MaterialGroup_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
-	@TableGenerator(  name="DocumentType_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="DocumentType", valueColumnName="keyField")
+	@TableGenerator(  name="MaterialGroup_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="MaterialGroup", valueColumnName="keyField")
 	@Id
-	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DocumentType_sequence")
+	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MaterialGroup_sequence")
 	//For MSSQL      : @GeneratedValue(strategy = GenerationType.IDENTITY)
 	//Generic solution :
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "DocumentType_id")	
-	@Column(name = "id_DocumentType", nullable = false)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "MaterialGroup_id")	
+	@Column(name = "id_MaterialGroup", nullable = false)
 	private Long id;
 	
 	@Version
@@ -64,64 +59,32 @@ public class DocumentType extends BaseEntity {
 
 
 	// Example of field	
-	@Column(name = "doct_Type", length = 1, nullable = false)
-	private String type;
+	@Column(name = "matg_Group", length = 5, nullable = false)
+	private String group;
 	
-	// Example of field	
-	@Column(name = "doct_Description", length = 100, nullable = false)
+	@Column(name = "matg_Description", length = 100, nullable = false)
 	private String description;
-	
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-
-	@Column(name = "doct_Prefix", length = 5)
-	private String prefix;
-	
-	
-	@Column(name = "doct_RunningNo", nullable = false)
-	private Long runningNo;
-	
-	// Vendor , Customer , Production or ... 
-	@Column(name = "doct_Category", nullable = false)
-	private Long catergory;
-	
-	
-	
 	
 	/*
 	@ManyToOne
 	@JoinColumn(name="fk_<ForeignTable>")	
 	private <ForeignTable> <foreignTable>;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="documentType", targetEntity=<ForeignTable>.class)
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="materialGroup", targetEntity=<ForeignTable>.class)
 	private List<<ForeignTable>> <foreignTable>s; // = new List<<ForeignTable>>();
 	*/
 
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="materialGroup", targetEntity=Material.class)
+	private List<Material> materials;
 	
-	@OneToMany(cascade= {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy="documentType", targetEntity=SalesOrder.class)
-	private List<SalesOrder> salesOrders;
-	
-	@OneToMany(cascade= {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy="documentType", targetEntity=ProductionOrder.class)
-	private List<ProductionOrder> productionOrders;
-	
-	
-	
-	public DocumentType() {
+	public MaterialGroup() {
 		super();
-
+	        //
 	}	
 
 	
 	// Constructors without the common fields
-	//public DocumentType(/* all fields */) {
+	//public MaterialGroup(/* all fields */) {
 	//	super();
 		/* Example of assignment
 		this.id = id;
@@ -131,21 +94,8 @@ public class DocumentType extends BaseEntity {
 	//}
 
 
-	
-
-
-	public Long getCatergory() {
-		return catergory;
-	}
-
-
-	public void setCatergory(Long catergory) {
-		this.catergory = catergory;
-	}
-
-
 	// Constructors with all fields
-	public DocumentType(/* all fields*/
+	public MaterialGroup(/* all fields*/
 			String recordStatus, String sessionId, String createLogin,
 			String createApp, Timestamp createTimestamp,
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
@@ -173,7 +123,7 @@ public class DocumentType extends BaseEntity {
 	public String toString() {
 		
 		StringBuffer buf = new StringBuffer();
-		buf.append("DocumentType: [");
+		buf.append("MaterialGroup: [");
 		buf.append("id=" + id + ", ");
 
 		/* All fields
@@ -202,7 +152,7 @@ public class DocumentType extends BaseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		return (obj == this) || (obj instanceof DocumentType) && getId() != null && ((DocumentType) obj).getId().equals(this.getId());
+		return (obj == this) || (obj instanceof MaterialGroup) && getId() != null && ((MaterialGroup) obj).getId().equals(this.getId());
 	}
 
 	// The need for a hashCode() method is discussed at http://www.hibernate.org/109.html
@@ -277,13 +227,13 @@ public class DocumentType extends BaseEntity {
 		
 		// Validate syntax...
 
-		if (StringUtil.isEmpty(type)) {
+		if (StringUtil.isEmpty(group)) {
 			//System.out.println("Yeah");
-			throw new ValueRequiredException(this, "DocumentType_Type");
+			throw new ValueRequiredException(this, "MaterialGroup_Group");
 		}
 
 		//if (StringUtil.isEmpty(description)) {
-		//	throw new ValueRequiredException(this, "DocumentType_Description");
+		//	throw new ValueRequiredException(this, "MaterialType_Description");
 		//}
 
 		/*
@@ -303,50 +253,54 @@ public class DocumentType extends BaseEntity {
 	}
 	
 	
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
 	
 
 	/**
-	 * @return the prefix
+	 * @return the group
 	 */
-	public String getPrefix() {
-		return prefix;
+	public String getGroup() {
+		return group;
 	}
 
 
 	/**
-	 * @param prefix the prefix to setnullable = false
+	 * @param group the group to set
 	 */
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+	
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
 	}
 
 
 	/**
-	 * @return the runningNo
+	 * @param description the description to set
 	 */
-	public Long getRunningNo() {
-		return runningNo;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 
 	/**
-	 * @param runningNo the runningNo to set
+	 * @return the materials
 	 */
-	public void setRunningNo(Long runningNo) {
-		this.runningNo = runningNo;
+	public List<Material> getMaterials() {
+		return materials;
+	}
+
+
+	/**
+	 * @param materials the materials to set
+	 */
+	public void setMaterials(List<Material> materials) {
+		this.materials = materials;
 	}
 
 
@@ -461,38 +415,5 @@ public class DocumentType extends BaseEntity {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
 	}
 
-
-	/**
-	 * @return the salesOrders
-	 */
-	public List<SalesOrder> getSalesOrders() {
-		return salesOrders;
-	}
-
-
-	/**
-	 * @param salesOrders the salesOrders to set
-	 */
-	public void setSalesOrders(List<SalesOrder> salesOrders) {
-		this.salesOrders = salesOrders;
-	}
-
-
-	/**
-	 * @return the productionOrders
-	 */
-	public List<ProductionOrder> getProductionOrders() {
-		return productionOrders;
-	}
-
-
-	/**
-	 * @param productionOrders the productionOrders to set
-	 */
-	public void setProductionOrders(List<ProductionOrder> productionOrders) {
-		this.productionOrders = productionOrders;
-	}
-
-	
 	
 }

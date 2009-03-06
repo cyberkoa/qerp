@@ -107,11 +107,11 @@ public class Material extends BaseEntity {
     @JoinColumn(name="fk_MaterialType")	
 	private MaterialType materialType;
 	
-	/*
+	
 	@ManyToOne
     @JoinColumn(name="fk_MaterialGroup")	
 	private MaterialGroup materialGroup;
-	*/	
+		
 	
 	@ManyToOne
     @JoinColumn(name="fk_BaseUOM")	
