@@ -1,49 +1,58 @@
-<html t:type="ReportTemplate" 
-CompanyHeader="LUM MAH PLASTIC AND PRINTING (M) SDN BHD"
-ReportName="PRODUCTION ORDER (PLANT 2)"
-FormNo="LM-F-SA-04"
+<html 
 xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+ 
 <body>
-<table>
+<table  border="1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center">
+			<h1><b>${CompDesc}</b></h1>			
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<b>ORDER FORM</b>			
+		</td>
+	</tr>
 	<tr>
 		<td width="800">
-			<table width="100%">
+			<table width="100%" border="1" cellspacing="0" cellpadding="0">
 				<tr>
 					<td>
-						<b>Order No</b>
+						<b>Order No:</b>
 					</td>
 					<td>
-						: ORD1312312
+						 ${printOrderNo}
 					</td>
 					<td>
-						<b>Order Date </b>
+						<b>Order Date: </b>
 					</td>
 					<td>
-						: 99/99/9999
+						 ${printOrderDate}
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<b>P/O No </b>
+						<b>P/O No : </b>
 					</td>
 					<td>
-						: P00123123
+						 ${printPOno}
 					</td>
 					<td>
-						<b>Delivery Date</b>
+						<b>Delivery Date:</b>
 					</td>
 					<td>
-						: 99/99/9999
+						 ${printDeliveryDate}
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<b>Customer No </b>
+						<b>Customer No:</b>
 					</td>
 					<td>
-						: C00001
+						 ${printCustomerNo}
 					</td>
 					<td colspan="2">
 						
@@ -52,10 +61,10 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 				
 				<tr>
 					<td>
-						<b>Brand Code</b>
+						<b>Brand Code:</b>
 					</td>
 					<td>
-						:  Blue berry
+						  Blue berry
 					</td>
 					<td colspan="2">
 						 
@@ -75,7 +84,33 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 	
 	<tr>
 		<td>
-			<b>Raw Material:-</b>			
+			<table width="100%" border="1" cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="100"> Code No </th>
+					<th width="100"> Film Type </th>
+					<th width="100"> Thickness </th>
+					<th width="100"> Width </th>
+					<th width="100"> Length </th>
+					<th width="100"> Quantity </th>
+					<th width="100"> Process </th>
+					<th width="150"> Production Date </th>					
+				</tr>
+				<t:loop source="RawMats" value="RawMat">
+					<tr>
+						<td>${CodeNo}</td>
+						<td>${Type}</td>
+						<td>${Thickness}</td>
+						<td>${Width}</td>
+						<td>${Length}</td>
+						<td>${Quantity}</td>
+						<td>${Process}</td>
+						<td>${ProductionDate}</td>
+						
+						
+					</tr>
+				</t:loop>
+
+			</table>			
 		</td>
 	</tr>
 	
