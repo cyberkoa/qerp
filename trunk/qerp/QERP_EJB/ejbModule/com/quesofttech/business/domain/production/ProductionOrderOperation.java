@@ -69,11 +69,11 @@ public class ProductionOrderOperation extends BaseEntity {
 	private Integer operation;
 	
 	
-	@Column(name = "prodoo_QuantityRequired", nullable = false)
-	private Double quantityRequired;
+	@Column(name = "prodoo_QuantityOrder", nullable = false)
+	private Double quantityOrder;
 		
-	@Column(name = "prodoo_QuantityConsumed", nullable = false)
-	private Double quantityConsumed;
+	@Column(name = "prodoo_QuantityReported", nullable = false)
+	private Double quantityReported;
 	
 	/*
 	@Column(name = "prodoo_Sequence", nullable = false)
@@ -91,8 +91,8 @@ public class ProductionOrderOperation extends BaseEntity {
 
 	
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="productionOrderOperation", targetEntity=ProductionOrderMaterial.class)
-	private List<ProductionOrderMaterial> productionOrderMaterials; // = new List<<ForeignTable>>();
+	//@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="productionOrderOperation", targetEntity=ProductionOrderMaterial.class)
+	//private List<ProductionOrderMaterial> productionOrderMaterials; // = new List<<ForeignTable>>();
 	
 	public ProductionOrderOperation() {
 		super();
@@ -254,7 +254,7 @@ public class ProductionOrderOperation extends BaseEntity {
 		 */
 		// Validate semantics...
 
-		if (this.quantityRequired <=0) {
+		if (this.quantityOrder <=0) {
 			throw new GenericBusinessException("Quantity_Order_Must_Greater_Than_Zero", new Object[] { });
 		}
 
@@ -391,11 +391,14 @@ public class ProductionOrderOperation extends BaseEntity {
 	}
 
 
+
+
+
 	/**
 	 * @return the quantityOrder
 	 */
 	public Double getQuantityOrder() {
-		return quantityRequired;
+		return quantityOrder;
 	}
 
 
@@ -403,23 +406,23 @@ public class ProductionOrderOperation extends BaseEntity {
 	 * @param quantityOrder the quantityOrder to set
 	 */
 	public void setQuantityOrder(Double quantityOrder) {
-		this.quantityRequired = quantityOrder;
+		this.quantityOrder = quantityOrder;
 	}
 
 
 	/**
-	 * @return the quantityReported
+	 * @return the quantityReport
 	 */
-	public Double getQuantityConsumed() {
-		return quantityConsumed;
+	public Double getQuantityReported() {
+		return quantityReported;
 	}
 
 
 	/**
-	 * @param quantityConsumed the quantityConsumed to set
+	 * @param quantityReport the quantityReport to set
 	 */
-	public void setQuantityConsumed(Double quantityConsumed) {
-		this.quantityConsumed = quantityConsumed;
+	public void setQuantityReported(Double quantityReported) {
+		this.quantityReported = quantityReported;
 	}
 
 
@@ -439,40 +442,26 @@ public class ProductionOrderOperation extends BaseEntity {
 	}
 
 
-	/**
-	 * @return the quantityRequired
-	 */
-	public Double getQuantityRequired() {
-		return quantityRequired;
-	}
 
-
-	/**
-	 * @param quantityRequired the quantityRequired to set
-	 */
-	public void setQuantityRequired(Double quantityRequired) {
-		this.quantityRequired = quantityRequired;
-	}
-
-
-
-
-
+	
+	
 	/**
 	 * @return the productionOrderMaterials
 	 */
+	/*
 	public List<ProductionOrderMaterial> getProductionOrderMaterials() {
 		return productionOrderMaterials;
 	}
-
+*/
 
 	/**
 	 * @param productionOrderMaterials the productionOrderMaterials to set
 	 */
+	/*
 	public void setProductionOrderMaterials(
 			List<ProductionOrderMaterial> productionOrderMaterials) {
 		this.productionOrderMaterials = productionOrderMaterials;
 	}
-
+*/
 	
 }

@@ -534,8 +534,8 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		ProductionOrderOperation productionOrderOperation = new ProductionOrderOperation();
 		
 		productionOrderOperation.setOperation(10);
-		productionOrderOperation.setQuantityOrder((double)30);
-		productionOrderOperation.setQuantityConsumed((double)0);
+		productionOrderOperation.setQuantityOrder((Double)30.0);
+		productionOrderOperation.setQuantityReported((Double)0.0);
 		
 		productionOrder.addProductionOrderOperation(productionOrderOperation);
 		
