@@ -30,8 +30,7 @@
 			<td>
 			</td>
 			<td>
-				<t:actionlink				
-				t:id="toolbarPrint"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+				<t:actionlink	t:id="toolbarPrint"><button><img src="images/addRecord24.png" /></button></t:actionlink>
 			</td>
 		</tr>
 	</table>

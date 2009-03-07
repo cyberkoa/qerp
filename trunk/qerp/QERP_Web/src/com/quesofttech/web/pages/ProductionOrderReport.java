@@ -85,7 +85,7 @@ public class ProductionOrderReport extends SecureBasePage {
 		return getBusinessServicesLocator().getProductionOrderServiceRemote();
 	}
 
-	
+	@Persist
 	private ProductionOrder productionOrder;
 	public ProductionOrder getProductionOrder()
 	{
@@ -147,15 +147,17 @@ public class ProductionOrderReport extends SecureBasePage {
 		this.blockFormView = blockFormView;
 	}
 
-	Object onSuccessFromProductionOrderReportForm() throws BusinessException
-	{		
-		return blockFormView;		
-	}
-	 @InjectPage
-	 private WorkOrderReport workorderreport;
-	private void onActionFromtoolbarPrint()
+	//Object onSuccessFromProductionOrderReportForm() throws BusinessException
+	//{		
+	//	return blockFormView;		
+	//}
+	@InjectPage
+	private WorkOrderReport workorderreport;
+	Object onActionFromtoolbarPrint()
 	{
+		System.out.println("productionOrder.getId():" + productionOrder.getId());
 		workorderreport.setProductionOrderID(productionOrder.getId());
+		return workorderreport;
 	}
 		 
 }
