@@ -39,8 +39,9 @@ import com.quesofttech.business.domain.general.iface.IBomServiceLocal;
 import com.quesofttech.business.domain.production.ProductionOrder;
 import com.quesofttech.business.domain.production.ProductionOrderOperation;
 import com.quesofttech.business.domain.production.ProductionOrderMaterial;
+import com.quesofttech.business.domain.production.Routing;
 import com.quesofttech.business.domain.production.iface.IProductionOrderServiceLocal;
-
+import com.quesofttech.business.domain.production.iface.IRoutingServiceLocal;
 
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.util.TreeNode;
@@ -72,6 +73,8 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	@EJB(beanName="ProductionOrderService")
 	private IProductionOrderServiceLocal productionOrderService;
 	
+	@EJB(beanName="RoutingService")
+	private IRoutingServiceLocal routingService;
 	
 	
 	// SalesOrder
@@ -473,6 +476,22 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 					
 					productionOrder.setMaterial(node.getData().getBomDetail().getMaterial());
 					
+					
+					List<Routing> routings = routingService.findRoutingsByMaterialId(productionOrder.getMaterial().getId());
+					
+					
+					for(Routing routing : routings)
+					{
+						ProductionOrderOperation productionOrderOperation = new ProductionOrderOperation();
+						productionOrderOperation.setOperation(routing.getOperation());
+						productionOrderOperation.setQuantityOrder(productionOrder.getQuantityOrder());
+						productionOrderOperation.setQuantityReported((Double)0.0);
+						
+						
+						productionOrder.addProductionOrderOperation(productionOrderOperation);
+						
+					}
+					
 					// Do a phantom explosion
 					
 					List<TreeNode<BomTreeNodeData>> productionOrderChildren = new ArrayList<TreeNode<BomTreeNodeData>>(node.getChildren());
@@ -527,6 +546,9 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 						productionOrder.addProductionOrderMaterial(productionOrderMaterial);
 
 					}
+					
+					
+					
 					
 					productionOrderService.addProductionOrder(productionOrder);
 					// update the production order with the production order materials

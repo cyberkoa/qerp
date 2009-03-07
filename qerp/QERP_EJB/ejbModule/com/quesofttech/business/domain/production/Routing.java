@@ -70,7 +70,7 @@ public class Routing extends BaseEntity {
 	@Column(name = "route_Description", length = 100, nullable = false)
 	private String description;
 
-	@Column(name = "route_SequenceType", length = 2, nullable = false)
+	@Column(name = "route_SequenceType", length = 2)
 	private String sequenceType;
 
 	
@@ -229,15 +229,19 @@ public class Routing extends BaseEntity {
 		
 		// Validate syntax...
 
-		//if (StringUtil.isEmpty(type)) {
+		if (operation==null || operation <= 0) {
 			//System.out.println("Yeah");
-		//	throw new ValueRequiredException(this, "MaterialType_Type");
-		//}
+			throw new ValueRequiredException(this, "Routing_Operation");
+		}
 
-		//if (StringUtil.isEmpty(description)) {
-		//	throw new ValueRequiredException(this, "MaterialType_Description");
-		//}
+		if (StringUtil.isEmpty(description)) {
+			throw new ValueRequiredException(this, "Routing_Description");
+		}
 
+		if (material==null) {
+			//System.out.println("Yeah");
+			throw new ValueRequiredException(this, "Routing_Operation");
+		}
 		/*
 		if (StringUtil.isEmpty(lastName)) {
 			throw new ValueRequiredException(this, "User_lastName");
@@ -251,7 +255,7 @@ public class Routing extends BaseEntity {
 		}
 		*/
 		 
-		throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
+		//throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
 	}
 	
 	

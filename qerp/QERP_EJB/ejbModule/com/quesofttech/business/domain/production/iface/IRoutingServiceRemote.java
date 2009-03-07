@@ -23,5 +23,7 @@ public interface IRoutingServiceRemote {
 	void addRouting(Routing routing) throws BusinessException;
 	
 	void logicalDeleteRouting(Routing routing) throws BusinessException;
+	
+	List<Routing> findRoutingsByMaterialId(Long materialId) throws DoesNotExistException;
 
 }
