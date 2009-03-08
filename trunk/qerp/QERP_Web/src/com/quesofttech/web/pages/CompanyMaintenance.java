@@ -24,6 +24,7 @@ import org.apache.tapestry5.Block;
 import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
+import org.omg.CORBA.exception_type;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.annotations.OnEvent;
@@ -332,15 +333,22 @@ public class CompanyMaintenance extends SecureBasePage {
 	
 	
 	void onValidateForm() {
-	   if ("U"== myState)
-	   {
-	       _UpdateRecord();
-	   }
-	   else
-	   if ("A" == myState)
-	   {
-	       _AddRecord();
-	   }
+		try
+		{
+		   if ("U"== myState)
+		   {
+		       _UpdateRecord();
+		   }
+		   else
+		   if ("A" == myState)
+		   {
+		       _AddRecord();
+		   }
+		}
+		catch(Exception e)
+		{
+			_form.recordError(e.getMessage());
+		}
 	}
 	
 	void assignToDatabase(Company company){
@@ -405,7 +413,7 @@ public class CompanyMaintenance extends SecureBasePage {
 	   }
 	   catch(BusinessException be)
 	   {
-	
+		   _form.recordError(be.getMessage());
 	   }
 	   if(company !=null)
 	   {
@@ -419,15 +427,13 @@ public class CompanyMaintenance extends SecureBasePage {
 			catch (BusinessException e) {
 				if(e instanceof DuplicatePrimaryKeyException  || e instanceof DuplicateAlternateKeyException)
 				{
-					_form.recordError(_code, e.getLocalizedMessage());
+					_form.recordError(e.getMessage());
 				}
 				else	
-					_form.recordError(e.getLocalizedMessage());
+					_form.recordError(e.getMessage());
 			}
 			catch (Exception e) {
-			   _logger.info("Record_Update_Error");
-			   e.printStackTrace();
-			   _form.recordError(getMessages().get("Record_Update_Error"));
+				_form.recordError(e.getMessage());
 	       }
 	   }
 	}
@@ -458,12 +464,10 @@ public class CompanyMaintenance extends SecureBasePage {
 	           RefreshRecords();
 	       }
 	           catch (BusinessException e) {
-	           _form.recordError(_code, e.getLocalizedMessage());
+	        	   _form.recordError(e.getMessage());
 	   }
 	       catch (Exception e) {
-	           _logger.info("Company_Delete_problem");
-	           e.printStackTrace();
-	           _form.recordError(getMessages().get("Company_Delete_problem"));
+	    	   _form.recordError(e.getMessage());
 	       }
 	   }
 	}
@@ -499,7 +503,7 @@ public class CompanyMaintenance extends SecureBasePage {
 	   }
 	   catch(BusinessException be)
 	   {
-	
+		   _form.recordError(be.getMessage());
 	   }
 	
 	   if(CompanyDetail!=null)

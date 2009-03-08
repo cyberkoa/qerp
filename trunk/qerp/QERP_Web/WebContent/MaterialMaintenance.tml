@@ -19,7 +19,7 @@
            t:id="grid" 
            t:source="Materials"
            t:row="Material"
-           t:reorder="id,code,description,materialtypecode,grade,length,width,height,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,code,description,materialtypecode, grade,length,width,height,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
                    t:rowsPerPage="10"
            t:exclude="sessionid,recordstatus,version,modifyapp,createapp,materialtypedesc,codedescription"
                    
@@ -52,7 +52,11 @@
                        <tr>
                            <th><t:label t:for="Description">Description</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="Description" t:value="Description" t:maxLength="100" t:size="100" /> </td>
-                       </tr>                       
+                       </tr>    
+                       <tr>
+                           <th><t:label t:for="materialgroup">Material Group</t:label>:</th>
+                           <td>   <select  t:type="select" t:id="materialgroup" t:model="materialGroupsSelect" encoder="materialGroupsSelect" t:value="materialgroup" /> </td>                      
+                       </tr>                   
                        <tr>
                            <th><t:label t:for="materialType">MaterialType</t:label>:</th>
                            <td>   <select  t:type="select" t:id="materialType" t:model="materialTypesSelect" encoder="materialTypesSelect" t:value="materialType" /> </td>                      

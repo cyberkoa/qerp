@@ -272,6 +272,37 @@ public class MaterialMaintenance extends SecureBasePage {
 	
 	
 	//===============================================================
+	//			Material Group ComboBox
+	//===============================================================
+	@Property
+	@Persist
+	@SuppressWarnings("unused")
+	private GenericSelectModel<MaterialGroup> materialGroupsSelect;	
+	
+	//@Inject
+    //private PropertyAccess _access;
+	
+	private IMaterialGroupServiceRemote getMaterialGroupService() {
+		return getBusinessServicesLocator().getMaterialGroupServiceRemote();
+	}
+
+	
+	private MaterialGroup materialgroup;
+	public MaterialGroup getMaterialGroup()
+	{
+	   return materialgroup;
+	}
+
+	public void setMaterialGroup(MaterialGroup materialgroup)
+	{
+	   this.materialgroup = materialgroup;
+	}
+	//===============================================================
+	//				Material Group ComboBox
+	//===============================================================
+	
+	
+	//===============================================================
 	//			MaterialType ComboBox
 	//===============================================================
 	@Property
@@ -364,7 +395,14 @@ public class MaterialMaintenance extends SecureBasePage {
 	{
 		List<MaterialType> materialTypes = null;
 		List<UOM> uoms = null;
+		List<MaterialGroup> materialGroups = null;
 		
+		try {
+	           materialGroups = this.getMaterialGroupService().findMaterialGroups();
+	    	}
+	    	catch (DoesNotExistException e) {
+	    		_form.recordError(e.getMessage());
+	    	}
     	try {
            materialTypes = this.getMaterialTypeService().findMaterialTypes();
     	}
@@ -381,9 +419,12 @@ public class MaterialMaintenance extends SecureBasePage {
     	 	
     	uomsSelect = null;
     	materialTypesSelect = null;
+    	materialGroupsSelect = null;
+    	
+    	
 		uomsSelect = new GenericSelectModel<UOM>(uoms,UOM.class,"shortForm","id",_access);
 		materialTypesSelect = new GenericSelectModel<MaterialType>(materialTypes,MaterialType.class,"typeDescription","id",_access);
-		
+		materialGroupsSelect = new GenericSelectModel<MaterialGroup>(materialGroups,MaterialGroup.class,"CodeDescription","id",_access);
 		
 		try
 		{
@@ -509,6 +550,7 @@ public class MaterialMaintenance extends SecureBasePage {
 	   Material.setDescription(Description);
 	   //Material.setversion(version);
 	   Material.setMaterialType(materialtype);
+	   Material.setMaterialGroup(materialgroup);
 	   Material.setGrade(grade);
 	   Material.setBaseUOM(uom);
 	   Material.getDimension().setHeight(height);
@@ -522,6 +564,7 @@ public class MaterialMaintenance extends SecureBasePage {
 	   this.id = Material.getId();
 	   this.Code = Material.getCode();
 	   this.Description = Material.getDescription();
+	   this.materialgroup = Material.getMaterialGroup();
 	   //this.version = Material.getversion();
 	  this.materialtype = Material.getMaterialType();
 	  this.height = Material.getDimension().getHeight();
