@@ -35,10 +35,7 @@
                            <th><t:label t:for="id">id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
-                       <tr>
-                           <th><t:label t:for="Description">Description</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Description" t:value="Description" t:maxLength="100" t:size="100" /> </td>
-                       </tr>
+                       
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>
                            <td>   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </td>
@@ -48,10 +45,11 @@
                            <td>   <input  t:type="TextField" t:id="Operation" t:value="Operation" t:maxLength="11" t:size="11" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="SequenceType">SequenceType</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="SequenceType" t:value="SequenceType" t:maxLength="2" t:size="2" /> </td>
+                           <th><t:label t:for="Description">Description</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Description" t:value="Description" t:maxLength="100" t:size="100" /> </td>
                        </tr>
-                               </table>
+                      
+                   </table>
                </td>
            </tr>
        </table>
