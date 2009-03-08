@@ -414,6 +414,10 @@ public class MaterialGroup extends BaseEntity {
 	public void setModifyTimestamp(java.sql.Timestamp modifyTimestamp) {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
 	}
+	public String getCodeDescription()
+	{
+		return group + " - " + description;
+	}
 
 	
 }
