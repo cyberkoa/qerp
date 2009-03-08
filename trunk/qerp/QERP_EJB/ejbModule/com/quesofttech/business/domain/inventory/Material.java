@@ -64,6 +64,17 @@ public class Material extends BaseEntity {
 	@Column(name = "id_Material", nullable = false)
 	private Long id;
 	
+	public MaterialGroup getMaterialGroup() {
+		return materialGroup;
+	}
+
+
+	public void setMaterialGroup(MaterialGroup materialGroup) {
+		this.materialGroup = materialGroup;
+	}
+
+
+
 	@Version
 	@Column(nullable = false)
 	private Integer version;
