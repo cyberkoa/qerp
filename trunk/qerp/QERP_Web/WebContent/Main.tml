@@ -1,7 +1,8 @@
 <t:cmp_layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
-<table width="800">
+<div style="width:700px;height:100%;">
+<table width="800" >
 	<tr>
-		<td colspan="2">
+		<td colspan="2" width="100%">
 			Bulletin
 		</td>
 	</tr>
@@ -14,5 +15,6 @@
 		</td>
 	</tr>
 </table>
-<h1>QERP Software </h1> <h3> powered by Quesoware</h3>
+</div>
+
 </t:cmp_layout>

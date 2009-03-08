@@ -152,20 +152,7 @@ public class RoutingMaintenance extends SecureBasePage {
 
     //===============================
     // Text Component for SequenceType
-    @Component(id = "SequenceType")
-    private TextField _SequenceType;
-    private String SequenceType;
-    public String getSequenceType()
-    {
-       return SequenceType;
-    }
-
-    public void setSequenceType(String SequenceType)
-    {
-       this.SequenceType = SequenceType;
-    }
     
-	
 	private IMaterialServiceRemote getMaterialService() {
 		return getBusinessServicesLocator().getMaterialServiceRemote();
 	}
@@ -281,8 +268,7 @@ private void refreshDisplay()
     void assignToDatabase(Routing routing){
        routing.setId(id);
        routing.setDescription(Description);
-       routing.setOperation(Operation);
-       routing.setSequenceType(SequenceType);
+       routing.setOperation(Operation);       
        routing.setRecordStatus("A");
        routing.setMaterial(material);
     }
@@ -290,8 +276,7 @@ private void refreshDisplay()
     {
        this.id = routing.getId();
        this.Description = routing.getDescription();
-       this.Operation = routing.getOperation();
-       this.SequenceType = routing.getSequenceType();
+       this.Operation = routing.getOperation();       
        this.material = routing.getMaterial();
     }
     void _AddRecord()
