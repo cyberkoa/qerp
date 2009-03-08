@@ -78,7 +78,7 @@ public class RoutingService extends BaseService implements IRoutingServiceLocal,
 	@SuppressWarnings("unchecked")
 	public List<Routing> findRoutingsByMaterialId(Long materialId) throws DoesNotExistException {
 		Query q = _em.createQuery("select routing from Routing routing where routing.material.id=:materialId order by routing.operation");
-		q.setParameter("MaterialId", materialId);
+		q.setParameter("materialId", materialId);
 		List l = q.getResultList();
 		return l;
 	}
