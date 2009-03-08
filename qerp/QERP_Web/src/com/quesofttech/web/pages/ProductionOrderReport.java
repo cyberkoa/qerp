@@ -155,9 +155,18 @@ public class ProductionOrderReport extends SecureBasePage {
 	private WorkOrderReport workorderreport;
 	Object onActionFromtoolbarPrint()
 	{
-		System.out.println("productionOrder.getId():" + productionOrder.getId());
-		workorderreport.setProductionOrderID(productionOrder.getId());
-		return workorderreport;
+		if(productionOrder!=null)
+		{
+			workorderreport.setProductionOrderID(productionOrder.getId());
+			return workorderreport;
+		}
+		else
+		{
+			_form.recordError("Invalid Production Order No");
+			return null;
+		}
+		
+		
 	}
 		 
 }

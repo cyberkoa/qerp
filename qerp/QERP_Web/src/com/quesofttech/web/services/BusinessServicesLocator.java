@@ -157,6 +157,10 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 	public IDocumentTypeServiceRemote getDocumentTypeServiceRemote(){
 		return (IDocumentTypeServiceRemote) getService(DocumentTypeService.class.getSimpleName() + "Remote");
 	}
+	
+	public IMaterialGroupServiceRemote getMaterialGroupServiceRemote(){
+		return (IMaterialGroupServiceRemote) getService(MaterialGroupService.class.getSimpleName() + "Remote");
+	}
 
 	
 	
