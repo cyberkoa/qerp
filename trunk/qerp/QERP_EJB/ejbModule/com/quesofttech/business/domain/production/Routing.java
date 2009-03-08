@@ -25,6 +25,8 @@ import javax.persistence.FetchType;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.persistence.Embedded;
+
+import sun.font.TrueTypeFont;
 //import javax.persistence.SequenceGenerator;
 
 
@@ -70,7 +72,7 @@ public class Routing extends BaseEntity {
 	@Column(name = "route_Description", length = 100, nullable = false)
 	private String description;
 
-	@Column(name = "route_SequenceType", length = 2)
+	@Column(name = "route_SequenceType", length = 2, nullable = true)
 	private String sequenceType;
 
 	
