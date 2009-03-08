@@ -1,5 +1,5 @@
 <html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
-<head> <title>Sales Order Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<head> <title>Production Order Report</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
 <h3>Production Order Report</h3>
 <t:zone t:id="zoneFormView" show="slidedown">
