@@ -68,6 +68,15 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 	
 	public void updateProductionOrder(ProductionOrder productionOrder) throws BusinessException {	
 		System.out.println("[updateProductionOrder] before merging");
+		
+		ProductionOrder oldProductionOrder = this.findProductionOrder(productionOrder.getId());
+		
+		for(ProductionOrderMaterial pom : productionOrder.getProductionOrderMaterials())
+		{
+			System.out.println("ProdO service : " + oldProductionOrder.getQuantityOrder() + "," + productionOrder.getQuantityOrder());
+			pom.setQuantityRequired(pom.getQuantityRequired()*(productionOrder.getQuantityOrder()/oldProductionOrder.getQuantityOrder()));
+		}
+		
 		productionOrder = (ProductionOrder) merge(productionOrder);
 		System.out.println("[updateProductionOrder] after merging");
 	}

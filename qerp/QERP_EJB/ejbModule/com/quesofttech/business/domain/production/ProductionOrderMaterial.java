@@ -216,24 +216,15 @@ public class ProductionOrderMaterial extends BaseEntity {
 
 	}
 
-	/*
+
 	@PreUpdate
 	protected void preUpdate() throws BusinessException {
 		super.preUpdate();
-		System.out.println("preUpdate of ProductionOrderMaterial");
-		
-		
-		if(rowInfo.getRecordStatus()!="D")
-		{
-			validate();
-		}
-			java.util.Date today = new java.util.Date();
 
-			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
-		
+		System.out.println("Production Order Material preUpdate");
 		
 	}
-    */
+    
 	
 	@PreRemove
 	void preRemove() throws BusinessException {
