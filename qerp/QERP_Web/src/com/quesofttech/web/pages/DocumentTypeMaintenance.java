@@ -83,7 +83,7 @@ public class DocumentTypeMaintenance extends SecureBasePage {
     private String numberFormat;
     public String getNumberFormat()
     {
-       return id;
+       return numberFormat;
     }
 
     public void setNumberFormat(String numberFormat)
