@@ -12,7 +12,7 @@ import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
 import com.quesofttech.web.common.ContextFixer;
 import com.quesofttech.business.domain.finance.iface.ICompanyServiceRemote;
 import com.quesofttech.business.domain.general.*;
-import com.quesofttech.business.domain.general.iface.IUomServiceRemote;
+import com.quesofttech.business.domain.general.iface.*;
 import com.quesofttech.business.domain.inventory.*;
 import com.quesofttech.business.domain.production.*;
 import com.quesofttech.business.domain.production.iface.IProductionOrderServiceRemote;
@@ -133,6 +133,9 @@ public class WorkOrderReport extends SecureBasePage {
 	private String printPOno;
 	private String printDeliveryDate;
 	private String printCustomerNo;
+	private String printBrandCode;	
+	private String printMasterCard;
+	private String printMasterCode;
 
 	private Material materiallists;
 	@Persist
@@ -146,8 +149,11 @@ public class WorkOrderReport extends SecureBasePage {
 	private ProductionOrder _productionOrder;
 	@Persist
 	private List<ProductionOrderMaterial> _productionOrderMaterial;
-	//@Persist
-	private List<rawmaterial> rawmatlist = new ArrayList<rawmaterial>();
+	
+
+	
+	@Persist
+	private List<rawmaterial> rawmatlist ;
 	@Property
 	private rawmaterial _rawmat;
 	
@@ -156,6 +162,12 @@ public class WorkOrderReport extends SecureBasePage {
 	//{
 	//	this._rawmat = _rawmat;
 	//}
+	public String getPrintMasterCard() {
+		return printMasterCard;
+	}
+	public void setPrintMasterCard(String printMasterCard) {
+		this.printMasterCard = printMasterCard;
+	}
 	public List<rawmaterial> getRawMats()
 	{		
 		if(rawmatlist==null)
@@ -168,6 +180,12 @@ public class WorkOrderReport extends SecureBasePage {
 	}
 	
 	
+	public String getPrintBrandCode() {
+		return printBrandCode;
+	}
+	public void setPrintBrandCode(String printBrandCode) {
+		this.printBrandCode = printBrandCode;
+	}
 	public String getPrintOrderNo() {
 		return printOrderNo;
 	}
@@ -214,17 +232,24 @@ public class WorkOrderReport extends SecureBasePage {
 	
 	private void GenerateRawMaterial()
 	{
+		System.out.println("GenerateRawMaterial _productionOrderMaterial 's size:" + _productionOrderMaterial.size());
 		for(ProductionOrderMaterial pom : _productionOrderMaterial)
 		{			
-			rawmaterial list = new rawmaterial();			
+			System.out.println("pom add");
+			rawmaterial list = new rawmaterial();
+			System.out.println("pom added");
 			list.CodeNo = pom.getMaterialCode();
 			list.Length = pom.getMaterial().getLength();
 			list.Process = " - ";
 			list.ProductionDate = " - ";
 			list.Quantity = pom.getQuantityRequired();
 			list.Thickness = pom.getMaterial().getHeight();
-			list.Type = pom.getMaterial().getMaterialType().getType();
+			if(pom.getMaterial().getMaterialGroup()==null)
+				list.Type = " - ";
+			else 
+				list.Type = pom.getMaterial().getMaterialGroup().getGroup();
 			list.Width = pom.getMaterial().getWidth();
+			System.out.println("add on raw mat");
 			rawmatlist.add(list);
 		}
 	}
@@ -252,17 +277,24 @@ public class WorkOrderReport extends SecureBasePage {
 	
 	private void getReportInfo() throws BusinessException
 	{
+		rawmatlist = null;
+		_productionOrder = null;
+		_productionOrderMaterial = null;
+		_salesOrderMaterial = null;
+		
+		rawmatlist = new ArrayList<rawmaterial>();
 		_productionOrder  = getProductionOrderService().findProductionOrder(_productionOrderid);
 		
 		_productionOrderMaterial = getProductionOrderService().findProductionOrderMaterialsByProductionOrderId(_productionOrderid);
-		_salesOrderMaterial = _productionOrder.getSalesOrderMaterial();
-		
+		_salesOrderMaterial = _productionOrder.getSalesOrderMaterial();	
+		printBrandCode = _productionOrder.getMaterial().getCode() + "("  + _productionOrder.getMaterial().getDescription() + ")";
+		//printBrandCode = _salesOrderMaterial.getMaterialCode() + "(" + _salesOrderMaterial.getMaterial().getDescription() + ")";
 		printCustomerNo = _salesOrderMaterial.getSalesOrder().getCustomerCode();
 		printDeliveryDate = " - ";
 		printOrderDate = _salesOrderMaterial.getSalesOrder().getRowInfo().getCreateTimestamp().toString();
 		printPOno  = _salesOrderMaterial.getSalesOrder().getCustomerPO();
 		printOrderNo = _salesOrderMaterial.getSalesOrder().getDocNo().toString();
-		
+		printMasterCard = _productionOrder.getBom().getCode(); 
 		System.out.println("printCustomerNo:" + printCustomerNo + ",  :" + _productionOrderMaterial.size());
 		System.out.println("printorderDate:" + printOrderDate);
 		System.out.println("printOrderNo:" + printOrderNo);
@@ -280,7 +312,9 @@ public class WorkOrderReport extends SecureBasePage {
 		   return getBusinessServicesLocator().getCompanyServiceRemote();
 		}
 	
-	
+	private IBomServiceRemote getBomService() {
+		   return getBusinessServicesLocator().getBOMServiceRemote();
+		}
 	private IMaterialServiceRemote getMaterialService() {
 	   return getBusinessServicesLocator().getMaterialServiceRemote();
 	}
@@ -298,18 +332,5 @@ public class WorkOrderReport extends SecureBasePage {
 			
 		}
 	}
-	public List<?> getMaterialDatasource() throws BusinessException
-	{
-		try
-		{
-			
-			_materiallists = getMaterialService().findForSaleMaterials();
-			return _materiallists;
-		}
-		catch (BusinessException e)
-		{
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
+	
 }

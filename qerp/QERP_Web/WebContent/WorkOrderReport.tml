@@ -15,7 +15,7 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 		</td>
 	</tr>
 	<tr>
-		<td width="800">
+		<td >
 			<table width="100%" border="1" cellspacing="0" cellpadding="0">
 				<tr>
 					<td>
@@ -54,8 +54,11 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 					<td>
 						 ${printCustomerNo}
 					</td>
-					<td colspan="2">
-						
+					<td >
+						<b>Master Code: </b>						
+					</td>
+					<td>
+						${printMasterCard}
 					</td>
 				</tr>
 				
@@ -64,10 +67,13 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 						<b>Brand Code:</b>
 					</td>
 					<td>
-						  Blue berry
+						  ${printBrandCode}
 					</td>
-					<td colspan="2">
-						 
+					<td>
+						<b>Process</b> 
+					</td>
+					<td>
+						. 
 					</td>
 				</tr>
 				<tr>
@@ -110,6 +116,49 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 					</tr>
 				</t:loop>
 
+			</table>			
+		</td>
+	</tr>
+	<tr>
+		<td height="40">
+					
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<table border="1" width="100%"  cellspacing="0" cellpadding="0">
+				<tr>
+					<td rowspan="4" width="30%" valign="top" align="right">Production Remark:</td>
+					<td width="70%">____________________________________________________________________________________</td>
+				</tr>
+				<tr>					
+					<td>____________________________________________________________________________________</td>
+				</tr>
+				<tr>					
+					<td>____________________________________________________________________________________</td>
+				</tr>
+				<tr>					
+					<td>____________________________________________________________________________________</td>
+				</tr>
+				
+			</table>
+					
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table width="100%"  cellspacing="0" cellpadding="0">
+				<TR>
+					<TD COLSPAN="2" HEIGHT="100"></TD>
+				</TR>
+				<tr>
+					<td width="50%"> _______________________ </td>
+					<td width="50%"> _______________________ </td>
+				</tr>
+				<tr>
+					<td> <b>ISSUED BY</b> </td>
+					<td> <B>APPROVED BY </B> </td>
+				</tr>
 			</table>			
 		</td>
 	</tr>
