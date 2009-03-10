@@ -4,6 +4,7 @@ import java.io.Serializable;
 //import java.sql.Date;
 //import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -613,5 +614,39 @@ public class ProductionOrder extends BaseEntity {
 		return output;
 		
 	}
+	
+	public String getFormattedDocNo()
+	{
+		
+		if(documentType!=null)
+		{
+			String formattedDocNo = null;
+			String numberFormat = documentType.getNumberFormat();
+			
+			if(numberFormat!=null)
+			{			
+				DecimalFormat docNoFormatter = new DecimalFormat(numberFormat);
+				try
+				{
+					formattedDocNo = docNoFormatter.format(docNo);
+				}
+				catch(IllegalArgumentException iae)
+				{
+					formattedDocNo = docNo.toString();
+					return documentType.getPrefix() + formattedDocNo + documentType.getSuffix();
+				}
+			}
+			else
+			{
+				formattedDocNo = docNo.toString();
+			}
+			return documentType.getPrefix() + formattedDocNo + documentType.getSuffix();
+		}
+		else
+		{
+			return docNo.toString();
+		}
+	}
+	
 
 }
