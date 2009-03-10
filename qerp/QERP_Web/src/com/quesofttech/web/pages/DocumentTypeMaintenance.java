@@ -74,6 +74,22 @@ public class DocumentTypeMaintenance extends SecureBasePage {
     {
        this.id = id;
     }
+    
+    
+  //===============================
+    // Text Component for id
+    @Component(id = "numberFormat")
+    private TextField _numberFormat;
+    private String numberFormat;
+    public String getNumberFormat()
+    {
+       return id;
+    }
+
+    public void setNumberFormat(String numberFormat)
+    {
+       this.numberFormat = numberFormat;
+    }
     //===============================
 
     //===============================
@@ -254,6 +270,7 @@ private void refreshDisplay() throws Exception
     }
 
     void assignToDatabase(DocumentType documentType){
+       documentType.setNumberFormat(numberFormat);
        documentType.setId(id);
        documentType.setDescription(Description);
        documentType.setCatergory(Catergory);
@@ -278,6 +295,7 @@ private void refreshDisplay() throws Exception
        this.Prefix = documentType.getPrefix();
        this.RunningNo = documentType.getRunningNo();
        this.Type = documentType.getType();
+       this.numberFormat = documentType.getNumberFormat();
     }
     void _AddRecord()
     {
