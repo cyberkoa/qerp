@@ -24,6 +24,7 @@ import com.quesofttech.web.state.Visit;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Retain;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ComponentResources;
@@ -71,8 +72,6 @@ public class ProductionOrderReport extends SecureBasePage {
 	@Inject
     private PropertyAccess _access;
 	
-	@Inject
-	private Block blockFormView;
 	
 	//@Persist
 	//private long lng_CurrentID;
@@ -85,7 +84,7 @@ public class ProductionOrderReport extends SecureBasePage {
 		return getBusinessServicesLocator().getProductionOrderServiceRemote();
 	}
 
-	@Persist
+	//@Persist
 	private ProductionOrder productionOrder;
 	public ProductionOrder getProductionOrder()
 	{
@@ -132,41 +131,29 @@ public class ProductionOrderReport extends SecureBasePage {
 		RenderCombo();
 	}
 	
-	public Block getBlock() {
-	   return blockFormView;
-	}
-		 
-	
-
-	
-	public Block getBlockFormView() {
-		return blockFormView;
-	}
-
-	public void setBlockFormView(Block blockFormView) {
-		this.blockFormView = blockFormView;
-	}
-
 	//Object onSuccessFromProductionOrderReportForm() throws BusinessException
 	//{		
 	//	return blockFormView;		
 	//}
 	@InjectPage
 	private WorkOrderReport workorderreport;
-	Object onActionFromtoolbarPrint()
-	{
-		if(productionOrder!=null)
-		{
-			workorderreport.setProductionOrderID(productionOrder.getId());
-			return workorderreport;
-		}
-		else
-		{
-			_form.recordError("Invalid Production Order No");
-			return null;
-		}
-		
+	void onValidateForm() {
+		System.out.println("onValidateForm(): " + productionOrder.getId());
 		
 	}
+	Object onSuccess()
+	{
+		System.out.println("productionOrder.getId(): " + productionOrder.getId());
+		workorderreport.setProductionOrderID(productionOrder.getId());
+		return workorderreport;
+	}
+	
+
+	//@OnEvent(component = "textfield", event="blur")
+	//	public void onBlurEvent(String value)
+	//	{
+	//		System.out.println("here clicked: " + productionOrder.getId());
+	//	}
+
 		 
 }

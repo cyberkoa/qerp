@@ -13,18 +13,20 @@ DEFINE VARIABLE  str_classname AS CHARACTER   NO-UNDO.
 /*   `fk_Customer` bigint(20) default NULL".    */
 
 
-pc_value = " `MaterialGroup_id` bigint(20) NOT NULL,
-  `matg_Description` varchar(100) NOT NULL,
-  `matg_Group` varchar(5) NOT NULL
+pc_value = " `Routing_id` bigint(20) NOT NULL,
+  `route_Description` varchar(100) NOT NULL,
+  `route_Operation` int(11) NOT NULL,
+  `route_SequenceType` varchar(2) NOT NULL
+
 
 ".
  
   
 
 /*     SalesOrderMaterial */
-str_formid = 'MaterialGroup'.
-str_subject = 'Material Group'.
-str_classname = 'materialGroup'.
+str_formid = 'Routing'.
+str_subject = 'Routing'.
+str_classname = 'routing'.
     str_module = 'inventory'.
 
 
