@@ -42,7 +42,7 @@
                        <tr>
                            <th><t:label t:for="Prefix">Prefix</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="Prefix" t:value="Prefix" t:maxLength="5" t:size="5" /> </td>
-                       </tr>
+                       </tr>                       
                        <tr>
                            <th><t:label t:for="RunningNo">RunningNo</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="RunningNo" t:value="RunningNo" t:maxLength="20" t:size="20" /> </td>
@@ -50,6 +50,10 @@
                        <tr>
                            <th><t:label t:for="Type">Type</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="NumberFormat">Number Format</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="NumberFormat" t:value="NumberFormat" t:maxLength="20" t:size="20" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="description">description</t:label>:</th>
