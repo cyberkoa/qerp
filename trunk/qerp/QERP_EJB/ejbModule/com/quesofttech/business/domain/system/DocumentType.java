@@ -71,20 +71,12 @@ public class DocumentType extends BaseEntity {
 	@Column(name = "doct_Description", length = 100, nullable = false)
 	private String description;
 	
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
 
 	@Column(name = "doct_Prefix", length = 5)
 	private String prefix;
 	
+	@Column(name = "doct_Suffix", length = 5)
+	private String suffix;
 	
 	@Column(name = "doct_RunningNo", nullable = false)
 	private Long runningNo;
@@ -94,6 +86,8 @@ public class DocumentType extends BaseEntity {
 	private Long catergory;
 	
 	
+	@Column(name = "doct_NumberFormat", length = 20)
+	private String numberFormat;
 	
 	
 	/*
@@ -333,6 +327,25 @@ public class DocumentType extends BaseEntity {
 		this.prefix = prefix;
 	}
 
+	
+	
+	
+
+	/**
+	 * @return the suffix
+	 */
+	public String getSuffix() {
+		return suffix;
+	}
+
+
+	/**
+	 * @param suffix the suffix to set
+	 */
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
+	}
+
 
 	/**
 	 * @return the runningNo
@@ -491,6 +504,31 @@ public class DocumentType extends BaseEntity {
 	 */
 	public void setProductionOrders(List<ProductionOrder> productionOrders) {
 		this.productionOrders = productionOrders;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	/**
+	 * @return the numberFormat
+	 */
+	public String getNumberFormat() {
+		return numberFormat;
+	}
+
+
+	/**
+	 * @param numberFormat the numberFormat to set
+	 */
+	public void setNumberFormat(String numberFormat) {
+		this.numberFormat = numberFormat;
 	}
 
 	
