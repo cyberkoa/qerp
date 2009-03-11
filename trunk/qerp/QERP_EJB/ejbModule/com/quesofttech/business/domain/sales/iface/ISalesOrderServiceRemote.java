@@ -32,7 +32,7 @@ public interface ISalesOrderServiceRemote {
 	SalesOrderMaterial findSalesOrderMaterial(Long id)throws DoesNotExistException;
 	List<SalesOrderMaterial> findSalesOrderMaterialsBySalesOrderId(Long id) throws DoesNotExistException;
 	List<SalesOrderMaterial> findSalesOrderMaterialsBySalesOrder(SalesOrder salesOrder) throws DoesNotExistException;
-	
+	public List<SalesOrderMaterial> findSalesOrderMaterials() throws DoesNotExistException ;
 	void updateSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) throws BusinessException;
 	void logicalDeleteSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) throws BusinessException;
 	

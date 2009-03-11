@@ -98,6 +98,13 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		List l = q.getResultList();
 		return l;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SalesOrderMaterial> findSalesOrderMaterials() throws DoesNotExistException {
+		Query q = _em.createQuery("select so from SalesOrderMaterial so where so.rowInfo.recordStatus='A' order by  so.line");
+		List l = q.getResultList();
+		return l;
+	}
 /*
 	public SalesOrder findSalesOrderByType(String type) {
 		SalesOrder salesOrder = _em.find(SalesOrder.class, id);
@@ -219,7 +226,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 	
 	@SuppressWarnings("unchecked")
 	public List<SalesOrderMaterial> findSalesOrdersMaterials() throws DoesNotExistException {
-		Query q = _em.createQuery("select so from SalesOrderMaterial so where so.rowInfo.recordStatus='A' order by so.id");
+		Query q = _em.createQuery("select so from SalesOrderMaterial so where so.rowInfo.recordStatus='A' order , so.id");
 		List l = q.getResultList();
 		return l;
 	}
@@ -470,6 +477,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 					productionOrder.setBom(bomService.findBOM(bomTree.getId()));
 					
 					productionOrder.setSalesOrderMaterial(salesOrderMaterial);
+					productionOrder.setSalesOrder(salesOrderMaterial.getSalesOrder());
 
 					//productionOrder.setDocNo(Integer.toString(j));
 					productionOrder.setQuantityOrder(node.getData().getTreeOriginalQuantityRequired() * salesOrderMaterial.getQuantityOrder());

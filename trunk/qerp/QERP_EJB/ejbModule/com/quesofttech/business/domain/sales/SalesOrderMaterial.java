@@ -460,6 +460,10 @@ public class SalesOrderMaterial extends BaseEntity {
 	}
 
 
+	public String getFormattedDocNoWithLine()
+	{
+		return salesOrder.getFormattedDocNo() + " - " + line;
+	}
 	/**
 	 * @return the quantityOrder
 	 */
