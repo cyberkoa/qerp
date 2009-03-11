@@ -10,3 +10,17 @@ Confirm.prototype = {
                         e.stop();
         }
 }
+
+
+var ConfirmNull = Class.create();
+ConfirmNull.prototype = {
+        initialize: function(element, message) {
+                this.message = message;
+                Event.observe($(element), 'click', this.doConfirm.bindAsEventListener(this));
+        },
+        
+        doConfirm: function(e) {
+                alert(this.message);
+                        e.stop();
+        }
+}
