@@ -596,9 +596,9 @@ public class ProductionOrder extends BaseEntity {
 		if (material!=null) return material.getCode();
 		else return "";
 	}
-	public Long getSalesOrderDoc()
+	public String getSalesOrderDoc()
 	{
-		if(salesOrder!=null) return salesOrder.getDocNo();
+		if(salesOrder!=null) return salesOrder.getFormattedDocNo();
 		else return null;
 	}
 
