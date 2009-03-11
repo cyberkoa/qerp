@@ -108,7 +108,7 @@ public class ProductionOrderReport extends SecureBasePage {
     		if(productionOrders==null)
     			System.out.println("productoinOrders is null");
 	       	_productionOrderSelect = null;
-	       	_productionOrderSelect = new GenericSelectModel<ProductionOrder>(productionOrders,ProductionOrder.class,"DoctypeNo","id",_access);
+	       	_productionOrderSelect = new GenericSelectModel<ProductionOrder>(productionOrders,ProductionOrder.class,"FormattedDocNo","id",_access);
 	       	if(_productionOrderSelect==null){
 	       		System.out.println("Setuprender productionOrderselect is null");
 	       	}

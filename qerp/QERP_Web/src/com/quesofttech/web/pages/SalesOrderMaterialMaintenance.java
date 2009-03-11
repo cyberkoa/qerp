@@ -232,7 +232,16 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	{
 	   this.Line = Line;
 	}
+	
+	@Persist
+	private String FormatedDocNo;
+	public String getFormatedDocNo() {
+		return FormatedDocNo;
+	}
 
+	public void setFormatedDocNo(String formatedDocNo) {
+		FormatedDocNo = formatedDocNo;
+	}
 	@Component(id = "Price")
 	private TextField _Price;
 	private Double Price;
@@ -457,6 +466,12 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 		try
 		{
 			int_SelectedRow=0;
+			SalesOrder salesorder = getSalesOrderService().findSalesOrder(_headerIDLng);
+			if(salesorder!=null)
+			{
+				FormatedDocNo = salesorder.getFormattedDocNo();
+			}
+			
 			RefreshRecords();
 		}
 		catch(Exception e)

@@ -233,6 +233,18 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		{
 		   this.id = id;
 		}
+		//@Component(id = "FormattedDocNo")
+		//private TextField _FormattedDocNo;
+		
+		private String FormattedDocNo;
+		public String getFormattedDocNo()
+		{
+		   return FormattedDocNo;
+		}
+		public void setFormattedDocNo(String FormattedDocNo)
+		{
+		   this.FormattedDocNo = FormattedDocNo;
+		}
 		
 		@Component(id = "CustomerPO")
 		private TextField _CustomerPO;
@@ -442,6 +454,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		   salesOrder.setDocType(DocType);
 		   //salesOrder.setversion(version);
 		   salesOrder.setCustomer(customer);
+		   
 		   //salesOrder.setRecordStatus("A");
 		   salesOrder.setRecordStatus("A");
 		}
@@ -449,6 +462,7 @@ public class SalesOrderMaintenance extends SecureBasePage {
 		void assignToLocalVariable(SalesOrder salesOrder)
 		{
 		   this.id = salesOrder.getId();
+		   this.FormattedDocNo = salesOrder.getFormattedDocNo();
 		   this.CustomerPO = salesOrder.getCustomerPO();
 		   this.Number = salesOrder.getDocNo();
 		   this.DocType = salesOrder.getDocType();

@@ -128,7 +128,7 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	@Property
 	@Persist
 	@SuppressWarnings("unused")
-	private GenericSelectModel<SalesOrder> _salesorders;	
+	private GenericSelectModel<SalesOrderMaterial> _salesordermaterials;	
 	
 	@Inject
     private PropertyAccess _access1;
@@ -138,16 +138,8 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	}
 
 	
-	private SalesOrder salesorder;
-	public SalesOrder getSalesOrder()
-	{
-	   return salesorder;
-	}
-
-	public void setSalesOrder(SalesOrder salesorder)
-	{
-	   this.salesorder = salesorder;
-	}
+	private SalesOrderMaterial salesordermaterial;
+	
 	//===============================================================
 	//				SalesOrder ComboBox
 	//===============================================================
@@ -158,6 +150,14 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	
 	
 	
+	public SalesOrderMaterial getSalesordermaterial() {
+		return salesordermaterial;
+	}
+
+	public void setSalesordermaterial(SalesOrderMaterial salesordermaterial) {
+		this.salesordermaterial = salesordermaterial;
+	}
+
 	Object onFailure()
 	{
 		//System.out.println("onFailure lah");
@@ -305,18 +305,18 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 		ModelRefresh();
 		 // ComboBox Refresh	
 		List<Material> list = null;
-	  	List<SalesOrder> list_so = null;
+	  	List<SalesOrderMaterial> list_so = null;
     	try {    		
     		list = this.getMaterialService().findProducedMaterials();           
     	}
     	catch (DoesNotExistException e) {}
     	try{
-    		list_so = this.getSalesOrderService().findSalesOrders();
+    		list_so = this.getSalesOrderService().findSalesOrderMaterials();
     	}
     	catch (DoesNotExistException e){}
-    	_salesorders = null;
+    	_salesordermaterials = null;
     	_materials = null;
-    	_salesorders = new GenericSelectModel<SalesOrder>(list_so,SalesOrder.class,"docNo","id",_access1);
+    	_salesordermaterials = new GenericSelectModel<SalesOrderMaterial>(list_so,SalesOrderMaterial.class,"FormattedDocNoWithLine","id",_access1);
         _materials = new GenericSelectModel<Material>(list,Material.class,"codeDescription","id",_access);
 		// ComboBox Refresh
 	   try
@@ -409,7 +409,8 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   productionOrder.setQuantityReported(QuantityReported);
 	  // productionOrder.setversion(version);
 	   productionOrder.setMaterial(material);
-	   productionOrder.setSalesOrder(salesorder);
+	   productionOrder.setSalesOrderMaterial(salesordermaterial);
+	   productionOrder.setSalesOrder(salesordermaterial.getSalesOrder());
 	   productionOrder.setRecordStatus("A");
 
 	}
@@ -422,7 +423,8 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   this.QuantityReported = productionOrder.getQuantityReported();
 	   //this.version = productionOrder.getversion();
 	   this.material = productionOrder.getMaterial();
-	   this.salesorder = productionOrder.getSalesOrder();
+	   //this.salesorder = productionOrder.getSalesOrderMaterial().getSalesOrder();
+	   this.salesordermaterial = productionOrder.getSalesOrderMaterial();
 	}
 	void _AddRecord()
 	{
