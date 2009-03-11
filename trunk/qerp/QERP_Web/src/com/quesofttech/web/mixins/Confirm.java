@@ -51,8 +51,17 @@ public class Confirm extends SimpleBasePage
 
     @AfterRender
     public void afterRender() {
-            renderSupport.addScript(String.format("new Confirm('%s', '%s');",
+    	if(message.contains("null"))
+    	{
+
+            renderSupport.addScript(String.format("new ConfirmNull('%s', '%s');",
+                    element.getClientId(), "No record available for delete."));
+    	}
+    	else
+    	{
+    		renderSupport.addScript(String.format("new Confirm('%s', '%s');",
                     element.getClientId(), message));
+    	}
     }
 
 
