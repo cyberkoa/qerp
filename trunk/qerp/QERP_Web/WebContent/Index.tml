@@ -13,7 +13,7 @@
 
 <div id="doc3" width="100%">
 	    <div id="hd" style="text-align: center;">
-	        <div t:type="t5components/RoundCornerContainer" fgcolor="#D2E0F2" style="background-image:url(images/QERPLogo.png);background-repeat: no-repeat;align:center;background-color:#D2E0F2;margin-top:5px;margin-bottom:5px;">
+	        <div t:type="t5components/RoundCornerContainer" fgcolor="#D2E0F2" style="background-image:url(images/QERPLogo1.png);background-repeat: no-repeat;align:center;background-color:#D2E0F2;margin-top:5px;margin-bottom:5px;">
 	          <br/><br/><br/><br/>
 					
 				

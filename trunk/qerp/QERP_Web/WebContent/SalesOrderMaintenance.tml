@@ -21,8 +21,8 @@
            t:row="SalesOrder"
            t:model="salesOrderModel"
 		   t:rowsPerPage="10"
-		   t:reorder="id,customerpo,docno,doctype,customercode,createLogin,createtimestamp,modifylogin,modifytimestamp"
-		   t:exclude="sessionid,recordstatus,version,customerp,modifyapp,createapp,customername"
+		   t:reorder="id,FormattedDocNo,customerpo,doctype,customercode,createLogin,createtimestamp,modifylogin,modifytimestamp"
+		   t:exclude="sessionid,docno,recordstatus,version,customerp,modifyapp,createapp,customername"
            t:pagerPosition="both"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
@@ -47,7 +47,7 @@
                        </tr>
                        <tr>
                            <th><t:label t:for="Number">Number</t:label>:</th>
-                           <td>  ${Number} <DIV style="display:none">  <input  t:type="TextField" t:id="Number" t:value="Number" /> </DIV> </td>
+                           <td>  ${FormattedDocNo} <DIV style="display:none">  <input  t:type="TextField" t:id="Number" t:value="Number" /> </DIV> </td>
                        </tr>                       
                        <tr>
                            <th><t:label t:for="customer">Customer</t:label>:</th>
