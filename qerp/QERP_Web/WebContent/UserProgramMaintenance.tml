@@ -13,7 +13,7 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
-           t:reorder="id,UserNameDesc,programdesc,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,UserNameDesc,programdesc,IsAllowed,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="UserPrograms"
            t:row="UserProgram"
                    t:rowsPerPage="10"
