@@ -240,12 +240,12 @@ public class WorkOrderReport extends SecureBasePage {
 			System.out.println("pom added");
 			list.CodeNo = pom.getMaterialCode();
 			list.Length = pom.getMaterial().getLength();
-			list.Process = " &nbsp;";
-			list.ProductionDate = " &nbsp; ";
+			list.Process = " - ";
+			list.ProductionDate = " - ";
 			list.Quantity = pom.getQuantityRequired();
 			list.Thickness = pom.getMaterial().getHeight();
 			if(pom.getMaterial().getMaterialGroup()==null)
-				list.Type = " &nbsp; ";
+				list.Type = " - ";
 			else 
 				list.Type = pom.getMaterial().getMaterialGroup().getGroup();
 			list.Width = pom.getMaterial().getWidth();
