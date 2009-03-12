@@ -83,7 +83,7 @@ public class DocumentType extends BaseEntity {
 	
 	// Vendor , Customer , Production or ... 
 	@Column(name = "doct_Category", nullable = false)
-	private Long catergory;
+	private Long category;
 	
 	
 	@Column(name = "doct_NumberFormat", length = 20)
@@ -129,12 +129,12 @@ public class DocumentType extends BaseEntity {
 
 
 	public Long getCatergory() {
-		return catergory;
+		return category;
 	}
 
 
 	public void setCatergory(Long catergory) {
-		this.catergory = catergory;
+		this.category = catergory;
 	}
 
 
