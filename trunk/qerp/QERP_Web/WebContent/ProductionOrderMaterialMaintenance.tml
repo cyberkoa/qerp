@@ -35,8 +35,12 @@
                <td>
                    <table id="input">
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="Id">id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Material">Material</t:label>:</th>
+                           <td>   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="QuantityRequired">Quantity Required</t:label>:</th>
@@ -45,12 +49,6 @@
                        <tr>
                            <th><t:label t:for="QuantityConsumed">Quantity Consumed</t:label>:</th>
                            <td> ${quantityConsumed}<div style="display:none"><input  t:type="TextField" t:id="QuantityConsumed" t:value="QuantityConsumed" t:maxLength="20" t:size="20" /></div> </td>
-                       </tr>
-                       
-                      
-                       <tr>
-                           <th><t:label t:for="Material">Material</t:label>:</th>
-                           <td>   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </td>
                        </tr>
                    </table>
                </td>

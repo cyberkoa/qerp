@@ -42,7 +42,7 @@
                    		 	<td>${BomType}</td>                   		 	
                    		</tr>
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="id">Id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
@@ -50,11 +50,11 @@
                            <td> <DIV style="display:${viewDisplayText};"> ${MaterialCode}</DIV><DIV style="display:${viewEditText};">  <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </DIV></td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="startDate">startDate</t:label>:</th>
+                           <th><t:label t:for="startDate">Start Date</t:label>:</th>
                            <td><t:datefield  t:type="DateField" t:id="startDate" t:value="startDate" /></td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="endDate">endDate</t:label>:</th>
+                           <th><t:label t:for="endDate">End Date</t:label>:</th>
                            <td><t:datefield  t:type="DateField" t:id="endDate" t:value="endDate" /></td>
                        </tr>
                        <tr>
@@ -62,11 +62,11 @@
                            <td>   <input  t:type="TextField" t:id="Location" t:value="Location" t:maxLength="20" t:size="20" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="quantityRequired">quantityRequired</t:label>:</th>
+                           <th><t:label t:for="quantityRequired">Quantity Required</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="quantityRequired" t:value="quantityRequired" t:maxLength="20" t:size="20" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="scrapFactor">scrapFactor</t:label>:</th>
+                           <th><t:label t:for="scrapFactor">Scrap Factor</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="scrapFactor" t:value="scrapFactor" t:maxLength="20" t:size="20" /> </td>
                        </tr>                       
                        

@@ -396,7 +396,7 @@ public class UserMaintenance extends SecureBasePage {
                getUserMgrService().updateUser(user);
            }
            catch (BusinessException e) {
-               //_form.recordError(Login, e.getLocalizedMessage());
+               _form.recordError(e.getLocalizedMessage());
            }
        catch (Exception e) {
                _logger.info("User_update_problem");

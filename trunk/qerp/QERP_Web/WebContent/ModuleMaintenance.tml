@@ -33,7 +33,7 @@
                <td>
                    <table id="input">
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="id">Id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
@@ -45,15 +45,15 @@
                            <td>   <input  t:type="TextField" t:id="Description" t:value="Description" t:maxLength="100" t:size="100" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="IsBasic">IsBasic</t:label>:</th>
+                           <th><t:label t:for="IsBasic">Is Basic ?</t:label>:</th>
                            <td>   <input  t:type="Checkbox" t:id="IsBasic" t:value="IsBasic" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="IsEnabled">IsEnabled</t:label>:</th>
+                           <th><t:label t:for="IsEnabled">Is Enabled ?</t:label>:</th>
                            <td>   <input  t:type="Checkbox" t:id="IsEnabled" t:value="IsEnabled" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="IsPurchased">IsPurchased</t:label>:</th>
+                           <th><t:label t:for="IsPurchased">Is Purchased ?</t:label>:</th>
                            <td>   <input  t:type="Checkbox" t:id="IsPurchased" t:value="IsPurchased" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                                </table>

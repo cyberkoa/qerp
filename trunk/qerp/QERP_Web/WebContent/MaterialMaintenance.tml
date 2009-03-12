@@ -58,7 +58,7 @@
                            <td>   <select  t:type="select" t:id="materialgroup" t:model="materialGroupsSelect" encoder="materialGroupsSelect" t:value="materialgroup" /> </td>                      
                        </tr>                   
                        <tr>
-                           <th><t:label t:for="materialType">MaterialType</t:label>:</th>
+                           <th><t:label t:for="materialType">Material Type</t:label>:</th>
                            <td>   <select  t:type="select" t:id="materialType" t:model="materialTypesSelect" encoder="materialTypesSelect" t:value="materialType" /> </td>                      
                        </tr>
                        <tr>

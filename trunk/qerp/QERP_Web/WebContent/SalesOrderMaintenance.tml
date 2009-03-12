@@ -42,7 +42,7 @@
                <td>
                    <table id="input">
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="id">Id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
@@ -59,7 +59,7 @@
                        </tr>
                        <!--
                        <tr>
-                           <th><t:label t:for="DocType">DocType</t:label>:</th>
+                           <th><t:label t:for="DocType">Document Type</t:label>:</th>
                            <td>  <DIV style="display:${viewDisplayText};"> ${DocType}</DIV><DIV style="display:${viewEditText};"> <input  t:type="TextField" t:id="DocType" t:value="DocType" t:maxLength="5" t:size="5" /> </DIV> </td>
                        </tr>
                        -->                       

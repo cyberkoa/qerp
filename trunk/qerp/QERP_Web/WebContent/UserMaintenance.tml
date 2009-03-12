@@ -33,7 +33,7 @@
                <td>
                    <table id="input">
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="id">Id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                         <tr>
@@ -46,11 +46,11 @@
                        </tr>
                       
                        <tr>
-                           <th><t:label t:for="FirstName">FirstName</t:label>:</th>
+                           <th><t:label t:for="FirstName">First Name</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="FirstName" t:value="FirstName" t:maxLength="30" t:size="30" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="LastName">LastName</t:label>:</th>
+                           <th><t:label t:for="LastName">Last Name</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="LastName" t:value="LastName" t:maxLength="30" t:size="30" /> </td>
                        </tr>                       
                        <tr>
@@ -58,15 +58,15 @@
                            <td>   <input  t:type="TextField" t:id="Telephone" t:value="Telephone" t:maxLength="15" t:size="15" /> </td>
                        </tr>
                         <tr>
-                           <th><t:label t:for="EmailAddress">EmailAddress</t:label>:</th>
+                           <th><t:label t:for="EmailAddress">Email Address</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="EmailAddress" t:value="EmailAddress" t:maxLength="50" t:size="50" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="ExpiryDate">ExpiryDate</t:label>:</th>
+                           <th><t:label t:for="ExpiryDate">Expiry Date</t:label>:</th>
                            <td><input  t:type="DateField" t:id="ExpiryDate" t:value="ExpiryDate" /></td>
                        </tr>
                        <tr>
-                           <th><DIV style="display:${viewEditText};"> <t:label t:for="UserPassword">UserPassword</t:label>:</DIV></th>
+                           <th><DIV style="display:${viewEditText};"> <t:label t:for="UserPassword">Password</t:label>:</DIV></th>
                            <td>  <DIV style="display:${viewEditText};">  <input  t:type="PasswordField" t:id="UserPassword" t:value="UserPassword" t:maxLength="20" t:size="20" /></DIV> </td>
                        </tr>
                                </table>

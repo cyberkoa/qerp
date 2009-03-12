@@ -34,25 +34,25 @@
                <td>
                    <table id="input">
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="id">Id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Unit">Unit</t:label>:</th>
                            <td>  <DIV style="display:${viewDisplayText};"> ${Unit}</DIV><DIV style="display:${viewEditText};">  <input  t:type="TextField" t:id="Unit" t:value="Unit" t:maxLength="10" t:size="10" /> </DIV></td>
                        </tr>
+                       <tr>
+                           <th><t:label t:for="SingularLabel">Singular Label</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="SingularLabel" t:value="SingularLabel" t:maxLength="5" t:size="5" /> </td>
+                       </tr>
                       
                        <tr>
-                           <th><t:label t:for="PluralLabel">PluralLabel</t:label>:</th>
+                           <th><t:label t:for="PluralLabel">Plural Label</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="PluralLabel" t:value="PluralLabel" t:maxLength="5" t:size="5" /> </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="ShortForm">ShortForm</t:label>:</th>
+                           <th><t:label t:for="ShortForm">Short Form</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="ShortForm" t:value="ShortForm" t:maxLength="5" t:size="5" /> </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="SingularLabel">SingularLabel</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="SingularLabel" t:value="SingularLabel" t:maxLength="5" t:size="5" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Symbol">Symbol</t:label>:</th>

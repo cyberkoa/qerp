@@ -45,7 +45,7 @@
                            <td>    <select  t:type="select" t:id="user" t:model="users" encoder="users" t:value="user" />  </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="IsAllowed">IsAllowed</t:label>:</th>
+                           <th><t:label t:for="IsAllowed">Is Allowed ?</t:label>:</th>
                            <td>   <input  t:type="Checkbox" t:id="IsAllowed" t:value="IsAllowed" t:maxLength="1" t:size="1" /> </td>
                        </tr>
                                </table>
