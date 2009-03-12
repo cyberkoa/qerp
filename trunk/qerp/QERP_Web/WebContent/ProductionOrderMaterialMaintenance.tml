@@ -19,7 +19,7 @@
                    t:rowsPerPage="10"
            t:pagerPosition="both"
            t:reorder="id,MaterialCode,quantityRequired,quantityConsumed,createlogin,createtimestamp,modifylogin,modifytimestamp"
-           t:exclude="sessionid,recordstatus,version,createapp,modifyapp"
+           t:exclude="sessionid,recordstatus,version,createapp,modifyapp,docno,doctypeno"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="ProductionOrderMaterial.id">
@@ -29,7 +29,7 @@
            </t:GRID>
        </div>
         <t:errors />
-       <h3>Production Order Number : ${headercode}</h3>
+       <h3>Production Order Number : ${ProductionOrderDocNo}</h3>
        <table id="main">
            <tr>
                <td>

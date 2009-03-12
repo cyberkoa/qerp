@@ -111,7 +111,19 @@ public class ProductionOrderMaterialMaintenance extends SecureBasePage {
 		refreshDisplay();
 	     return viewDisplayText;
 	}
-	
+	public String getProductionOrderDocNo()
+	{
+		String output = "";
+		try
+		{
+			output = getProductionOrderService().findProductionOrder(_headerid).getFormattedDocNo();
+		}
+		catch (Exception e)
+		{
+			output = "N/A";			
+		}
+		return output;
+	}
 	public String getviewEditText()
 	{
 		refreshDisplay();
