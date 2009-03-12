@@ -539,7 +539,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 						
 						productionOrderMaterial.setMaterial(child.getData().getBomDetail().getMaterial());
 						//productionOrderMaterial.setProductionOrder(productionOrder);
-						productionOrderMaterial.setQuantityConsumed(0.0);
+						productionOrderMaterial.setQuantityConsumed(1.0);
 						productionOrderMaterial.setQuantityRequired(child.getData().getTreeOriginalQuantityRequired() * productionOrder.getQuantityOrder());
 						productionOrderMaterial.setCreateApp(rowInfo.getCreateApp());
 						productionOrderMaterial.setModifyApp(rowInfo.getModifyApp());
