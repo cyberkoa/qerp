@@ -576,19 +576,33 @@ public class SalesOrder extends BaseEntity {
 				catch(IllegalArgumentException iae)
 				{
 					formattedDocNo = docNo.toString();
-					return documentType.getPrefix() + formattedDocNo + documentType.getSuffix();
+
+					if(documentType.getPrefix()!=null)
+					    formattedDocNo = documentType.getPrefix() + formattedDocNo;
+					
+					if(documentType.getSuffix()!=null)
+					    formattedDocNo = formattedDocNo + documentType.getSuffix(); 
 				}
 			}
 			else
 			{
 				formattedDocNo = docNo.toString();
 			}
-			return documentType.getPrefix() + formattedDocNo + documentType.getSuffix();
+			
+			if(documentType.getPrefix()!=null)
+			    formattedDocNo = documentType.getPrefix() + formattedDocNo;
+			
+			if(documentType.getSuffix()!=null)
+			    formattedDocNo = formattedDocNo + documentType.getSuffix(); 
+			
+			return  formattedDocNo; 
 		}
-		else
+		else if(docNo!=null)
 		{
 			return docNo.toString();
 		}
+		else
+			return "";
 	}
 	
 	
