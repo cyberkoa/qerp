@@ -37,7 +37,7 @@
                <td>
                    <table id="input">
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="id">Id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
@@ -62,7 +62,7 @@
                <td>
                    <table id="input2">
                        <tr>
-                           <th><t:label t:for="buildingLot">Building Lot</t:label>:</th>
+                           <th><t:label t:for="buildingLot">No</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="buildingLot" t:value="buildingLot" t:maxLength="10" t:size="10" /> </td>
                        </tr>                       
                        <tr>

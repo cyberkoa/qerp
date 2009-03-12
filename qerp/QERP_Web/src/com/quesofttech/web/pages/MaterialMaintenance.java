@@ -40,7 +40,7 @@ import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.services.Request;
-import org.omg.CORBA.exception_type;
+
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 

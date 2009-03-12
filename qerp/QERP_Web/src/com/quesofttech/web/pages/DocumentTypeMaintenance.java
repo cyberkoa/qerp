@@ -95,16 +95,16 @@ public class DocumentTypeMaintenance extends SecureBasePage {
     //===============================
     // Text Component for Category
     @Component(id = "Catergory")
-    private TextField _Catergory;
-    private Long Catergory;
-    public Long getCatergory()
+    private TextField _Category;
+    private Long Category;
+    public Long getCategory()
     {
-       return Catergory;
+       return Category;
     }
 
-    public void setCatergory(Long Catergory)
+    public void setCategory(Long Category)
     {
-       this.Catergory = Catergory;
+       this.Category = Category;
     }
     //===============================
     
@@ -273,7 +273,7 @@ private void refreshDisplay() throws Exception
        documentType.setNumberFormat(numberFormat);
        documentType.setId(id);
        documentType.setDescription(Description);
-       documentType.setCatergory(Catergory);
+       documentType.setCatergory(Category);
        documentType.setPrefix(Prefix);
        documentType.setRunningNo(RunningNo);
        documentType.setType(Type);
@@ -291,7 +291,7 @@ private void refreshDisplay() throws Exception
     {
        this.id = documentType.getId();
        this.Description = documentType.getDescription();
-       this.Catergory = documentType.getCatergory();
+       this.Category = documentType.getCatergory();
        this.Prefix = documentType.getPrefix();
        this.RunningNo = documentType.getRunningNo();
        this.Type = documentType.getType();

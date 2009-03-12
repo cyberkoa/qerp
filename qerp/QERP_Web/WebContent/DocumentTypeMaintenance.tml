@@ -32,12 +32,20 @@
                <td>
                    <table id="input">
                        <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
+                           <th><t:label t:for="id">Id</t:label>:</th>
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="catergory">catergory</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="catergory" t:value="catergory" t:maxLength="20" t:size="20" /> </td>
+                           <th><t:label t:for="Type">Type</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="description">Description</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="description" t:value="description" t:maxLength="100" t:size="100" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="category">Category</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="category" t:value="category" t:maxLength="20" t:size="20" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Prefix">Prefix</t:label>:</th>
@@ -47,17 +55,10 @@
                            <th><t:label t:for="RunningNo">RunningNo</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="RunningNo" t:value="RunningNo" t:maxLength="20" t:size="20" /> </td>
                        </tr>
-                       <tr>
-                           <th><t:label t:for="Type">Type</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </td>
-                       </tr>
+
                        <tr>
                            <th><t:label t:for="NumberFormat">Number Format</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="NumberFormat" t:value="NumberFormat" t:maxLength="20" t:size="20" /> </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="description">description</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="description" t:value="description" t:maxLength="100" t:size="100" /> </td>
                        </tr>
                        
                      
