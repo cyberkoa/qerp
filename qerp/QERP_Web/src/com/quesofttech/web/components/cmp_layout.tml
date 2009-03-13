@@ -14,6 +14,106 @@
 	
 	<style type="text/css">
 		<!--
+		.tap5c_sidepanel {
+		    display: block;
+		    float: left;
+		}
+		
+		.tap5c_sidepanel-panel {
+		    cursor: pointer;
+		    height: 100%;
+		    background-color: #eeefff;
+		    border: 1px solid #7B84A1;
+		    display: block;
+		    float: left;
+		    margin-right: 0;
+		    width: 20px;
+		}
+		
+		.tap5c_sidepanel-toggler {
+		    background: transparent url( 'images/tool-sprites.gif' ) no-repeat scroll;
+		    cursor: pointer;
+		    float: right;
+		    height: 15px;
+		    margin-top: 4px;
+		    margin-right: 2px;
+		    overflow: hidden;
+		    width: 15px;
+		    background-position: 0 -165px;
+		}
+		
+		.tap5c_sidepanel-pinner-bar {
+		    background: transparent url('images/tb-bg.gif' ) repeat-x scroll top left;
+		    margin-bottom: 3px;
+		}
+		
+		.tap5c_sidepanel-pinner {
+		    background: transparent url( 'images/tool-sprites.gif' ) no-repeat scroll;
+		    cursor: pointer;
+		    height: 15px;
+		    overflow: hidden;
+		    width: 15px;
+		    background-position: 0 -150px;
+		    margin-top: 4px;
+		}
+		
+		.tap5c_sidepanel-content {
+		    background-color: #eeefff;
+		    border: 1px solid #7B84A1;
+		    display: block;
+		    float: left;
+		    margin-right: 2px;
+		    height: 100%;
+		}	
+		
+		DIV.tap5c_accordionToggle {
+		    font-weight: bold;
+		    text-align: left;
+		    cursor: pointer;
+		    padding-top: 5px;
+		    padding-bottom: 5px;
+		    padding-left: 5px;
+		    -moz-user-select: none;
+		    background: url( 'images/white-top-bottom.gif' ) repeat-x scroll 0 -1px;
+		}
+		
+		DIV.tap5c_accordionContent {
+		    overflow: hidden;
+		    background: #F2EFE9 url( ../images/fieldset_gradient.jpg ) repeat-x;
+		    padding-left: 5px;
+		}
+				
+		
+		DIV.tap5c_tab-set {
+		}
+		
+		DIV.tap5c_tab-set-panel {
+		    background: url( 'images/white-top-bottom.gif' ) repeat-x scroll 0pt -1px;
+		    color: black;
+		    border: 1px solid #98c0f4;
+		    float: left;
+		    padding-left: 3px;
+		    padding-right: 3px;
+		    padding-top: 2px;
+		    padding-bottom: 2px;
+		    margin-left: 2px;
+		    cursor: pointer;
+		    width: 100px;;
+		}
+		
+		DIV.activated {
+		    font-weight: bold;
+		}
+		
+		DIV.tap5c_tab-set-content {
+		    clear: left;
+		    border-left: 1px solid silver;
+		    border-right: 1px solid silver;
+		    border-bottom: 1px solid silver;
+		    padding: 5px;
+		}
+				
+		
 		#blanket {
 		   background-color:#111;
 		   opacity: 0.65;
@@ -65,7 +165,7 @@
 	    </div>
 	    <div id="bd" style="width:1200px;">
 	        <div t:type="t5components/SidePanel" style="height:580px;">
-	            <div t:type="t5components/Accordion" subjects="Subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
+	            <div t:type="AccordionQERP" subjects="Subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
 	        </div>
 	        <fieldset style="padding-left:5px;height:570px;width:100px">
 	        	<div style="width:1000px;height:100%;overflow:scroll;">
