@@ -43,8 +43,8 @@
                            <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
-                           <th><t:label t:for="Type">Type</t:label>:</th>
-                           <td>   <DIV style="display:${viewDisplayText};"> ${Type}</DIV><DIV style="display:${viewEditText};">  <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </DIV> </td>
+                           <th>Type:</th>
+                           <td>  P </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Code">Master Card No</t:label>:</th>

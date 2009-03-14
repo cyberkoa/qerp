@@ -104,7 +104,7 @@ public class BomMaintenance extends SecureBasePage {
 
     //===============================
     // Text Component for Type
-    @Component(id = "Type")
+    /*@Component(id = "Type")
     private TextField _Type;
     private String Type;
     public String getType()
@@ -117,7 +117,7 @@ public class BomMaintenance extends SecureBasePage {
        this.Type = Type;
     }
     
-    
+    */
     @Component(id = "Code")
     private TextField _Code;
     private String Code;
@@ -323,7 +323,8 @@ public class BomMaintenance extends SecureBasePage {
 
     void assignToDatabase(BOM bom){
        bom.setId(id);
-       bom.setType(Type);
+       //bom.setType(Type);
+       bom.setType("P"); // BOM always is P (Production type).
        bom.setCode(Code);
        bom.setMaterial(material);
        bom.setRecordStatus("A");
@@ -336,7 +337,7 @@ public class BomMaintenance extends SecureBasePage {
     void assignToLocalVariable(BOM bom)
     {
        this.id = bom.getId();
-       this.Type = bom.getType();
+       //this.Type = bom.getType();
        this.material = bom.getMaterial();
        this.Code = bom.getCode();
     }
