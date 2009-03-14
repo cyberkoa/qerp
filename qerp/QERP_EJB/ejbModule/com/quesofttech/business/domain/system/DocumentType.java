@@ -47,6 +47,16 @@ import java.util.List;
 public class DocumentType extends BaseEntity {
 	
 
+	public Long getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Long category) {
+		this.category = category;
+	}
+
+
 	//For Postgresql : @SequenceGenerator(name = "DocumentType_sequence", sequenceName = "DocumentType_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
 	@TableGenerator(  name="DocumentType_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="DocumentType", valueColumnName="keyField")
