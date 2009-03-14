@@ -43,7 +43,7 @@ import java.util.List;
 //import java.util.ArrayList;
 
 @Entity
-@Table(name = "BomDetail", uniqueConstraints = { @UniqueConstraint(columnNames = { "<unique_field>" }) })
+@Table(name = "BomDetail", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_BOM","fk_Material"}) })
 @SuppressWarnings("serial")
 public class BomDetail extends BaseEntity {
 	
@@ -274,11 +274,11 @@ public class BomDetail extends BaseEntity {
 		}
 
 		
-		if (startDate!=null) {
+		if (startDate==null) {
 			throw new ValueRequiredException(this, "BomDetail_StartDate");
 		}
 		
-		if (endDate!=null) {
+		if (endDate==null) {
 			throw new ValueRequiredException(this, "BomDetail_EndDate");
 		}
 
