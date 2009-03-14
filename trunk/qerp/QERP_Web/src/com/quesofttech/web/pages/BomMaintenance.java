@@ -116,6 +116,20 @@ public class BomMaintenance extends SecureBasePage {
     {
        this.Type = Type;
     }
+    
+    
+    @Component(id = "Code")
+    private TextField _Code;
+    private String Code;
+    public String getCode()
+    {
+       return Code;
+    }
+
+    public void setCode(String Code)
+    {
+       this.Code = Code;
+    }
     //===============================
 
     //===============================
@@ -198,7 +212,7 @@ public class BomMaintenance extends SecureBasePage {
     	ModelRefresh();
     	List<Material> list = null;	  	
     	try {    		
-    		list = this.getMaterialService().findMaterials();           
+    		list = this.getMaterialService().findProducedMaterials();           
     	}
     	catch (DoesNotExistException e) {}    	
     	_materials = null;
@@ -310,6 +324,7 @@ public class BomMaintenance extends SecureBasePage {
     void assignToDatabase(BOM bom){
        bom.setId(id);
        bom.setType(Type);
+       bom.setCode(Code);
        bom.setMaterial(material);
        bom.setRecordStatus("A");
     }
@@ -318,6 +333,7 @@ public class BomMaintenance extends SecureBasePage {
        this.id = bom.getId();
        this.Type = bom.getType();
        this.material = bom.getMaterial();
+       this.Code = bom.getCode();
     }
     void _AddRecord()
     {
