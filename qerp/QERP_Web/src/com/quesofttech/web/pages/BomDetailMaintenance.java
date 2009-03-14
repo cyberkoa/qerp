@@ -285,8 +285,8 @@ public class BomDetailMaintenance extends SecureBasePage {
     void RefreshRecords()
     {
     	List<Material> list = null;	  	
-    	try {    		
-    		list = this.getMaterialService().findForSaleMaterials();           
+    	try {
+    		list = this.getMaterialService().findNotForSaleMaterials();           
     	}
     	catch (DoesNotExistException e) {}
     	

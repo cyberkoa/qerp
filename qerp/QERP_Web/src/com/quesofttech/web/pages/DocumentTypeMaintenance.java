@@ -94,7 +94,7 @@ public class DocumentTypeMaintenance extends SecureBasePage {
 
     //===============================
     // Text Component for Category
-    @Component(id = "Catergory")
+    @Component(id = "Category")
     private TextField _Category;
     private Long Category;
     public Long getCategory()

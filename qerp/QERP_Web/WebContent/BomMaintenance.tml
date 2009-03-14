@@ -14,7 +14,7 @@
            <t:GRID
            t:id="Grid"
            t:model="bommodel"
-           t:reorder="id,type,MaterialCode,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,type,MaterialCode,code,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="BOMs"
            t:row="BOM"
                    t:rowsPerPage="10"
@@ -45,6 +45,10 @@
                        <tr>
                            <th><t:label t:for="Type">Type</t:label>:</th>
                            <td>   <DIV style="display:${viewDisplayText};"> ${Type}</DIV><DIV style="display:${viewEditText};">  <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </DIV> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Code">Master Card No</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Code" t:value="Code" t:maxLength="10" t:size="10" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>
