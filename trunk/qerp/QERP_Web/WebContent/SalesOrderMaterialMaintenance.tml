@@ -1,7 +1,13 @@
 <html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 <head> <title>Sales Order Material Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
-<h3>Sales Order Material Maintenance</h3>
+<table width="100%">
+	<tr>
+		<td style="background:#EEEEEE;align:center;">
+			<center><font color="#001C48" size="3"><b>Sales Order Material Maintenance</b></font></center>
+		</td>
+	</tr>
+</table>
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
@@ -48,14 +54,12 @@
        <table id="main">
            <tr>
                <td>
+                <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>
+                
                    <table id="input">
                    	   <tr>
                            <th>Sales Order No:</th>
                            <td>  ${FormatedDocNo}  </td>
-                       </tr>
-                       <tr>
-                           <th><t:label t:for="id">Id</t:label>:</th>
-                           <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Line">Line</t:label>:</th>
@@ -71,7 +75,7 @@
                        </tr>                       
                        <tr>
                            <th><t:label t:for="QuantityShipped">Quantity Shipped</t:label>:</th>
-                           <td> ${quantityShipped} <div style="display:none"> <input  t:type="TextField" t:id="QuantityShipped" t:value="QuantityShipped" t:maxLength="20" t:size="20" /> </div> </td>
+                           <td> <input  t:type="TextField" t:id="QuantityShipped" t:value="QuantityShipped" t:maxLength="20" t:size="20" /> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>

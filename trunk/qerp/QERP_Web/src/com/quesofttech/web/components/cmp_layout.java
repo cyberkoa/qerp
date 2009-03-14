@@ -221,9 +221,9 @@ public class cmp_layout extends SimpleBasePage
 				    			_TreeView[i_Subjects] = _TreeView[i_Subjects]
 								 + " <tr id='" + _TR_ID + "-" + _Loop + "' class='a'>"
 								 + "<td><div class='tier2'>"
-								 + "<div><a href='" + p.getCode()  + "'  target=" 
+								 + "<div ><a href='" + p.getCode()  + "'  target=" 
 								 + (char)34 + "_self" +  (char)34 +  "   class='doc'>"
-								 + "</a></div><div>" 
+								 + "</a></div><div style=" + (char)34 + "font-family:serif;font-size:small;" + (char)34 +  ">" 
 								 + "<a href='" + p.getCode()  + "'  target=" 
 								 + (char)34 + "_self" +  (char)34 +  "  >"
 								 + p.getDescription()  + "</a></div></div></td>  " +

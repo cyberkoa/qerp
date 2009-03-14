@@ -2,8 +2,13 @@
 <head> <title>Material Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
 
-
-<h3>Material Maintenance</h3>
+<table width="100%">
+	<tr>
+		<td style="background:#EEEEEE;align:center;">
+			<center><font color="#001C48" size="3"><b>Material Maintenance</b></font></center>
+		</td>
+	</tr>
+</table>
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
@@ -27,7 +32,7 @@
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="Material.id">
-                   ${Material.id}
+                   select
                </t:actionlink>
            </t:parameter>
           
@@ -40,11 +45,10 @@
        <table id="main">
            <tr>
                <td>
+                <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>
+                
                    <table id="input">
-                       <tr>
-                           <th><t:label t:for="id">id</t:label>:</th>
-                           <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
-                       </tr>
+                       
                        <tr>
                            <th><t:label t:for="Code">Code</t:label>:</th>
                            <td> <DIV style="display:${viewDisplayText};"> ${Code}</DIV><DIV style="display:${viewEditText};"> <input  t:type="TextField" t:id="Code" t:value="Code" t:maxLength="30" t:size="30" /> </DIV></td>
