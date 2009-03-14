@@ -327,6 +327,11 @@ public class BomMaintenance extends SecureBasePage {
        bom.setCode(Code);
        bom.setMaterial(material);
        bom.setRecordStatus("A");
+       java.util.Date today = new java.util.Date();	   
+	   bom.setModifyApp(this.getClass().getSimpleName());
+	   bom.setModifyLogin(getVisit().getMyLoginId());       
+	   bom.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+       
     }
     void assignToLocalVariable(BOM bom)
     {
@@ -339,8 +344,11 @@ public class BomMaintenance extends SecureBasePage {
     {
        BOM bom = new BOM();
        try {
-               bom.setModifyLogin(getVisit().getMyLoginId());
-               bom.setCreateLogin(getVisit().getMyLoginId());
+	    	   java.util.Date today = new java.util.Date();	   
+	    	   bom.setCreateApp(this.getClass().getSimpleName());
+	    	   bom.setCreateLogin(getVisit().getMyLoginId());       
+	    	   bom.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
+               
            assignToDatabase(bom);
            getBOMService().addBOM(bom);
        }
