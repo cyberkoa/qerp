@@ -43,14 +43,14 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 		return l;
 	}
 	
-	
+	/*
 	@SuppressWarnings("unchecked")
 	public List<Material> findMaterialsExceptFinishGood() {
 		Query q = _em.createQuery("select m from Material m where m.rowInfo.recordStatus='A' and m.materialtype.isForSale='1' order by m.id");
 		List l = q.getResultList();
 		return l;
 	}
-
+*/
 	public void updateMaterial(Material material) throws BusinessException {
 		
 		System.out.println("[MaterialService - updateMaterial]\n" +  material.getMaterialType().toString());
@@ -78,6 +78,15 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 		return l;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Material> findNotForSaleMaterials() {
+		Query q = _em.createQuery("select m from Material m where m.rowInfo.recordStatus='A' AND m.materialType.rowInfo.recordStatus='A' AND " +
+				"m.materialType.isForSale=false");
+		List l = q.getResultList();
+		return l;
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<Material> findProducedMaterials() {
 		Query q = _em.createQuery("select m from Material m where m.rowInfo.recordStatus='A' AND m.materialType.rowInfo.recordStatus='A' AND " +
