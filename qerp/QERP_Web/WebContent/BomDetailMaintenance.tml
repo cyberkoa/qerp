@@ -1,7 +1,14 @@
 <html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 <head> <title>BomDetail Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
-<h3>Bom Detail Maintenance</h3>
+<table width="100%">
+	<tr>
+		<td style="background:#EEEEEE;align:center;">
+			<center><font color="#001C48" size="3"><b>Bom Detail Maintenance</b></font></center>
+		</td>
+	</tr>
+</table>
+
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
@@ -17,13 +24,13 @@
            t:reorder="id,materialdesc,startdate,enddate,quantityRequired,scrapfactor,location,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="BomDetails"
            t:row="BomDetail"
-                   t:rowsPerPage="10"
+           t:rowsPerPage="10"
            t:pagerPosition="both"
            t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="BomDetail.id">
-                   ${BomDetail.id}
+                   select
                </t:actionlink>
            </t:parameter>
            </t:GRID>
@@ -32,6 +39,7 @@
        <table id="main">
            <tr>
                <td>
+                <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>
                    <table id="input">
                    		<tr>
                    		 	<th>BOM Header Material</th>
@@ -41,10 +49,7 @@
                    		 	<th>BOM Type</th>
                    		 	<td>${BomType}</td>                   		 	
                    		</tr>
-                       <tr>
-                           <th><t:label t:for="id">Id</t:label>:</th>
-                           <td>  ${id}  <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
-                       </tr>
+                       
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>
                            <td> <DIV style="display:${viewDisplayText};"> ${MaterialCode}</DIV><DIV style="display:${viewEditText};">  <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </DIV></td>

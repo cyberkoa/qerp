@@ -629,8 +629,7 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	void onActionFromConvertSOselect(Long id) throws BusinessException
 	{
 		try
-		{	
-			System.out.println("clicked");
+		{
 			RowInfo rowInfo = new RowInfo();
 			System.out.println("clicked 2 ");
 			SalesOrderMaterial salesordermaterialConvert = getSalesOrderService().findSalesOrderMaterial(id);

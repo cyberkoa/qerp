@@ -1,7 +1,13 @@
 <html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 <head> <title>Production Order Operation Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
-<h3>Production Order Operation Maintenance</h3>
+<table width="100%">
+	<tr>
+		<td style="background:#EEEEEE;align:center;">
+			<center><font color="#001C48" size="3"><b>Production Order Operation Maintenance</b></font></center>
+		</td>
+	</tr>
+</table>
 <t:zone t:id="zoneFormView" show="slidedown">
     <t:delegate to="block" />
 </t:zone>
@@ -20,7 +26,7 @@
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="ProductionOrderOperation.id">
-                   ${ProductionOrderOperation.id}
+                   select
                </t:actionlink>
            </t:parameter>
            </t:GRID>
@@ -28,11 +34,9 @@
        <table id="main">
            <tr>
                <td>
+                <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>
+                
                    <table id="input">
-                       <tr>
-                           <th><t:label t:for="id">Id</t:label>:</th>
-                           <td>  ${id}  <DIV style="display:none"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>  </td>
-                       </tr>
                        <tr>
                            <th><t:label t:for="Operation">Operation</t:label>:</th>
                            <td>   <input  t:type="TextField" t:id="Operation" t:value="Operation" t:maxLength="11" t:size="11" /> </td>
