@@ -288,7 +288,9 @@ public class BomDetailMaintenance extends SecureBasePage {
     	try {
     		list = this.getMaterialService().findNotForSaleMaterials();           
     	}
-    	catch (DoesNotExistException e) {}
+    	catch (DoesNotExistException e) {
+    		_form.recordError(e.getMessage());
+    	}
     	
     	_materials = null;
     	_materials = new GenericSelectModel<Material>(list,Material.class,"codeDescription","id",_access);
@@ -299,7 +301,7 @@ public class BomDetailMaintenance extends SecureBasePage {
        }
        catch(BusinessException be)
        {
-
+    	   _form.recordError(be.getMessage());
        }
        if(_BomDetails!=null && !_BomDetails.isEmpty())
        {
@@ -363,7 +365,7 @@ public class BomDetailMaintenance extends SecureBasePage {
     	catch (Exception e)
     	{
     		System.out.println("Error: " + e.getMessage());
-    		_form.recordError(getMessages().get(e.getMessage()));
+    		_form.recordError(e.getMessage());
     	}
     	if(_form.getHasErrors())
     	{
@@ -429,6 +431,11 @@ public class BomDetailMaintenance extends SecureBasePage {
        //bomDetail.setBom(BOMHeader);
        bomDetail.setMaterial(Material);
        bomDetail.setRecordStatus("A");
+       
+       java.util.Date today = new java.util.Date();	   
+       bomDetail.setModifyApp(this.getClass().getSimpleName());
+       bomDetail.setModifyLogin(getVisit().getMyLoginId());       
+       bomDetail.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
     }
     void assignToLocalVariable(BomDetail bomDetail)
     {
@@ -445,15 +452,15 @@ public class BomDetailMaintenance extends SecureBasePage {
     {
        BomDetail bomDetail = new BomDetail();
        try {
-               bomDetail.setModifyLogin(getVisit().getMyLoginId());
-               bomDetail.setCreateLogin(getVisit().getMyLoginId());
+    	   java.util.Date today = new java.util.Date();	   
+    	   bomDetail.setCreateApp(this.getClass().getSimpleName());
+    	   bomDetail.setCreateLogin(getVisit().getMyLoginId());       
+    	   bomDetail.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
            assignToDatabase(bomDetail);
            getBomDetailService().addBomDetail(_HeaderId,bomDetail);
        }
        catch (Exception e) {
-           _logger.info("BomDetail_Add_problem");
-           e.printStackTrace();
-           _form.recordError(getMessages().get("BomDetail_add_problem"));
+    	   _form.recordError(e.getMessage());
        }
     }
 
@@ -478,9 +485,7 @@ public class BomDetailMaintenance extends SecureBasePage {
                _form.recordError(_id, e.getLocalizedMessage());
            }
        catch (Exception e) {
-               _logger.info("BomDetail_update_problem");
-               e.printStackTrace();
-               _form.recordError(getMessages().get("BomDetail_update_problem"));
+    	   _form.recordError(e.getMessage());
            }
        }
     }
@@ -494,7 +499,7 @@ public class BomDetailMaintenance extends SecureBasePage {
        }
        catch(BusinessException be)
        {
-
+    	   _form.recordError(be.getMessage());
        }
        if(bomDetail!=null)
        {
@@ -508,12 +513,10 @@ public class BomDetailMaintenance extends SecureBasePage {
                RefreshRecords();
            }
                catch (BusinessException e) {
-               _form.recordError(_id, e.getLocalizedMessage());
+            	   _form.recordError(e.getMessage());
        }
            catch (Exception e) {
-               _logger.info("BomDetail_Delete_problem");
-               e.printStackTrace();
-               _form.recordError(getMessages().get("BomDetail_Delete_problem"));
+        	   _form.recordError(e.getMessage());               
            }
        }
     }
@@ -549,7 +552,7 @@ public class BomDetailMaintenance extends SecureBasePage {
        }
        catch(BusinessException be)
        {
-
+    	   _form.recordError(be.getMessage());
        }
 
        if(BomDetailDetail!=null){
