@@ -29,8 +29,9 @@ public interface IMaterialServiceRemote {
 	
 	// Finders
 	List<Material> findForSaleMaterials() throws DoesNotExistException;
+	List<Material> findNotForSaleMaterials() throws DoesNotExistException;
 	List<Material> findProducedMaterials() throws DoesNotExistException;
-	List<Material> findMaterialsExceptFinishGood() throws DoesNotExistException;
+	//List<Material> findMaterialsExceptFinishGood() throws DoesNotExistException;
 	public List<Material> findMaterialBySearchFieldsRange(MaterialSearchFields lower,MaterialSearchFields upper,SearchOptions options) throws DoesNotExistException;
 	public List<Material> findMaterialBySearchFields(MaterialSearchFields search,SearchOptions options)	throws DoesNotExistException;
 	
