@@ -58,7 +58,7 @@ public class Operation extends BaseEntity {
 	private Long version;
 
 
-	@Column(name = "opr_Code", length = 1, nullable = false)
+	@Column(name = "opr_Code", length = 10, nullable = false)
 	private String code;
 
 	@Column(name = "opr_Description", length = 100,nullable = false)
