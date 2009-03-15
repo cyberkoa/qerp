@@ -541,14 +541,17 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 	{
         SalesOrderMaterial salesOrderMaterial = new SalesOrderMaterial();
         try {
-        	salesOrderMaterial.setCreateLogin(getVisit().getMyLoginId());
-        	salesOrderMaterial.setModifyLogin(getVisit().getMyLoginId());
-			 
- 		    salesOrderMaterial.setCreateApp(this.getClass().getSimpleName());
-		    salesOrderMaterial.setModifyApp(this.getClass().getSimpleName());
         	
-        	
-            assignToDatabase(salesOrderMaterial);            
+		    java.util.Date today = new java.util.Date();
+		    salesOrderMaterial.setCreateApp(this.getClass().getSimpleName());
+		    salesOrderMaterial.setCreateLogin(getVisit().getMyLoginId());
+		    salesOrderMaterial.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
+            assignToDatabase(salesOrderMaterial);     
+            if(salesOrderMaterial.getQuantityShipped()>1)
+            {
+            	throw new Exception("Quantity Shipped must equal to 0 in record creation.");	
+            }
+            
             getSalesOrderService().addSalesOrderMaterial(_headerIDLng, salesOrderMaterial);
         }
     	catch (BusinessException e) {

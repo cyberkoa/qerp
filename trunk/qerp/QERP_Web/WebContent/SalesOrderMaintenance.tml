@@ -27,7 +27,7 @@
            t:row="SalesOrder"
            t:model="salesOrderModel"
 		   t:rowsPerPage="10"
-		   t:reorder="id,FormattedDocNo,customerpo,doctype,customercode,createLogin,createtimestamp,modifylogin,modifytimestamp"
+		   t:reorder="id,FormattedDocNo,customerpo,doctype,customercode,SalesOrderDetailSelect,createLogin,createtimestamp,modifylogin,modifytimestamp"
 		   t:exclude="sessionid,docno,recordstatus,version,customerp,modifyapp,createapp,customername"
            t:pagerPosition="both"
            t:inPlace="literal:true">

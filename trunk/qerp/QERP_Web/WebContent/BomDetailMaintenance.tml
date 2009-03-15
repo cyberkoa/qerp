@@ -21,12 +21,12 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
-           t:reorder="id,materialdesc,startdate,enddate,quantityRequired,scrapfactor,location,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,materialcode,startdate,enddate,quantityRequired,scrapfactor,location,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="BomDetails"
            t:row="BomDetail"
            t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:exclude="materialdesc,sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="BomDetail.id">
