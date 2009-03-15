@@ -48,6 +48,7 @@ public interface IBusinessServicesLocator {
 	//public abstract IUserPasswordServiceRemote getUserPasswordServiceRemote();
 	public abstract IDocumentTypeServiceRemote getDocumentTypeServiceRemote();
 	public abstract IMaterialGroupServiceRemote getMaterialGroupServiceRemote();
+	public abstract IOperationServiceRemote getOperationServiceRemote();
 	
 	/**
 	 * Invoked after any kind of naming or remote exception. All cached naming contexts and interfaces are discarded.

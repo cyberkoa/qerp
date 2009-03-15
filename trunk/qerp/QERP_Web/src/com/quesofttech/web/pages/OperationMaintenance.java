@@ -3,15 +3,11 @@ import java.io.IOException;
 import java.util.List;
 import javax.annotation.Resource;
 import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.domain.inventory.Material;
-import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
-import com.quesofttech.business.domain.production.Routing;
-import com.quesofttech.business.domain.production.iface.IRoutingServiceRemote;
+import com.quesofttech.business.domain.general.Operation;
+import com.quesofttech.business.domain.general.iface.IOperationServiceRemote;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
-import com.quesofttech.web.model.base.GenericSelectModel;
 import com.quesofttech.web.state.Visit;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Persist;
@@ -25,54 +21,16 @@ import org.apache.tapestry5.corelib.components.Checkbox;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-public class RoutingMaintenance extends SecureBasePage {
-	
-	//========================================
-	//          Material Combo
-	//========================================
-	@Inject
-    private PropertyAccess _access;
-	
-	@Property
-	@Persist
-	@SuppressWarnings("unused")
-	private GenericSelectModel<Material> _materials;	
-	
-	//@Component(id = "Customer")
-	//private TextField _Customer;
-	
-	//@Persist
-	private Material material;
-	
-	
-/*
-	@Component(id = "Material")
-	private TextField _Material;
-	private Long Material;
-*/
-	public Material getMaterial()
-	{
-	   return material;
-	}
-
-	public void setMaterial(Material material)
-	{
-	   this.material = material;
-	}
-	
-	
-	
-	//========================================
+public class OperationMaintenance extends SimpleBasePage {
 // Default defination.
     private String _strMode = "";
-    private Routing RoutingDetail;
-    private Routing _Routing;
+    private Operation OperationDetail;
+    private Operation _Operation;
     @Persist
-    private List<Routing> _Routings;
+    private List<Operation> _Operations;
     @Inject
     private Logger _logger;
     @Inject
@@ -91,7 +49,7 @@ public class RoutingMaintenance extends SecureBasePage {
          return viewEditText;
     }
 
-    @Component(id = "RoutingForm")
+    @Component(id = "OperationForm")
     private Form _form;
     @Persist
     private int int_SelectedRow;
@@ -119,6 +77,22 @@ public class RoutingMaintenance extends SecureBasePage {
     //===============================
 
     //===============================
+    // Text Component for Code
+    @Component(id = "Code")
+    private TextField _Code;
+    private String Code;
+    public String getCode()
+    {
+       return Code;
+    }
+
+    public void setCode(String Code)
+    {
+       this.Code = Code;
+    }
+    //===============================
+
+    //===============================
     // Text Component for Description
     @Component(id = "Description")
     private TextField _Description;
@@ -135,63 +109,45 @@ public class RoutingMaintenance extends SecureBasePage {
     //===============================
 
     //===============================
-    // Text Component for Operation
-    @Component(id = "Operation")
-    private TextField _Operation;
-    private Integer Operation;
-    public Integer getOperation()
+    // Text Component for Type
+    @Component(id = "Type")
+    private TextField _Type;
+    private String Type;
+    public String getType()
     {
-       return Operation;
+       return Type;
     }
 
-    public void setOperation(Integer Operation)
+    public void setType(String Type)
     {
-       this.Operation = Operation;
+       this.Type = Type;
     }
-    //===============================
-
-    //===============================
-    // Text Component for SequenceType
-    
-	private IMaterialServiceRemote getMaterialService() {
-		return getBusinessServicesLocator().getMaterialServiceRemote();
-	}
     //===============================
     void RefreshRecords()
     {
-    	List<Material> list = null;
-    	try {
-           list = this.getMaterialService().findForSaleMaterials();
-    	}
-    	catch (DoesNotExistException e) {
-    		_form.recordError(e.getMessage());
-    	}
-    	
-        _materials = new GenericSelectModel<Material>(list,Material.class,"codeDescription","id",_access);
-
        try
        {
-           _Routings = getRoutingService().findRoutings();
+           _Operations = getOperationService().findOperations();
        }
        catch(BusinessException be)
        {
 
        }
-       if(_Routings!=null && !_Routings.isEmpty())
+       if(_Operations!=null && !_Operations.isEmpty())
        {
            if(int_SelectedRow==0)
            {
-               RoutingDetail = _Routings.get(_Routings.size() - 1);
+               OperationDetail = _Operations.get(_Operations.size() - 1);
            }
            else
            {
-               RoutingDetail = _Routings.get(int_SelectedRow - 1);
+               OperationDetail = _Operations.get(int_SelectedRow - 1);
            }
-           RoutingDetail = _Routings.get(_Routings.size() - 1);
+           OperationDetail = _Operations.get(_Operations.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";
-           assignToLocalVariable(RoutingDetail);
+           assignToLocalVariable(OperationDetail);
        }
              else
             {
@@ -216,7 +172,7 @@ private void refreshDisplay()
       int int_return ,int_i;
       int_i = 0;
       int_return = 0;
-      for(Routing p : _Routings)
+      for(Operation p : _Operations)
        {
           int_i++;
           if((long)p.getId().intValue()==id)
@@ -265,79 +221,84 @@ private void refreshDisplay()
        }
     }
 
-    void assignToDatabase(Routing routing){
-       routing.setId(id);
-       routing.setDescription(Description);
-       //routing.setOperation(Operation);  
-      // routing.set
-       //routing.setRecordStatus("A");
-       //routing.setMaterial(material);
+    void assignToDatabase(Operation operation){
+       operation.setId(id);
+       operation.setCode(Code);
+       operation.setDescription(Description);
+       operation.setType(Type);
+       operation.setRecordStatus("A");
+       java.util.Date today = new java.util.Date();
+       operation.setModifyApp(this.getClass().getSimpleName());
+       operation.setModifyLogin(getVisit().getMyLoginId());
+       operation.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
     }
-    void assignToLocalVariable(Routing routing)
+    void assignToLocalVariable(Operation operation)
     {
-       this.id = routing.getId();
-       this.Description = routing.getDescription();
-      // this.Operation = routing.getOperation();       
-       //this.material = routing.getMaterial();
+       this.id = operation.getId();
+       this.Code = operation.getCode();
+       this.Description = operation.getDescription();
+       this.Type = operation.getType();
     }
     void _AddRecord()
     {
-       Routing routing = new Routing();
+       Operation operation = new Operation();
        try {
-               routing.setModifyLogin(getVisit().getMyLoginId());
-               routing.setCreateLogin(getVisit().getMyLoginId());
-               routing.setCreateApp(this.getClass().getSimpleName());
-               routing.setModifyApp(this.getClass().getSimpleName());
-           assignToDatabase(routing);
-           getRoutingService().addRouting(routing);
+                java.util.Date today = new java.util.Date();
+                operation.setCreateApp(this.getClass().getSimpleName());
+                operation.setCreateLogin(getVisit().getMyLoginId());
+                operation.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
+           assignToDatabase(operation);
+           getOperationService().addOperation(operation);
        }
        catch (Exception e) {
-    	   _form.recordError(e.getMessage());
+           _logger.info("Operation_Add_problem");
+           e.printStackTrace();
+           _form.recordError(getMessages().get("Operation_add_problem"));
        }
     }
 
     void _UpdateRecord(){
-       Routing routing = new Routing();
+       Operation operation = new Operation();
        try
        {
-           routing = getRoutingService().findRouting(id);
+           operation = getOperationService().findOperation(id);
        }
        catch(BusinessException be)
        {
 
        }
-       if(routing !=null)
+       if(operation !=null)
        {
            try {
-               routing.setModifyLogin(getVisit().getMyLoginId());
-               assignToDatabase(routing);
-               getRoutingService().updateRouting(routing);
+               operation.setModifyLogin(getVisit().getMyLoginId());
+               assignToDatabase(operation);
+               getOperationService().updateOperation(operation);
            }
            catch (BusinessException e) {
                _form.recordError(e.getMessage());
            }
-       catch (Exception e) {
-    	   _form.recordError(e.getMessage());
+       catch (Exception e) {               
+               _form.recordError(e.getMessage());
            }
        }
     }
 
 
     void _DeleteRecord(Long id) {
-       Routing routing = new Routing();
+       Operation operation = new Operation();
        try
        {
-           routing = getRoutingService().findRouting(id);
+           operation = getOperationService().findOperation(id);
        }
        catch(BusinessException be)
        {
 
        }
-       if(routing!=null)
+       if(operation!=null)
        {
            try {
-               routing.setModifyLogin(getVisit().getMyLoginId());
-               getRoutingService().logicalDeleteRouting(routing);
+               operation.setModifyLogin(getVisit().getMyLoginId());
+               getOperationService().logicalDeleteOperation(operation);
                if(int_SelectedRow!=0)
                {
                    int_SelectedRow--;
@@ -345,10 +306,11 @@ private void refreshDisplay()
                RefreshRecords();
            }
                catch (BusinessException e) {
-            	   _form.recordError(e.getMessage());
+               _form.recordError(e.getMessage());
        }
            catch (Exception e) {
-        	   _form.recordError(e.getMessage());
+              
+               _form.recordError(e.getMessage());
            }
        }
     }
@@ -379,7 +341,7 @@ private void refreshDisplay()
        lng_CurrentID = id;
        try
        {
-           RoutingDetail = getRoutingService().findRouting(id);
+           OperationDetail = getOperationService().findOperation(id);
            int_SelectedRow = getRcdLocation(id);
        }
        catch(BusinessException be)
@@ -387,32 +349,32 @@ private void refreshDisplay()
 
        }
 
-       if(RoutingDetail!=null){
+       if(OperationDetail!=null){
            viewDisplayText="Block";
            viewEditText="none";
-           assignToLocalVariable(RoutingDetail);
+           assignToLocalVariable(OperationDetail);
            return blockFormView;
        }
        return null;
     }
 
-    private IRoutingServiceRemote getRoutingService() {
-       return getBusinessServicesLocator().getRoutingServiceRemote();
+    private IOperationServiceRemote getOperationService() {
+       return getBusinessServicesLocator().getOperationServiceRemote();
     }
 
 
-    public List<Routing> getRoutings() {
-       return _Routings;
+    public List<Operation> getOperations() {
+       return _Operations;
     }
 
 
-    public Routing getRouting() throws BusinessException{
-       return _Routing;
+    public Operation getOperation() throws BusinessException{
+       return _Operation;
     }
 
 
-     public void setRouting(Routing tb) {
-       _Routing = tb;
+     public void setOperation(Operation tb) {
+       _Operation = tb;
     }
 
 }

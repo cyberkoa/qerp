@@ -98,14 +98,15 @@ public class cmp_layout extends SimpleBasePage
 			List<Module> Modules;
 			
 			Modules = getBusinessServicesLocator().getModuleServiceRemote().findModules();
-			for(Module p : Modules)
+			i = Modules.size();
+			/*for(Module p : Modules)
 			{			
 				
 				//System.out.println("This is the output data: " + p.toString());
 				//_subjects[i] = p.getDescription();
 				//_modules[i] = p.getCode();
 				i++;
-			}
+			}*/
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -146,8 +147,9 @@ public class cmp_layout extends SimpleBasePage
 		}
 		catch (Exception e)
 		{
-			System.out.println("getProgramTypeNum Exception:" + e.getMessage());
+		
 		}
+			
 		return _temp;
 	}
 	
@@ -241,7 +243,6 @@ public class cmp_layout extends SimpleBasePage
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("GenerateTree Exception:" + e.getMessage());
 			returnLoginScreen();
 			return;
 		}
@@ -251,38 +252,25 @@ public class cmp_layout extends SimpleBasePage
 	{
 		return _index;
 	}
-	//public List<String> getSubjects()
-	//{		
-		//System.out.println("this is the subject: and array is " + int_Array + ", subject: " + _subjects.toString());
-	//	return _subjects;
-	//}
-	
     private String _detail = "A";
     private String _test;
     private String _temp;
     private String _temp1;
     public String[] getDetails() throws BusinessException
     {
-    	try{
-    		
+    	try{    		
 	    	GenerateTree();
-System.out.println("the tree size is :" + _subjects.size());
-	    	String[] _Details_output = new String[_subjects.size()];
-	    	
+	    	String[] _Details_output = new String[_subjects.size()];	    	
 	    	for(int i_Loop=0;i_Loop<_subjects.size();i_Loop++)
 	    	{
-	    		//System.out.println("here");
 	    		if (! _TreeView[i_Loop].equals(""))
 	    		{
 	    			_Details_output[i_Loop] = _TreeView[i_Loop];   
-	    			//System.out.println("the tree contains is :" + _TreeView[i_Loop]);
 	    		}
 	    		else 
 	    		{
-	    			//System.out.println("the tree contains is blank");
 	    			_Details_output[i_Loop] = "<br><br><B><H1>N/A</H1></B>";
-	    		}
-	    		
+	    		}	    		
 	    	}
 	    	return _Details_output;	    	
     	}

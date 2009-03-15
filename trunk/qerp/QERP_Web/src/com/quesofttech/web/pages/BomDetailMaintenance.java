@@ -240,26 +240,29 @@ public class BomDetailMaintenance extends SecureBasePage {
 	@SuppressWarnings("unused")
 	private GenericSelectModel<Material> _materials;	
 	
+	
+	@Property
+	@Persist
+	@SuppressWarnings("unused")
+	private GenericSelectModel<Operation> _operations;
+	
 	@Inject
     private PropertyAccess _access;
-	/*
-	public ProductionOrderMaintenance() throws BusinessException{
-	  	List<Material> list = null;
-	  	List<SalesOrder> list_so = null;
-    	try {    		
-    		list = this.getMaterialService().findMaterials();           
-    	}
-    	catch (DoesNotExistException e) {}
-    	try{
-    		list_so = this.getSalesOrderService().findSalesOrders();
-    	}
-    	catch (DoesNotExistException e){}
-    	
-    	_salesorders = new GenericSelectModel<SalesOrder>(list_so,SalesOrder.class,"docNo","id",_access1);
-        _materials = new GenericSelectModel<Material>(list,Material.class,"code","id",_access);
-	}*/
+	
+	private IOperationServiceRemote getOperationService(){
+		return getBusinessServicesLocator().getOperationServiceRemote();
+	}
 	private IMaterialServiceRemote getMaterialService() {
 		return getBusinessServicesLocator().getMaterialServiceRemote();
+	}
+	private Operation Operation;
+	public Operation getOperation()
+	{
+		return Operation;
+	}
+	public void setOperation(Operation Operation)
+	{
+		this.Operation = Operation;
 	}
 
     private Material Material;
@@ -284,8 +287,10 @@ public class BomDetailMaintenance extends SecureBasePage {
     //===============================
     void RefreshRecords()
     {
-    	List<Material> list = null;	  	
+    	List<Material> list = null;	 
+    	List<Operation> listoperation = null;
     	try {
+    		listoperation = this.getOperationService().findOperationsByType("P");
     		list = this.getMaterialService().findNotForSaleMaterials();           
     	}
     	catch (DoesNotExistException e) {
@@ -294,6 +299,8 @@ public class BomDetailMaintenance extends SecureBasePage {
     	
     	_materials = null;
     	_materials = new GenericSelectModel<Material>(list,Material.class,"codeDescription","id",_access);
+    	_operations = null;
+    	_operations = new GenericSelectModel<Operation>(listoperation,Operation.class,"CodeDescription","id",_access);
 		// ComboBox Refresh
        try
        {
@@ -431,6 +438,7 @@ public class BomDetailMaintenance extends SecureBasePage {
        //bomDetail.setBom(BOMHeader);
        bomDetail.setMaterial(Material);
        bomDetail.setRecordStatus("A");
+       bomDetail.setOperation(Operation);
        
        java.util.Date today = new java.util.Date();	   
        bomDetail.setModifyApp(this.getClass().getSimpleName());
@@ -447,6 +455,7 @@ public class BomDetailMaintenance extends SecureBasePage {
        this.startDate = bomDetail.getStartDate();
        this.BOMHeader = bomDetail.getBom();
        this.Material = bomDetail.getMaterial();
+       this.Operation = bomDetail.getOperation();
     }
     void _AddRecord()
     {

@@ -351,6 +351,10 @@ PROCEDURE assignToDatabase:
 /*     MESSAGE '   mt.setPurchased(isPurchased);'.   */
 /*     MESSAGE '   mt.setForSale(isForSale);'.       */
     MESSAGE '    ' + '   ' + str_classname + '.setRecordStatus("A");'.
+    MESSAGE '       java.util.Date today = new java.util.Date();'.
+    MESSAGE '    ' + '   ' + str_classname + '.setModifyApp(this.getClass().getSimpleName());'.
+    MESSAGE '    ' + '   ' + str_classname + '.setModifyLogin(getVisit().getMyLoginId());'.
+    MESSAGE '    ' + '   ' + str_classname + '.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));'.
     MESSAGE '    ' + CHR(125).
 END PROCEDURE.
 
@@ -361,10 +365,15 @@ PROCEDURE AddRecord:
     MESSAGE '    ' + CHR(123).
     MESSAGE '    ' + '   ' + str_formid + ' ' + str_classname + ' = new ' + str_formid + '();'.
     MESSAGE '    ' + '   try ' + CHR(123).
-    MESSAGE '    ' + '           ' + str_classname + '.setModifyLogin(getVisit().getMyLoginId());'.
-    MESSAGE '    ' + '           ' + str_classname + '.setCreateLogin(getVisit().getMyLoginId());'.
-    MESSAGE '    ' + '           ' + str_classname + '.setCreateApp(this.getClass().getSimpleName());'.
-    MESSAGE '    ' + '           ' + str_classname + '.setModifyApp(this.getClass().getSimpleName());'.
+
+    MESSAGE '                java.util.Date today = new java.util.Date();'.
+    MESSAGE '                ' + str_classname + '.setCreateApp(this.getClass().getSimpleName());'.
+    MESSAGE '                ' + str_classname + '.setCreateLogin(getVisit().getMyLoginId());'.
+    MESSAGE '                ' + str_classname + '.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));'.
+/*     MESSAGE '    ' + '           ' + str_classname + '.setModifyLogin(getVisit().getMyLoginId());'.     */
+/*     MESSAGE '    ' + '           ' + str_classname + '.setCreateLogin(getVisit().getMyLoginId());'.     */
+/*     MESSAGE '    ' + '           ' + str_classname + '.setCreateApp(this.getClass().getSimpleName());'. */
+/*     MESSAGE '    ' + '           ' + str_classname + '.setModifyApp(this.getClass().getSimpleName());'. */
     MESSAGE '    ' + '       assignToDatabase(' + str_classname + ');'.
     MESSAGE '    ' + '       get' + str_formid + 'Service().add' + str_formid + '(' + str_classname + ');'.
     MESSAGE '    ' + '   ' + CHR(125).	
@@ -397,12 +406,12 @@ PROCEDURE UpdateRecord:
     MESSAGE '    ' + '           get' + str_formid + 'Service().update' + str_formid + '(' + str_classname + ');'.
     MESSAGE '    ' + '       ' + CHR(125).
     MESSAGE '    ' + '       catch (BusinessException e) ' + CHR(123).
-    MESSAGE '    ' + '           _form.recordError(_typeField, e.getLocalizedMessage());'.
+    MESSAGE '    ' + '           _form.recordError(e.getMessage());'.
     MESSAGE '    ' + '       ' + CHR(125).
     MESSAGE '       catch (Exception e) ' + CHR(123).
-    MESSAGE '    ' + '           _logger.info("' + str_formid + '_update_problem");'.
-    MESSAGE '    ' + '           e.printStackTrace();'.
-    MESSAGE '    ' + '           _form.recordError(getMessages().get("' + str_formid + '_update_problem"));'.
+/*     MESSAGE '    ' + '           _logger.info("' + str_formid + '_update_problem");'. */
+/*     MESSAGE '    ' + '           e.printStackTrace();'.                               */
+    MESSAGE '    ' + '           _form.recordError(e.getMessage());'.
     MESSAGE '    ' + "       " + CHR(125).
     MESSAGE '    ' + "   " + CHR(125).
     MESSAGE '    ' + CHR(125).
