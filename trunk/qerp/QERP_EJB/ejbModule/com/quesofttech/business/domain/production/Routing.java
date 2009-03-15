@@ -34,6 +34,8 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.inventory.Material;
+import com.quesofttech.business.domain.general.Operation;
+
 
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.business.common.exception.GenericBusinessException;
@@ -66,15 +68,13 @@ public class Routing extends BaseEntity {
 
 	// Example of field	
 	
-	@Column(name = "route_Operation", nullable = false)
-	private Integer operation;
-	
 	@Column(name = "route_Description", length = 100, nullable = false)
 	private String description;
 
-	@Column(name = "route_SequenceType", length = 2, nullable = true)
-	private String sequenceType;
+	@Column(name = "route_Sequence", nullable = true)
+	private Integer sequence;
 
+	
 	
 	//@Embedded
 	//RowInfo rowInfo_1;
@@ -83,6 +83,12 @@ public class Routing extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name="fk_Material")	
 	private Material material;
+	
+	@ManyToOne
+	@JoinColumn(name="fk_Operation")	
+	private Operation operation;
+	
+	
 	/*
 	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="routing", targetEntity=<ForeignTable>.class)
 	private List<<ForeignTable>> <foreignTable>s; // = new List<<ForeignTable>>();
@@ -231,7 +237,7 @@ public class Routing extends BaseEntity {
 		
 		// Validate syntax...
 
-		if (operation==null || operation <= 0) {
+		if (operation==null) {
 			//System.out.println("Yeah");
 			throw new ValueRequiredException(this, "Routing_Operation");
 		}
@@ -374,10 +380,13 @@ public class Routing extends BaseEntity {
 	}
 
 
+
+
+
 	/**
 	 * @return the operation
 	 */
-	public Integer getOperation() {
+	public Operation getOperation() {
 		return operation;
 	}
 
@@ -385,7 +394,7 @@ public class Routing extends BaseEntity {
 	/**
 	 * @param operation the operation to set
 	 */
-	public void setOperation(Integer operation) {
+	public void setOperation(Operation operation) {
 		this.operation = operation;
 	}
 
@@ -407,18 +416,18 @@ public class Routing extends BaseEntity {
 
 
 	/**
-	 * @return the sequenceType
+	 * @return the sequence
 	 */
-	public String getSequenceType() {
-		return sequenceType;
+	public Integer getSequence() {
+		return sequence;
 	}
 
 
 	/**
-	 * @param sequenceType the sequenceType to set
+	 * @param sequence the sequence to set
 	 */
-	public void setSequenceType(String sequenceType) {
-		this.sequenceType = sequenceType;
+	public void setSequence(Integer sequence) {
+		this.sequence = sequence;
 	}
 
 

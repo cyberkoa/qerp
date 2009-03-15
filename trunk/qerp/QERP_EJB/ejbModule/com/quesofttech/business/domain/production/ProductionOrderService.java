@@ -163,7 +163,7 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 
 	@SuppressWarnings("unchecked")
 	public List<ProductionOrderOperation> findProductionOrderOperations() throws DoesNotExistException {
-		Query q = _em.createQuery("select prodoo from ProductionOrderOperation prodoo where prodoo.rowInfo.recordStatus='A' order by prodoo.id ");
+		Query q = _em.createQuery("select prodoo from ProductionOrderOperation prodoo where prodoo.rowInfo.recordStatus='A' order by prodoo.sequence ");
 		List l = q.getResultList();
 		return l;
 	}
@@ -173,7 +173,7 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		//ProductionOrder productionOrder = this.findProductionOrder(productionOrderId);
 		
 		Query q = _em.createQuery("select prodoo from ProductionOrderOperation prodoo where prodoo.productionOrder.id = :productionOrderId AND prodoo.rowInfo.recordStatus='A'" +
-				" order by prodoo.id");
+				" order by prodoo.sequence");
 		q.setParameter("productionOrderId", productionOrderId);
 		List l = q.getResultList();
 		return l;

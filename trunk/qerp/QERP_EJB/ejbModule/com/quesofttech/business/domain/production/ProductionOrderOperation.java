@@ -34,6 +34,8 @@ import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.inventory.Material;
+import com.quesofttech.business.domain.general.Operation;
+
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.util.StringUtil;
 
@@ -41,7 +43,7 @@ import java.util.List;
 //import java.util.ArrayList;
 
 @Entity
-@Table(name = "ProductionOrderOperation", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_ProductionOrder","pom_Operation" }) })
+@Table(name = "ProductionOrderOperation", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_ProductionOrder","prodoo_Sequence" }) })
 @SuppressWarnings("serial")
 public class ProductionOrderOperation extends BaseEntity {
 	
@@ -65,20 +67,15 @@ public class ProductionOrderOperation extends BaseEntity {
 	// Example of field	
 	//@Column(name = "matt_Type", length = 1, nullable = false)
 	//private String type;
-	@Column(name = "prodoo_Operation", nullable = false)
-	private Integer operation;
-	
-	
+	@Column(name = "prodoo_Sequence", nullable = false)
+	private Integer sequence;
+		
 	@Column(name = "prodoo_QuantityOrder", nullable = false)
 	private Double quantityOrder;
 		
 	@Column(name = "prodoo_QuantityReported", nullable = false)
 	private Double quantityReported;
 	
-	/*
-	@Column(name = "prodoo_Sequence", nullable = false)
-	private Double sequence;
-	*/
 	
 	
 	//@Embedded
@@ -89,6 +86,9 @@ public class ProductionOrderOperation extends BaseEntity {
     @JoinColumn(name="fk_ProductionOrder")	
 	private ProductionOrder productionOrder;
 
+	@ManyToOne(cascade={CascadeType.REFRESH})
+    @JoinColumn(name="fk_Operation")	
+	private Operation operation;
 	
 	
 	//@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="productionOrderOperation", targetEntity=ProductionOrderMaterial.class)
@@ -375,23 +375,6 @@ public class ProductionOrderOperation extends BaseEntity {
 	}
 
 
-	/**
-	 * @return the operation
-	 */
-	public Integer getOperation() {
-		return operation;
-	}
-
-
-	/**
-	 * @param operation the operation to set
-	 */
-	public void setOperation(Integer operation) {
-		this.operation = operation;
-	}
-
-
-
 
 
 	/**
@@ -439,6 +422,38 @@ public class ProductionOrderOperation extends BaseEntity {
 	 */
 	public void setProductionOrder(ProductionOrder productionOrder) {
 		this.productionOrder = productionOrder;
+	}
+
+
+	/**
+	 * @return the sequence
+	 */
+	public Integer getSequence() {
+		return sequence;
+	}
+
+
+	/**
+	 * @param sequence the sequence to set
+	 */
+	public void setSequence(Integer sequence) {
+		this.sequence = sequence;
+	}
+
+
+	/**
+	 * @return the operation
+	 */
+	public Operation getOperation() {
+		return operation;
+	}
+
+
+	/**
+	 * @param operation the operation to set
+	 */
+	public void setOperation(Operation operation) {
+		this.operation = operation;
 	}
 
 
