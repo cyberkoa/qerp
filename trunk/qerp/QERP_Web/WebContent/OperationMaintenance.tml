@@ -40,7 +40,7 @@
                    <table id="input">
                        <tr>
                            <th><t:label t:for="Code">Code</t:label>:</th>
-                           <td>   <DIV style="display:${viewDisplayText};"> ${Code}</DIV><DIV style="display:${viewEditText};"><input  t:type="TextField" t:id="Code" t:value="Code" t:maxLength="1" t:size="1" /> </DIV></td>
+                           <td>   <DIV style="display:${viewDisplayText};"> ${Code}</DIV><DIV style="display:${viewEditText};"><input  t:type="TextField" t:id="Code" t:value="Code" t:maxLength="10" t:size="10" /> </DIV></td>
                        </tr>
                        <tr>
                            <th><t:label t:for="Description">Description</t:label>:</th>

@@ -4,9 +4,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.domain.inventory.Material;
-import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
 import com.quesofttech.business.domain.production.Routing;
+import com.quesofttech.business.domain.general.*;
+import com.quesofttech.business.domain.general.iface.IOperationServiceRemote;
+import com.quesofttech.business.domain.inventory.*;
+import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
 import com.quesofttech.business.domain.production.iface.IRoutingServiceRemote;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
@@ -29,44 +31,7 @@ import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-public class RoutingMaintenance extends SecureBasePage {
-	
-	//========================================
-	//          Material Combo
-	//========================================
-	@Inject
-    private PropertyAccess _access;
-	
-	@Property
-	@Persist
-	@SuppressWarnings("unused")
-	private GenericSelectModel<Material> _materials;	
-	
-	//@Component(id = "Customer")
-	//private TextField _Customer;
-	
-	//@Persist
-	private Material material;
-	
-	
-/*
-	@Component(id = "Material")
-	private TextField _Material;
-	private Long Material;
-*/
-	public Material getMaterial()
-	{
-	   return material;
-	}
-
-	public void setMaterial(Material material)
-	{
-	   this.material = material;
-	}
-	
-	
-	
-	//========================================
+public class RoutingMaintenance extends SimpleBasePage {
 // Default defination.
     private String _strMode = "";
     private Routing RoutingDetail;
@@ -135,40 +100,97 @@ public class RoutingMaintenance extends SecureBasePage {
     //===============================
 
     //===============================
-    // Text Component for Operation
-    @Component(id = "Operation")
-    private TextField _Operation;
-    private Integer Operation;
-    public Integer getOperation()
-    {
-       return Operation;
-    }
-
-    public void setOperation(Integer Operation)
-    {
-       this.Operation = Operation;
-    }
-    //===============================
-
-    //===============================
-    // Text Component for SequenceType
     
+    //===============================
+
+    //===============================
+    // Text Component for Sequence
+    @Component(id = "Sequence")
+    private TextField _Sequence;
+    private Integer Sequence;
+    public Integer getSequence()
+    {
+       return Sequence;
+    }
+
+    public void setSequence(Integer Sequence)
+    {
+       this.Sequence = Sequence;
+    }
+    //===============================
+
+    //===============================
+  //===============================================================
+	//			Material ComboBox
+	//===============================================================
+	@Property
+	@Persist
+	@SuppressWarnings("unused")
+	private GenericSelectModel<Material> _materials;	
+	
+	
+	@Property
+	@Persist
+	@SuppressWarnings("unused")
+	private GenericSelectModel<Operation> _operations;
+	
+	@Inject
+    private PropertyAccess _access;
+	
+	private IOperationServiceRemote getOperationService(){
+		return getBusinessServicesLocator().getOperationServiceRemote();
+	}
 	private IMaterialServiceRemote getMaterialService() {
 		return getBusinessServicesLocator().getMaterialServiceRemote();
 	}
+	private Operation Operation;
+	public Operation getOperation()
+	{
+		return Operation;
+	}
+	public void setOperation(Operation Operation)
+	{
+		this.Operation = Operation;
+	}
+
+    private Material Material;
+    public Material getMaterial()
+    {
+       return Material;
+    }
+
+    public void setMaterial(Material Material)
+    {
+       this.Material = Material;
+    }
+    public String getMaterialCode()
+    {
+    	if(Material==null)
+    	{
+    		return "";
+    	}
+    	else
+    	return Material.getCodeDescription();
+    }
+    //===============================
     //===============================
     void RefreshRecords()
     {
-    	List<Material> list = null;
+    	List<Material> list = null;	 
+    	List<Operation> listoperation = null;
     	try {
-           list = this.getMaterialService().findForSaleMaterials();
+    		listoperation = this.getOperationService().findOperationsByType("P");
+    		list = this.getMaterialService().findNotForSaleMaterials();           
     	}
     	catch (DoesNotExistException e) {
     		_form.recordError(e.getMessage());
     	}
     	
-        _materials = new GenericSelectModel<Material>(list,Material.class,"codeDescription","id",_access);
-
+    	_materials = null;
+    	_materials = new GenericSelectModel<Material>(list,Material.class,"codeDescription","id",_access);
+    	_operations = null;
+    	_operations = new GenericSelectModel<Operation>(listoperation,Operation.class,"CodeDescription","id",_access);
+		// ComboBox Refresh
        try
        {
            _Routings = getRoutingService().findRoutings();
@@ -268,31 +290,38 @@ private void refreshDisplay()
     void assignToDatabase(Routing routing){
        routing.setId(id);
        routing.setDescription(Description);
-       //routing.setOperation(Operation);  
-      // routing.set
-       //routing.setRecordStatus("A");
-       //routing.setMaterial(material);
+       routing.setOperation(Operation);
+       routing.setSequence(Sequence);
+       routing.setMaterial(Material);
+       routing.setRecordStatus("A");
+       java.util.Date today = new java.util.Date();
+       routing.setModifyApp(this.getClass().getSimpleName());
+       routing.setModifyLogin(getVisit().getMyLoginId());
+       routing.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
     }
     void assignToLocalVariable(Routing routing)
     {
        this.id = routing.getId();
-       this.Description = routing.getDescription();
-      // this.Operation = routing.getOperation();       
-       //this.material = routing.getMaterial();
+       this.Description = routing.getDescription();       
+       this.Sequence = routing.getSequence();
+       this.Material = routing.getMaterial();
+       this.Operation = routing.getOperation();
     }
     void _AddRecord()
     {
        Routing routing = new Routing();
        try {
-               routing.setModifyLogin(getVisit().getMyLoginId());
-               routing.setCreateLogin(getVisit().getMyLoginId());
-               routing.setCreateApp(this.getClass().getSimpleName());
-               routing.setModifyApp(this.getClass().getSimpleName());
+                java.util.Date today = new java.util.Date();
+                routing.setCreateApp(this.getClass().getSimpleName());
+                routing.setCreateLogin(getVisit().getMyLoginId());
+                routing.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
            assignToDatabase(routing);
            getRoutingService().addRouting(routing);
        }
        catch (Exception e) {
-    	   _form.recordError(e.getMessage());
+           _logger.info("Routing_Add_problem");
+           e.printStackTrace();
+           _form.recordError(getMessages().get("Routing_add_problem"));
        }
     }
 
@@ -317,7 +346,7 @@ private void refreshDisplay()
                _form.recordError(e.getMessage());
            }
        catch (Exception e) {
-    	   _form.recordError(e.getMessage());
+               _form.recordError(e.getMessage());
            }
        }
     }
@@ -345,10 +374,10 @@ private void refreshDisplay()
                RefreshRecords();
            }
                catch (BusinessException e) {
-            	   _form.recordError(e.getMessage());
+               _form.recordError(e.getMessage());
        }
-           catch (Exception e) {
-        	   _form.recordError(e.getMessage());
+           catch (Exception e) {               
+               _form.recordError(e.getMessage());
            }
        }
     }
