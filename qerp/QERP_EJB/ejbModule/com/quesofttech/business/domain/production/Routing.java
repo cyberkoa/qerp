@@ -303,6 +303,10 @@ public class Routing extends BaseEntity {
 	}
 
 
+	public String getMaterialCode()
+	{
+		return getMaterial().getCode();
+	}
 
 	public String getSessionId() {
 		return rowInfo.getSessionId();
