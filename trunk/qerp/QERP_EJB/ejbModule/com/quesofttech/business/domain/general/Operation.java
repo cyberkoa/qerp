@@ -419,6 +419,11 @@ public class Operation extends BaseEntity {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public String getCodeDescription()
+	{
+		return code + " - " + description;
+	}
 
 	
 	
