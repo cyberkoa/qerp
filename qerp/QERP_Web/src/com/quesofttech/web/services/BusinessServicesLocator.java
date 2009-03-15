@@ -161,6 +161,9 @@ public class BusinessServicesLocator implements IBusinessServicesLocator {
 	public IMaterialGroupServiceRemote getMaterialGroupServiceRemote(){
 		return (IMaterialGroupServiceRemote) getService(MaterialGroupService.class.getSimpleName() + "Remote");
 	}
+	public IOperationServiceRemote getOperationServiceRemote(){
+		return (IOperationServiceRemote) getService(OperationService.class.getSimpleName() + "Remote");
+	}
 
 	
 	

@@ -55,6 +55,10 @@
                            <td> <DIV style="display:${viewDisplayText};"> ${MaterialCode}</DIV><DIV style="display:${viewEditText};">  <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </DIV></td>
                        </tr>
                        <tr>
+                           <th><t:label t:for="Operation">Operation</t:label>:</th>
+                           <td> <select  t:type="select" t:id="Operation" t:model="Operations" encoder="Operations" t:value="Operation" /> </td>
+                       </tr>
+                       <tr>
                            <th><t:label t:for="startDate">Start Date</t:label>:</th>
                            <td><t:datefield  t:type="DateField" t:id="startDate" t:value="startDate" /></td>
                        </tr>

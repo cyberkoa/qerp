@@ -13,21 +13,22 @@ DEFINE VARIABLE  str_classname AS CHARACTER   NO-UNDO.
 /*   `fk_Customer` bigint(20) default NULL".    */
 
 
-pc_value = " `Routing_id` bigint(20) NOT NULL,
+pc_value = "`id_id` bigint(20) NOT NULL,
   `route_Description` varchar(100) NOT NULL,
   `route_Operation` int(11) NOT NULL,
-  `route_SequenceType` varchar(2) NOT NULL
-
-
+  
+    `route_Sequence` int(11) default NULL,
+  `fk_Material` bigint(20) default NULL,
+  `fk_Operation` bigint(20) default NULL
 ".
  
   
 
 /*     SalesOrderMaterial */
-str_formid = 'Routing'.
-str_subject = 'Routing'.
-str_classname = 'routing'.
-    str_module = 'inventory'.
+str_formid = 'Operation'.
+str_subject = 'Operation'.
+str_classname = 'operation'.
+    str_module = 'general'.
 
 
 
