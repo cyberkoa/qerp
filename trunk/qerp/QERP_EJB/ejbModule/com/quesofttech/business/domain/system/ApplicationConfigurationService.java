@@ -57,10 +57,10 @@ public class ApplicationConfigurationService extends BaseService implements IApp
 	public void addApplicationConfiguration(ApplicationConfiguration applicationConfiguration) throws BusinessException {
 		
 		//try{
-		System.out.println("just before persist in ApplicationConfigurationService");
+		//System.out.println("just before persist in ApplicationConfigurationService");
 		persist(applicationConfiguration);
 		
-		System.out.println("just after persist in ApplicationConfigurationService");
+		//System.out.println("just after persist in ApplicationConfigurationService");
 		//}
 	/*	catch (java.lang.RuntimeException e)
 		{

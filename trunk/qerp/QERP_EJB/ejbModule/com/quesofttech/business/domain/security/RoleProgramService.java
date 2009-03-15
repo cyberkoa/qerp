@@ -57,10 +57,10 @@ public class RoleProgramService extends BaseService implements IRoleProgramServi
 	public void addRoleProgram(RoleProgram roleProgram) throws BusinessException {
 		
 		//try{
-		System.out.println("just before persist in RoleService");
+		//System.out.println("just before persist in RoleService");
 		persist(roleProgram);
 		
-		System.out.println("just after persist in RoleService");
+		//System.out.println("just after persist in RoleService");
 		//}
 	/*	catch (java.lang.RuntimeException e)
 		{
