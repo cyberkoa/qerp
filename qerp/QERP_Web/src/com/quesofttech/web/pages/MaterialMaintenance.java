@@ -556,7 +556,12 @@ public class MaterialMaintenance extends SecureBasePage {
 	   Material.getDimension().setHeight(height);
 	   Material.getDimension().setLength(length);
 	   Material.getDimension().setWidth(width);	   
-	   Material.setRecordStatus("A");	   
+	   Material.setRecordStatus("A");	
+	   
+	   java.util.Date today = new java.util.Date();	   
+	   Material.setModifyApp(this.getClass().getSimpleName());
+	   Material.setModifyLogin(getVisit().getMyLoginId());       
+	   Material.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	}
 	
 	void assignToLocalVariable(Material Material)
@@ -578,11 +583,11 @@ public class MaterialMaintenance extends SecureBasePage {
 	{
 		Material material = new Material();
 		try {
-			material.setCreateLogin(getVisit().getMyLoginId());
-			material.setModifyLogin(getVisit().getMyLoginId());
-			
+			java.util.Date today = new java.util.Date();
 			material.setCreateApp(this.getClass().getSimpleName());
-			material.setModifyApp(this.getClass().getSimpleName());
+            material.setCreateLogin(getVisit().getMyLoginId());
+            material.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
+			
 			
 			
 		   assignToDatabase(material);

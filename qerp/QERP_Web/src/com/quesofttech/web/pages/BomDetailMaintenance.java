@@ -450,7 +450,7 @@ public class BomDetailMaintenance extends SecureBasePage {
        this.id = bomDetail.getId();
        this.endDate = bomDetail.getEndDate();
        this.Location = bomDetail.getLocation();
-       this.quantityRequired = bomDetail.getQuantityRequired();
+       this.quantityRequired = bomDetail.getQuantityRequired();      
        this.scrapFactor = bomDetail.getScrapFactor();
        this.startDate = bomDetail.getStartDate();
        this.BOMHeader = bomDetail.getBom();
@@ -545,6 +545,9 @@ public class BomDetailMaintenance extends SecureBasePage {
        _form.clearErrors();
        myState = "A";
        _strMode = "A";
+       scrapFactor = 1;
+       
+       
        return blockFormView;
     }
 
