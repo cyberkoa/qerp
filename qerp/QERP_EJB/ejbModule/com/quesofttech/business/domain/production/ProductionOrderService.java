@@ -71,15 +71,18 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		
 		ProductionOrder oldProductionOrder = this.findProductionOrder(productionOrder.getId());
 		
-		for(ProductionOrderOperation poo : productionOrder.getProductionOrderOperations())
+		if(productionOrder.getQuantityOrder()!=oldProductionOrder.getQuantityOrder())
 		{
-			poo.setQuantityOrder(poo.getQuantityOrder()*(productionOrder.getQuantityOrder()/oldProductionOrder.getQuantityOrder()));
-		}
-		
-		for(ProductionOrderMaterial pom : productionOrder.getProductionOrderMaterials())
-		{
-			System.out.println("ProdO service : " + oldProductionOrder.getQuantityOrder() + "," + productionOrder.getQuantityOrder());
-			pom.setQuantityRequired(pom.getQuantityRequired()*(productionOrder.getQuantityOrder()/oldProductionOrder.getQuantityOrder()));
+			for(ProductionOrderOperation poo : productionOrder.getProductionOrderOperations())
+			{
+				poo.setQuantityOrder(poo.getQuantityOrder()*(productionOrder.getQuantityOrder()/oldProductionOrder.getQuantityOrder()));
+			}
+			
+			for(ProductionOrderMaterial pom : productionOrder.getProductionOrderMaterials())
+			{
+				System.out.println("ProdO service : " + oldProductionOrder.getQuantityOrder() + "," + productionOrder.getQuantityOrder());
+				pom.setQuantityRequired(pom.getQuantityRequired()*(productionOrder.getQuantityOrder()/oldProductionOrder.getQuantityOrder()));
+			}
 		}
 		
 		productionOrder = (ProductionOrder) merge(productionOrder);
