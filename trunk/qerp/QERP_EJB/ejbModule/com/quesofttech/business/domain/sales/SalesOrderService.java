@@ -487,11 +487,12 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 					
 					List<Routing> routings = routingService.findRoutingsByMaterialId(productionOrder.getMaterial().getId());
 					
-					
 					for(Routing routing : routings)
 					{
+						
 						ProductionOrderOperation productionOrderOperation = new ProductionOrderOperation();
 						productionOrderOperation.setOperation(routing.getOperation());
+						productionOrderOperation.setSequence(routing.getSequence());
 						productionOrderOperation.setQuantityOrder(productionOrder.getQuantityOrder());
 						productionOrderOperation.setQuantityReported((Double)0.0);
 						
