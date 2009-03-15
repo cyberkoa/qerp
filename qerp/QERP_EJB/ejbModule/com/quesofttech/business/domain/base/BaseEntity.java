@@ -180,7 +180,7 @@ public abstract class BaseEntity implements Serializable {
 	
 	@PrePersist
 	protected void prePersist() throws BusinessException {
-		System.out.println("prePersist of BaseEntity");
+		//System.out.println("prePersist of BaseEntity");
 	
 		validate();
 		
@@ -188,14 +188,14 @@ public abstract class BaseEntity implements Serializable {
 	    java.util.Date today = new java.util.Date();
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
-		System.out.println("[PrePersist] " + rowInfo.getCreateLogin());
+		//System.out.println("[PrePersist] " + rowInfo.getCreateLogin());
 		
 	}
 
 	
 	@PreUpdate
 	protected void preUpdate() throws BusinessException {
-		System.out.println("preUpdate of BaseEntity");
+		//System.out.println("preUpdate of BaseEntity");
 		
 		if(rowInfo.getRecordStatus()!="D")
 		{

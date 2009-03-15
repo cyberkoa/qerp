@@ -57,10 +57,10 @@ public class UserProgramService extends BaseService implements IUserProgramServi
 	public void addUserProgram(UserProgram userProgram) throws BusinessException {
 		
 		//try{
-		System.out.println("just before persist in UserProgramService");
+		//System.out.println("just before persist in UserProgramService");
 		persist(userProgram);
 		
-		System.out.println("just after persist in UserProgramService");
+		//System.out.println("just after persist in UserProgramService");
 		//}
 	/*	catch (java.lang.RuntimeException e)
 		{
