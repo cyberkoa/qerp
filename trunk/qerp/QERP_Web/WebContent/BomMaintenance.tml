@@ -20,7 +20,7 @@
            <t:GRID
            t:id="Grid"
            t:model="bommodel"
-           t:reorder="id,type,MaterialCode,code,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,type,MaterialCode,code,bomDetailSelect,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="BOMs"
            t:row="BOM"
                    t:rowsPerPage="10"
