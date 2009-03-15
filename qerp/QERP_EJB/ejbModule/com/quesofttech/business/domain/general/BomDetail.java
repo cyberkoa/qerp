@@ -97,6 +97,10 @@ public class BomDetail extends BaseEntity {
 	@JoinColumn(name="fk_BOM")	
 	private BOM bom;
 
+	@ManyToOne
+	@JoinColumn(name="fk_Operation")	
+	private Operation operation;
+	
 	
 	// Parent material move to header, since the link is by head id
 	/*
@@ -560,5 +564,22 @@ public class BomDetail extends BaseEntity {
 		
 		return null;
 	}
+
+
+	/**
+	 * @return the operation
+	 */
+	public Operation getOperation() {
+		return operation;
+	}
+
+
+	/**
+	 * @param operation the operation to set
+	 */
+	public void setOperation(Operation operation) {
+		this.operation = operation;
+	}
+	
 	
 }
