@@ -14,6 +14,10 @@
 	
 	<style type="text/css">
 		<!--
+		.bodyField {
+			display:block;
+		}
+		
 		.tap5c_sidepanel {
 		    display: block;
 		    float: left;
@@ -145,7 +149,7 @@
 
 <body onload="collapseAllRows();  " >
 <div>
-	<div id="doc3" width="100%">
+	<div id="doc3" style="width:1270px;">
 	    <div id="hd" style="text-align: center;">
 	        <div t:type="t5components/RoundCornerContainer" fgcolor="#EEEEEE" style="background-image:url(images/QERPLogo1.png);background-repeat: no-repeat;align:left;background-color:#EEEEEE;margin-top:5px;margin-bottom:5px;">
 	           <div style="position:relative;float:right;left:-15px;">
@@ -154,7 +158,7 @@
 				</div>  <h3><br/><br/><br/></h3>
 	                   
 	        </div>
-	       	 <table width="100%" height="20" >
+	       	 <table width="1270" height="20" >
 	        	<tr>
 	        		<td style="background:#24618E;color:white;text-align:right;" align="right">
 	        		[&nbsp;&nbsp;&nbsp;Login ID: ${Username}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<t:actionlink t:id="actionSignOff"  style="color:white;"><b>Log out</b></t:actionlink>&nbsp;&nbsp;&nbsp;]
@@ -164,11 +168,11 @@
 			 
 	    </div>
 	    <div id="bd" style="width:1200px;">
-	        <div t:type="t5components/SidePanel" style="height:580px;">
+	        <div t:type="SidePanelQERP" style="height:580px;">
 	            <div t:type="AccordionQERP" subjects="Subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
 	        </div>
 	        <fieldset style="padding-left:5px;height:570px;width:100px">
-	        	<div style="width:1000px;height:100%;overflow:scroll;">
+	        	<div class="bodyField" style="width:1234px;height:100%;overflow:scroll;">
 	            	<t:body/>
 	            </div>
 	        </fieldset>
