@@ -25,10 +25,10 @@ pc_value = "`id_id` bigint(20) NOT NULL,
   
 
 /*     SalesOrderMaterial */
-str_formid = 'Operation'.
-str_subject = 'Operation'.
-str_classname = 'operation'.
-    str_module = 'general'.
+str_formid = 'Routing'.
+str_subject = 'Routing'.
+str_classname = 'routing'.
+    str_module = 'production'.
 
 
 
