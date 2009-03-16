@@ -209,12 +209,12 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<ProductionOrder> findProductionOrderBySalesOrderMaterial(Long salesordermaterial) throws DoesNotExistException {
+	public List<ProductionOrder> findProductionOrderBySalesOrderMaterialId(Long salesOrderMaterialId) throws DoesNotExistException {
 		
 		//System.out.println("salesordermaterial(): " + salesordermaterial.toString() + ", " + salesordermaterial.getId());
-		Query q = _em.createQuery("select prodo from ProductionOrder prodo where prodo.salesOrderMaterial.id = :salesordermaterial AND prodo.rowInfo.recordStatus='A'" +
+		Query q = _em.createQuery("select prodo from ProductionOrder prodo where prodo.salesOrderMaterial.id = :salesOrderMaterialId AND prodo.rowInfo.recordStatus='A'" +
 				" order by prodo.id");
-		q.setParameter("salesordermaterial", salesordermaterial);
+		q.setParameter("salesOrderMaterialId", salesOrderMaterialId);
 		System.out.println(q.toString());
 		List l = q.getResultList();
 		return l;
