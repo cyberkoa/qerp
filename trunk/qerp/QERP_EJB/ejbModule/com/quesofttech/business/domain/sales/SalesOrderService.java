@@ -422,6 +422,12 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		
 		System.out.println("SO Material : " + salesOrderMaterial.getMaterial());
 		
+		if(productionOrderService.findProductionOrderBySalesOrderMaterialId(salesOrderMaterial.getId()).size()>0)
+		{
+			System.out.println("Production Order with the same Sales Order Material already exist");
+			return;
+		}
+		
 		if(salesOrderMaterial != null && salesOrderMaterial.getMaterial() != null) 
 		{
 			//try {	
@@ -456,10 +462,10 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 		
 		List<TreeNode<BomTreeNodeData>> bomTreeNodeList = bomTree.toList();
 		
-		//for(TreeNode<BomTreeNodeData> node : bomTreeNodeList)
-		//{
-		//	System.out.println("BomDetail Id : " + node.getData().getBomDetail().getId());
-		//}
+		for(TreeNode<BomTreeNodeData> node : bomTreeNodeList)
+		{
+			System.out.println("BomDetail Id : " + node.getData().getBomDetail().getMaterialCode());
+		}
 		 
 		
 		//List<ProductionOrder> productionOrders = new ArrayList<ProductionOrder>();
@@ -540,7 +546,7 @@ public class SalesOrderService extends BaseService implements ISalesOrderService
 						
 						productionOrderMaterial.setMaterial(child.getData().getBomDetail().getMaterial());
 						//productionOrderMaterial.setProductionOrder(productionOrder);
-						productionOrderMaterial.setQuantityConsumed(1.0);
+						productionOrderMaterial.setQuantityConsumed(0.0);
 						productionOrderMaterial.setQuantityRequired(child.getData().getTreeOriginalQuantityRequired() * productionOrder.getQuantityOrder());
 						productionOrderMaterial.setCreateApp(rowInfo.getCreateApp());
 						productionOrderMaterial.setModifyApp(rowInfo.getModifyApp());
