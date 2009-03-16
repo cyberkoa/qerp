@@ -45,7 +45,7 @@ import java.util.List;
 //import java.util.ArrayList;
 
 @Entity
-@Table(name = "Routing", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_Material","route_Operation" }) })
+@Table(name = "Routing", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_Material","fk_Operation" }) })
 @SuppressWarnings("serial")
 public class Routing extends BaseEntity {
 	

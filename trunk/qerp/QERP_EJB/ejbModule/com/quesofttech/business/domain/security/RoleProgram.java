@@ -46,7 +46,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class RoleProgram extends BaseEntity {
 	
-/*
+
 	//For Postgresql : @SequenceGenerator(name = "RoleProgram_sequence", sequenceName = "RoleProgram_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
 	@TableGenerator(  name="RoleProgram_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="RoleProgram", valueColumnName="keyField")
@@ -57,8 +57,8 @@ public class RoleProgram extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "RoleProgram_id")	
 	@Column(name = "id_RoleProgram", nullable = false)
 	private Long id;
-*/
-	
+    
+	/*
     @Embeddable
     public static class Id
         implements Serializable
@@ -77,9 +77,6 @@ public class RoleProgram extends BaseEntity {
             this.programId = programId;
         }
 
-		/* (non-Javadoc)
-		 * @see java.lang.Object#hashCode()
-		 */
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -90,10 +87,11 @@ public class RoleProgram extends BaseEntity {
 					+ ((roleId == null) ? 0 : roleId.hashCode());
 			return result;
 		}
-
+        */
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
+	/*
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -116,7 +114,7 @@ public class RoleProgram extends BaseEntity {
 			return true;
 		}
         
-        
+      */  
         
         
 /*
@@ -130,27 +128,19 @@ public class RoleProgram extends BaseEntity {
             // add the orderId and productId hashCode()s
         	return (roleId == null||programId==null) ? super.hashCode() : roleId.hashCode() + programId.hashCode();
         }
- */       
+        
 
     } 
-	
-    @EmbeddedId
-    private Id id = new Id(); 
+*/	
+    //@EmbeddedId
+    //private Id id = new Id(); 
 	
     @ManyToOne
-    @JoinColumn(
-        name="fk_Role"//,
-        //insertable="false",
-        //updatable="false"
-    )
+    @JoinColumn(name="fk_Role")
     private Role role; 
     
     @ManyToOne
-    @JoinColumn(
-        name="fk_Program"//,
-        //insertable="false",
-        //updatable="false"
-    )
+    @JoinColumn(name="fk_Program")
     private Program program; 
 	
 	
@@ -168,8 +158,8 @@ public class RoleProgram extends BaseEntity {
 	
 	
 	
-	@Embedded
-	RowInfo rowInfo_1;
+	//@Embedded
+	//RowInfo rowInfo_1;
 	
 	/*
 	
@@ -202,9 +192,9 @@ public class RoleProgram extends BaseEntity {
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
 		super();
 
-        this.id.roleId = role.getId();
-        this.id.programId = program.getId(); 
-		//this.id = id;
+        //this.id.roleId = role.getId();
+        //this.id.programId = program.getId(); 
+		this.id = id;
 		/* Example of assignment
 		this.type = type;
 		this.description = description;
@@ -256,7 +246,7 @@ public class RoleProgram extends BaseEntity {
 	}
 
 	// The need for an equals() method is discussed at http://www.hibernate.org/109.html
-/*
+
 	@Override
 	public boolean equals(Object obj) {
 		return (obj == this) || (obj instanceof RoleProgram) && getId() != null && ((RoleProgram) obj).getId().equals(this.getId());
@@ -269,9 +259,9 @@ public class RoleProgram extends BaseEntity {
 		return getId() == null ? super.hashCode() : getId().hashCode();
 	}	
 	
-*/	@Override
+	@Override
 	public Serializable getIdForMessages() {
-		return id.roleId + id.programId;
+		return getId();
 	}
 
 /*	
@@ -364,7 +354,7 @@ public class RoleProgram extends BaseEntity {
 	
 
 	// Common EJB field
-	/*
+	
 	public Long getId() {
 		return id;
 	}
@@ -374,7 +364,7 @@ public class RoleProgram extends BaseEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-*/
+
 	public Long getVersion() {
 		return version;
 	}

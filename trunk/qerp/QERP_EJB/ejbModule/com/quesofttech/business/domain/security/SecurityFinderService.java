@@ -177,8 +177,10 @@ public class SecurityFinderService extends BaseService implements ISecurityFinde
 		
 		Query q = _em.createQuery("select distinct p from Program p" +
                                   " join p.userPrograms up" +
-                                  " where" +
-                                  " p.rowInfo.recordStatus='A' AND up.rowInfo.recordStatus='A'" +
+                                  " WHERE" +
+                                  " p.rowInfo.recordStatus='A'" +
+                                  " AND up.isAllowed=true" +
+                                  " AND up.rowInfo.recordStatus='A'" +
                                   " AND up.user.id = :userId");
         		
 		q.setParameter("userId", user.getId());
@@ -195,10 +197,11 @@ public class SecurityFinderService extends BaseService implements ISecurityFinde
 		
 		Query q = _em.createQuery("select distinct p from Program p" +
 				                  " join p.rolePrograms rp" +
-				                  " where" +
-				                  " p.rowInfo.recordStatus='A' AND" +
-				                  " rp.rowInfo.recordStatus='A' AND" +
-				                  " rp.role.id = :roleId");
+				                  " WHERE " +
+				                  " p.rowInfo.recordStatus='A'" +
+				                  " AND rp.isAllowed=true" +
+				                  " AND rp.rowInfo.recordStatus='A'" +
+				                  " AND rp.role.id = :roleId");
 				                       		
 		q.setParameter("roleId", role.getId());
 		
