@@ -46,7 +46,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class UserRole extends BaseEntity {
 	
-/*
+
 	//For Postgresql : @SequenceGenerator(name = "UserRole_sequence", sequenceName = "UserRole_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
 	@TableGenerator(  name="UserRole_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="UserRole", valueColumnName="keyField")
@@ -57,9 +57,9 @@ public class UserRole extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "UserRole_id")	
 	@Column(name = "id_UserRole", nullable = false)
 	private Long id;
-*/	
 	
 	
+	/*
     @Embeddable
     public static class Id
         implements Serializable
@@ -77,10 +77,6 @@ public class UserRole extends BaseEntity {
             this.userId = userId;
             this.roleId = roleId;
         }
-
-		/* (non-Javadoc)
-		 * @see java.lang.Object#hashCode()
-		 */
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -92,9 +88,6 @@ public class UserRole extends BaseEntity {
 			return result;
 		}
 
-		/* (non-Javadoc)
-		 * @see java.lang.Object#equals(java.lang.Object)
-		 */
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -116,26 +109,26 @@ public class UserRole extends BaseEntity {
 				return false;
 			return true;
 		}
-
-        /*
+        */
+	//}        
         public boolean equals(Object obj)
         {
             // compare this and that Id properties (orderIds and productIds)
-        	return (obj == this) || (obj instanceof UserRole) && this.userId != null && this.roleId != null && ((UserRole) obj).id.userId.equals(this.userId) && ((UserRole) obj).id.roleId.equals(this.roleId);
+        	return (obj == this) || (obj instanceof UserRole) && getId() != null && ((UserRole) obj).getId().equals(this.getId());
         }
 
         public int hashCode() {
             // add the orderId and productId hashCode()s
-        	return (userId == null||roleId==null) ? super.hashCode() : userId.hashCode() + roleId.hashCode();
+        	return getId() == null ? super.hashCode() : getId().hashCode();
         }
-        */
+        
         
         
 
-    } 
+     
 	
-    @EmbeddedId
-    private Id id = new Id(); 
+    //@EmbeddedId
+    //private Id id = new Id(); 
     
 	
 	@Version
@@ -254,7 +247,7 @@ public class UserRole extends BaseEntity {
 	*/
 	@Override
 	public Serializable getIdForMessages() {
-		return id.userId + id.roleId;
+		return getId();
 	}
 
 /*	
@@ -343,7 +336,7 @@ public class UserRole extends BaseEntity {
 	
 
 	// Common EJB field
-	/*
+	
 	public Long getId() {
 		return id;
 	}
@@ -353,7 +346,7 @@ public class UserRole extends BaseEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-*/
+
 	public Long getVersion() {
 		return version;
 	}
