@@ -59,7 +59,15 @@ public class UserRole extends BaseEntity {
 	private Long id;
 	
 	
-	/*
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+		/*
     @Embeddable
     public static class Id
         implements Serializable
@@ -306,11 +314,11 @@ public class UserRole extends BaseEntity {
 		
 		// Validate syntax...
 
-		if (user!=null) {
+		if (user==null) {
 			throw new ValueRequiredException(this, "User");		
 		}
 		
-		if (role!=null) {
+		if (role==null) {
 			throw new ValueRequiredException(this, "Role");		
 		}
 
