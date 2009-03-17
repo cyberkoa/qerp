@@ -33,6 +33,7 @@ import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.sales.SalesOrder;
 import com.quesofttech.business.domain.inventory.Material;
+import com.quesofttech.business.domain.general.Operation;
 import com.quesofttech.business.common.exception.ValueRequiredException;
 import com.quesofttech.business.common.exception.GenericBusinessException;
 import com.quesofttech.util.StringUtil;
@@ -89,6 +90,10 @@ public class ProductionOrderMaterial extends BaseEntity {
 	@ManyToOne
     @JoinColumn(name="fk_ProductionOrderOperation")	
 	private ProductionOrderOperation productionOrderOperation;	
+	
+	@ManyToOne
+    @JoinColumn(name="fk_Operation")	
+	private Operation operation;
 	
 	
 	// Foreign keys
@@ -446,7 +451,41 @@ public class ProductionOrderMaterial extends BaseEntity {
 	 */
 	public void setMaterial(Material material) {
 		this.material = material;
+	}	
+	
+	
+	/**
+	 * @return the productionOrderOperation
+	 */
+	public ProductionOrderOperation getProductionOrderOperation() {
+		return productionOrderOperation;
 	}
+
+
+	/**
+	 * @param productionOrderOperation the productionOrderOperation to set
+	 */
+	public void setProductionOrderOperation(
+			ProductionOrderOperation productionOrderOperation) {
+		this.productionOrderOperation = productionOrderOperation;
+	}
+
+
+	/**
+	 * @return the operation
+	 */
+	public Operation getOperation() {
+		return operation;
+	}
+
+
+	/**
+	 * @param operation the operation to set
+	 */
+	public void setOperation(Operation operation) {
+		this.operation = operation;
+	}
+
 
 	public String getMaterialCode()
 	{
