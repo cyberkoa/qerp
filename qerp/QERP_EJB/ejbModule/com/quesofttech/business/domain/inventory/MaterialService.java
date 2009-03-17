@@ -115,7 +115,7 @@ public class MaterialService extends BaseService implements IMaterialServiceLoca
 		builder.appendBetween("so.rowInfo.recordStatus", lower.getRecordStatus(),upper.getRecordStatus(),true);
 		builder.appendBetween("so.code", lower.getCode(),upper.getCode(),true);
 		builder.appendBetween("so.description", lower.getDescription(),upper.getDescription(),true);
-		builder.appendBetween("so.materialtype.type", lower.getType(),upper.getType(),true);
+		builder.appendBetween("so.materialType.type", lower.getType(),upper.getType(),true);
 		
 		Query q = builder.createQuery(_em, options, "so");
 	    System.out.println(builder.getQueryString());
