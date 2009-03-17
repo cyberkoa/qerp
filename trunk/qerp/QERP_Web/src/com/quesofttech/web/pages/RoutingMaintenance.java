@@ -180,7 +180,7 @@ public class RoutingMaintenance extends SimpleBasePage {
     	List<Operation> listoperation = null;
     	try {
     		listoperation = this.getOperationService().findOperationsByType("P");
-    		list = this.getMaterialService().findNotForSaleMaterials();           
+    		list = this.getMaterialService().findProducedMaterials();           
     	}
     	catch (DoesNotExistException e) {
     		_form.recordError(e.getMessage());
