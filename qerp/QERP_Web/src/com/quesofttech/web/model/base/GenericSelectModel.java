@@ -83,13 +83,13 @@ public class GenericSelectModel<T> extends AbstractSelectModel implements ValueE
         if (idFieldAdapter == null) {
             return obj + "";
         } else {
-        	System.out.println("[toClient] obj : " + obj.toString());
+        	//System.out.println("[toClient] obj : " + obj.toString());
             return idFieldAdapter.get(obj) + "";
         }
     }
 
     public T toValue(String string) {
-    	System.out.println("[toValue] string : " + string);
+    	//System.out.println("[toValue] string : " + string);
         if (idFieldAdapter == null) {
             for (T obj : list) {
                 if (handleNull(obj).equals(string)) return obj;
