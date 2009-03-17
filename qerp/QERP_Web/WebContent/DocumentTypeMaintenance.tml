@@ -19,12 +19,12 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
-           t:reorder="id,category,Prefix,RunningNo,description,Type,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,category,suffix,Prefix,RunningNo,numberformat,description,Type,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="DocumentTypes"
            t:row="DocumentType"
                    t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:exclude="catergory,sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="DocumentType.id">

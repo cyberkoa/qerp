@@ -24,7 +24,7 @@
            t:row="MaterialGroup"
                    t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:exclude="sessionid,recordstatus,version,modifyapp,createapp,codedescription"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="MaterialGroup.id">
