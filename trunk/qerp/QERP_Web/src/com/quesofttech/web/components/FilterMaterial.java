@@ -58,12 +58,12 @@ public class FilterMaterial extends SecureBasePage
     void injectResources(ComponentResources resources)
     {
         this.resources = resources;
-        System.out.println("in injectResources");
+        //System.out.println("in injectResources");
         //resources.triggerContextEvent(arg0, arg1, arg2)
     }
 	
 	void onSubmitFromSearchForm() {
-		System.out.println("onActionFrombtnFilter");
+		//System.out.println("onActionFrombtnFilter");
 		//System.out.println("lowerDocNo : " + lowerDocNo.toString());
 		//System.out.println("upperDocNo : " + upperDocNo.toString());
 		/*
@@ -168,7 +168,7 @@ public class FilterMaterial extends SecureBasePage
 	}
 
 	void onValidateFromSearchForm() {
-		System.out.println("onSuccessFromSearchForm");
+		//System.out.println("onSuccessFromSearchForm");
 
 		// Trigger the container event "onSuccessFromFilterData"
 		resources.triggerEvent("successFromFilterData", new Object[] {}, null);

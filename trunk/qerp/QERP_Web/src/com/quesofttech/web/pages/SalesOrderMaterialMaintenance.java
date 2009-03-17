@@ -648,8 +648,9 @@ public class SalesOrderMaterialMaintenance extends SecureBasePage {
 			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 			rowInfo.setSessionId("");
 			rowInfo.setRecordStatus("A");
-			
+			System.out.println("going to convert");
 			getSalesOrderService().convertOrderMaterialToProductionOrder(rowInfo, salesordermaterialConvert);
+			System.out.println("converted");
 		}
 		catch (Exception e)
 		{

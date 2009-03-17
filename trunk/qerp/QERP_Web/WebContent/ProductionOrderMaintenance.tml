@@ -24,8 +24,8 @@
            t:row="ProductionOrder"
            t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:reorder="id,FormattedDocNo,QuantityOrder,QuantityReported,SalesOrderDoc,materialcode,createlogin,createtimestamp,modifylogin,modifytimestamp"
-           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:reorder="id,FormattedDocNo,QuantityOrder,QuantityReported,SalesOrderDoc,materialcode,ProductionOrderDetailSelect,createlogin,createtimestamp,modifylogin,modifytimestamp"
+           t:exclude="docno,doctypeno,sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="ProductionOrder.id">

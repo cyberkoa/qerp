@@ -1,15 +1,11 @@
-package com.quesofttech.web.pages;
+ package com.quesofttech.web.pages;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.Resource;
 import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.security.*;
-import com.quesofttech.business.domain.system.*;
-import com.quesofttech.business.domain.security.iface.IProgramServiceRemote;
-import com.quesofttech.business.domain.security.iface.IRoleProgramServiceRemote;
-import com.quesofttech.business.domain.security.iface.IRoleServiceRemote;
-import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
+import com.quesofttech.business.domain.security.iface.*;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
 import com.quesofttech.web.model.base.GenericSelectModel;
@@ -30,13 +26,13 @@ import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-public class RoleProgramMaintenance extends SimpleBasePage {
+public class UserRoleMaintenance extends SimpleBasePage {
 // Default defination.
     private String _strMode = "";
-    private RoleProgram RoleProgramDetail;
-    private RoleProgram _RoleProgram;
+    private UserRole UserRoleDetail;
+    private UserRole _UserRole;
     @Persist
-    private List<RoleProgram> _RolePrograms;
+    private List<UserRole> _UserRoles;
     @Inject
     private Logger _logger;
     @Inject
@@ -55,7 +51,7 @@ public class RoleProgramMaintenance extends SimpleBasePage {
          return viewEditText;
     }
 
-    @Component(id = "RoleProgramForm")
+    @Component(id = "UserRoleForm")
     private Form _form;
     @Persist
     private int int_SelectedRow;
@@ -83,13 +79,8 @@ public class RoleProgramMaintenance extends SimpleBasePage {
     //===============================
 
     //===============================
-    // Text Component for Program
-    //@Component(id = "Program")
-    //private TextField _Program;
-  //===============================================================
-	//			PRogram ComboBox
-	//===============================================================
-	@Property
+    // Text Component for Role
+    @Property
 	@Persist
 	@SuppressWarnings("unused")
 	private GenericSelectModel<Role> _roles;	
@@ -97,7 +88,7 @@ public class RoleProgramMaintenance extends SimpleBasePage {
 	@Property
 	@Persist
 	@SuppressWarnings("unused")
-	private GenericSelectModel<Program> _programs;	
+	private GenericSelectModel<User> _users;	
 	
 	@Inject
     private PropertyAccess _access;
@@ -105,30 +96,14 @@ public class RoleProgramMaintenance extends SimpleBasePage {
 	@Inject
     private PropertyAccess _access1;
 	
-	private IProgramServiceRemote getProgramService() {
-		return getBusinessServicesLocator().getProgramServiceRemote();
+	private ISecurityFinderServiceRemote getUserService() {
+		return getBusinessServicesLocator().getSecurityFinderSvcRemote();
 	}	
 	private IRoleServiceRemote getRoleService() {
 		return getBusinessServicesLocator().getRoleServiceRemote();
 	}	
 	
-    private Program Program;
-    public Program getProgram()
-    {
-       return Program;
-    }
-
-    public void setProgram(Program Program)
-    {
-       this.Program = Program;
-    }
     
-    //===============================
-
-    //===============================
-    // Text Component for Role
-    //@Component(id = "Role")
-   // private TextField _Role;
     private Role Role;
     public Role getRole()
     {
@@ -142,58 +117,57 @@ public class RoleProgramMaintenance extends SimpleBasePage {
     //===============================
 
     //===============================
-    // Text Component for IsAllowed
-    @Component(id = "IsAllowed")
-    private Checkbox _IsAllowed;
-    private Boolean IsAllowed;
-    
-    public Boolean getIsAllowed() {
-		return IsAllowed;
-	}
+    // Text Component for User
+   
+    private User User;
+    public User getUser()
+    {
+       return User;
+    }
 
-	public void setIsAllowed(Boolean isAllowed) {
-		IsAllowed = isAllowed;
-	}
-
-	//===============================
+    public void setUser(User User)
+    {
+       this.User = User;
+    }
+    //===============================
     void RefreshRecords()
     {
     	
-    	List<Program> programlist = null;
+    	List<User> userlist = null;
     	List<Role> rolelist = null;
 	  	try {    		
-	  		programlist = this.getProgramService().findPrograms();    
+	  		userlist = this.getUserService().findUsers();    
 	  		rolelist = this.getRoleService().findRoles();
     	}
     	catch (DoesNotExistException e) {}
     	_roles = null;
-    	_programs = null;
-    	_programs = new GenericSelectModel<Program>(programlist,Program.class,"CodeDescription","id",_access);
+    	_users = null;
+    	_users = new GenericSelectModel<User>(userlist,User.class,"login","id",_access);
     	_roles = new GenericSelectModel<Role>(rolelist,Role.class,"roleDescription","id",_access1);
         
        try
        {
-           _RolePrograms = getRoleProgramService().findRolePrograms();
+           _UserRoles = getUserRoleService().findUserRoles();
        }
        catch(BusinessException be)
        {
 
        }
-       if(_RolePrograms!=null && !_RolePrograms.isEmpty())
+       if(_UserRoles!=null && !_UserRoles.isEmpty())
        {
            if(int_SelectedRow==0)
            {
-               RoleProgramDetail = _RolePrograms.get(_RolePrograms.size() - 1);
+               UserRoleDetail = _UserRoles.get(_UserRoles.size() - 1);
            }
            else
            {
-               RoleProgramDetail = _RolePrograms.get(int_SelectedRow - 1);
+               UserRoleDetail = _UserRoles.get(int_SelectedRow - 1);
            }
-           RoleProgramDetail = _RolePrograms.get(_RolePrograms.size() - 1);
+           UserRoleDetail = _UserRoles.get(_UserRoles.size() - 1);
            myState="U";
            viewDisplayText="Block";
            viewEditText="none";
-           assignToLocalVariable(RoleProgramDetail);
+           assignToLocalVariable(UserRoleDetail);
        }
              else
             {
@@ -218,7 +192,7 @@ private void refreshDisplay()
       int int_return ,int_i;
       int_i = 0;
       int_return = 0;
-      for(RoleProgram p : _RolePrograms)
+      for(UserRole p : _UserRoles)
        {
           int_i++;
           if((long)p.getId().intValue()==id)
@@ -267,58 +241,56 @@ private void refreshDisplay()
        }
     }
 
-    void assignToDatabase(RoleProgram roleProgram){
-       roleProgram.setId(id);
-       roleProgram.setProgram(Program);
-       roleProgram.setRole(Role);
-       roleProgram.setIsAllowed(IsAllowed);
-       roleProgram.setRecordStatus("A");
+    void assignToDatabase(UserRole userRole){
+       userRole.setId(id);
+       userRole.setRole(Role);
+       userRole.setUser(User);
+       userRole.setRecordStatus("A");
        java.util.Date today = new java.util.Date();
-       roleProgram.setModifyApp(this.getClass().getSimpleName());
-       roleProgram.setModifyLogin(getVisit().getMyLoginId());
-       roleProgram.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
+       userRole.setModifyApp(this.getClass().getSimpleName());
+       userRole.setModifyLogin(getVisit().getMyLoginId());
+       userRole.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
     }
-    void assignToLocalVariable(RoleProgram roleProgram)
+    void assignToLocalVariable(UserRole userRole)
     {
-       this.id = roleProgram.getId();
-       this.Program = roleProgram.getProgram();
-       this.Role = roleProgram.getRole();
-       this.IsAllowed = roleProgram.getIsAllowed();
+       this.id = userRole.getId();
+       this.Role = userRole.getRole();
+       this.User = userRole.getUser();
     }
     void _AddRecord()
     {
-       RoleProgram roleProgram = new RoleProgram();
+       UserRole userRole = new UserRole();
        try {
                 java.util.Date today = new java.util.Date();
-                roleProgram.setCreateApp(this.getClass().getSimpleName());
-                roleProgram.setCreateLogin(getVisit().getMyLoginId());
-                roleProgram.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
-           assignToDatabase(roleProgram);
-           getRoleProgramService().addRoleProgram(roleProgram);
+                userRole.setCreateApp(this.getClass().getSimpleName());
+                userRole.setCreateLogin(getVisit().getMyLoginId());
+                userRole.setCreateTimestamp(new java.sql.Timestamp(today.getTime()));
+           assignToDatabase(userRole);
+           getUserRoleService().addUserRole(userRole);
        }
        catch (Exception e) {
-           _logger.info("RoleProgram_Add_problem");
+           _logger.info("UserRole_Add_problem");
            e.printStackTrace();
-           _form.recordError(getMessages().get("RoleProgram_add_problem"));
+           _form.recordError(getMessages().get("UserRole_add_problem"));
        }
     }
 
     void _UpdateRecord(){
-       RoleProgram roleProgram = new RoleProgram();
+       UserRole userRole = new UserRole();
        try
        {
-           roleProgram = getRoleProgramService().findRoleProgram(id);
+           userRole = getUserRoleService().findUserRole(id);
        }
        catch(BusinessException be)
        {
 
        }
-       if(roleProgram !=null)
+       if(userRole !=null)
        {
            try {
-               roleProgram.setModifyLogin(getVisit().getMyLoginId());
-               assignToDatabase(roleProgram);
-               getRoleProgramService().updateRoleProgram(roleProgram);
+               userRole.setModifyLogin(getVisit().getMyLoginId());
+               assignToDatabase(userRole);
+               getUserRoleService().updateUserRole(userRole);
            }
            catch (BusinessException e) {
                _form.recordError(e.getMessage());
@@ -331,20 +303,20 @@ private void refreshDisplay()
 
 
     void _DeleteRecord(Long id) {
-       RoleProgram roleProgram = new RoleProgram();
+       UserRole userRole = new UserRole();
        try
        {
-           roleProgram = getRoleProgramService().findRoleProgram(id);
+           userRole = getUserRoleService().findUserRole(id);
        }
        catch(BusinessException be)
        {
 
        }
-       if(roleProgram!=null)
+       if(userRole!=null)
        {
            try {
-               roleProgram.setModifyLogin(getVisit().getMyLoginId());
-               getRoleProgramService().logicalDeleteRoleProgram(roleProgram);
+               userRole.setModifyLogin(getVisit().getMyLoginId());
+               getUserRoleService().logicalDeleteUserRole(userRole);
                if(int_SelectedRow!=0)
                {
                    int_SelectedRow--;
@@ -386,7 +358,7 @@ private void refreshDisplay()
        lng_CurrentID = id;
        try
        {
-           RoleProgramDetail = getRoleProgramService().findRoleProgram(id);
+           UserRoleDetail = getUserRoleService().findUserRole(id);
            int_SelectedRow = getRcdLocation(id);
        }
        catch(BusinessException be)
@@ -394,32 +366,32 @@ private void refreshDisplay()
 
        }
 
-       if(RoleProgramDetail!=null){
+       if(UserRoleDetail!=null){
            viewDisplayText="Block";
            viewEditText="none";
-           assignToLocalVariable(RoleProgramDetail);
+           assignToLocalVariable(UserRoleDetail);
            return blockFormView;
        }
        return null;
     }
 
-    private IRoleProgramServiceRemote getRoleProgramService() {
-       return getBusinessServicesLocator().getRoleProgramServiceRemote();
+    private IUserRoleServiceRemote getUserRoleService() {
+       return getBusinessServicesLocator().getUserRoleServiceRemote();
     }
 
 
-    public List<RoleProgram> getRolePrograms() {
-       return _RolePrograms;
+    public List<UserRole> getUserRoles() {
+       return _UserRoles;
     }
 
 
-    public RoleProgram getRoleProgram() throws BusinessException{
-       return _RoleProgram;
+    public UserRole getUserRole() throws BusinessException{
+       return _UserRole;
     }
 
 
-     public void setRoleProgram(RoleProgram tb) {
-       _RoleProgram = tb;
+     public void setUserRole(UserRole tb) {
+       _UserRole = tb;
     }
 
-}
+} 
