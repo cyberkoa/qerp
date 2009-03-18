@@ -325,6 +325,18 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		
 	}
 	*/
-	
+	@SuppressWarnings("unchecked")
+	public List<ProductionOrderMaterial> findProductionOrderMaterialsByProductionOrderIdAndOperationId(Long productionOrderId,Long operationId) throws DoesNotExistException {
+		
+		Query q = _em.createQuery("select prodom from ProductionOrderMaterial prodom where " +
+				"prodom.productionOrder.id = :productionOrderId " +
+				"prodom.operation.id = :operationId " +
+				"AND prodom.rowInfo.recordStatus='A' " +
+				" order by prodom.id");
+		q.setParameter("productionOrderId", productionOrderId);
+		q.setParameter("operationId", operationId);
+		List l = q.getResultList();
+		return l;
+	}
 	
 }

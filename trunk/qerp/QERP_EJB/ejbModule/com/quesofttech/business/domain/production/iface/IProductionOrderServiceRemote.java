@@ -65,5 +65,5 @@ public interface IProductionOrderServiceRemote {
 	
 	List<ProductionOrderMaterial> findProductionOrderMaterialsByProductionOrder(ProductionOrder productionOrder) throws DoesNotExistException;
 	
-	
+	List<ProductionOrderMaterial> findProductionOrderMaterialsByProductionOrderIdAndOperationId(Long productionOrderId,Long operationId) throws DoesNotExistException;
 }
