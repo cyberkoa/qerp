@@ -14,7 +14,7 @@ DEFINE VARIABLE  str_classname AS CHARACTER   NO-UNDO.
 
 
 pc_value = "
-  `id_RoleProgram` bigint(20) default NULL,
+  `id_id` bigint(20) default NULL,
     `fk_Program` bigint(20) NOT NULL,
   `fk_Role` bigint(20) NOT NULL,
   `rolep_IsAllowed` bit(1) NOT NULL

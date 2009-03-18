@@ -65,29 +65,29 @@ public class WorkOrderReport extends SecureBasePage {
 	{
 		_rawmat.Type = Type;
 	}
-	public Double getWidth()
+	public String getWidth()
 	{
 		return _rawmat.Width;
 	}
-	public void setWidth(Double Width)
+	public void setWidth(String Width)
 	{
 		_rawmat.Width = Width;		
 	}
 	
-	public Double getLength()
+	public String getLength()
 	{
 		return _rawmat.Length;
 	}
-	public void setLength(Double Length)
+	public void setLength(String Length)
 	{
 		_rawmat.Length = Length;		
 	}
 	
-	public Double getQuantity()
+	public String getQuantity()
 	{
 		return _rawmat.Quantity;
 	}
-	public void setQuantity(Double Quantity)
+	public void setQuantity(String Quantity)
 	{
 		_rawmat.Quantity = Quantity;
 	}
@@ -108,22 +108,23 @@ public class WorkOrderReport extends SecureBasePage {
 		_rawmat.ProductionDate = ProductionDate;
 	}
 	
-	public Double getThickness()
+	public String getThickness()
 	{
 		return _rawmat.Thickness;
 	}
-	public void setThickness(Double Thickness)
+	public void setThickness(String Thickness)
 	{
 		_rawmat.Thickness = Thickness;
 	}
 	public class rawmaterial
 	{
+		public String RowType=""; // If RowType = "H" then is header.
 		public String CodeNo="";
 		public String Type="";
-		public Double Thickness=0.0;
-		public Double Width=0.0;
-		public Double Length=0.0;
-		public Double Quantity=0.0;
+		public String Thickness="";
+		public String Width="";
+		public String Length="";
+		public String Quantity="";
 		public String Process="";
 		public String ProductionDate="";
 	}
@@ -230,27 +231,78 @@ public class WorkOrderReport extends SecureBasePage {
 		
 	}
 	
-	private void GenerateRawMaterial()
+	private void GenerateRawMaterial() throws Exception
 	{
 		System.out.println("GenerateRawMaterial _productionOrderMaterial 's size:" + _productionOrderMaterial.size());
-		for(ProductionOrderMaterial pom : _productionOrderMaterial)
-		{			
+		if(_productionOrder==null)
+			System.out.println("null for _productionOrder");
+		else 
+			System.out.println("null for _productionOrder not null");
+			
+		System.out.println("_productionOrder: " + _productionOrder.getFormattedDocNo());
+		
+		List<ProductionOrderOperation> productionOrderOperations = getProductionOrderService().findProductionOrderOperationsByProductionOrderId(_productionOrder.getId());
+		List<ProductionOrderOperation> uniquePOO = new ArrayList<ProductionOrderOperation>();
+		List<Integer> _lines = new ArrayList<Integer>();
+		int count = 0;
+		System.out.println("productionOrderOperations: " + productionOrderOperations.size());
+		for(ProductionOrderOperation poo : productionOrderOperations)
+		{
+			if(!uniquePOO.contains(poo))
+			{
+				
+				uniquePOO.add(poo);
+				_lines.add(count);
+				count++;
+			}
+		}
+		System.out.println("uniquePOO 's size:" + uniquePOO.size());
+		for(ProductionOrderOperation poo1 : uniquePOO)
+		{	
 			System.out.println("pom add");
-			rawmaterial list = new rawmaterial();
+			rawmaterial listH = new rawmaterial();
 			System.out.println("pom added");
-			list.CodeNo = pom.getMaterialCode();
-			list.Length = pom.getMaterial().getLength();
-			list.Process = " - ";
-			list.ProductionDate = " - ";
-			list.Quantity = pom.getQuantityRequired();
-			list.Thickness = pom.getMaterial().getHeight();
-			if(pom.getMaterial().getMaterialGroup()==null)
-				list.Type = " - ";
-			else 
-				list.Type = pom.getMaterial().getMaterialGroup().getGroup();
-			list.Width = pom.getMaterial().getWidth();
+			listH.RowType = "H";
+			listH.CodeNo = "Code";
+			listH.Length = "Length";
+			listH.Process = "Process";
+			listH.ProductionDate ="Production Date";
+			listH.Quantity = "Quantity";
+			listH.Thickness = "Thickness";
+			listH.Type = "Type";
+			listH.Width ="Width";
 			System.out.println("add on raw mat");
-			rawmatlist.add(list);
+			rawmatlist.add(listH);
+			
+			System.out.println("_productionOrderMaterial: " + _productionOrderMaterial.size());
+			for(ProductionOrderMaterial pom : _productionOrderMaterial)
+			{			
+				System.out.println("output in pom:" );
+				//System.out.println("getProductionOrderOperation().getOperation().getCode(): " + pom.getProductionOrderOperation().getOperation().getCode());
+				//System.out.println("poo1.getOperation().getCode(): " + poo1.getOperation().getCode());
+				if(pom.getOperation().getCode().equals(poo1.getOperation().getCode()))
+				{
+					System.out.println("pom add");
+					rawmaterial list = new rawmaterial();
+					System.out.println("pom added");
+					list.RowType = "";
+					list.CodeNo = pom.getMaterialCode();
+					list.Length = String.format("", pom.getMaterial().getLength());
+					list.Process = pom.getOperation().getCode();
+					list.ProductionDate = " - ";
+					list.Quantity = String.format("", pom.getQuantityRequired());
+					list.Thickness =  String.format("", pom.getMaterial().getHeight());
+					if(pom.getMaterial().getMaterialGroup()==null)
+						list.Type = " - ";
+					else 
+						list.Type = pom.getMaterial().getMaterialGroup().getGroup();
+					list.Width =  String.format("", pom.getMaterial().getWidth());
+					System.out.println("add on raw mat");
+					rawmatlist.add(list);
+					
+				}
+				
+			}
 		}
 	}
 	
@@ -311,7 +363,6 @@ public class WorkOrderReport extends SecureBasePage {
 	private ICompanyServiceRemote getCompanyService() {
 		   return getBusinessServicesLocator().getCompanyServiceRemote();
 		}
-	
 	private IBomServiceRemote getBomService() {
 		   return getBusinessServicesLocator().getBOMServiceRemote();
 		}
