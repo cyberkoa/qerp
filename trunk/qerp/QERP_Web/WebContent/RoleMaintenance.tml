@@ -24,7 +24,7 @@
            t:row="RoleDetail"
                    t:rowsPerPage="10"
            t:pagerPosition="both"
-           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:exclude="RoleDescription,sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="RoleDetail.id">
