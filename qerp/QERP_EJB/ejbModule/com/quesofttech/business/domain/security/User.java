@@ -210,11 +210,18 @@ rowInfo.setRecordStatus("A");
 			throw new ValueRequiredException(this, "User_lastName");
 		}
 
+		
+		
 		// Validate semantics...
-
+		if (expiryDate == null && !login.equals(ADMIN_LOGINID)) {
+			throw new ValueRequiredException(this, "User_expireDate");
+		}
+		
+		
 		if (expiryDate != null && login.equals(ADMIN_LOGINID)) {
 			throw new GenericBusinessException("User_expirydate_not_permitted_for_user", new Object[] { ADMIN_LOGINID });
 		}
+		
 
 	}
 
