@@ -45,6 +45,16 @@ public class TestClient {
 	
 	public static void main(String[] args) {
 		
+		String test1 = "do null?";
+		String test2 = "null";
+		if(test1.contains(test2))
+		{
+			System.out.println("got");
+		}
+		else
+			System.out.println("don have");
+		
+		/*
 		rowInfo = new RowInfo();
 		
 		rowInfo.setCreateApp("TestClient");
@@ -58,7 +68,7 @@ public class TestClient {
 
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());	
-		
+		*/
 		
 		
 		/* get a initial context. By default the settings in the file
@@ -78,7 +88,7 @@ properties.put("java.naming.factory.url.pkgs","=org.jboss.naming:org.jnp.interfa
 		//testReflectionGetMethods(UOM.class);
 	    //testReflectionToString();
 		//testBOMExplosion();
-		testConvertSOM2ProdO();
+		//testConvertSOM2ProdO();
 		//testMaterialLazyFetch();
 	}
 	
