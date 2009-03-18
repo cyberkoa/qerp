@@ -509,6 +509,14 @@ public class RoleProgram extends BaseEntity {
 		this.isAllowed = isAllowed;
 	}
 
+	public String getRoleDesc()
+	{
+		return role.getRole();
+	}
+	public String getProgramDesc()
+	{
+		return program.getDescription();
+	}
 
 	
 	

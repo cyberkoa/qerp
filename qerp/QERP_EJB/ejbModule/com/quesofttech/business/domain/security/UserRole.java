@@ -483,6 +483,14 @@ public class UserRole extends BaseEntity {
 			}
 		}
 	}
+	public String getUserDesc()
+	{
+		return user.getLogin();
+	}
+	public String getRoleDesc()
+	{
+		return role.getRole();
+	}
 
 
 	
