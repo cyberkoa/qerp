@@ -131,6 +131,8 @@ public class WorkOrderReport extends SecureBasePage {
 		public String ProductionDate="";
 	}
 	
+	
+	private String printOrderQuantity;
 	private String printOrderNo;
 	private String printOrderDate;
 	private String printPOno;
@@ -174,7 +176,13 @@ public class WorkOrderReport extends SecureBasePage {
 		return rawmatlist;
 	}
 	
-	
+	public String getPrintOrderQuantity() {
+		return printOrderQuantity;
+	}
+	public void setPrintOrderQuantity(String printOrderQuantity) {
+		this.printOrderQuantity = printOrderQuantity;
+	}
+
 	public String getPrintBrandCode() {
 		return printBrandCode;
 	}
@@ -324,6 +332,7 @@ public class WorkOrderReport extends SecureBasePage {
 	
 	private void getReportInfo() throws BusinessException
 	{
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		rawmatlist = null;
 		_productionOrder = null;
 		_productionOrderMaterial = null;
@@ -340,8 +349,9 @@ public class WorkOrderReport extends SecureBasePage {
 		printDeliveryDate = " - ";
 		printOrderDate = _salesOrderMaterial.getSalesOrder().getRowInfo().getCreateTimestamp().toString();
 		printPOno  = _salesOrderMaterial.getSalesOrder().getCustomerPO();
-		printOrderNo = _salesOrderMaterial.getSalesOrder().getDocNo().toString();
-		printMasterCard = _productionOrder.getBom().getCode(); 
+		printOrderNo = _salesOrderMaterial.getSalesOrder().getFormattedDocNo();
+		printMasterCard = _productionOrder.getBom().getCode();
+		printOrderQuantity = decimalFormat.format(_productionOrder.getQuantityOrder());
 		System.out.println("printCustomerNo:" + printCustomerNo + ",  :" + _productionOrderMaterial.size());
 		System.out.println("printorderDate:" + printOrderDate);
 		System.out.println("printOrderNo:" + printOrderNo);
