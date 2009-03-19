@@ -7,6 +7,7 @@ import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.production.ProductionOrder;
 import com.quesofttech.business.domain.production.ProductionOrderOperation;import com.quesofttech.business.domain.production.ProductionOrderMaterial;
 import com.quesofttech.business.domain.sales.*;
+import com.quesofttech.business.domain.general.Operation;
 import com.quesofttech.business.domain.inventory.*;
 /**
  * The <code>IProductionOrderServiceRemote</code> bean exposes the business methods
@@ -66,4 +67,6 @@ public interface IProductionOrderServiceRemote {
 	List<ProductionOrderMaterial> findProductionOrderMaterialsByProductionOrder(ProductionOrder productionOrder) throws DoesNotExistException;
 	
 	List<ProductionOrderMaterial> findProductionOrderMaterialsByProductionOrderIdAndOperationId(Long productionOrderId,Long operationId) throws DoesNotExistException;
+
+	List<Operation> findOperationFromProductionOrderOperationByProductionOrderId(Long productionOrderId) throws DoesNotExistException;
 }
