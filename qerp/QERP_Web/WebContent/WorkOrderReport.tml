@@ -92,24 +92,24 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 		<td>
 			<table width="100%" border="1" cellspacing="0" cellpadding="0">
 				<tr>
+					<th width="100"> Process </th>
 					<th width="100"> Code No </th>
 					<th width="100"> Film Type </th>
 					<th width="100"> Thickness </th>
 					<th width="100"> Width </th>
 					<th width="100"> Length </th>
-					<th width="100"> Quantity </th>
-					<th width="100"> Process </th>
+					<th width="100"> Quantity </th>					
 					<th width="150"> Production Date </th>					
 				</tr>
 				<t:loop source="RawMats" value="RawMat">
 					<tr>
+						<td>${Process}</td>
 						<td>${CodeNo}</td>
 						<td>${Type}</td>
 						<td>${Thickness}</td>
 						<td>${Width}</td>
 						<td>${Length}</td>
-						<td>${Quantity}</td>
-						<td>${Process}</td>
+						<td>${Quantity}</td>						
 						<td>${ProductionDate}</td>
 						
 						

@@ -1,5 +1,6 @@
 package com.quesofttech.web.pages;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
@@ -118,6 +119,7 @@ public class WorkOrderReport extends SecureBasePage {
 	}
 	public class rawmaterial
 	{
+		
 		public String RowType=""; // If RowType = "H" then is header.
 		public String CodeNo="";
 		public String Type="";
@@ -150,19 +152,11 @@ public class WorkOrderReport extends SecureBasePage {
 	private ProductionOrder _productionOrder;
 	@Persist
 	private List<ProductionOrderMaterial> _productionOrderMaterial;
-	
-
-	
 	@Persist
 	private List<rawmaterial> rawmatlist ;
 	@Property
 	private rawmaterial _rawmat;
 	
-	
-	//public void setRawMat(rawmaterial _rawmat)
-	//{
-	//	this._rawmat = _rawmat;
-	//}
 	public String getPrintMasterCard() {
 		return printMasterCard;
 	}
@@ -259,20 +253,20 @@ public class WorkOrderReport extends SecureBasePage {
 		System.out.println("uniquePOO 's size:" + uniquePOO.size());
 		for(ProductionOrderOperation poo1 : uniquePOO)
 		{	
-			System.out.println("pom add");
-			rawmaterial listH = new rawmaterial();
-			System.out.println("pom added");
-			listH.RowType = "H";
-			listH.CodeNo = "Code";
-			listH.Length = "Length";
-			listH.Process = "Process";
-			listH.ProductionDate ="Production Date";
-			listH.Quantity = "Quantity";
-			listH.Thickness = "Thickness";
-			listH.Type = "Type";
-			listH.Width ="Width";
-			System.out.println("add on raw mat");
-			rawmatlist.add(listH);
+			//System.out.println("pom add");
+			//rawmaterial listH = new rawmaterial();
+			//System.out.println("pom added");
+			//listH.RowType = "H";
+			//listH.CodeNo = "Code";
+			//listH.Length = "Length";
+			//listH.Process = "Process";
+			//listH.ProductionDate ="Production Date";
+			//listH.Quantity = "Quantity";
+			//listH.Thickness = "Thickness";
+			//listH.Type = "Type";
+			//listH.Width ="Width";
+			//System.out.println("add on raw mat");
+			//rawmatlist.add(listH);
 			
 			System.out.println("_productionOrderMaterial: " + _productionOrderMaterial.size());
 			for(ProductionOrderMaterial pom : _productionOrderMaterial)
@@ -282,21 +276,22 @@ public class WorkOrderReport extends SecureBasePage {
 				//System.out.println("poo1.getOperation().getCode(): " + poo1.getOperation().getCode());
 				if(pom.getOperation().getCode().equals(poo1.getOperation().getCode()))
 				{
+					DecimalFormat decimalFormat = new DecimalFormat("0.00");
 					System.out.println("pom add");
 					rawmaterial list = new rawmaterial();
 					System.out.println("pom added");
 					list.RowType = "";
 					list.CodeNo = pom.getMaterialCode();
-					list.Length = String.format("", pom.getMaterial().getLength());
+					list.Length = decimalFormat.format(pom.getMaterial().getLength());
 					list.Process = pom.getOperation().getCode();
 					list.ProductionDate = " - ";
-					list.Quantity = String.format("", pom.getQuantityRequired());
-					list.Thickness =  String.format("", pom.getMaterial().getHeight());
+					list.Quantity = decimalFormat.format(pom.getQuantityRequired());
+					list.Thickness =  decimalFormat.format( pom.getMaterial().getHeight());
 					if(pom.getMaterial().getMaterialGroup()==null)
 						list.Type = " - ";
 					else 
 						list.Type = pom.getMaterial().getMaterialGroup().getGroup();
-					list.Width =  String.format("", pom.getMaterial().getWidth());
+					list.Width =  decimalFormat.format( pom.getMaterial().getWidth());
 					System.out.println("add on raw mat");
 					rawmatlist.add(list);
 					
