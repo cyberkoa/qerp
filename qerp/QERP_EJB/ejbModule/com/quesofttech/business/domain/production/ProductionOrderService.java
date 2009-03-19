@@ -27,6 +27,8 @@ import com.quesofttech.business.domain.general.BomTree;
 import com.quesofttech.business.domain.general.BomService;
 import com.quesofttech.business.domain.general.iface.IBomServiceLocal;
 
+import com.quesofttech.business.domain.general.Operation;
+
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.MaterialType;
 
@@ -338,5 +340,18 @@ public class ProductionOrderService extends BaseService implements IProductionOr
 		List l = q.getResultList();
 		return l;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Operation> findOperationFromProductionOrderOperationByProductionOrderId(Long productionOrderId) throws DoesNotExistException {
+		Query q = _em.createQuery("select distinct prodoo.operation from ProductionOrderOperation prodoo where " +
+				"prodoo.productionOrder.id = :productionOrderId " +
+				"AND prodoo.rowInfo.recordStatus='A' " +
+				" order by prodoo.sequence");
+		q.setParameter("productionOrderId", productionOrderId);
+		List l = q.getResultList();
+		return l;
+	}
+
+	
 	
 }
