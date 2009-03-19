@@ -79,6 +79,24 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 				<tr>
 					<td colspan="4"></td>
 				</tr>
+				
+				
+				<tr>
+					<td>
+						<b>Color:</b>
+					</td>
+					<td>
+						  
+					</td>
+					<td>
+						<b>Quantity</b> 
+					</td>
+					<td align="right">
+						${printOrderQuantity}
+						. 
+					</td>
+				</tr>
+				
 			</table>	
 		</td>
 	</tr>
@@ -93,8 +111,8 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 			<table width="100%" border="1" cellspacing="0" cellpadding="0">
 				<tr>
 					<th width="100"> Process </th>
-					<th width="100"> Code No </th>
 					<th width="100"> Film Type </th>
+					<th width="100"> Code No </th>					
 					<th width="100"> Thickness </th>
 					<th width="100"> Width </th>
 					<th width="100"> Length </th>
@@ -104,12 +122,12 @@ xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
 				<t:loop source="RawMats" value="RawMat">
 					<tr>
 						<td>${Process}</td>
-						<td>${CodeNo}</td>
 						<td>${Type}</td>
-						<td>${Thickness}</td>
-						<td>${Width}</td>
-						<td>${Length}</td>
-						<td>${Quantity}</td>						
+						<td>${CodeNo}</td>						
+						<td align="right">${Thickness}</td>
+						<td align="right">${Width}</td>
+						<td align="right">${Length}</td>
+						<td align="right">${Quantity}</td>						
 						<td>${ProductionDate}</td>
 						
 						
