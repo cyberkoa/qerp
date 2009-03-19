@@ -1,8 +1,12 @@
 package com.quesofttech.web.pages;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
+
 import javax.annotation.Resource;
 
 import com.quesofttech.business.common.exception.BusinessException;
@@ -333,6 +337,7 @@ public class WorkOrderReport extends SecureBasePage {
 	private void getReportInfo() throws BusinessException
 	{
 		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+		Format format = new SimpleDateFormat("dd-MMM-yyyy");
 		rawmatlist = null;
 		_productionOrder = null;
 		_productionOrderMaterial = null;
