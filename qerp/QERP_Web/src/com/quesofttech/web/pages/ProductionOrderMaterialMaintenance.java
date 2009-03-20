@@ -34,7 +34,7 @@ import com.quesofttech.business.domain.inventory.*;
 import com.quesofttech.business.domain.inventory.iface.*;
 
 
-public class ProductionOrderMaterialMaintenance extends SecureBasePage {
+public class ProductionOrderMaterialMaintenance extends SimpleBasePage {
 	//===============================================================
 	//			Material ComboBox
 	//===============================================================

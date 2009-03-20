@@ -12,8 +12,9 @@ import org.apache.tapestry5.json.JSONObject;
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
 import com.quesofttech.web.base.SecureBasePage;
+import com.quesofttech.web.base.SimpleBasePage;
 
-public class FilterDataSalesOrderMaterial extends SecureBasePage
+public class FilterDataSalesOrderMaterial extends SimpleBasePage
 {
 
 	@Component(id = "lowerMaterialCode")

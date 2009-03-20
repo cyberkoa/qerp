@@ -59,7 +59,7 @@ import org.apache.tapestry.commons.components.Window;
 //}
 
 
-public class SalesOrderMaterialMaintenance extends SecureBasePage {
+public class SalesOrderMaterialMaintenance extends SimpleBasePage {
 	
 	@Component(parameters = {"width=300", "height=300", 
 			 "style=bluelighting", "show=false","modal=true", "title=literal:Filter Window"})

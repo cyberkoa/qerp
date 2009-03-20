@@ -14,8 +14,8 @@
 							</tr>
 							<tr>
 								<th>Description</th>
-								<td><input t:type="TextField" t:id="lowerDescription" t:value="lowerDescription" size="50" maxLength="50" /></td>
-								<td><input t:type="TextField" t:id="upperDescription" t:value="upperDescription" size="50" maxLength="50" /></td>							
+								<td><input t:type="TextField" t:id="lowerDescription" t:value="lowerDescription" size="20" maxLength="50" /></td>
+								<td><input t:type="TextField" t:id="upperDescription" t:value="upperDescription" size="20" maxLength="50" /></td>							
 							</tr>
 							
 							<tr>

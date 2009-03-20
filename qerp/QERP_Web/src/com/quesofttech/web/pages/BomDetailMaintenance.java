@@ -33,7 +33,7 @@ import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 import com.quesofttech.web.util.*;
-public class BomDetailMaintenance extends SecureBasePage {
+public class BomDetailMaintenance extends SimpleBasePage {
 // Default defination.
 	void onActionFromtoolbarback()
     {
