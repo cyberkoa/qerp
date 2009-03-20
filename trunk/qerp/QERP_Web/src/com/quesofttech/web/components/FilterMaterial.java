@@ -12,10 +12,10 @@ import org.apache.tapestry5.json.JSONObject;
 
 import com.quesofttech.business.domain.inventory.dto.MaterialSearchFields;
 import com.quesofttech.web.base.SecureBasePage;
+import com.quesofttech.web.base.*;
 
 
-
-public class FilterMaterial extends SecureBasePage
+public class FilterMaterial extends SimpleBasePage
 {
 
 	@Component(id = "lowerDocNo")

@@ -13,8 +13,9 @@ import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.dto.MaterialSearchFields;
 import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
 import com.quesofttech.web.base.SecureBasePage;
+import com.quesofttech.web.base.SimpleBasePage;
 
-public class FilterDataMaterial extends SecureBasePage
+public class FilterDataMaterial extends SimpleBasePage
 {
 
 	@Component(id = "lowerCode")
