@@ -352,7 +352,7 @@ public class WorkOrderReport extends SecureBasePage {
 		//printBrandCode = _salesOrderMaterial.getMaterialCode() + "(" + _salesOrderMaterial.getMaterial().getDescription() + ")";
 		printCustomerNo = _salesOrderMaterial.getSalesOrder().getCustomerCode();
 		printDeliveryDate = " - ";
-		printOrderDate = _salesOrderMaterial.getSalesOrder().getRowInfo().getCreateTimestamp().toString();
+		printOrderDate = format.format(_salesOrderMaterial.getSalesOrder().getRowInfo().getCreateTimestamp());
 		printPOno  = _salesOrderMaterial.getSalesOrder().getCustomerPO();
 		printOrderNo = _salesOrderMaterial.getSalesOrder().getFormattedDocNo();
 		printMasterCard = _productionOrder.getBom().getCode();
