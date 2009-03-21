@@ -71,15 +71,26 @@ public class cmp_layout extends SimpleBasePage
 		try{
 			_subjects.clear();
 			_modules.clear();
-			List<Module> Modules;
-			
-			Modules = getBusinessServicesLocator().getModuleServiceRemote().findModules();
+			List<Module> Modules = new ArrayList<Module>();
+			_id =getVisit().getMyUserId(); 
+			_user = getISecurityFinderServiceRemote().findUser(_id);   
+	    	_Programs = getISecurityFinderServiceRemote().findAuthorizedProgramsByUser(_user);
+	    	
+	    	for(Program p :_Programs)
+	    	{
+	    		if(!Modules.contains(p.getModule()))
+	    		{
+	    			Modules.add(p.getModule());
+	    		}
+	    	}
 			for(Module p : Modules)
-			{			
+			{	
+				
 				
 				//System.out.println("This is the output data: " + p.toString());
 				_subjects.add(p.getDescription());
 				_modules.add(p.getCode());
+			
 				//_modules[i] = p.getCode();
 				i++;
 			}
@@ -98,20 +109,11 @@ public class cmp_layout extends SimpleBasePage
 			List<Module> Modules;
 			
 			Modules = getBusinessServicesLocator().getModuleServiceRemote().findModules();
-			i = Modules.size();
-			/*for(Module p : Modules)
-			{			
-				
-				//System.out.println("This is the output data: " + p.toString());
-				//_subjects[i] = p.getDescription();
-				//_modules[i] = p.getCode();
-				i++;
-			}*/
+			i = Modules.size();			
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			i =0;
 		}		
-		//i++;
 		return i;
 	}
 	
@@ -188,58 +190,59 @@ public class cmp_layout extends SimpleBasePage
 			int _Loop=0;
 			int _TR_ID=0;
 			//getArrayValues();
-			// TODO: (hardcode potion) this will temporary to do the user id assignment. to avoid development test having the exception when accesing the page without login.
-			_id =getVisit().getMyUserId(); // Hard coded to using KoaCG id located at No2.  
-			_user = getISecurityFinderServiceRemote().findUser(_id);   
-	    	_Programs = getISecurityFinderServiceRemote().findAuthorizedProgramsByUser(_user);
+			//_id =getVisit().getMyUserId(); 
+			//_user = getISecurityFinderServiceRemote().findUser(_id);   
+	    	//_Programs = getISecurityFinderServiceRemote().findAuthorizedProgramsByUser(_user);
 	    	for(int i_Subjects=0 ;i_Subjects< _subjects.size();i_Subjects++){ // To Loop number of Subjects
-				_TreeView[i_Subjects] = "<div class='app'>" 
-					+ "<div style='background: #eee; border: dashed 1px #000;'>"
-					+ "<table width='100%'> " 
-					+ "<tr>   <th width='33%'>Program List</th></tr>";
-				for (int i_Type=0;i_Type<_ProgramTypeNum.length;i_Type++){ // To Loop Number of Program Type;
-					_Loop = 0;
-					for(Program p : _Programs)
-			    	{    		
-						_temp = p.getType();						
-			    		if(p.getModule()!=null)
-			    		{
-				    		_tempSubj = p.getModule().getCode();
-				    		if(_ProgramTypeNum[i_Type].equals(_temp) &&  _modules.get(i_Subjects).equals(_tempSubj))
+	    		
+					_TreeView[i_Subjects] = "<div class='app'>" 
+						+ "<div style='background: #eee; border: dashed 1px #000;'>"
+						+ "<table width='100%'> " 
+						+ "<tr>   <th width='33%'>Program List</th></tr>";
+					for (int i_Type=0;i_Type<_ProgramTypeNum.length;i_Type++){ // To Loop Number of Program Type;
+						_Loop = 0;
+						for(Program p : _Programs)
+				    	{    		
+							_temp = p.getType();						
+				    		if(p.getModule()!=null)
 				    		{
-				    			// This is to set if Program have only list out the Maint, Posting , etc. to avoid looks messy
-								if(_Loop==0)
-								{
-									_TR_ID++;
-									_TreeView[i_Subjects] = _TreeView[i_Subjects] 
-					                + "<tr id='" + _TR_ID + "' class='a'>" 
-					                + "<td id='p" + _PNum++ + "'>"
-					                + "<div id='p" + _PNum++ + "' class='tier1'>"
-					                + "<a id='p"  + _PNum++ + "' href='#' onclick='toggleRows(this)' class='folder'>"
-					                + "</a><a href='#' onclick='toggleRowsType(this)' >" + _ProgramTypeNum[i_Type]  + "</a></div></td>"
-					                + "</tr> ";
-								}
-				    			_Loop++;
-				    			_TreeView[i_Subjects] = _TreeView[i_Subjects]
-								 + " <tr id='" + _TR_ID + "-" + _Loop + "' class='a'>"
-								 + "<td><div class='tier2'>"
-								 + "<div ><a href='" + p.getCode()  + "'  target=" 
-								 + (char)34 + "_self" +  (char)34 +  "   class='doc'>"
-								 + "</a></div><div style=" + (char)34 + "font-family:serif;font-size:small;" + (char)34 +  ">" 
-								 + "<a href='" + p.getCode()  + "'  target=" 
-								 + (char)34 + "_self" +  (char)34 +  "  >"
-								 + p.getDescription()  + "</a></div></div></td>  " +
-								 "</tr>";		    			
-				    		}		    
-			    		// TODO: Need to change to Dynamic Server name instead of Localhost.
-			    		}
-			    	}				
-				}
-				_TreeView[i_Subjects] = _TreeView[i_Subjects]
-				                                  + "</table>"
-				                                  + "</div>"
-				                                  + "</div>";
-			}
+					    		_tempSubj = p.getModule().getCode();
+					    		if(_ProgramTypeNum[i_Type].equals(_temp) &&  _modules.get(i_Subjects).equals(_tempSubj))
+					    		{
+					    			// This is to set if Program have only list out the Maint, Posting , etc. to avoid looks messy
+									if(_Loop==0)
+									{
+										_TR_ID++;
+										_TreeView[i_Subjects] = _TreeView[i_Subjects] 
+						                + "<tr id='" + _TR_ID + "' class='a'>" 
+						                + "<td id='p" + _PNum++ + "'>"
+						                + "<div id='p" + _PNum++ + "' class='tier1'>"
+						                + "<a id='p"  + _PNum++ + "' href='#' onclick='toggleRows(this)' class='folder'>"
+						                + "</a><a href='#' onclick='toggleRowsType(this)' >" + _ProgramTypeNum[i_Type]  + "</a></div></td>"
+						                + "</tr> ";
+									}
+					    			_Loop++;
+					    			_TreeView[i_Subjects] = _TreeView[i_Subjects]
+									 + " <tr id='" + _TR_ID + "-" + _Loop + "' class='a'>"
+									 + "<td><div class='tier2'>"
+									 + "<div ><a href='" + p.getCode()  + "'  target=" 
+									 + (char)34 + "_self" +  (char)34 +  "   class='doc'>"
+									 + "</a></div><div style=" + (char)34 + "font-family:serif;font-size:small;" + (char)34 +  ">" 
+									 + "<a href='" + p.getCode()  + "'  target=" 
+									 + (char)34 + "_self" +  (char)34 +  "  >"
+									 + p.getDescription()  + "</a></div></div></td>  " +
+									 "</tr>";		    			
+					    		}		    
+				    		// TODO: Need to change to Dynamic Server name instead of Localhost.
+				    		}
+				    	}				
+					}
+					_TreeView[i_Subjects] = _TreeView[i_Subjects]
+					                                  + "</table>"
+					                                  + "</div>"
+					                                  + "</div>";
+	    		}
+			
 		}
 		catch (Exception e) {
 			// TODO: handle exception

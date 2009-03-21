@@ -19,7 +19,7 @@
        <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
            <t:GRID
            t:id="Grid"
-           t:reorder="id,sequence,MaterialCode,description,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:reorder="id,sequence,MaterialCode,description,OperationCode,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
            t:source="Routings"
            t:row="Routing"
                    t:rowsPerPage="10"
