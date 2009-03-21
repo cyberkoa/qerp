@@ -1,0 +1,12 @@
+#summary Coding Style
+= Introduction =
+
+Every developer has their own style of coding. QERP as an open source project , is expected to include code from different developers. Therefore, in order to have a clean and easily understood code base, we would like to emphasize on the coding style
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
