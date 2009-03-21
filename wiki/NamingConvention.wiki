@@ -14,10 +14,7 @@ Java naming convention
     Example :
       # ProductionOrder
       # SalesOrderMaterial
-
-  # Class name - use Camel case convention, i.e, every word start with capital letter, except 1st letter
+  # Variable name - use Camel case convention, i.e, every word start with capital letter, except 1st letter
     Example :
       # productionOrder
       # salesOrderMaterial
-
-
