@@ -568,5 +568,4 @@ public class Customer extends BaseEntity {
 		return code + " - " + name;
 	}
 	
-	
 }
