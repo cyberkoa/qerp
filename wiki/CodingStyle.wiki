@@ -15,7 +15,6 @@ Every developer has their own style of coding. QERP as an open source project , 
           }
     }}}
     instead of 
-    Please use this style
     {{{
           class  ABC {
              private int abc;
