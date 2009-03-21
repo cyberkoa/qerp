@@ -27,6 +27,7 @@ Every developer has their own style of coding. QERP as an open source project , 
           class  ABC
           {
              private int abc;
+
              public int getAbc()
              {
                return abc;
@@ -36,7 +37,10 @@ Every developer has their own style of coding. QERP as an open source project , 
              {
                  this.abc = abc;
              }
+
+
              private String xyz;
+
              public String getXyz()
              {
                return abc;
