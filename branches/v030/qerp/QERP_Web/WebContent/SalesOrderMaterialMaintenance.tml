@@ -1,0 +1,98 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Sales Order Material Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<table width="100%">
+	<tr>
+		<td style="background:#EEEEEE;align:center;">
+			<center><font color="#001C48" size="3"><b>Sales Order Material Maintenance</b></font></center>
+		</td>
+	</tr>
+</table>
+<t:zone t:id="zoneFormView" show="slidedown">
+    <t:delegate to="block" />
+</t:zone>
+
+<t:block id="blockFormView">
+   <form t:type="form" t:id="SalesOrderMaterialForm" t:zone="zoneFormView" >
+       <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+       <button type="submit"><img  src="images/saveRecord24.png" /></button>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID: ${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <button onclick="filterWindow.showCenter(true);" type="button"><img src="images/filterRecord24.png" /> </button>
+       <t:pagelink t:page="SalesOrdermaintenance"  t:id="toolbarback" ><button><img src="images/backRecord24.png" /></button></t:pagelink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+           <t:GRID
+           t:id="grid" 
+           
+           t:source="SalesOrderMaterials"
+           t:Model="salesOrderMaterialModel"
+           t:row="SalesOrderMaterial"
+           t:rowsPerPage="10"
+           t:reorder="id,line,MaterialCode,customerpoline,QuantityShipped,price,QuantityOrder,amount,ConvertSO"
+           t:exclude="sessionid,recordstatus,version,modifyapp,createapp"
+           t:pagerPosition="both"
+           t:inPlace="literal:true">
+           <t:parameter name="idCell">
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="SalesOrderMaterial.id">
+                   ${SalesOrderMaterial.id}
+               </t:actionlink>
+           </t:parameter>
+           
+	           <t:parameter name="ConvertSOCell">
+	           <t:if t:test="SoConvert">
+	               <t:actionlink t:id="ConvertSOselect" t:mixins="confirm" t:message="Are you sure you want to Convert?"  t:context="SalesOrderMaterial.id" >
+	                   <button>Convert</button>
+	               </t:actionlink>
+	               </t:if>
+	           </t:parameter>
+           
+           
+           <t:parameter name="deleteCell">
+             <t:actionlink t:id="convertSO" context="SalesOrderMaterial.id">Delete</t:actionlink>
+         	</t:parameter>
+           </t:GRID>
+       </div>
+       <table id="main">
+           <tr>
+               <td>
+                <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>
+                
+                   <table id="input">
+                   	   <tr>
+                           <th>Sales Order No:</th>
+                           <td>  ${FormatedDocNo}  </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Line">Line</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Line" t:value="Line" t:maxLength="20" t:size="20" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Price">Unit Price</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Price" t:value="Price" t:maxLength="20" t:size="20" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="QuantityOrder">Quantity Order</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="QuantityOrder" t:value="QuantityOrder" t:maxLength="20" t:size="20" /> </td>
+                       </tr>                       
+                       <tr>
+                           <th><t:label t:for="QuantityShipped">Quantity Shipped</t:label>:</th>
+                           <td> <input  t:type="TextField" t:id="QuantityShipped" t:value="QuantityShipped" t:maxLength="20" t:size="20" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Material">Material</t:label>:</th>
+                           <td>   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="CustomerPOLine">Customer PO Line</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="CustomerPOLine" t:value="CustomerPOLine" t:maxLength="20" t:size="20" /> </td>
+                       </tr>                       
+                    </table>
+               </td>
+           </tr>
+       </table>  
+   </form>   
+   </t:block>
+<div t:id="filterWindow">   
+	 	<div t:type="filterDataSalesOrderMaterial" t:id="filterDataSalesOrderMaterial" />
+	</div>
+</body>
+</html>

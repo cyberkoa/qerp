@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<t:cmp_layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<div style="width:700px;height:100%;">
+<table width="800" >
+	<tr>
+		<td  width="1000" height="540" background="images/background.png">
+			&nbsp;
+		</td>
+	</tr>
+	
+</table>
+</div>
+
+</t:cmp_layout>

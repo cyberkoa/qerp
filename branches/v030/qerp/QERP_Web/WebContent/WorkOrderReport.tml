@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+ 
+<body>
+<table  border="1" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center">
+			<h1><b>${CompDesc}</b></h1>			
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<b>ORDER FORM</b>			
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<table width="100%" border="1" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<b>Order No:</b>
+					</td>
+					<td>
+						 ${printOrderNo}
+					</td>
+					<td>
+						<b>Order Date: </b>
+					</td>
+					<td>
+						 ${printOrderDate}
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<b>P/O No : </b>
+					</td>
+					<td>
+						 ${printPOno}
+					</td>
+					<td>
+						<b>Delivery Date:</b>
+					</td>
+					<td>
+						 ${printDeliveryDate}
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<b>Customer No:</b>
+					</td>
+					<td>
+						 ${printCustomerNo}
+					</td>
+					<td >
+						<b>Master Code: </b>						
+					</td>
+					<td>
+						${printMasterCard}
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<b>Brand Code:</b>
+					</td>
+					<td>
+						  ${printBrandCode}
+					</td>
+					<td>
+						<b>Process</b> 
+					</td>
+					<td>
+						. 
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4"></td>
+				</tr>
+				
+				
+				<tr>
+					<td>
+						<b>Color:</b>
+					</td>
+					<td>
+						  
+					</td>
+					<td>
+						<b>Quantity</b> 
+					</td>
+					<td align="right">
+						${printOrderQuantity}
+						. 
+					</td>
+				</tr>
+				
+			</table>	
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b>Raw Material:-</b>			
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<table width="100%" border="1" cellspacing="0" cellpadding="0">
+				<tr>
+					<th width="100"> Process </th>
+					<th width="100"> Film Type </th>
+					<th width="100"> Code No </th>					
+					<th width="100"> Thickness </th>
+					<th width="100"> Width </th>
+					<th width="100"> Length </th>
+					<th width="100"> Quantity </th>					
+					<th width="150"> Production Date </th>					
+				</tr>
+				<t:loop source="RawMats" value="RawMat">
+					<tr>
+						<td>${Process}</td>
+						<td>${Type}</td>
+						<td>${CodeNo}</td>						
+						<td align="right">${Thickness}</td>
+						<td align="right">${Width}</td>
+						<td align="right">${Length}</td>
+						<td align="right">${Quantity}</td>						
+						<td>${ProductionDate}</td>
+						
+						
+					</tr>
+				</t:loop>
+
+			</table>			
+		</td>
+	</tr>
+	<tr>
+		<td height="40">
+					
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<table border="1" width="100%"  cellspacing="0" cellpadding="0">
+				<tr>
+					<td rowspan="4" width="30%" valign="top" align="right">Production Remark:</td>
+					<td width="70%">____________________________________________________________________________________</td>
+				</tr>
+				<tr>					
+					<td>____________________________________________________________________________________</td>
+				</tr>
+				<tr>					
+					<td>____________________________________________________________________________________</td>
+				</tr>
+				<tr>					
+					<td>____________________________________________________________________________________</td>
+				</tr>
+				
+			</table>
+					
+		</td>
+	</tr>
+	<tr>
+	<table >
+		<tr>
+			<td rowspan="2" align="center" valign="center">
+				<br/>
+				<br/>
+				<table>
+					<tr>
+						<td>
+							<table width="20" height="20" border="1" cellspacing="0" cellpadding="0">
+								<tr>
+									<td>
+										&nbsp;
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							SLITTING &nbsp;&nbsp;
+						</td>
+						<td>
+							<table border="1" cellspacing="0" cellpadding="0" width="400" >
+								<tr>								
+									<td width="50%" align="center">
+										SIZE
+									</td>
+									<td>
+										ORDER
+									</td>
+								</tr>
+								<tr>								
+									<td width="50%" align="center">
+										&nbsp;
+									</td>
+									<td>
+										&nbsp;
+									</td>
+								</tr>
+							
+							</table>
+						</td>
+					</tr>
+				</table>
+				
+			</td>
+		</tr>
+	</table>
+	
+	</tr>
+	
+	
+	
+	
+	
+	
+	<tr WIDTH="100%">
+	<table>
+		<tr>
+			<td rowspan="2" align="center" valign="center">
+				<br/>
+				<br/>
+				<table>
+					<tr>
+						<td>
+							<table width="20" height="20" border="1" cellspacing="0" cellpadding="0">
+								<tr>
+									<td>
+										&nbsp;
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							CUTTING &nbsp;&nbsp;
+						</td>
+						<td>
+							<table border="1" cellspacing="0" cellpadding="0" width="100%" >
+								<tr>								
+									<td  align="center">
+										SIZE
+									</td>
+									<td align="center">
+										BAG FORM
+									</td>
+									<td align="center">
+										TOP SEALING
+									</td>
+									<td align="center">
+										BOTTOM SEAL
+									</td>
+									<td align="center">
+										SIDE SEAL
+									</td>
+									<td align="center">
+										CENTRE SEAL
+									</td>
+								</tr>
+								<tr>								
+									<td  align="center">
+										&nbsp;
+									</td>
+									<td align="center">
+										&nbsp;
+									</td>
+									<td  align="center">
+										&nbsp;
+									</td>
+									<td align="center">
+										&nbsp;
+									</td>
+									<td  align="center">
+										&nbsp;
+									</td>
+									<td align="center">
+										&nbsp;
+									</td>
+								</tr>
+								
+								
+								
+								<tr>								
+									<td  align="center">
+										SIDE FOLD
+									</td>
+									<td align="center">
+										STAND POUCH
+									</td>
+									<td align="center">
+										HOLE
+									</td>
+									<td align="center">
+										V-CUT
+									</td>
+									<td align="center" COLSPAN="2">
+										OTHER
+									</td>
+								</tr>
+								<tr>								
+									<td  align="center">
+										&nbsp;
+									</td>
+									<td align="center">
+										&nbsp;
+									</td>
+									<td  align="center">
+										&nbsp;
+									</td>
+									<td align="center">
+										&nbsp;
+									</td>
+									<td  align="center" COLSPAN="2">
+										&nbsp;
+									</td>
+								</tr>
+							
+							</table>
+						</td>
+					</tr>
+				</table>
+				
+			</td>
+		</tr>
+	</table>
+	
+	</tr>
+	
+	
+	
+	
+	
+	<tr>
+		<td>
+			<table width="100%"  cellspacing="0" cellpadding="0">
+				<TR>
+					<TD COLSPAN="2" HEIGHT="100"></TD>
+				</TR>
+				<tr>
+					<td width="50%"> _______________________ </td>
+					<td width="50%"> _______________________ </td>
+				</tr>
+				<tr>
+					<td> <b>ISSUED BY</b> </td>
+					<td> <B>APPROVED BY </B> </td>
+				</tr>
+			</table>			
+		</td>
+	</tr>
+	
+	
+</table>	
+</body>
+</html>

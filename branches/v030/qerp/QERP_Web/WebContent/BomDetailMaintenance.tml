@@ -1,0 +1,91 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>BomDetail Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<table width="100%">
+	<tr>
+		<td style="background:#EEEEEE;align:center;">
+			<center><font color="#001C48" size="3"><b>Bom Detail Maintenance</b></font></center>
+		</td>
+	</tr>
+</table>
+
+<t:zone t:id="zoneFormView" show="slidedown">
+    <t:delegate to="block" />
+</t:zone>
+<t:block id="blockFormView">
+   <form t:type="form" t:id="BomDetailForm" t:zone="zoneFormView" >
+       <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+       <button type="submit"><img  src="images/saveRecord24.png" /></button>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbardel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <t:pagelink t:page="bommaintenance"  t:id="toolbarback" ><button><img src="images/backRecord24.png" /></button></t:pagelink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+           <t:GRID
+           t:id="Grid"
+           t:reorder="id,materialcode,startdate,enddate,quantityRequired,scrapfactor,location,createLogin,createTimestamp,modifyLogin,modifyTimestamp"
+           t:source="BomDetails"
+           t:row="BomDetail"
+           t:rowsPerPage="10"
+           t:pagerPosition="both"
+           t:exclude="materialdesc,sessionid,recordstatus,version,modifyapp,createapp"
+           t:inPlace="literal:true">
+           <t:parameter name="idCell">
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="BomDetail.id">
+                   select
+               </t:actionlink>
+           </t:parameter>
+           </t:GRID>
+       </div>
+        <t:errors />
+       <table id="main">
+           <tr>
+               <td>
+                <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>
+                   <table id="input">
+                   		<tr>
+                   		 	<th>BOM Header Material</th>
+                   		 	<td>${BomMaterialCode}</td>                   		 	
+                   		</tr>
+                   		<tr>
+                   		 	<th>BOM Type</th>
+                   		 	<td>${BomType}</td>                   		 	
+                   		</tr>
+                       
+                       <tr>
+                           <th><t:label t:for="Material">Material</t:label>:</th>
+                           <td> <DIV style="display:${viewDisplayText};"> ${MaterialCode}</DIV><DIV style="display:${viewEditText};">  <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </DIV></td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Operation">Operation</t:label>:</th>
+                           <td> <select  t:type="select" t:id="Operation" t:model="Operations" encoder="Operations" t:value="Operation" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="startDate">Start Date</t:label>:</th>
+                           <td><t:datefield  t:type="DateField" t:id="startDate" t:value="startDate" /></td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="endDate">End Date</t:label>:</th>
+                           <td><t:datefield  t:type="DateField" t:id="endDate" t:value="endDate" /></td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Location">Location</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Location" t:value="Location" t:maxLength="20" t:size="20" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="quantityRequired">Quantity Required</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="quantityRequired" t:value="quantityRequired" t:maxLength="20" t:size="20" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="scrapFactor">Scrap Factor</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="scrapFactor" t:value="scrapFactor" t:maxLength="20" t:size="20" /> </td>
+                       </tr>                       
+                       
+                       
+                               </table>
+               </td>
+           </tr>
+       </table>
+  
+   </form>
+</t:block>
+</body>
+</html>

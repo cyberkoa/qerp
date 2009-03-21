@@ -1,0 +1,41 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Production Order Report</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<h3>Production Order Report</h3>
+
+   <form t:type="form" t:id="ProductionOrderReportForm"  >
+	<table width="500" border="1" cellspacing="0" cellpadding="0">
+		<tr>
+			<td colspan="2">
+			<h2> Selection Criteria</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Production Order No:
+			</td>
+			<td>
+				<select  t:type="select" 
+				t:id="ProductionOrder" 
+				t:model="ProductionOrderSelect" 
+				encoder="ProductionOrderSelect" 
+				t:value="ProductionOrder" width="200px"
+				
+			    /> 
+				
+				
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+			<t:linksubmit><button><img  src="images/printRecord24.png" /></button></t:linksubmit>
+				
+			</td>
+		</tr>
+	</table>
+	<t:errors />
+</form>
+</body>
+</html>

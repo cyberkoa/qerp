@@ -1,0 +1,30 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>	
+	<title>${ReportTitle}</title>
+</head>
+<body >
+<table width="800">
+	<tr>
+		<td width="800">
+			<center><h1>${CompanyName}</h1>
+			<h3>${ReportTitle}</h3></center>
+		</td>
+	</tr>
+	<tr>
+		<td width="800">
+			<table style="width=100%">
+				<tr>
+					<td style="float:left;"><b> Form No: ${formNo}</b></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			 <t:body/>
+		</td>
+	</tr>
+ </table>
+</body>
+</html>

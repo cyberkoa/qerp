@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>	
+	<link href="${asset:context:css/inst.css}" rel="stylesheet" type="text/css"/>
+	<link href="${asset:context:css/tigris.css}" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+
+	table.t-data-grid tr th a {
+		color:darkBlue;
+	}
+	</style>	
+	
+	<style type="text/css">
+		<!--
+		.bodyField {
+			display:block;
+		}
+		
+		.tap5c_sidepanel {
+		    display: block;
+		    float: left;
+		}
+		
+		.tap5c_sidepanel-panel {
+		    cursor: pointer;
+		    height: 100%;
+		    background-color: #eeefff;
+		    border: 1px solid #7B84A1;
+		    display: block;
+		    float: left;
+		    margin-right: 0;
+		    width: 20px;
+		}
+		
+		.tap5c_sidepanel-toggler {
+		    background: transparent url( 'images/tool-sprites.gif' ) no-repeat scroll;
+		    cursor: pointer;
+		    float: right;
+		    height: 15px;
+		    margin-top: 4px;
+		    margin-right: 2px;
+		    overflow: hidden;
+		    width: 15px;
+		    background-position: 0 -165px;
+		}
+		
+		.tap5c_sidepanel-pinner-bar {
+		    background: transparent url('images/tb-bg.gif' ) repeat-x scroll top left;
+		    margin-bottom: 3px;
+		}
+		
+		.tap5c_sidepanel-pinner {
+		    background: transparent url( 'images/tool-sprites.gif' ) no-repeat scroll;
+		    cursor: pointer;
+		    height: 15px;
+		    overflow: hidden;
+		    width: 15px;
+		    background-position: 0 -150px;
+		    margin-top: 4px;
+		}
+		
+		.tap5c_sidepanel-content {
+		    background-color: #eeefff;
+		    border: 1px solid #7B84A1;
+		    display: block;
+		    float: left;
+		    margin-right: 2px;
+		    height: 100%;
+		}	
+		
+		DIV.tap5c_accordionToggle {
+		    font-weight: bold;
+		    text-align: left;
+		    cursor: pointer;
+		    padding-top: 5px;
+		    padding-bottom: 5px;
+		    padding-left: 5px;
+		    -moz-user-select: none;
+		    background: url( 'images/white-top-bottom.gif' ) repeat-x scroll 0 -1px;
+		}
+		
+		DIV.tap5c_accordionContent {
+		    overflow: hidden;
+		    background: #F2EFE9 url( ../images/fieldset_gradient.jpg ) repeat-x;
+		    padding-left: 5px;
+		}
+				
+		
+		DIV.tap5c_tab-set {
+		}
+		
+		DIV.tap5c_tab-set-panel {
+		    background: url( 'images/white-top-bottom.gif' ) repeat-x scroll 0pt -1px;
+		    color: black;
+		    border: 1px solid #98c0f4;
+		    float: left;
+		    padding-left: 3px;
+		    padding-right: 3px;
+		    padding-top: 2px;
+		    padding-bottom: 2px;
+		    margin-left: 2px;
+		    cursor: pointer;
+		    width: 100px;;
+		}
+		
+		DIV.activated {
+		    font-weight: bold;
+		}
+		
+		DIV.tap5c_tab-set-content {
+		    clear: left;
+		    border-left: 1px solid silver;
+		    border-right: 1px solid silver;
+		    border-bottom: 1px solid silver;
+		    padding: 5px;
+		}
+				
+		
+		#blanket {
+		   background-color:#111;
+		   opacity: 0.65;
+		   position:absolute;
+		   z-index: 9001; /*ooveeerrrr nine thoussaaaannnd*/
+		   top:0px;
+		   height:300px;
+		   left:0px;
+		   width:100%;
+		}
+		#popUpDiv {
+			position:absolute;
+			background-color:#eeeeee;
+			width:300px;
+			height:300px;
+			z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+		}
+		
+		
+		div.t-data-grid tr:hover {
+			background-color: #E0FFFF;
+  			color: #fff;
+
+		}
+		-->
+	</style>
+	
+</head>
+
+<body onload="collapseAllRows();  " >
+<div>
+	<div id="doc3" style="width:1270px;">
+	    <div id="hd" style="text-align: center;">
+	        <div t:type="t5components/RoundCornerContainer" fgcolor="#EEEEEE" style="background-image:url(images/QERPLogo1.png);background-repeat: no-repeat;align:left;background-color:#EEEEEE;margin-top:5px;margin-bottom:5px;">
+	           <div style="position:relative;float:right;left:-15px;">
+					
+				
+				</div>  <h3><br/><br/><br/></h3>
+	                   
+	        </div>
+	       	 <table width="1270" height="20" >
+	        	<tr>
+	        		<td style="background:#24618E;color:white;text-align:right;" align="right">
+	        		[&nbsp;&nbsp;&nbsp;Login ID: ${Username}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<t:actionlink t:id="actionSignOff"  style="color:white;"><b>Log out</b></t:actionlink>&nbsp;&nbsp;&nbsp;]
+	        		</td>
+	        	</tr>
+	        </table>
+			 
+	    </div>
+	    <div id="bd" style="width:1200px;">
+	        <div t:type="SidePanelQERP" style="height:580px;">
+	            <div t:type="AccordionQERP" subjects="Subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
+	        </div>
+	        <fieldset style="padding-left:5px;height:570px;width:100px">
+	        	<div class="bodyField" style="width:1234px;height:100%;overflow:scroll;">
+	            	<t:body/>
+	            </div>
+	        </fieldset>
+	    </div>
+	    <div id="ft">
+	        <div t:type="t5components/RoundCornerContainer" fgcolor="#EEEEEE" style="background-color:#EEEEEE;margin-top:15px;">
+	            <p style="padding:5px;">
+	               QERP Software  powered by Quesoware &nbsp;
+	            </p>
+	        </div>
+	    </div>
+	</div>
+</div>
+</body>
+</html>

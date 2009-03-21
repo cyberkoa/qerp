@@ -1,0 +1,78 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Material Type Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+<table width="100%">
+	<tr>
+		<td style="background:#EEEEEE;align:center;">
+			<center><font color="#001C48" size="3"><b>Material Type Maintenance</b></font></center>
+		</td>
+	</tr>
+</table>
+<t:zone t:id="zoneFormView" show="slidedown">
+    <t:delegate to="block" />
+</t:zone>
+<t:block id="blockFormView">
+   <form t:type="form" t:id="MaterialTypeForm" t:zone="zoneFormView" >
+       <t:actionlink t:zone="zoneFormView" t:id="toolbarAdd"><button><img src="images/addRecord24.png" /></button></t:actionlink>
+       <button type="submit"><img  src="images/saveRecord24.png" /></button>
+       <t:actionlink  t:mixins="confirm" t:message="Are you sure you want to delete ID:${id}?"  t:id="toolbarDel" t:context="${id}"><button><img src="images/deleteRecord24.png" /></button></t:actionlink>
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+           <t:GRID
+           t:id="grid" 
+         
+           t:source="MaterialTypes"
+           t:row="MaterialType"
+                   t:rowsPerPage="10"
+           t:pagerPosition="both"
+           t:reorder="id,type,description,Purchased,Produced,ForSale,JIT,createlogin,createtimestamp,modifylogin,modifytimestamp"
+           t:exclude="sessionid,recordstatus,version,CreateApp,ModifyApp,typedescription"
+           t:inPlace="literal:true">
+           <t:parameter name="idCell">
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="MaterialType.id">
+                   select
+               </t:actionlink>
+           </t:parameter>
+           </t:GRID>
+       </div>
+        <t:errors />
+       <table id="main">
+           <tr>
+               <td>
+                <DIV style="display:none;"> <input  t:type="TextField" t:id="id" t:value="id" t:maxLength="20" t:size="20" /></DIV>
+                
+                   <table id="input">
+                       
+                       <tr>
+                           <th><t:label t:for="Type">Type</t:label>:</th>
+                           <td> <DIV style="display:${viewDisplayText};"> ${type}</DIV><DIV style="display:${viewEditText};"> <input  t:type="TextField" t:id="Type" t:value="Type" t:maxLength="1" t:size="1" /> </DIV></td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="Description">Description</t:label>:</th>
+                           <td>   <input  t:type="TextField" t:id="Description" t:value="Description" t:maxLength="100" t:size="100" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="IsForSale">Is For Sale ?</t:label>:</th>
+                           <td>   <input  t:type="Checkbox" t:id="IsForSale" t:value="IsForSale" t:maxLength="1" t:size="1" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="IsProduced">Is Produced ?</t:label>:</th>
+                           <td>   <input  t:type="Checkbox" t:id="IsProduced" t:value="IsProduced" t:maxLength="1" t:size="1" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="IsPurchased">Is Purchased ?</t:label>:</th>
+                           <td>   <input  t:type="Checkbox" t:id="IsPurchased" t:value="IsPurchased" t:maxLength="1" t:size="1" /> </td>
+                       </tr>
+                       <tr>
+                           <th><t:label t:for="IsJIT">Is JIT ?</t:label>:</th>
+                           <td>   <input  t:type="Checkbox" t:id="IsJIT" t:value="IsJIT" t:maxLength="1" t:size="1" /> </td>
+                       </tr>
+                       
+                  </table>
+               </td>
+           </tr>
+       </table>
+   
+   </form>
+</t:block>
+</body>
+</html>
