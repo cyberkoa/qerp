@@ -14,7 +14,6 @@ Every developer has their own style of coding. QERP as an open source project , 
              private int abc;
           }
     }}}
-
     instead of 
     Please use this style
     {{{
