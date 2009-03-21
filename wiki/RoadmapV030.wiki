@@ -1,8 +1,8 @@
-#summary Alpha_0.20
+#summary v0.30
 
 = Introduction =
 
-The aim of Alpha 0.20 is to refactor the source code , to optimize the power of OOP programming. 
+The aim of v 0.30 is to refactor the source code , to optimize the power of OOP programming. 
 
 
 = Tasks =
