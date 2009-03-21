@@ -459,5 +459,9 @@ public class Routing extends BaseEntity {
 	public String getOperationDescription() {
 		return operation + " - " + description;
 	}
+	public String getOperationCode()
+	{
+		return operation.getCode();
+	}
 	
 }
