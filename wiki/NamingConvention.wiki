@@ -1,0 +1,15 @@
+#summary Naming convention in code
+
+= Introduction =
+QERP is developed using Java as core programming language, with javascript and CSS as assisting programming language at Web UI.
+
+We need a naming convention to help to easily understand the code and to form a standardization of code.
+
+Please refer to the respective programming language for naming convention if this guide does not cover it
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
