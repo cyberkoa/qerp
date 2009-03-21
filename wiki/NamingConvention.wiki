@@ -9,7 +9,15 @@ Please refer to the respective programming language for naming convention if thi
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Java naming convention
+  # Class name - use Pascal case convention, i.e, every word start with capital letter
+    Example :
+      # ProductionOrder
+      # SalesOrderMaterial
+
+  # Class name - use Camel case convention, i.e, every word start with capital letter, except 1st letter
+    Example :
+      # productionOrder
+      # salesOrderMaterial
+
+
