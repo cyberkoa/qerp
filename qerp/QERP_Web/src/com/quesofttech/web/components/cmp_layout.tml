@@ -171,7 +171,7 @@
 	        <div t:type="SidePanelQERP" style="height:580px;">
 	            <div t:type="AccordionQERP" subjects="Subjects" renderDetailsRaw="literal:true" details="details" style="width: 240px;"/>
 	        </div>
-	        <fieldset style="padding-left:5px;height:570px;width:100px">
+	        <fieldset style="padding-left:0px;height:570px;width:0px">
 	        	<div class="bodyField" style="width:1234px;height:100%;overflow:scroll;">
 	            	<t:body/>
 	            </div>
