@@ -52,7 +52,7 @@ import com.quesofttech.web.model.base.GenericSelectModel;
 
 
 
-public class WorkOrderReport extends SecureBasePage {
+public class WorkOrderReport extends SimpleBasePage {
 	public String getCodeNo()
 	{
 		return _rawmat.CodeNo;
