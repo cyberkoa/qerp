@@ -53,7 +53,7 @@ import com.quesofttech.web.model.base.GenericSelectModel;
 public class MaterialMaintenance extends SecureBasePage {
 	
 	//===============Filter window=========================
-	@Component(parameters = {"width=400", "height=300", 
+	@Component(parameters = {"width=500", "height=300", 
 			 "style=bluelighting", "show=false","modal=true", "title=literal:Filter Window"})
 	@Property
 	private QERPWindow _filterWindow;

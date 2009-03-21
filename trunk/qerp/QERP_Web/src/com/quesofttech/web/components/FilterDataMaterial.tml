@@ -9,13 +9,13 @@
 						    </tr>
 							<tr>
 								<th>Material Code</th>
-								<td><input t:type="TextField" t:id="lowerCode"  t:value="lowerCode" size="10" maxLength="10" /></td>
-								<td><input t:type="TextField" t:id="upperCode" t:value="upperCode" size="10" maxLength="10" /></td>
+								<td><input t:type="TextField" t:id="lowerCode"  t:value="lowerCode" size="30" maxLength="30" /></td>
+								<td><input t:type="TextField" t:id="upperCode" t:value="upperCode" size="30" maxLength="30" /></td>
 							</tr>
 							<tr>
 								<th>Description</th>
-								<td><input t:type="TextField" t:id="lowerDescription" t:value="lowerDescription" size="20" maxLength="50" /></td>
-								<td><input t:type="TextField" t:id="upperDescription" t:value="upperDescription" size="20" maxLength="50" /></td>							
+								<td><input t:type="TextField" t:id="lowerDescription" t:value="lowerDescription" size="30" maxLength="50" /></td>
+								<td><input t:type="TextField" t:id="upperDescription" t:value="upperDescription" size="30" maxLength="50" /></td>							
 							</tr>
 							
 							<tr>
