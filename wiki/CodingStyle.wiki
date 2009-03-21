@@ -21,3 +21,61 @@ Every developer has their own style of coding. QERP as an open source project , 
              private int abc;
           }
     }}}
+  # property getter and setter location
+    Please use this style
+    {{{
+          class  ABC
+          {
+             private int abc;
+             public int getAbc()
+             {
+               return abc;
+             }
+
+             public void setAbc(int abc)
+             {
+                 this.abc = abc;
+             }
+             private String xyz;
+             public String getXyz()
+             {
+               return abc;
+             }
+
+             public void setXyz(String xyz)
+             {
+                 this.xyz = xyz;
+             }
+
+          }
+    }}}
+    Instead of
+    {{{
+          class  ABC
+          {
+             private int abc;
+             private String xyz;
+
+
+             public int getAbc()
+             {
+               return abc;
+             }
+
+             public void setAbc(int abc)
+             {
+                 this.abc = abc;
+             }
+
+             public String getXyz()
+             {
+               return abc;
+             }
+
+             public void setXyz(String xyz)
+             {
+                 this.xyz = xyz;
+             }
+
+          }
+    }}}
