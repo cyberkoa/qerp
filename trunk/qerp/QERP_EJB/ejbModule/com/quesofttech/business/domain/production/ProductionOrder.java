@@ -86,6 +86,9 @@ public class ProductionOrder extends BaseEntity {
 	@Column(name = "prodo_QuantityReported", nullable = false)
 	private Double quantityReported;
 	
+	@Column(name = "prodo_Remark", length = 200)
+	private String remark;
+	
 	
 	@ManyToOne
     @JoinColumn(name="fk_Material")	
@@ -545,6 +548,22 @@ public class ProductionOrder extends BaseEntity {
 	 */
 	public void setDocumentType(DocumentType documentType) {
 		this.documentType = documentType;
+	}
+
+
+	/**
+	 * @return the remark
+	 */
+	public String getRemark() {
+		return remark;
+	}
+
+
+	/**
+	 * @param remark the remark to set
+	 */
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 
