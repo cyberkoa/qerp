@@ -4,7 +4,7 @@
 
  
 <body>
-<table  border="1" cellspacing="0" cellpadding="0">
+<table  border="1" cellspacing="0" cellpadding="0" width="700">
 	<tr>
 		<td align="center">
 			<h1><b>${CompDesc}</b></h1>			
@@ -148,18 +148,8 @@
 			<table border="1" width="100%"  cellspacing="0" cellpadding="0">
 				<tr>
 					<td rowspan="4" width="30%" valign="top" align="right">Production Remark:</td>
-					<td width="70%">____________________________________________________________________________________</td>
+					<td width="70%">${printRemakr}</td>
 				</tr>
-				<tr>					
-					<td>____________________________________________________________________________________</td>
-				</tr>
-				<tr>					
-					<td>____________________________________________________________________________________</td>
-				</tr>
-				<tr>					
-					<td>____________________________________________________________________________________</td>
-				</tr>
-				
 			</table>
 					
 		</td>

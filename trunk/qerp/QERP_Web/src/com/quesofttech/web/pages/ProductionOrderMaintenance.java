@@ -200,6 +200,22 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	@Component(id = "GRID")
 	private Grid _Grid;
 	
+	
+	//===============================
+	// Text Component for Remark
+	@Component(id = "Remark")
+	private TextField _remark;
+	private String remark;
+	public String getRemark()
+	{
+	   return remark;
+	}
+	
+	public void setRemark(String id)
+	{
+	   this.remark = remark;
+	}
+	
 	//===============================
 	// Text Component for id
 	@Component(id = "id")
@@ -407,6 +423,7 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   productionOrder.setDocNo(Number);
 	   productionOrder.setQuantityOrder(QuantityOrder);
 	   productionOrder.setQuantityReported(QuantityReported);
+	   productionOrder.setRemark(remark);
 	  // productionOrder.setversion(version);
 	   productionOrder.setMaterial(material);
 	   productionOrder.setSalesOrderMaterial(salesordermaterial);
@@ -421,6 +438,7 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   this.Number = productionOrder.getDocNo();
 	   this.QuantityOrder = productionOrder.getQuantityOrder();
 	   this.QuantityReported = productionOrder.getQuantityReported();
+	   this.remark = productionOrder.getRemark();
 	   //this.version = productionOrder.getversion();
 	   this.material = productionOrder.getMaterial();
 	   //this.salesorder = productionOrder.getSalesOrderMaterial().getSalesOrder();

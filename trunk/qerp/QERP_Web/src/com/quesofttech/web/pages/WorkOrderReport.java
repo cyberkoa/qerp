@@ -135,7 +135,7 @@ public class WorkOrderReport extends SimpleBasePage {
 		public String ProductionDate="";
 	}
 	
-	
+	private String printRemark;
 	private String printOrderQuantity;
 	private String printOrderNo;
 	private String printOrderDate;
@@ -357,6 +357,11 @@ public class WorkOrderReport extends SimpleBasePage {
 		printOrderNo = _salesOrderMaterial.getSalesOrder().getFormattedDocNo();
 		printMasterCard = _productionOrder.getBom().getCode();
 		printOrderQuantity = decimalFormat.format(_productionOrder.getQuantityOrder());
+		printRemark = _productionOrder.getRemark();
+		if(printRemark==null)
+		{
+			printRemark = "";
+		}
 		System.out.println("printCustomerNo:" + printCustomerNo + ",  :" + _productionOrderMaterial.size());
 		System.out.println("printorderDate:" + printOrderDate);
 		System.out.println("printOrderNo:" + printOrderNo);
@@ -392,6 +397,12 @@ public class WorkOrderReport extends SimpleBasePage {
 		{
 			
 		}
+	}
+	public String getPrintRemark() {
+		return printRemark;
+	}
+	public void setPrintRemark(String printRemark) {
+		this.printRemark = printRemark;
 	}
 	
 }
