@@ -25,7 +25,7 @@
            t:rowsPerPage="10"
            t:pagerPosition="both"
            t:reorder="id,FormattedDocNo,QuantityOrder,QuantityReported,SalesOrderDoc,materialcode,ProductionOrderDetailSelect,createlogin,createtimestamp,modifylogin,modifytimestamp"
-           t:exclude="docno,doctypeno,sessionid,recordstatus,version,modifyapp,createapp"
+           t:exclude="remark,docno,doctypeno,sessionid,recordstatus,version,modifyapp,createapp"
            t:inPlace="literal:true">
            <t:parameter name="idCell">
                <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="ProductionOrder.id">
@@ -67,7 +67,11 @@
                            <th><t:label t:for="SalesOrderMaterial">Sales Order Material</t:label>:</th>
                            <td>   <select  t:type="select" t:id="salesordermaterial" t:model="salesordermaterials" encoder="salesordermaterials" t:value="salesordermaterial" /> </td>
                        </tr>
-                               </table>
+                        <tr>
+                           <th><t:label t:for="Remark">Remark</t:label>:</th>
+                           <td> <input  t:type="TextField" t:id="Remark" t:value="Remark" t:maxLength="50" t:size="50" /> </td>
+                       </tr>
+                   </table>
                </td>
            </tr>
        </table>
