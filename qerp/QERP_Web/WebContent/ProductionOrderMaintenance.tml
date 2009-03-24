@@ -48,7 +48,7 @@
                    <table id="input">
                        <tr>
                            <th><t:label t:for="Number">Number</t:label>:</th>
-                           <td>   <input  t:type="TextField" t:id="Number" t:value="Number" t:maxLength="10" t:size="10" /> </td>
+                           <td> ${FormattedDocNo} <div style="display:none">  <input  t:type="TextField" t:id="Number" t:value="Number" t:maxLength="10" t:size="10" /></div> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="QuantityOrder">Quantity Order</t:label>:</th>
@@ -61,7 +61,7 @@
                        
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>
-                           <td>   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" />  </td>
+                           <td> <DIV style="display:${viewDisplayText};"> ${MaterialCode}</DIV> <DIV style="display:${viewEditText};">   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </DIV> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="SalesOrderMaterial">Sales Order Material</t:label>:</th>
