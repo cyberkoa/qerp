@@ -554,7 +554,7 @@ public class ProductionOrder extends BaseEntity {
 	/**
 	 * @return the remark
 	 */
-	public String getRemark() {
+	public String getProductionRemark() {
 		return remark;
 	}
 
@@ -679,6 +679,11 @@ public class ProductionOrder extends BaseEntity {
 		}
 		else
 			return "";
+	}
+
+
+	public String getRemark() {
+		return remark;
 	}
 	
 
