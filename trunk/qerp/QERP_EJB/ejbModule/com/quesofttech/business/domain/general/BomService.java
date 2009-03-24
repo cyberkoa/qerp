@@ -56,7 +56,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	}
 
 	@SuppressWarnings("unchecked")
-	public BOM findBOMByMaterial(Material material, String type) throws DoesNotExistException {
+	public BOM findBomByMaterial(Material material, String type) throws DoesNotExistException {
 		Query q = _em.createQuery("select bom from BOM bom " +
 				                  " where bom.rowInfo.recordStatus='A' " +
 				                  " AND bom.material.id = :materialId " +
@@ -206,7 +206,7 @@ public class BomService extends BaseService implements IBomServiceLocal, IBomSer
 	public BomTree buildBomTree(Material material, String type) throws DoesNotExistException {
 		//TreeSet<BomTreeNodeData> bomTreeSet = new TreeSet<BomTreeNodeData>();
 		//System.out.println("build1");
-		BOM bom = this.findBOMByMaterial(material, type);
+		BOM bom = this.findBomByMaterial(material, type);
 		//System.out.println("build12");
 		// Create a virtual BomDetail record for the root Material, to set the calculated value 
 		

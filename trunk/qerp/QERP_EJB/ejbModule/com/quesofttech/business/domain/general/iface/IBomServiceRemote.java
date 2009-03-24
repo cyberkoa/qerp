@@ -18,6 +18,7 @@ public interface IBomServiceRemote {
 
 	BOM findBOM(Long id)throws DoesNotExistException;
 
+	BOM findBomByMaterial(Material material, String type) throws DoesNotExistException;
 	List<BOM> findBOMs() throws DoesNotExistException;
 
 	void updateBOM(BOM bom) throws BusinessException;
@@ -28,6 +29,7 @@ public interface IBomServiceRemote {
 	
 	
 	// BomDetail
+	
 
 	BomDetail findBomDetail(Long id)throws DoesNotExistException;
 

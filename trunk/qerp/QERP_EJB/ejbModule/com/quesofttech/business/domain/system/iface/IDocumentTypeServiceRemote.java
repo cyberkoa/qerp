@@ -16,6 +16,7 @@ public interface IDocumentTypeServiceRemote {
 	// DocumentType
 
 	DocumentType findDocumentType(Long id)throws DoesNotExistException;
+	DocumentType findDocumentTypeByType(String type) throws DoesNotExistException;
 
 	List<DocumentType> findDocumentTypes() throws DoesNotExistException;
 
