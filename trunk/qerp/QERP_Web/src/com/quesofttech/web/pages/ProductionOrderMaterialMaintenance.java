@@ -357,6 +357,7 @@ public class ProductionOrderMaterialMaintenance extends SimpleBasePage {
 	   //this.ProductionOrderOperation = productionOrderMaterial.getProductionOrderOperation();
 	  // this.ProductionOrder = productionOrderMaterial.getProductionOrder();
 	  this.material = productionOrderMaterial.getMaterial();
+	  this.materialCode = productionOrderMaterial.getMaterialCode();
 	}
 	void _AddRecord()
 	{
@@ -556,6 +557,17 @@ public class ProductionOrderMaterialMaintenance extends SimpleBasePage {
 		 this.id = id;
 		 _headerid = id;
 		// System.out.println("salesheader 's id:" + id);
+	 }
+	 
+	 private String materialCode;
+	 public String getMaterialCode()
+	 {
+		 return materialCode;
+	 }
+	 
+	 public void setMaterialCode(String materialCode)
+	 {
+		 this.materialCode = materialCode;
 	 }
 
 }

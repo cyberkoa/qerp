@@ -6,6 +6,8 @@ import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.common.exception.DuplicateAlternateKeyException;
 import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
+import com.quesofttech.business.domain.general.BOM;
+import com.quesofttech.business.domain.general.iface.IBomServiceRemote;
 import com.quesofttech.business.domain.inventory.*;
 import com.quesofttech.business.domain.inventory.iface.*;
 import com.quesofttech.business.domain.sales.*;
@@ -13,6 +15,8 @@ import com.quesofttech.business.domain.sales.iface.*;
 import com.quesofttech.business.domain.production.ProductionOrder;
 import com.quesofttech.business.domain.production.iface.IProductionOrderServiceRemote;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
+import com.quesofttech.business.domain.system.DocumentType;
+import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
 import com.quesofttech.web.model.base.GenericSelectModel;
@@ -442,6 +446,8 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   this.remark = productionOrder.getRemark();
 	   //this.version = productionOrder.getversion();
 	   this.material = productionOrder.getMaterial();
+	   this._materialCode = productionOrder.getMaterialCode();
+	   this._formattedDocNo = productionOrder.getFormattedDocNo();
 	   //this.salesorder = productionOrder.getSalesOrderMaterial().getSalesOrder();
 	   this.salesordermaterial = productionOrder.getSalesOrderMaterial();
 	}
@@ -453,6 +459,12 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 		   productionOrder.setModifyLogin(getVisit().getMyLoginId());
 		   productionOrder.setCreateApp(this.getClass().getSimpleName());
 		   productionOrder.setModifyApp(this.getClass().getSimpleName());
+		   DocumentType doctype = getDocumentTypeService().findDocumentTypeByType("P");
+		   productionOrder.setDocumentType(doctype);
+		   BOM bom = getBomService().findBomByMaterial(material, "P");
+		   productionOrder.setBom(bom);
+		   
+		   
 		   
 	       assignToDatabase(productionOrder);
 	       getProductionOrderService().addProductionOrder(productionOrder);
@@ -591,7 +603,13 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	private IProductionOrderServiceRemote getProductionOrderService() {
 	   return getBusinessServicesLocator().getProductionOrderServiceRemote(); 
 	}
+	private IDocumentTypeServiceRemote getDocumentTypeService() {
+		   return getBusinessServicesLocator().getDocumentTypeServiceRemote(); 
+	}
 	
+	private IBomServiceRemote getBomService() {
+		   return getBusinessServicesLocator().getBOMServiceRemote(); 
+	}
 
 	
 	 @InjectPage
@@ -615,10 +633,32 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	public ProductionOrder getProductionOrder() throws BusinessException{
 	   return _ProductionOrder;
 	}
-	
+		
 	
 	 public void setProductionOrder(ProductionOrder tb) {
 	   _ProductionOrder = tb;
 	}
+	 
+	 private String _formattedDocNo;
+	 public String getFormattedDocNo()
+	 {
+		 return _formattedDocNo;
+	 }
+	 public void setFormattedDocNo(String _formattedDocNo)
+	 {
+		 this._formattedDocNo = _formattedDocNo;
+	 }
+	 private String _materialCode;
+	 
+	 public void setMaterialCode(String _materialCode)
+	 {
+		 this._materialCode = _materialCode;
+	 }
+	 
+	 public String getMaterialCode()
+	 {
+		 return _materialCode;
+	 }
+	 
 
 }

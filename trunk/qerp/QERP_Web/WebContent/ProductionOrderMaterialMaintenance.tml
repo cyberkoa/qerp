@@ -44,7 +44,7 @@
                    <table id="input">
                        <tr>
                            <th><t:label t:for="Material">Material</t:label>:</th>
-                           <td>   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /> </td>
+                           <td> <DIV style="display:${viewDisplayText};"> ${MaterialCode}</DIV> <DIV style="display:${viewEditText};">   <select  t:type="select" t:id="material" t:model="materials" encoder="materials" t:value="material" /></DIV> </td>
                        </tr>
                        <tr>
                            <th><t:label t:for="QuantityRequired">Quantity Required</t:label>:</th>
