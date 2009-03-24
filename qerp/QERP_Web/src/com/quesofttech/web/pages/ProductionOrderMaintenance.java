@@ -211,7 +211,7 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   return remark;
 	}
 	
-	public void setRemark(String id)
+	public void setRemark(String remark)
 	{
 	   this.remark = remark;
 	}
@@ -423,6 +423,7 @@ public class ProductionOrderMaintenance extends SecureBasePage {
 	   productionOrder.setDocNo(Number);
 	   productionOrder.setQuantityOrder(QuantityOrder);
 	   productionOrder.setQuantityReported(QuantityReported);
+	   System.out.println("assignToDatabase: " + remark);
 	   productionOrder.setRemark(remark);
 	  // productionOrder.setversion(version);
 	   productionOrder.setMaterial(material);

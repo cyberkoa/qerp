@@ -69,7 +69,7 @@
                        </tr>
                         <tr>
                            <th><t:label t:for="Remark">Remark</t:label>:</th>
-                           <td> <input  t:type="TextField" t:id="Remark" t:value="Remark" t:maxLength="50" t:size="50" /> </td>
+                           <td> <input  t:type="TextField" t:id="Remark" t:value="Remark" t:maxLength="100" t:size="100" /> </td>
                        </tr>
                    </table>
                </td>
