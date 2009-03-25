@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.Embedded;
 
-import com.quesofttech.business.domain.embeddable.RowInfo;
+import com.quesoware.business.domain.embeddable.RowInfo;
 import com.quesoware.business.domain.inventory.MaterialType;
 
 @SuppressWarnings("serial")

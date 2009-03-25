@@ -26,14 +26,14 @@ import javax.persistence.Embedded;
 //import javax.persistence.SequenceGenerator;
 
 
-import com.quesofttech.business.domain.base.BaseEntity;
-//import com.quesofttech.business.domain.embeddable.RowInfo;
+//import com.quesoware.business.domain.embeddable.RowInfo;
 //import com.quesoware.business.domain.production.ProductionOrderMaterial;
 
 
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.GenericBusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
+import com.quesoware.business.domain.base.BaseEntity;
 import com.quesoware.business.domain.production.ProductionOrder;
 import com.quesoware.business.domain.sales.SalesOrder;
 import com.quesoware.util.StringUtil;

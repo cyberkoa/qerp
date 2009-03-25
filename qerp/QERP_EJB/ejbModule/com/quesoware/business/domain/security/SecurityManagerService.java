@@ -5,8 +5,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 
-import com.quesofttech.business.domain.base.BaseService;
 import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.domain.base.BaseService;
 import com.quesoware.business.domain.security.iface.ISecurityManagerServiceLocal;
 import com.quesoware.business.domain.security.iface.ISecurityManagerServiceRemote;
 

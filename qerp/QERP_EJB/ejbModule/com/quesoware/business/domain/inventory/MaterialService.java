@@ -9,11 +9,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.quesofttech.business.domain.base.BaseService;
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.DoesNotExistException;
 import com.quesoware.business.common.query.QueryBuilder;
 import com.quesoware.business.common.query.SearchOptions;
+import com.quesoware.business.domain.base.BaseService;
 import com.quesoware.business.domain.inventory.Material;
 import com.quesoware.business.domain.inventory.dto.*;
 import com.quesoware.business.domain.inventory.iface.IMaterialServiceLocal;

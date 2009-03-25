@@ -26,14 +26,14 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.persistence.Embedded;
 
-import com.quesofttech.business.domain.base.BaseEntity;
-import com.quesofttech.business.domain.embeddable.RowInfo;
 
 //import com.quesoware.business.domain.security.User;
 
 
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
+import com.quesoware.business.domain.base.BaseEntity;
+import com.quesoware.business.domain.embeddable.RowInfo;
 import com.quesoware.util.StringUtil;
 
 import java.util.List;

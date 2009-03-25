@@ -13,12 +13,12 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 
-import com.quesofttech.business.domain.base.BaseService;
 import com.quesoware.business.common.exception.AuthenticationException;
 import com.quesoware.business.common.exception.DoesNotExistException;
 import com.quesoware.business.common.query.ComparisonOperator;
 import com.quesoware.business.common.query.QueryBuilder;
 import com.quesoware.business.common.query.SearchOptions;
+import com.quesoware.business.domain.base.BaseService;
 import com.quesoware.business.domain.security.dto.UserSearchFields;
 import com.quesoware.business.domain.security.iface.ISecurityFinderServiceLocal;
 import com.quesoware.business.domain.security.iface.ISecurityFinderServiceRemote;
