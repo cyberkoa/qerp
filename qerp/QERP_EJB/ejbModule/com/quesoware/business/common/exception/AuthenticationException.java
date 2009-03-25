@@ -1,6 +1,6 @@
 package com.quesoware.business.common.exception;
 
-import com.quesofttech.util.MessageUtil;
+import com.quesoware.util.MessageUtil;
 
 /**
  * Throw this exception when an authentication exception has occurred.  This implementation allows

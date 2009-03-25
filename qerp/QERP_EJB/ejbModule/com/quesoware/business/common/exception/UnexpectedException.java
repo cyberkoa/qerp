@@ -2,7 +2,7 @@ package com.quesoware.business.common.exception;
 
 import java.util.Date;
 
-import com.quesofttech.util.MessageUtil;
+import com.quesoware.util.MessageUtil;
 
 @SuppressWarnings("serial")
 public class UnexpectedException extends SystemException {

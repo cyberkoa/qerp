@@ -1,4 +1,4 @@
-package com.quesofttech.util;
+package com.quesoware.util;
 
 
 // >>>> Temporary solution - needs renaming at least 

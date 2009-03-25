@@ -1,9 +1,9 @@
 /**
  * 
  */
-package com.quesofttech.util.iface;
+package com.quesoware.util.iface;
 
-import com.quesofttech.util.TreeNode;
+import com.quesoware.util.TreeNode;
 
 /**
  * @author super

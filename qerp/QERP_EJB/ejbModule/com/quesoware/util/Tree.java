@@ -1,4 +1,4 @@
-package com.quesofttech.util;
+package com.quesoware.util;
 
 import java.io.Serializable;
 import java.io.IOException;
@@ -36,7 +36,7 @@ import javax.persistence.Embedded;
 /*
 import com.quesoware.business.common.exception.ValueRequiredException;
 import com.quesoware.business.common.exception.GenericBusinessException;
-import com.quesofttech.util.StringUtil;
+import com.quesoware.util.StringUtil;
 */
 import java.util.List;
 import java.util.TreeSet;
