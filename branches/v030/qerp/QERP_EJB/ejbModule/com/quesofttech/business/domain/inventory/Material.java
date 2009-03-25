@@ -39,11 +39,11 @@ import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.general.BomDetail;
 import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.UOM;
-import com.quesofttech.business.domain.security.User;
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.CannotDeleteIsReferencedException;
 import com.quesoware.business.common.exception.GenericBusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
+import com.quesoware.business.domain.security.User;
 import com.quesoware.util.StringUtil;
 
 

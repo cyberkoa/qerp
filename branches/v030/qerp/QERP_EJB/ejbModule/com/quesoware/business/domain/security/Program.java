@@ -1,10 +1,10 @@
-package com.quesofttech.business.domain.sales;
+package com.quesoware.business.domain.security;
 
 import java.io.Serializable;
 //import java.sql.Date;
 //import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
+//import java.sql.*;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -24,8 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.UniqueConstraint;
-import javax.persistence.Embedded;
 import javax.persistence.Version;
+import javax.persistence.Embedded;
 //import javax.persistence.SequenceGenerator;
 
 
@@ -34,121 +34,96 @@ import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.inventory.MaterialType;
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
-import com.quesoware.business.domain.system.DocumentType;
 import com.quesoware.util.StringUtil;
+import com.sun.crypto.provider.DESCipher;
 
 import java.util.List;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 @Entity
-@Table(name = "SalesOrder", uniqueConstraints = { @UniqueConstraint(columnNames = { "docNo","docType" }) })
+@Table(name = "Program", uniqueConstraints = { @UniqueConstraint(columnNames = { "program_Code" }) })
 @SuppressWarnings("serial")
-public class SalesOrder extends BaseEntity {
+public class Program extends BaseEntity {
 	
 
-	//For Postgresql : @SequenceGenerator(name = "SalesOrderHeader_sequence", sequenceName = "SalesOrderHeader_id_seq")
+	//For Postgresql : @SequenceGenerator(name = "Program_sequence", sequenceName = "Program_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
-	@TableGenerator(  name="SalesOrder_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="SalesOrder", valueColumnName="keyField")
+	@TableGenerator(  name="Program_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="Program", valueColumnName="keyField")
 	@Id
-	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SalesOrderHeader_sequence")
+	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Program_sequence")
 	//For MSSQL      : @GeneratedValue(strategy = GenerationType.IDENTITY)
 	//Generic solution :
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "SalesOrder_id")	
-	@Column(name = "id_SalesOrder", nullable = false)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Program_id")	
+	@Column(name = "id_Program", nullable = false)
 	private Long id;
 	
 	@Version
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Long version;
-	
-	
-	// Example of field	
-	@Column(name = "so_Number", length = 10, nullable = false)
-	private Long docNo;
-	
-	@Column(name = "so_CustomerPO", length = 20, nullable = false)
-	private String customerPO;
-	
-	@Column(name = "so_DocType", length = 5)
-	private String docType;
 
-	// Foreign keys
-	@ManyToOne
-    @JoinColumn(name="fk_Customer")	
-	private Customer customer;
+
+	// Example of field	
+	@Column(name = "program_Code", length = 30, nullable = false)
+	private String code;
 	
+	@Column(name = "program_Type", length = 20, nullable = false)
+	private String type;
 	
-	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy="salesOrder", targetEntity=SalesOrderMaterial.class)
-	private List<SalesOrderMaterial> salesOrderMaterials; // = new List<<ForeignTable>>();
-		
-	@ManyToOne
-    @JoinColumn(name="fk_DocumentType")	
-	private DocumentType documentType;
-	
-	/*
-	@ManyToOne
-    @JoinColumn(name="fk_SalesPerson")	
-	private SalesPerson salesPerson;
-	*/
-	
-	/*
-	@ManyToOne
-    @JoinColumn(name="fk_Currency")	
-	private Currency currency;
-	*/
-	
-	/*
-	@ManyToOne
-    @JoinColumn(name="fk_ShipTo") // Should change to something like ShipmentContact	
-	private ShipTo shipTo;
-	*/
-	
-	
+	@Column(name = "program_Description", length = 50, nullable = false)
+	private String description;
 	
 	//@Embedded
 	//RowInfo rowInfo_1;
 	
 	
 	/*
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="SalesOrderHeader", targetEntity=<ForeignTable>.class)
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="Program", targetEntity=<ForeignTable>.class)
 	private List<<ForeignTable>> <foreignTable>s; // = new List<<ForeignTable>>();
 	*/
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="program", targetEntity=UserProgram.class)
+	private List<UserProgram> userPrograms;
 	
-	public SalesOrder() {
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="program", targetEntity=RoleProgram.class)
+	private List<RoleProgram> rolePrograms;
+	
+	
+	// Foreign keys
+	@ManyToOne
+    @JoinColumn(name="fk_Module")	
+	private Module module;
+	
+	
+	
+	public Program() {
 		super();
 		
-		this.salesOrderMaterials = new ArrayList<SalesOrderMaterial>();
 	}	
 
 	
 	// Constructors without the common fields
-	public SalesOrder(Long docNo, String customerPO, String docType) {
-		
-		//super();
-		this();
-		
-		this.docNo = docNo;
-		this.customerPO = customerPO;
-		this.docType = docType;
-		
-	}
-
-
-	// Constructors with all fields
-	public SalesOrder(/* all fields*/
-			Long docNo, String customerPO, String docType,
-			String recordStatus, String sessionId, String createLogin,
-			String createApp, Timestamp createTimestamp,
-			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
-		this(docNo,customerPO,docType);
-		//super();
-		
+	public Program(Long id) {
+		super();
 		/* Example of assignment
 		this.id = id;
 		this.type = type;
 		this.description = description;
 		*/
+	}
 
+
+	// Constructors with all fields
+	public Program(/* all fields*/
+			String recordStatus, String sessionId, String createLogin,
+			String createApp, Timestamp createTimestamp,
+			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
+		super();
+
+		
+		//this.id = id;
+		/* Example of assignment
+		this.type = type;
+		this.description = description;
+		*/
 
 		this.rowInfo.setRecordStatus(recordStatus);
 		this.rowInfo.setSessionId(sessionId);
@@ -167,8 +142,12 @@ public class SalesOrder extends BaseEntity {
 	public String toString() {
 		
 		StringBuffer buf = new StringBuffer();
-		buf.append("SalesOrderHeader: [");
+		buf.append("Program: [");
 		buf.append("id=" + id + ", ");
+		buf.append("id=" + code + ", ");
+		buf.append("id=" + description + ", ");
+		buf.append("id=" + version + ", ");
+		buf.append("id=" + type + ", ");
 
 		/* All fields
 		buf.append("type=" + type + ", ");
@@ -198,7 +177,7 @@ public class SalesOrder extends BaseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		return (obj == this) || (obj instanceof SalesOrder) && getId() != null && ((SalesOrder) obj).getId().equals(this.getId());
+		return (obj == this) || (obj instanceof Program) && getId() != null && ((Program) obj).getId().equals(this.getId());
 	}
 
 	// The need for a hashCode() method is discussed at http://www.hibernate.org/109.html
@@ -216,12 +195,7 @@ public class SalesOrder extends BaseEntity {
 /*	
 	@PrePersist
 	protected void prePersist() throws BusinessException {
-		
-		// Default the document type
-		docType = "S"; 
-		
 		validate();
-		
 		
 		rowInfo.setRecordStatus("A");
 		
@@ -232,8 +206,7 @@ public class SalesOrder extends BaseEntity {
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    //rowInfo.setCreateDate(rowInfo.getModifyDate());
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());	
-		
-	    System.out.println(this.toString());
+				
 	}
 */
 	@PostPersist
@@ -252,12 +225,10 @@ public class SalesOrder extends BaseEntity {
 		{
 			validate();
 		}
-			java.util.Date today = new java.util.Date();
+		java.util.Date today = new java.util.Date();
 
-			//rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
-			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
-		
-		//setModifyDateTime(modifyDate,modifyTime);		
+		//rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
+		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 		
 	}
 */
@@ -275,19 +246,26 @@ public class SalesOrder extends BaseEntity {
 	public void validate() throws BusinessException  {
 
 		
+		if (StringUtil.isEmpty(code)) {
+			//System.out.println("Yeah");
+			throw new ValueRequiredException(this, "Program Code");
+		}
+
+		if (StringUtil.isEmpty(description)) {
+			throw new ValueRequiredException(this, "Program Description");
+		}
+		
 		// Validate syntax...
 
-		/*
-		if (StringUtil.isEmpty(docNo)) {
+		//if (StringUtil.isEmpty(type)) {
 			//System.out.println("Yeah");
-			throw new ValueRequiredException(this, "SalesOrder_DocNo");
-		}
-        */
-        /*
-		if (StringUtil.isEmpty(docType)) {
-			throw new ValueRequiredException(this, "SalesOrder_DocType");
-		}
-        */
+		//	throw new ValueRequiredException(this, "MaterialType_Type");
+		//}
+
+		//if (StringUtil.isEmpty(description)) {
+		//	throw new ValueRequiredException(this, "MaterialType_Description");
+		//}
+
 		/*
 		if (StringUtil.isEmpty(lastName)) {
 			throw new ValueRequiredException(this, "User_lastName");
@@ -316,7 +294,6 @@ public class SalesOrder extends BaseEntity {
 		this.id = id;
 	}
 
-	
 	public Long getVersion() {
 		return version;
 	}
@@ -326,9 +303,9 @@ public class SalesOrder extends BaseEntity {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-	
-	
-	
+
+
+
 
 	public String getRecordStatus() {
 		return rowInfo.getRecordStatus();
@@ -392,7 +369,8 @@ public class SalesOrder extends BaseEntity {
 
 	public void setModifyLogin(String modifyLogin) {
 		this.rowInfo.setModifyLogin(modifyLogin);
-	}
+		this.rowInfo.setModifyLogin(modifyLogin);
+		}
 
 
 
@@ -431,179 +409,86 @@ public class SalesOrder extends BaseEntity {
 	}
 
 
+	public String getCode() {
+		return code;
+	}
 
-	/**
-	 * @return the customerPO
-	 */
-	public String getCustomerPO() {
-		return customerPO;
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+	public List<UserProgram> getUserPrograms() {
+		return userPrograms;
+	}
+
+
+	public void setUserPrograms(List<UserProgram> userPrograms) {
+		this.userPrograms = userPrograms;
+	}
+
+
+	public List<RoleProgram> getRolePrograms() {
+		return rolePrograms;
+	}
+
+
+	public void setRolePrograms(List<RoleProgram> rolePrograms) {
+		this.rolePrograms = rolePrograms;
 	}
 
 
 	/**
-	 * @param customerPO the customerPO to set
+	 * @return the type
 	 */
-	public void setCustomerPO(String customerPO) {
-		this.customerPO = customerPO;
+	public String getType() {
+		return type;
 	}
 
 
 	/**
-	 * @return the customer
+	 * @param type the type to set
 	 */
-	public Customer getCustomer() {
-		return customer;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 
 	/**
-	 * @param customer the customer to set
+	 * @return the module
 	 */
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public Module getModule() {
+		return module;
 	}
 
 
 	/**
-	 * @return the salesOrderLines
+	 * @param module the module to set
 	 */
-	public List<SalesOrderMaterial> getSalesOrderMaterials() {
-		return salesOrderMaterials;
+	public void setModule(Module module) {
+		this.module = module;
 	}
 
 
-	/**
-	 * @param salesOrderLines the salesOrderLines to set
-	 */
-	public void setSalesOrderMaterials(List<SalesOrderMaterial> salesOrderLines) {
-		this.salesOrderMaterials = salesOrderLines;
+	public String getDescription() {
+		return description;
 	}
 
 
-	/**
-	 * @return the docNo
-	 */
-	public Long getDocNo() {
-		return docNo;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-
-	/**
-	 * @param docNo the docNo to set
-	 */
-	public void setDocNo(Long docNo) {
-		this.docNo = docNo;
-	}
-
-
-	/**
-	 * @return the docType
-	 */
-	public String getDocType() {
-		return docType;
-	}
-
-	
-	/**
-	 * @param docType the docType to set
-	 */
-	public void setDocType(String docType) {
-		this.docType = docType;
-	}
-
-	
-	
-	
-	
-
-	
-	
-	/**
-	 * @return the documentType
-	 */
-	public DocumentType getDocumentType() {
-		return documentType;
-	}
-
-
-	/**
-	 * @param documentType the documentType to set
-	 */
-	public void setDocumentType(DocumentType documentType) {
-		this.documentType = documentType;
-	}
-
-	
-	
+	// Useful properties
 	
 	/*
-	    Helper methods
+	 *  Property : Code - Description
 	 */
-
-	public void addSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) {
-		if (!salesOrderMaterials.contains(salesOrderMaterial)) {
-			salesOrderMaterials.add(salesOrderMaterial);
-			/* Maintain the bidirectional relationship . */
-			salesOrderMaterial.setSalesOrder(this);
-		}
-	}
-
-	public String getCustomerCode() {
-		if(customer!=null) return customer.getCode();
-	    return "";
+	public String getCodeDescription() {
+		return code + " - " + description;
 	}
 	
-	public String getCustomerName() {
-		if(customer!=null) return customer.getName();
-		return "";
-	}
-	
-	public String getFormattedDocNo()
-	{
-		
-		if(documentType!=null)
-		{
-			String formattedDocNo = null;
-			String numberFormat = documentType.getNumberFormat();
-			
-			if(numberFormat!=null)
-			{			
-				DecimalFormat docNoFormatter = new DecimalFormat(numberFormat);
-				try
-				{
-					formattedDocNo = docNoFormatter.format(docNo);
-				}
-				catch(IllegalArgumentException iae)
-				{
-					formattedDocNo = docNo.toString();
-
-					if(documentType.getPrefix()!=null)
-					    formattedDocNo = documentType.getPrefix() + formattedDocNo;
-					
-					if(documentType.getSuffix()!=null)
-					    formattedDocNo = formattedDocNo + documentType.getSuffix(); 
-				}
-			}
-			else
-			{
-				formattedDocNo = docNo.toString();
-			}
-			
-			if(documentType.getPrefix()!=null)
-			    formattedDocNo = documentType.getPrefix() + formattedDocNo;
-			
-			if(documentType.getSuffix()!=null)
-			    formattedDocNo = formattedDocNo + documentType.getSuffix(); 
-			
-			return  formattedDocNo; 
-		}
-		else if(docNo!=null)
-		{
-			return docNo.toString();
-		}
-		else
-			return "";
-	}
 	
 	
 	

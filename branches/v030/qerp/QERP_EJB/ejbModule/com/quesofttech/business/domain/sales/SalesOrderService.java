@@ -21,7 +21,6 @@ import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceLocal;
 import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
 import com.quesofttech.business.domain.sales.dto.SalesOrderSearchFields;
 import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
-import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceLocal;
 import com.quesofttech.business.domain.general.BOM;
 import com.quesofttech.business.domain.general.BomDetail;
 import com.quesofttech.business.domain.general.BomTree;
@@ -44,6 +43,7 @@ import com.quesoware.business.common.exception.DoesNotExistException;
 import com.quesoware.business.common.query.ComparisonOperator;
 import com.quesoware.business.common.query.QueryBuilder;
 import com.quesoware.business.common.query.SearchOptions;
+import com.quesoware.business.domain.system.iface.IDocumentTypeServiceLocal;
 import com.quesoware.util.TreeNode;
 
 

@@ -1,15 +1,15 @@
-package com.quesofttech.business.domain.sales;
+package com.quesoware.business.domain.security;
 
 import java.io.Serializable;
 //import java.sql.Date;
 //import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
+//import java.sql.*;
+import java.util.List;
+
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,131 +20,102 @@ import javax.persistence.PostPersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.TableGenerator;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.UniqueConstraint;
-import javax.persistence.Embedded;
 import javax.persistence.Version;
+import javax.persistence.Embedded;
 //import javax.persistence.SequenceGenerator;
 
 
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
-import com.quesofttech.business.domain.inventory.MaterialType;
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
-import com.quesoware.business.domain.system.DocumentType;
 import com.quesoware.util.StringUtil;
 
-import java.util.List;
-import java.util.ArrayList;
+
+//import java.util.ArrayList;
 
 @Entity
-@Table(name = "SalesOrder", uniqueConstraints = { @UniqueConstraint(columnNames = { "docNo","docType" }) })
+@Table(name = "Role", uniqueConstraints = { @UniqueConstraint(columnNames = { "role_Role" }) })
 @SuppressWarnings("serial")
-public class SalesOrder extends BaseEntity {
+public class Role extends BaseEntity {
 	
 
-	//For Postgresql : @SequenceGenerator(name = "SalesOrderHeader_sequence", sequenceName = "SalesOrderHeader_id_seq")
+	//For Postgresql : @SequenceGenerator(name = "Role_sequence", sequenceName = "Role_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
-	@TableGenerator(  name="SalesOrder_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="SalesOrder", valueColumnName="keyField")
+	@TableGenerator(  name="Role_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="Role", valueColumnName="keyField")
 	@Id
-	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SalesOrderHeader_sequence")
+	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Role_sequence")
 	//For MSSQL      : @GeneratedValue(strategy = GenerationType.IDENTITY)
 	//Generic solution :
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "SalesOrder_id")	
-	@Column(name = "id_SalesOrder", nullable = false)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Role_id")	
+	@Column(name = "id_Role", nullable = false)
 	private Long id;
 	
 	@Version
 	@Column(nullable = false)
 	private Long version;
-	
-	
-	// Example of field	
-	@Column(name = "so_Number", length = 10, nullable = false)
-	private Long docNo;
-	
-	@Column(name = "so_CustomerPO", length = 20, nullable = false)
-	private String customerPO;
-	
-	@Column(name = "so_DocType", length = 5)
-	private String docType;
 
-	// Foreign keys
-	@ManyToOne
-    @JoinColumn(name="fk_Customer")	
-	private Customer customer;
+
+	// Example of field	
+	@Column(name = "role_Role", length = 20, nullable = false)
+	private String role;
 	
-	
-	@OneToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy="salesOrder", targetEntity=SalesOrderMaterial.class)
-	private List<SalesOrderMaterial> salesOrderMaterials; // = new List<<ForeignTable>>();
-		
-	@ManyToOne
-    @JoinColumn(name="fk_DocumentType")	
-	private DocumentType documentType;
-	
-	/*
-	@ManyToOne
-    @JoinColumn(name="fk_SalesPerson")	
-	private SalesPerson salesPerson;
-	*/
-	
-	/*
-	@ManyToOne
-    @JoinColumn(name="fk_Currency")	
-	private Currency currency;
-	*/
-	
-	/*
-	@ManyToOne
-    @JoinColumn(name="fk_ShipTo") // Should change to something like ShipmentContact	
-	private ShipTo shipTo;
-	*/
-	
-	
+	@Column(name = "role_Description", length = 100)
+	private String description;
 	
 	//@Embedded
 	//RowInfo rowInfo_1;
-	
-	
 	/*
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="SalesOrderHeader", targetEntity=<ForeignTable>.class)
-	private List<<ForeignTable>> <foreignTable>s; // = new List<<ForeignTable>>();
+   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER, mappedBy="roles")
+   @JoinTable(name = "UserRole",
+	          joinColumns = {@JoinColumn(name = "id_Role")},
+	          inverseJoinColumns = {@JoinColumn(name = "id_User")})
+	 
+	private List<User> users;
 	*/
-	
-	public SalesOrder() {
+   
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="role", targetEntity=UserRole.class)
+	private List<UserRole> userRoles;
+    
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="role", targetEntity=RoleProgram.class)
+	private List<RoleProgram> rolePrograms;
+
+
+	public Role() {
 		super();
 		
-		this.salesOrderMaterials = new ArrayList<SalesOrderMaterial>();
 	}	
 
 	
 	// Constructors without the common fields
-	public SalesOrder(Long docNo, String customerPO, String docType) {
-		
-		//super();
-		this();
-		
-		this.docNo = docNo;
-		this.customerPO = customerPO;
-		this.docType = docType;
-		
+	public Role(Long id) {
+		super();
+		/* Example of assignment
+		this.id = id;
+		this.type = type;
+		this.description = description;
+		*/
 	}
 
 
 	// Constructors with all fields
-	public SalesOrder(/* all fields*/
-			Long docNo, String customerPO, String docType,
+	public Role(/* all fields*/
 			String recordStatus, String sessionId, String createLogin,
 			String createApp, Timestamp createTimestamp,
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
-		this(docNo,customerPO,docType);
-		//super();
+		super();
+
 		
-		/* Example of assignment
 		this.id = id;
+		/* Example of assignment
 		this.type = type;
 		this.description = description;
 		*/
@@ -167,7 +138,7 @@ public class SalesOrder extends BaseEntity {
 	public String toString() {
 		
 		StringBuffer buf = new StringBuffer();
-		buf.append("SalesOrderHeader: [");
+		buf.append("Role: [");
 		buf.append("id=" + id + ", ");
 
 		/* All fields
@@ -198,7 +169,7 @@ public class SalesOrder extends BaseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		return (obj == this) || (obj instanceof SalesOrder) && getId() != null && ((SalesOrder) obj).getId().equals(this.getId());
+		return (obj == this) || (obj instanceof Role) && getId() != null && ((Role) obj).getId().equals(this.getId());
 	}
 
 	// The need for a hashCode() method is discussed at http://www.hibernate.org/109.html
@@ -213,15 +184,10 @@ public class SalesOrder extends BaseEntity {
 		return getId();
 	}
 
-/*	
+	/*
 	@PrePersist
 	protected void prePersist() throws BusinessException {
-		
-		// Default the document type
-		docType = "S"; 
-		
 		validate();
-		
 		
 		rowInfo.setRecordStatus("A");
 		
@@ -231,9 +197,8 @@ public class SalesOrder extends BaseEntity {
 	    //rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    //rowInfo.setCreateDate(rowInfo.getModifyDate());
-	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());	
-		
-	    System.out.println(this.toString());
+	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());		
+				
 	}
 */
 	@PostPersist
@@ -252,12 +217,10 @@ public class SalesOrder extends BaseEntity {
 		{
 			validate();
 		}
-			java.util.Date today = new java.util.Date();
+		java.util.Date today = new java.util.Date();
 
-			//rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
-			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
-		
-		//setModifyDateTime(modifyDate,modifyTime);		
+		//rowInfo.setModifyDate(new java.sql.Date(today.getTime()));
+		rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 		
 	}
 */
@@ -273,21 +236,17 @@ public class SalesOrder extends BaseEntity {
 	}
 
 	public void validate() throws BusinessException  {
-
-		
+	
 		// Validate syntax...
 
-		/*
-		if (StringUtil.isEmpty(docNo)) {
-			//System.out.println("Yeah");
-			throw new ValueRequiredException(this, "SalesOrder_DocNo");
+		if (StringUtil.isEmpty(role)) {
+			throw new ValueRequiredException(this, "Role");		
 		}
-        */
-        /*
-		if (StringUtil.isEmpty(docType)) {
-			throw new ValueRequiredException(this, "SalesOrder_DocType");
+
+		if (StringUtil.isEmpty(description)) {
+			throw new ValueRequiredException(this, "Role_Description");
 		}
-        */
+
 		/*
 		if (StringUtil.isEmpty(lastName)) {
 			throw new ValueRequiredException(this, "User_lastName");
@@ -316,7 +275,6 @@ public class SalesOrder extends BaseEntity {
 		this.id = id;
 	}
 
-	
 	public Long getVersion() {
 		return version;
 	}
@@ -326,9 +284,9 @@ public class SalesOrder extends BaseEntity {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-	
-	
-	
+
+
+
 
 	public String getRecordStatus() {
 		return rowInfo.getRecordStatus();
@@ -431,180 +389,67 @@ public class SalesOrder extends BaseEntity {
 	}
 
 
-
 	/**
-	 * @return the customerPO
+	 * @return the role
 	 */
-	public String getCustomerPO() {
-		return customerPO;
-	}
-
-
-	/**
-	 * @param customerPO the customerPO to set
-	 */
-	public void setCustomerPO(String customerPO) {
-		this.customerPO = customerPO;
+	public String getRole() {
+		return role;
 	}
 
 
 	/**
-	 * @return the customer
+	 * @param role the role to set
 	 */
-	public Customer getCustomer() {
-		return customer;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 
 	/**
-	 * @param customer the customer to set
+	 * @return the userRoles
 	 */
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public List<UserRole> getUserRoles() {
+		return userRoles;
 	}
 
 
 	/**
-	 * @return the salesOrderLines
+	 * @param userRoles the userRoles to set
 	 */
-	public List<SalesOrderMaterial> getSalesOrderMaterials() {
-		return salesOrderMaterials;
+	public void setUserRoles(List<UserRole> userRoles) {
+		this.userRoles = userRoles;
 	}
 
 
 	/**
-	 * @param salesOrderLines the salesOrderLines to set
+	 * @return the rolePrograms
 	 */
-	public void setSalesOrderMaterials(List<SalesOrderMaterial> salesOrderLines) {
-		this.salesOrderMaterials = salesOrderLines;
+	public List<RoleProgram> getRolePrograms() {
+		return rolePrograms;
 	}
 
 
 	/**
-	 * @return the docNo
+	 * @param rolePrograms the rolePrograms to set
 	 */
-	public Long getDocNo() {
-		return docNo;
+	public void setRolePrograms(List<RoleProgram> rolePrograms) {
+		this.rolePrograms = rolePrograms;
 	}
 
 
-	/**
-	 * @param docNo the docNo to set
-	 */
-	public void setDocNo(Long docNo) {
-		this.docNo = docNo;
+	public String getDescription() {
+		return description;
 	}
 
 
-	/**
-	 * @return the docType
-	 */
-	public String getDocType() {
-		return docType;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
 	
-	/**
-	 * @param docType the docType to set
-	 */
-	public void setDocType(String docType) {
-		this.docType = docType;
-	}
-
-	
-	
-	
-	
-
-	
-	
-	/**
-	 * @return the documentType
-	 */
-	public DocumentType getDocumentType() {
-		return documentType;
+	public String getRoleDescription() {
+		return role + " - " + description;
 	}
 
 
-	/**
-	 * @param documentType the documentType to set
-	 */
-	public void setDocumentType(DocumentType documentType) {
-		this.documentType = documentType;
-	}
-
-	
-	
-	
-	/*
-	    Helper methods
-	 */
-
-	public void addSalesOrderMaterial(SalesOrderMaterial salesOrderMaterial) {
-		if (!salesOrderMaterials.contains(salesOrderMaterial)) {
-			salesOrderMaterials.add(salesOrderMaterial);
-			/* Maintain the bidirectional relationship . */
-			salesOrderMaterial.setSalesOrder(this);
-		}
-	}
-
-	public String getCustomerCode() {
-		if(customer!=null) return customer.getCode();
-	    return "";
-	}
-	
-	public String getCustomerName() {
-		if(customer!=null) return customer.getName();
-		return "";
-	}
-	
-	public String getFormattedDocNo()
-	{
-		
-		if(documentType!=null)
-		{
-			String formattedDocNo = null;
-			String numberFormat = documentType.getNumberFormat();
-			
-			if(numberFormat!=null)
-			{			
-				DecimalFormat docNoFormatter = new DecimalFormat(numberFormat);
-				try
-				{
-					formattedDocNo = docNoFormatter.format(docNo);
-				}
-				catch(IllegalArgumentException iae)
-				{
-					formattedDocNo = docNo.toString();
-
-					if(documentType.getPrefix()!=null)
-					    formattedDocNo = documentType.getPrefix() + formattedDocNo;
-					
-					if(documentType.getSuffix()!=null)
-					    formattedDocNo = formattedDocNo + documentType.getSuffix(); 
-				}
-			}
-			else
-			{
-				formattedDocNo = docNo.toString();
-			}
-			
-			if(documentType.getPrefix()!=null)
-			    formattedDocNo = documentType.getPrefix() + formattedDocNo;
-			
-			if(documentType.getSuffix()!=null)
-			    formattedDocNo = formattedDocNo + documentType.getSuffix(); 
-			
-			return  formattedDocNo; 
-		}
-		else if(docNo!=null)
-		{
-			return docNo.toString();
-		}
-		else
-			return "";
-	}
-	
-	
 	
 }
