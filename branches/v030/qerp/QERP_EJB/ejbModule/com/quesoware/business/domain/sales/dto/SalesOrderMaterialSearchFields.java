@@ -3,7 +3,7 @@ package com.quesoware.business.domain.sales.dto;
 
 import java.io.Serializable;
 
-import com.quesofttech.business.domain.base.dto.BaseSearchFields;
+import com.quesoware.business.domain.base.dto.BaseSearchFields;
 import com.quesoware.business.domain.inventory.Material;
 import com.quesoware.business.domain.sales.*;
 

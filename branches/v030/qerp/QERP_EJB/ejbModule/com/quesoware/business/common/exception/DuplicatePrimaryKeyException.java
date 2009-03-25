@@ -2,7 +2,7 @@ package com.quesoware.business.common.exception;
 
 import java.io.Serializable;
 
-import com.quesofttech.business.domain.base.BaseEntity;
+import com.quesoware.business.domain.base.BaseEntity;
 import com.quesoware.util.ClassUtil;
 import com.quesoware.util.MessageUtil;
 

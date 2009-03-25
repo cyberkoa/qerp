@@ -3,10 +3,10 @@ package com.quesoware.business.domain.sales.iface;
 
 import java.util.List;
 
-import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.DoesNotExistException;
 import com.quesoware.business.common.query.SearchOptions;
+import com.quesoware.business.domain.embeddable.RowInfo;
 import com.quesoware.business.domain.sales.SalesOrder;
 import com.quesoware.business.domain.sales.SalesOrderMaterial;
 import com.quesoware.business.domain.sales.dto.SalesOrderMaterialSearchFields;

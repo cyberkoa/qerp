@@ -31,8 +31,8 @@ import javax.persistence.Embedded;
 */
 
 //import com.quesoware.business.common.exception.BusinessException;
-//import com.quesofttech.business.domain.base.BaseEntity;
-//import com.quesofttech.business.domain.general.BomTreeNodeData;
+//import com.quesoware.business.domain.base.BaseEntity;
+//import com.quesoware.business.domain.general.BomTreeNodeData;
 /*
 import com.quesoware.business.common.exception.ValueRequiredException;
 import com.quesoware.business.common.exception.GenericBusinessException;

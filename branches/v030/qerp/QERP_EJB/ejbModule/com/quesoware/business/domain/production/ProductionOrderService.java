@@ -10,19 +10,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.quesofttech.business.domain.base.BaseService;
 
 
-import com.quesofttech.business.domain.general.BomDetail;
-import com.quesofttech.business.domain.general.BomTree;
-import com.quesofttech.business.domain.general.BomService;
-import com.quesofttech.business.domain.general.iface.IBomServiceLocal;
 
-import com.quesofttech.business.domain.general.Operation;
 
 
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.DoesNotExistException;
+import com.quesoware.business.domain.base.BaseService;
+import com.quesoware.business.domain.general.BomDetail;
+import com.quesoware.business.domain.general.BomService;
+import com.quesoware.business.domain.general.BomTree;
+import com.quesoware.business.domain.general.Operation;
+import com.quesoware.business.domain.general.iface.IBomServiceLocal;
 import com.quesoware.business.domain.inventory.Material;
 import com.quesoware.business.domain.inventory.MaterialType;
 import com.quesoware.business.domain.production.ProductionOrder;
