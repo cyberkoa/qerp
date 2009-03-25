@@ -1,4 +1,4 @@
-package com.quesofttech.test;
+package com.quesoware.test;
 
 import java.util.Properties;
 import javax.naming.Context;
