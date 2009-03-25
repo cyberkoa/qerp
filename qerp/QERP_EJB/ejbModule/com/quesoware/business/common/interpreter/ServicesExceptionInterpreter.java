@@ -1,8 +1,8 @@
-package com.quesofttech.business.common.interpreter;
+package com.quesoware.business.common.interpreter;
 import java.io.*;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.UnexpectedException;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.UnexpectedException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -9,8 +9,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.embeddable.RowInfo;
+import com.quesoware.business.common.exception.BusinessException;
 
 //import org.hibernate.LazyInitializationException;
 @MappedSuperclass

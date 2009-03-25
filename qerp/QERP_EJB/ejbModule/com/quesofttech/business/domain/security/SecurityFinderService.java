@@ -16,12 +16,12 @@ import com.quesofttech.business.domain.security.dto.UserSearchFields;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceLocal;
 import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 
-import com.quesofttech.business.common.exception.AuthenticationException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.common.query.ComparisonOperator;
-import com.quesofttech.business.common.query.QueryBuilder;
-import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.base.BaseService;
+import com.quesoware.business.common.exception.AuthenticationException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+import com.quesoware.business.common.query.ComparisonOperator;
+import com.quesoware.business.common.query.QueryBuilder;
+import com.quesoware.business.common.query.SearchOptions;
 
 
 import java.io.FileWriter;

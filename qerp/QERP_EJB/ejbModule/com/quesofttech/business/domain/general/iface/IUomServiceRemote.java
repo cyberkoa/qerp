@@ -2,9 +2,9 @@ package com.quesofttech.business.domain.general.iface;
 
 import java.util.List;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.domain.general.UOM;
+import com.quesofttech.business.domain.general.UOM;import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+
 
 /**
  * The <code>IUOMServiceRemote</code> bean exposes the business methods

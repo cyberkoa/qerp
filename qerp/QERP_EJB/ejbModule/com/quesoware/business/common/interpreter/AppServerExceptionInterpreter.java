@@ -1,4 +1,4 @@
-package com.quesofttech.business.common.interpreter;
+package com.quesoware.business.common.interpreter;
 
 import java.io.Serializable;
 import java.sql.BatchUpdateException;
@@ -9,12 +9,12 @@ import javax.persistence.PersistenceException;
 
 //import org.apache.openjpa.persistence.PersistenceException;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.CannotDeleteIsReferencedException;
-import com.quesofttech.business.common.exception.DuplicateAlternateKeyException;
-import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
-import com.quesofttech.business.common.exception.OptimisticLockException;
-import com.quesofttech.business.common.exception.UnexpectedException;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.CannotDeleteIsReferencedException;
+import com.quesoware.business.common.exception.DuplicateAlternateKeyException;
+import com.quesoware.business.common.exception.DuplicatePrimaryKeyException;
+import com.quesoware.business.common.exception.OptimisticLockException;
+import com.quesoware.business.common.exception.UnexpectedException;
 
 public class AppServerExceptionInterpreter implements IEJBExceptionInterpreter {
 

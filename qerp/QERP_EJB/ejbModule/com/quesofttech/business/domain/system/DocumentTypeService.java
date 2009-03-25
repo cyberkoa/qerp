@@ -9,13 +9,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.base.BaseService;
 import com.quesofttech.business.domain.security.User;
 import com.quesofttech.business.domain.system.DocumentType;
 import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceLocal;
 import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
 
 @Stateless
 @Local(IDocumentTypeServiceLocal.class)

@@ -9,12 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.base.BaseService;
 import com.quesofttech.business.domain.general.UOM;
 import com.quesofttech.business.domain.general.iface.IUomServiceLocal;
 import com.quesofttech.business.domain.general.iface.IUomServiceRemote;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
 
 @Stateless
 @Local(IUomServiceLocal.class)

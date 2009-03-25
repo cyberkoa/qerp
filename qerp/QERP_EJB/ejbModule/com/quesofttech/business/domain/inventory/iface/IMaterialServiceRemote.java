@@ -2,12 +2,12 @@ package com.quesofttech.business.domain.inventory.iface;
 
 import java.util.List;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.MaterialType;
 import com.quesofttech.business.domain.inventory.dto.MaterialSearchFields;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+import com.quesoware.business.common.query.SearchOptions;
 
 
 /**

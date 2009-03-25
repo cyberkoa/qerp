@@ -1,4 +1,4 @@
-package com.quesofttech.business.common.exception;
+package com.quesoware.business.common.exception;
 
 /**
  * A system exception is an exception that the application cannot recover from. They fall into two categories: (1)

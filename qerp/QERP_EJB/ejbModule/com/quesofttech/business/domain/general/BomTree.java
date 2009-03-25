@@ -29,13 +29,13 @@ import javax.persistence.Embedded;
 //import javax.persistence.SequenceGenerator;
 */
 
-//import com.quesofttech.business.common.exception.BusinessException;
+//import com.quesoware.business.common.exception.BusinessException;
 //import com.quesofttech.business.domain.base.BaseEntity;
 //import com.quesofttech.business.domain.embeddable.RowInfo;
 import com.quesofttech.business.domain.general.BomTreeNodeData;
 
-//import com.quesofttech.business.common.exception.ValueRequiredException;
-//import com.quesofttech.business.common.exception.GenericBusinessException;
+//import com.quesoware.business.common.exception.ValueRequiredException;
+//import com.quesoware.business.common.exception.GenericBusinessException;
 //import com.quesofttech.util.StringUtil;
 import com.quesofttech.util.Tree;
 import com.quesofttech.util.TreeNode;
