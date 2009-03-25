@@ -29,7 +29,7 @@ import javax.persistence.Embedded;
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
 
-//import com.quesofttech.business.domain.security.User;
+//import com.quesoware.business.domain.security.User;
 
 
 import com.quesoware.business.common.exception.BusinessException;
