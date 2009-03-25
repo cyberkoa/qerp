@@ -1,4 +1,4 @@
-package com.quesofttech.util;
+package com.quesoware.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

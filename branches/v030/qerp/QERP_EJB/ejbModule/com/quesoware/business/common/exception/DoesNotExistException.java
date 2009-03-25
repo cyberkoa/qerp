@@ -2,8 +2,8 @@ package com.quesoware.business.common.exception;
 
 import java.io.Serializable;
 
-import com.quesofttech.util.ClassUtil;
-import com.quesofttech.util.MessageUtil;
+import com.quesoware.util.ClassUtil;
+import com.quesoware.util.MessageUtil;
 
 @SuppressWarnings("serial")
 public class DoesNotExistException extends BusinessException {

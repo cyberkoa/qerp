@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.ejb.ApplicationException;
 
 import com.quesofttech.business.domain.base.BaseEntity;
-import com.quesofttech.util.ClassUtil;
-import com.quesofttech.util.MessageUtil;
+import com.quesoware.util.ClassUtil;
+import com.quesoware.util.MessageUtil;
 
 @ApplicationException(rollback = true)
 @SuppressWarnings("serial")

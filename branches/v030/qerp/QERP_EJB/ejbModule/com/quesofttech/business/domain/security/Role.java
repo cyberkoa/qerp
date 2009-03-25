@@ -35,9 +35,9 @@ import javax.persistence.Embedded;
 
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
-import com.quesofttech.util.StringUtil;
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
+import com.quesoware.util.StringUtil;
 
 
 //import java.util.ArrayList;
