@@ -31,12 +31,12 @@ import javax.persistence.Embedded;
 
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
-import com.quesofttech.business.domain.inventory.Material;
 
 
 import com.quesoware.business.common.exception.BusinessException;
 import com.quesoware.business.common.exception.GenericBusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
+import com.quesoware.business.domain.inventory.Material;
 import com.quesoware.util.StringUtil;
 
 import java.util.List;
