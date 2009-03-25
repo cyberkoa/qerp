@@ -2,9 +2,9 @@ package com.quesofttech.business.domain.sales.iface;
 
 import java.util.List;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.domain.sales.Customer;
+import com.quesofttech.business.domain.sales.Customer;import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+
 
 /**
  * The <code>ICustomerServiceRemote</code> bean exposes the business methods

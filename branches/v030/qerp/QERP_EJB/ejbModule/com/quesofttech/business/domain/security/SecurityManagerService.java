@@ -7,8 +7,8 @@ import javax.ejb.Stateless;
 import com.quesofttech.business.domain.security.iface.ISecurityManagerServiceLocal;
 import com.quesofttech.business.domain.security.iface.ISecurityManagerServiceRemote;
 
-import com.quesofttech.business.common.exception.BusinessException;
 import com.quesofttech.business.domain.base.BaseService;
+import com.quesoware.business.common.exception.BusinessException;
 
 //@SecurityDomain("jumpstart")
 @Stateless

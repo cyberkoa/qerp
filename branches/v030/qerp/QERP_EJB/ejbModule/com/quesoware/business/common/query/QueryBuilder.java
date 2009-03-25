@@ -1,4 +1,4 @@
-package com.quesofttech.business.common.query;
+package com.quesoware.business.common.query;
 
 import java.util.ArrayList;
 import java.util.List;

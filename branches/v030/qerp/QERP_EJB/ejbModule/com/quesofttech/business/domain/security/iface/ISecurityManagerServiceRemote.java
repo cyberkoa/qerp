@@ -2,7 +2,7 @@ package com.quesofttech.business.domain.security.iface;
 
 import com.quesofttech.business.domain.security.User;
 
-import com.quesofttech.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.BusinessException;
 
 /**
  * The <code>ISecurityManagerSvcRemote</code> bean exposes the business methods in the interface.

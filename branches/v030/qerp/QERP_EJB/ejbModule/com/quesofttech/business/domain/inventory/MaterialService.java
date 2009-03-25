@@ -9,10 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.common.query.QueryBuilder;
-import com.quesofttech.business.common.query.SearchOptions;
 import com.quesofttech.business.domain.base.BaseService;
 import com.quesofttech.business.domain.inventory.Material;
 import com.quesofttech.business.domain.inventory.dto.*;
@@ -20,6 +16,10 @@ import com.quesofttech.business.domain.inventory.iface.IMaterialServiceLocal;
 import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
 import com.quesofttech.business.domain.sales.SalesOrderMaterial;
 import com.quesofttech.business.domain.sales.dto.SalesOrderMaterialSearchFields;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+import com.quesoware.business.common.query.QueryBuilder;
+import com.quesoware.business.common.query.SearchOptions;
 
 @Stateless
 @Local(IMaterialServiceLocal.class)

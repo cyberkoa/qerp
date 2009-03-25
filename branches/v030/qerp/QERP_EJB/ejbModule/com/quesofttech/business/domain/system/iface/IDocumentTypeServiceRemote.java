@@ -2,9 +2,9 @@ package com.quesofttech.business.domain.system.iface;
 
 import java.util.List;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.system.DocumentType;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
 
 
 /**

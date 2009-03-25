@@ -1,4 +1,4 @@
-package com.quesofttech.business.common.exception;
+package com.quesoware.business.common.exception;
 
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.util.ClassUtil;

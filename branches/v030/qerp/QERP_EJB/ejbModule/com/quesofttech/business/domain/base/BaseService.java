@@ -8,12 +8,12 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.CannotDeleteIsReferencedException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.common.exception.DuplicateAlternateKeyException;
-import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
-import com.quesofttech.business.common.interpreter.ServicesExceptionInterpreter;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.CannotDeleteIsReferencedException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+import com.quesoware.business.common.exception.DuplicateAlternateKeyException;
+import com.quesoware.business.common.exception.DuplicatePrimaryKeyException;
+import com.quesoware.business.common.interpreter.ServicesExceptionInterpreter;
 
 public abstract class BaseService {
 

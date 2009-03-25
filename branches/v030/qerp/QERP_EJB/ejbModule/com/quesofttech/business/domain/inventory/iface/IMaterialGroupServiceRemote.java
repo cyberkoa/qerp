@@ -2,9 +2,9 @@ package com.quesofttech.business.domain.inventory.iface;
 
 import java.util.List;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.domain.inventory.MaterialGroup;
+import com.quesofttech.business.domain.inventory.MaterialGroup;import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+
 
 /**
  * The <code>IMaterialGroupServiceRemote</code> bean exposes the business methods

@@ -8,9 +8,9 @@ import com.quesofttech.business.domain.security.User;
 import com.quesofttech.business.domain.security.UserPassword;
 import com.quesofttech.business.domain.security.dto.UserSearchFields;
 
-import com.quesofttech.business.common.exception.AuthenticationException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.common.query.SearchOptions;
+import com.quesoware.business.common.exception.AuthenticationException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+import com.quesoware.business.common.query.SearchOptions;
 
 /**
  * The <code>ISecurityFinderSvcRemote</code> bean exposes the business methods in the interface.

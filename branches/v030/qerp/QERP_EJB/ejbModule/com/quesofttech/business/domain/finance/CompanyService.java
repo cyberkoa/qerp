@@ -9,12 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
 import com.quesofttech.business.domain.base.BaseService;
 import com.quesofttech.business.domain.finance.Company;
 import com.quesofttech.business.domain.finance.iface.ICompanyServiceLocal;
 import com.quesofttech.business.domain.finance.iface.ICompanyServiceRemote;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
 
 @Stateless
 @Local(ICompanyServiceLocal.class)

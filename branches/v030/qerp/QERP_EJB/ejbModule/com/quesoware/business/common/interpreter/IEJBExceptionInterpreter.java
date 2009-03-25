@@ -1,9 +1,9 @@
-package com.quesofttech.business.common.interpreter;
+package com.quesoware.business.common.interpreter;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 
-import com.quesofttech.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.BusinessException;
 
 public interface IEJBExceptionInterpreter {
 
