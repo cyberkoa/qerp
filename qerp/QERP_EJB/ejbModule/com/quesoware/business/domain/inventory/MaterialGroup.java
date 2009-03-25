@@ -1,4 +1,4 @@
-package com.quesofttech.business.domain.general;
+package com.quesoware.business.domain.inventory;
 
 import java.io.Serializable;
 //import java.sql.Date;
@@ -18,8 +18,6 @@ import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.TableGenerator;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.UniqueConstraint;
@@ -30,37 +28,29 @@ import javax.persistence.Embedded;
 
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
-
-
 import com.quesoware.business.common.exception.BusinessException;
-import com.quesoware.business.common.exception.DoesNotExistException;
 import com.quesoware.business.common.exception.GenericBusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
-import com.quesoware.business.domain.inventory.Material;
-import com.quesoware.business.domain.production.ProductionOrder;
 import com.quesoware.util.StringUtil;
-import com.quesoware.util.TreeNode;
-import com.quesoware.util.iface.ITreeNodeFilter;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 @Entity
-@Table(name = "BOM", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_Material","bom_Type" }) })
+@Table(name = "MaterialGroup", uniqueConstraints = { @UniqueConstraint(columnNames = { "matg_Group" }) })
 @SuppressWarnings("serial")
-public class BOM extends BaseEntity {
+public class MaterialGroup extends BaseEntity {
 	
 
-	//For Postgresql : @SequenceGenerator(name = "BOM_sequence", sequenceName = "BOM_id_seq")
+	//For Postgresql : @SequenceGenerator(name = "MaterialGroup_sequence", sequenceName = "MaterialGroup_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
-	@TableGenerator(  name="BOM_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="BOM", valueColumnName="keyField")
+	@TableGenerator(  name="MaterialGroup_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="MaterialGroup", valueColumnName="keyField")
 	@Id
-	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOM_sequence")
+	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MaterialGroup_sequence")
 	//For MSSQL      : @GeneratedValue(strategy = GenerationType.IDENTITY)
 	//Generic solution :
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "BOM_id")	
-	@Column(name = "id_BOM", nullable = false)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "MaterialGroup_id")	
+	@Column(name = "id_MaterialGroup", nullable = false)
 	private Long id;
 	
 	@Version
@@ -69,41 +59,32 @@ public class BOM extends BaseEntity {
 
 
 	// Example of field	
-	@Column(name = "bom_Type", length = 1, nullable = false)
-	private String type;
+	@Column(name = "matg_Group", length = 5, nullable = false)
+	private String group;
 	
-	@Column(name = "bom_Code", length = 10)
-	private String code;
+	@Column(name = "matg_Description", length = 100, nullable = false)
+	private String description;
 	
-	//@Embedded
-	//RowInfo rowInfo_1;
-	
-	
+	/*
 	@ManyToOne
-	@JoinColumn(name="fk_Material")
-	//@JoinColumn(name = "Store.SiteId", referencedColumnName="site.PartyId", nullable = false, insertable = true, updatable = true)
-	private Material material;
+	@JoinColumn(name="fk_<ForeignTable>")	
+	private <ForeignTable> <foreignTable>;
 	
-	
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="bom", targetEntity=BomDetail.class)
-	private List<BomDetail> bomDetails; // = new List<<ForeignTable>>();
-	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="materialGroup", targetEntity=<ForeignTable>.class)
+	private List<<ForeignTable>> <foreignTable>s; // = new List<<ForeignTable>>();
+	*/
 
-	@OneToMany(cascade={CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy="bom", targetEntity=BomDetail.class)
-	private List<ProductionOrder> productionOrders; // = new List<<ForeignTable>>();
-
-		
-	public BOM() {
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="materialGroup", targetEntity=Material.class)
+	private List<Material> materials;
+	
+	public MaterialGroup() {
 		super();
-		
-		//this.bomDetails = new List<BomDetail>();
-		
+	        //
 	}	
 
 	
 	// Constructors without the common fields
-	//public BOM(/* all fields */) {
+	//public MaterialGroup(/* all fields */) {
 	//	super();
 		/* Example of assignment
 		this.id = id;
@@ -114,16 +95,15 @@ public class BOM extends BaseEntity {
 
 
 	// Constructors with all fields
-	public BOM(/* all fields*/String type,
+	public MaterialGroup(/* all fields*/
 			String recordStatus, String sessionId, String createLogin,
 			String createApp, Timestamp createTimestamp,
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
 		this();
 
 		
-		
-		this.type = type;
 		/* Example of assignment
+		this.type = type;
 		this.description = description;
 		*/
 
@@ -143,12 +123,11 @@ public class BOM extends BaseEntity {
 	public String toString() {
 		
 		StringBuffer buf = new StringBuffer();
-		buf.append("BOM: [");
+		buf.append("MaterialGroup: [");
 		buf.append("id=" + id + ", ");
 
-		
-		buf.append("type=" + type + ", ");
 		/* All fields
+		buf.append("type=" + type + ", ");
 		buf.append("description=" + description + ", ");
 		buf.append("isProduced=" + isProduced + ", ");
 		buf.append("isPurchased=" + isPurchased + ", ");
@@ -173,7 +152,7 @@ public class BOM extends BaseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		return (obj == this) || (obj instanceof BOM) && getId() != null && ((BOM) obj).getId().equals(this.getId());
+		return (obj == this) || (obj instanceof MaterialGroup) && getId() != null && ((MaterialGroup) obj).getId().equals(this.getId());
 	}
 
 	// The need for a hashCode() method is discussed at http://www.hibernate.org/109.html
@@ -188,9 +167,9 @@ public class BOM extends BaseEntity {
 		return getId();
 	}
 
-	
+	/*
 	@PrePersist
-	protected void prePersist() throws BusinessException {
+	void prePersist() throws BusinessException {
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -201,7 +180,7 @@ public class BOM extends BaseEntity {
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
 				
 	}
-
+       */
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -211,12 +190,19 @@ public class BOM extends BaseEntity {
 	void postLoad() {
 
 	}
-    /*
+       /*
 	@PreUpdate
-	protected void preUpdate() throws BusinessException {
+	void preUpdate() throws BusinessException {
 		if(rowInfo.getRecordStatus()!="D")
 		{
-			validate();
+			try
+			{
+				validate();
+			}
+			catch(BusinessException be)
+			{
+				return;
+			}
 		}
 			java.util.Date today = new java.util.Date();
 
@@ -236,14 +222,14 @@ public class BOM extends BaseEntity {
 		// responsibility (and for performance, it might not bother)
 	}
 
-	public void validate() throws BusinessException  {
+	public void validate() throws BusinessException {
 
 		
 		// Validate syntax...
 
-		if (StringUtil.isEmpty(type)) {
+		if (StringUtil.isEmpty(group)) {
 			//System.out.println("Yeah");
-			throw new ValueRequiredException(this, "BOM_Type");
+			throw new ValueRequiredException(this, "MaterialGroup_Group");
 		}
 
 		//if (StringUtil.isEmpty(description)) {
@@ -267,6 +253,56 @@ public class BOM extends BaseEntity {
 	}
 	
 	
+	
+
+	/**
+	 * @return the group
+	 */
+	public String getGroup() {
+		return group;
+	}
+
+
+	/**
+	 * @param group the group to set
+	 */
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+	
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	/**
+	 * @return the materials
+	 */
+	public List<Material> getMaterials() {
+		return materials;
+	}
+
+
+	/**
+	 * @param materials the materials to set
+	 */
+	public void setMaterials(List<Material> materials) {
+		this.materials = materials;
+	}
+
 
 	// Common EJB field
 	public Long getId() {
@@ -378,103 +414,10 @@ public class BOM extends BaseEntity {
 	public void setModifyTimestamp(java.sql.Timestamp modifyTimestamp) {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
 	}
-	
-	public String getMaterialCode()
+	public String getCodeDescription()
 	{
-		return material.getCode();
+		return group + " - " + description;
 	}
-
-
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	
-	
-	public void addBomDetail(BomDetail bomDetail)
-	{
-		if (!bomDetails.contains(bomDetail)) {			
-			bomDetails.add(bomDetail);
-			bomDetail.setBom(this);
-		}		
-	}
-
-
-	public Material getMaterial() {
-		return material;
-	}
-
-
-	public void setMaterial(Material material) {
-		this.material = material;
-	}
-
-
-	/**
-	 * @return the code
-	 */
-	public String getCode() {
-		return code;
-	}
-
-
-	/**
-	 * @param code the code to set
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-
-	/**
-	 * @return the bomDetails
-	 */
-	public List<BomDetail> getBomDetails() {
-		return bomDetails;
-	}
-
-
-	/**
-	 * @param bomDetails the bomDetails to set
-	 */
-	public void setBomDetails(List<BomDetail> bomDetails) {
-		this.bomDetails = bomDetails;
-	}
-
-
-	/**
-	 * @return the productionOrders
-	 */
-	public List<ProductionOrder> getProductionOrders() {
-		return productionOrders;
-	}
-
-
-	/**
-	 * @param productionOrders the productionOrders to set
-	 */
-	public void setProductionOrders(List<ProductionOrder> productionOrders) {
-		this.productionOrders = productionOrders;
-	}
-	
-
-	
 
 	
 }
-
-
-
-
-

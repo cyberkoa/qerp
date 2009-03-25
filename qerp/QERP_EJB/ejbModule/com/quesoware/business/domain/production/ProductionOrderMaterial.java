@@ -1,4 +1,4 @@
-package com.quesofttech.business.domain.general;
+package com.quesoware.business.domain.production;
 
 import java.io.Serializable;
 //import java.sql.Date;
@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,8 +20,6 @@ import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.TableGenerator;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.UniqueConstraint;
@@ -30,37 +30,33 @@ import javax.persistence.Embedded;
 
 import com.quesofttech.business.domain.base.BaseEntity;
 import com.quesofttech.business.domain.embeddable.RowInfo;
-
-
+import com.quesofttech.business.domain.general.Operation;
 import com.quesoware.business.common.exception.BusinessException;
-import com.quesoware.business.common.exception.DoesNotExistException;
 import com.quesoware.business.common.exception.GenericBusinessException;
 import com.quesoware.business.common.exception.ValueRequiredException;
 import com.quesoware.business.domain.inventory.Material;
-import com.quesoware.business.domain.production.ProductionOrder;
+import com.quesoware.business.domain.sales.SalesOrder;
 import com.quesoware.util.StringUtil;
-import com.quesoware.util.TreeNode;
-import com.quesoware.util.iface.ITreeNodeFilter;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.logging.Logger;
+//import java.util.ArrayList;
 
 @Entity
-@Table(name = "BOM", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_Material","bom_Type" }) })
+@Table(name = "ProductionOrderMaterial", uniqueConstraints = { @UniqueConstraint(columnNames = { "fk_ProductionOrder","fk_ProductionOrderOperation","fk_Material" }) })
 @SuppressWarnings("serial")
-public class BOM extends BaseEntity {
+public class ProductionOrderMaterial extends BaseEntity {
 	
 
-	//For Postgresql : @SequenceGenerator(name = "BOM_sequence", sequenceName = "BOM_id_seq")
+	//For Postgresql : @SequenceGenerator(name = "ProductionOrderMaterial_sequence", sequenceName = "ProductionOrderMaterial_id_seq")
 	//Generic solution : (Use a table named primary_keys, with 2 fields , key &  value)
-	@TableGenerator(  name="BOM_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="BOM", valueColumnName="keyField")
+	@TableGenerator(  name="ProductionOrderMaterial_id", table="PrimaryKeys", pkColumnName="tableName", pkColumnValue="ProductionOrderMaterial", valueColumnName="keyField")
 	@Id
-	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOM_sequence")
+	//For Postgresql : @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ProductionOrderMaterial_sequence")
 	//For MSSQL      : @GeneratedValue(strategy = GenerationType.IDENTITY)
 	//Generic solution :
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "BOM_id")	
-	@Column(name = "id_BOM", nullable = false)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "ProductionOrderMaterial_id")	
+	@Column(name = "id_ProductionOrderMaterial", nullable = false)
 	private Long id;
 	
 	@Version
@@ -69,41 +65,53 @@ public class BOM extends BaseEntity {
 
 
 	// Example of field	
-	@Column(name = "bom_Type", length = 1, nullable = false)
-	private String type;
+	//@Column(name = "matt_Type", length = 1, nullable = false)
+	//private String type;
+	@Column(name = "prodom_QuantityRequired", nullable = false)
+	private Double quantityRequired;
+		
+	@Column(name = "prodom_QuantityConsumed", nullable = false)
+	private Double quantityConsumed;
 	
-	@Column(name = "bom_Code", length = 10)
-	private String code;
+	/*
+	@Column(name = "prodom_Sequence", nullable = false)
+	private Double sequence;
+	*/
+	
 	
 	//@Embedded
 	//RowInfo rowInfo_1;
 	
+	// Foreign keys
+	@ManyToOne(cascade={CascadeType.REFRESH})
+    @JoinColumn(name="fk_ProductionOrder")	
+	private ProductionOrder productionOrder;
 	
 	@ManyToOne
-	@JoinColumn(name="fk_Material")
-	//@JoinColumn(name = "Store.SiteId", referencedColumnName="site.PartyId", nullable = false, insertable = true, updatable = true)
+    @JoinColumn(name="fk_ProductionOrderOperation")	
+	private ProductionOrderOperation productionOrderOperation;	
+	
+	@ManyToOne
+    @JoinColumn(name="fk_Operation")	
+	private Operation operation;
+	
+	
+	// Foreign keys
+	@ManyToOne
+    @JoinColumn(name="fk_Material")	
 	private Material material;
 	
+	//@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="ProductionOrderMaterial", targetEntity=<ForeignTable>.class)
+	//private List<<ForeignTable>> <foreignTable>s; // = new List<<ForeignTable>>();
 	
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="bom", targetEntity=BomDetail.class)
-	private List<BomDetail> bomDetails; // = new List<<ForeignTable>>();
-	
-
-	@OneToMany(cascade={CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy="bom", targetEntity=BomDetail.class)
-	private List<ProductionOrder> productionOrders; // = new List<<ForeignTable>>();
-
-		
-	public BOM() {
+	public ProductionOrderMaterial() {
 		super();
-		
-		//this.bomDetails = new List<BomDetail>();
 		
 	}	
 
 	
 	// Constructors without the common fields
-	//public BOM(/* all fields */) {
+	//public ProductionOrderMaterial(/* all fields */) {
 	//	super();
 		/* Example of assignment
 		this.id = id;
@@ -114,16 +122,16 @@ public class BOM extends BaseEntity {
 
 
 	// Constructors with all fields
-	public BOM(/* all fields*/String type,
+	public ProductionOrderMaterial(/* all fields*/
 			String recordStatus, String sessionId, String createLogin,
 			String createApp, Timestamp createTimestamp,
 			String modifyLogin, String modifyApp, Timestamp modifyTimestamp) {
 		this();
 
 		
-		
-		this.type = type;
+		this.id = id;
 		/* Example of assignment
+		this.type = type;
 		this.description = description;
 		*/
 
@@ -143,12 +151,11 @@ public class BOM extends BaseEntity {
 	public String toString() {
 		
 		StringBuffer buf = new StringBuffer();
-		buf.append("BOM: [");
+		buf.append("ProductionOrderMaterial: [");
 		buf.append("id=" + id + ", ");
 
-		
-		buf.append("type=" + type + ", ");
 		/* All fields
+		buf.append("type=" + type + ", ");
 		buf.append("description=" + description + ", ");
 		buf.append("isProduced=" + isProduced + ", ");
 		buf.append("isPurchased=" + isPurchased + ", ");
@@ -173,7 +180,7 @@ public class BOM extends BaseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		return (obj == this) || (obj instanceof BOM) && getId() != null && ((BOM) obj).getId().equals(this.getId());
+		return (obj == this) || (obj instanceof ProductionOrderMaterial) && getId() != null && ((ProductionOrderMaterial) obj).getId().equals(this.getId());
 	}
 
 	// The need for a hashCode() method is discussed at http://www.hibernate.org/109.html
@@ -188,9 +195,11 @@ public class BOM extends BaseEntity {
 		return getId();
 	}
 
-	
+    /*	
 	@PrePersist
 	protected void prePersist() throws BusinessException {
+		System.out.println("prePersist of ProductionOrderMaterial");
+		
 		validate();
 		
 		rowInfo.setRecordStatus("A");
@@ -199,9 +208,9 @@ public class BOM extends BaseEntity {
 
 	    rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
 	    rowInfo.setCreateTimestamp(rowInfo.getModifyTimestamp());			
-				
+        				
 	}
-
+    */
 	@PostPersist
 	void postPersist() throws BusinessException {
 
@@ -211,20 +220,17 @@ public class BOM extends BaseEntity {
 	void postLoad() {
 
 	}
-    /*
+
+
 	@PreUpdate
 	protected void preUpdate() throws BusinessException {
-		if(rowInfo.getRecordStatus()!="D")
-		{
-			validate();
-		}
-			java.util.Date today = new java.util.Date();
+		super.preUpdate();
 
-			rowInfo.setModifyTimestamp(new java.sql.Timestamp(today.getTime()));
-		
+		System.out.println("Production Order Material preUpdate");
 		
 	}
-    */
+    
+	
 	@PreRemove
 	void preRemove() throws BusinessException {
 		// Check business rules here, eg.
@@ -241,11 +247,16 @@ public class BOM extends BaseEntity {
 		
 		// Validate syntax...
 
-		if (StringUtil.isEmpty(type)) {
+		if (this.material == null) {
 			//System.out.println("Yeah");
-			throw new ValueRequiredException(this, "BOM_Type");
+			throw new ValueRequiredException(this, "Material");
 		}
 
+		if (quantityRequired == null||quantityRequired==0) {
+			//System.out.println("Yeah");
+			throw new ValueRequiredException(this, "ProductionOrderMaterial_QuantityOrder");
+		}
+		
 		//if (StringUtil.isEmpty(description)) {
 		//	throw new ValueRequiredException(this, "MaterialType_Description");
 		//}
@@ -257,12 +268,11 @@ public class BOM extends BaseEntity {
 		*/
 
 		// Validate semantics...
-		/*	
-		if (expiryDate != null && loginId.equals(ADMIN_LOGINID)) {
-			throw new GenericBusinessException("User_expirydate_not_permitted_for_user", new Object[] { ADMIN_LOGINID });
+
+		if (this.quantityRequired <=0) {
+			throw new GenericBusinessException("ProductionOrder_QuantityOrderMustGreaterThanZero", new Object[] { });
 		}
-		*/
-		 
+		
 		//throw new ValueRequiredException(this, this.getClass().getName() + " [validate] Please remove this line and code the validation logic");
 	}
 	
@@ -378,103 +388,111 @@ public class BOM extends BaseEntity {
 	public void setModifyTimestamp(java.sql.Timestamp modifyTimestamp) {
 		this.rowInfo.setModifyTimestamp(modifyTimestamp);
 	}
-	
-	public String getMaterialCode()
-	{
-		return material.getCode();
+
+
+	/**
+	 * @return the quantityRequired
+	 */
+	public Double getQuantityRequired() {
+		return quantityRequired;
 	}
 
 
 	/**
-	 * @return the type
+	 * @param quantityRequired the quantityOrder to set
 	 */
-	public String getType() {
-		return type;
+	public void setQuantityRequired(Double quantityRequired) {
+		this.quantityRequired = quantityRequired;
 	}
 
 
 	/**
-	 * @param type the type to set
+	 * @return the quantityConsumed
 	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	
-	
-	public void addBomDetail(BomDetail bomDetail)
-	{
-		if (!bomDetails.contains(bomDetail)) {			
-			bomDetails.add(bomDetail);
-			bomDetail.setBom(this);
-		}		
+	public Double getQuantityConsumed() {
+		return quantityConsumed;
 	}
 
 
+	/**
+	 * @param quantityConsumed the quantityConsumed to set
+	 */
+	public void setQuantityConsumed(Double quantityConsumed) {
+		this.quantityConsumed = quantityConsumed;
+	}
+
+
+	/**
+	 * @return the productionOrder
+	 */
+	public ProductionOrder getProductionOrder() {
+		return productionOrder;
+	}
+
+
+	/**
+	 * @param productionOrder the productionOrder to set
+	 */
+	public void setProductionOrder(ProductionOrder productionOrder) {
+		this.productionOrder = productionOrder;
+	}
+
+
+	/**
+	 * @return the material
+	 */
 	public Material getMaterial() {
 		return material;
 	}
 
 
+	/**
+	 * @param material the material to set
+	 */
 	public void setMaterial(Material material) {
 		this.material = material;
-	}
-
-
-	/**
-	 * @return the code
-	 */
-	public String getCode() {
-		return code;
-	}
-
-
-	/**
-	 * @param code the code to set
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-
-	/**
-	 * @return the bomDetails
-	 */
-	public List<BomDetail> getBomDetails() {
-		return bomDetails;
-	}
-
-
-	/**
-	 * @param bomDetails the bomDetails to set
-	 */
-	public void setBomDetails(List<BomDetail> bomDetails) {
-		this.bomDetails = bomDetails;
-	}
-
-
-	/**
-	 * @return the productionOrders
-	 */
-	public List<ProductionOrder> getProductionOrders() {
-		return productionOrders;
-	}
-
-
-	/**
-	 * @param productionOrders the productionOrders to set
-	 */
-	public void setProductionOrders(List<ProductionOrder> productionOrders) {
-		this.productionOrders = productionOrders;
-	}
+	}	
 	
-
 	
+	/**
+	 * @return the productionOrderOperation
+	 */
+	public ProductionOrderOperation getProductionOrderOperation() {
+		return productionOrderOperation;
+	}
 
+
+	/**
+	 * @param productionOrderOperation the productionOrderOperation to set
+	 */
+	public void setProductionOrderOperation(
+			ProductionOrderOperation productionOrderOperation) {
+		this.productionOrderOperation = productionOrderOperation;
+	}
+
+
+	/**
+	 * @return the operation
+	 */
+	public Operation getOperation() {
+		return operation;
+	}
+
+
+	/**
+	 * @param operation the operation to set
+	 */
+	public void setOperation(Operation operation) {
+		this.operation = operation;
+	}
+
+
+	public String getMaterialCode()
+	{
+		if(material!=null)			
+			return material.getCode();
+		else
+			return "";
+	}
 	
 }
-
-
-
-
-
