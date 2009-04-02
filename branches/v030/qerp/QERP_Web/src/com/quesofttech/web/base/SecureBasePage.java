@@ -1,12 +1,12 @@
 package com.quesofttech.web.base;
 
-import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.pages.Index;
 import com.quesofttech.web.pages.Main;
+import com.quesoware.business.domain.security.iface.ISecurityFinderServiceRemote;
 
 import java.util.List;
 import org.apache.tapestry5.annotations.InjectPage;
-import com.quesofttech.business.domain.security.Program;
+import com.quesoware.business.domain.security.Program;
 /**
  * Base page for pages that must not be accessible if the user is not logged in.
  */

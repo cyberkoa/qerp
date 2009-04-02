@@ -2,18 +2,15 @@ package com.quesofttech.web.services;
 
 //import jumpstart.business.domain.examples.iface.IDateStuffServiceLocal;
 //import jumpstart.business.domain.examples.iface.IPersonServiceLocal;
-//import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceLocal;
-import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
-import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
-//import com.quesofttech.business.domain.security.iface.ISecurityManagerServiceLocal;
-import com.quesofttech.business.domain.inventory.iface.*;
-import com.quesofttech.business.domain.sales.iface.*;
-import com.quesofttech.business.domain.general.iface.*;
-import com.quesofttech.business.domain.finance.iface.ICompanyServiceRemote;
-import com.quesofttech.business.domain.security.iface.*;
-import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
-import com.quesofttech.business.domain.production.iface.*;
-import com.quesofttech.business.domain.production.iface.*;
+//import com.quesoware.business.domain.security.iface.ISecurityFinderServiceLocal;
+//import com.quesoware.business.domain.security.iface.ISecurityManagerServiceLocal;
+import com.quesoware.business.domain.finance.iface.ICompanyServiceRemote;
+import com.quesoware.business.domain.general.iface.*;
+import com.quesoware.business.domain.inventory.iface.*;
+import com.quesoware.business.domain.production.iface.*;
+import com.quesoware.business.domain.sales.iface.*;
+import com.quesoware.business.domain.security.iface.*;
+import com.quesoware.business.domain.system.iface.IDocumentTypeServiceRemote;
 public interface IBusinessServicesLocator {
 
 	//public abstract IPersonServiceLocal getPersonServiceLocal();

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.apache.tapestry5.annotations.ApplicationState;
 
-import com.quesofttech.business.domain.security.User;
+import com.quesoware.business.domain.security.User;
 
 @SuppressWarnings("serial")
 public class Visit implements Serializable {

@@ -2,15 +2,6 @@ package com.quesofttech.web.pages;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.Resource;
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.DoesNotExistException;
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.domain.general.*;
-import com.quesofttech.business.domain.inventory.*;
-import com.quesofttech.business.domain.inventory.iface.IMaterialServiceRemote;
-import com.quesofttech.business.domain.general.iface.*;
-import com.quesofttech.business.domain.sales.SalesOrder;
-import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
 import com.quesofttech.web.model.base.GenericSelectModel;
@@ -33,7 +24,16 @@ import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
 import com.quesofttech.web.util.*;
-public class BomDetailMaintenance extends SimpleBasePage {
+
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.DoesNotExistException;
+import com.quesoware.business.domain.general.*;
+import com.quesoware.business.domain.general.iface.*;
+import com.quesoware.business.domain.inventory.*;
+import com.quesoware.business.domain.inventory.iface.IMaterialServiceRemote;
+import com.quesoware.business.domain.sales.SalesOrder;
+import com.quesoware.business.domain.security.iface.ISecurityFinderServiceRemote;
+public class BomDetailMaintenance extends SecureBasePage {
 // Default defination.
 	void onActionFromtoolbarback()
     {
