@@ -3,14 +3,14 @@ package com.quesofttech.web.base;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import com.quesofttech.business.common.exception.BusinessException;
-import com.quesofttech.business.common.exception.CannotDeleteIsReferencedException;
-import com.quesofttech.business.common.exception.DuplicateAlternateKeyException;
-import com.quesofttech.business.common.exception.DuplicatePrimaryKeyException;
-import com.quesofttech.business.common.exception.OptimisticLockException;
-import com.quesofttech.business.common.interpreter.ServicesExceptionInterpreter;
 import com.quesofttech.web.services.IBusinessServicesLocator;
 import com.quesofttech.web.state.Visit;
+import com.quesoware.business.common.exception.BusinessException;
+import com.quesoware.business.common.exception.CannotDeleteIsReferencedException;
+import com.quesoware.business.common.exception.DuplicateAlternateKeyException;
+import com.quesoware.business.common.exception.DuplicatePrimaryKeyException;
+import com.quesoware.business.common.exception.OptimisticLockException;
+import com.quesoware.business.common.interpreter.ServicesExceptionInterpreter;
 
 import org.apache.tapestry5.annotations.ApplicationState;
 import org.apache.tapestry5.ioc.Messages;

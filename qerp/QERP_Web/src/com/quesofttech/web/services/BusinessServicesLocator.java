@@ -13,42 +13,30 @@ import javax.naming.InitialContext;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 
-import com.quesofttech.business.common.exception.SystemUnavailableException;
 //import jumpstart.business.domain.examples.iface.IDateStuffServiceLocal;
 //import jumpstart.business.domain.examples.iface.IPersonServiceLocal;
-import com.quesofttech.business.domain.sales.SalesOrderService;
-import com.quesofttech.business.domain.sales.iface.ISalesOrderServiceRemote;
-import com.quesofttech.business.domain.production.*;
-import com.quesofttech.business.domain.production.iface.*;
-import com.quesofttech.business.domain.general.*;
-import com.quesofttech.business.domain.general.iface.*;
-import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceLocal;
-import com.quesofttech.business.domain.security.iface.ISecurityManagerServiceLocal;
-import com.quesofttech.business.domain.security.iface.ISecurityFinderServiceRemote;
-import com.quesofttech.business.domain.security.iface.ISecurityManagerServiceRemote;
-import com.quesofttech.business.domain.security.SecurityManagerService;
-import com.quesofttech.business.domain.security.SecurityFinderService;
-
-import com.quesofttech.business.domain.inventory.iface.IMaterialTypeServiceRemote;
-import com.quesofttech.business.domain.inventory.MaterialTypeService;
-
-import com.quesofttech.business.domain.inventory.*;
-import com.quesofttech.business.domain.inventory.iface.*;
 
 
-import com.quesofttech.business.domain.sales.iface.*;
-import com.quesofttech.business.domain.sales.*;
 
-import com.quesofttech.business.domain.finance.iface.ICompanyServiceRemote;
-import com.quesofttech.business.domain.finance.CompanyService;
 
-import com.quesofttech.business.domain.security.iface.*;
-import com.quesofttech.business.domain.security.*;
-import com.quesofttech.business.domain.system.DocumentTypeService;
-import com.quesofttech.business.domain.system.iface.IDocumentTypeServiceRemote;
 
-import com.quesofttech.business.domain.production.iface.IRoutingServiceRemote;
-import com.quesofttech.business.domain.production.RoutingService;
+
+
+import com.quesoware.business.common.exception.SystemUnavailableException;
+import com.quesoware.business.domain.finance.CompanyService;
+import com.quesoware.business.domain.finance.iface.ICompanyServiceRemote;
+import com.quesoware.business.domain.general.*;
+import com.quesoware.business.domain.general.iface.*;
+import com.quesoware.business.domain.inventory.*;
+import com.quesoware.business.domain.inventory.iface.*;
+import com.quesoware.business.domain.production.*;
+import com.quesoware.business.domain.production.iface.*;
+import com.quesoware.business.domain.sales.*;
+import com.quesoware.business.domain.sales.iface.*;
+import com.quesoware.business.domain.security.*;
+import com.quesoware.business.domain.security.iface.*;
+import com.quesoware.business.domain.system.DocumentTypeService;
+import com.quesoware.business.domain.system.iface.IDocumentTypeServiceRemote;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
