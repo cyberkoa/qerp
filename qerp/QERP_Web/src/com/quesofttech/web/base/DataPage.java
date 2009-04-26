@@ -9,15 +9,16 @@ import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.Retain;
 import org.apache.tapestry5.beaneditor.BeanModel;
+import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.internal.grid.CollectionGridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.BeanModelSource;
-import org.slf4j.*;
+//import org.slf4j.*;
 
 public class DataPage extends SecureBasePage 
 {
-	
-	protected Logger logger; 
+	// sfl4j.logger
+	//protected Logger logger; 
 	
 	protected CollectionGridDataSource collectionGridDataSource;
 	
@@ -48,13 +49,47 @@ public class DataPage extends SecureBasePage
 	*/
 	
 	//protected Viewer viewer;
-	
-	// protected Grid grid;
+	@Component(id = "grid")
+	protected Grid grid;
 	
 	// protected Toolbar toolbar;
 	
+	
+	// protected Viewer viewer;
+	
 	// Methods
 	 
+	protected Boolean searchRecord()
+	{
+		return true;
+	}
+	
+	protected Boolean filterRecord()
+	{
+		return true;
+	}
+	
+	
+	
+	protected Boolean previousRecord()
+	{
+		return true;
+	}
+	
+	protected Boolean nextRecord()
+	{
+		return true;
+	}
+	
+	protected Boolean firstRecord()
+	{
+		return true;
+	}
+	
+	protected Boolean lastRecord()
+	{
+		return true;
+	}
 	
 	
 }
