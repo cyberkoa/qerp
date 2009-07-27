@@ -1,0 +1,6 @@
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<head> <title>Test Maintenance Application</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
+<body>
+  <div t:type="StandardToolbar" id="st1" />
+</body>
+</html>

@@ -52,7 +52,7 @@ import org.apache.tapestry5.ioc.services.PropertyAccess;
 import org.apache.tapestry5.services.*;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-import org.apache.tapestry.commons.components.Window;
+import org.chenillekit.tapestry.core.components.Window;
 //interface Delegate
 //{
 //	List<SalesOrderMaterial> bindData();

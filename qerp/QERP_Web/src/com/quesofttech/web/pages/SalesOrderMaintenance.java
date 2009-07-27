@@ -46,7 +46,7 @@ import com.quesoware.business.domain.security.iface.ISecurityFinderServiceRemote
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
-import org.apache.tapestry.commons.components.*;
+import org.apache.tapestry5.corelib.components.*;
 
 interface Delegate
 {

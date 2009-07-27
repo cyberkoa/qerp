@@ -7,7 +7,7 @@ import org.apache.tapestry5.annotations.AfterRenderBody;
 import org.apache.tapestry5.annotations.BeforeRenderBody;
 import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.json.JSONObject;
-import org.apache.tapestry.commons.base.AbstractWindow;
+import org.apache.tapestry5.corelib.components.*;
 
 public class QERPWindow extends QERPAbstractWindow
 
