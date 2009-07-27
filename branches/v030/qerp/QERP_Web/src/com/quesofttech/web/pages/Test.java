@@ -13,7 +13,7 @@ import com.quesoware.business.domain.general.*;
 import com.quesoware.business.domain.general.iface.*;
 import com.quesoware.business.domain.security.iface.ISecurityFinderServiceRemote;
 
-import org.chenillekit.tapestry.core.components.datetimefield.*;
+import org.apache.tapestry5.corelib.components.*;
 import org.apache.tapestry5.annotations.*;
 
 import org.apache.tapestry5.ComponentResources;
@@ -28,30 +28,13 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
-public class testpage {
-	@Parameter(defaultPrefix="literal", required=true)
-    private String _pages;
+public class Test {
+	//@Parameter(defaultPrefix="literal", required=true)
+    //private String _pages;
 
     @Inject
     private ComponentResources _resources;
 
-    private String _pageName;
 
-    public String getPageName() { return _pageName; }
-
-    public void setPageName(String pageName) { _pageName = pageName; }
-
-    public String[] getPageNames()
-    {
-        return _pages.split(",");
-    }
-
-    public String getTabClass()
-    {
-        if (_pageName.equalsIgnoreCase(_resources.getPageName()))
-            return "current";
-
-        return null;
-    }
 
 }

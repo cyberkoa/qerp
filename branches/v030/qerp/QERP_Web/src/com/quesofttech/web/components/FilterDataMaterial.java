@@ -7,7 +7,7 @@ import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ComponentResources;
 
-import org.apache.tapestry.commons.components.*;
+import org.apache.tapestry5.corelib.components.*;
 import org.apache.tapestry5.json.JSONObject;
 import com.quesofttech.web.base.SecureBasePage;
 
