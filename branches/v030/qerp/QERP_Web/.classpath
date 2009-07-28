@@ -13,6 +13,31 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="tapestry-core-5.1.0.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="tapestry-ioc-5.1.0.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="tapestry-test-5.1.0.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="tapestry5-annotations-5.1.0.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="chenillekit-tapestry-1.0.2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="antlr-2.7.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="bsf-2.4.0.jar">
 		<attributes>
@@ -30,14 +55,14 @@
 	<classpathentry exported="true" kind="lib" path="ognl-2.7.jar"/>
 	<classpathentry kind="lib" path="opencsv-1.8.jar"/>
 	<classpathentry kind="lib" path="oro-2.0.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="testng-5.8-jdk15.jar"/>
 	<classpathentry kind="lib" path="/opt/SDK/lib/javaee.jar"/>
 	<classpathentry kind="lib" path="hibernate-annotations-3.2.0.ga.jar"/>
-	<classpathentry kind="lib" path="javassist-3.9.0.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="tapestry-ioc-5.1.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="tapestry-test-5.1.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="tapestry5-annotations-5.1.0.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="testng-5.8-jdk15.jar"/>
-	<classpathentry exported="true" kind="lib" path="chenillekit-tapestry-1.0.2.jar"/>
+	<classpathentry kind="lib" path="javassist-3.9.0.GA.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-1.5.0-sun-1.5.0.16"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
