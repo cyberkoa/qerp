@@ -8,37 +8,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="lib" path="tapestry5-annotations-5.0.18.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="tapestry-core-5.0.18.jar" sourcepath="C:/dev/QERP_Web">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="tapestry-ioc-5.0.18.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="tapestry-test-5.0.18.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="slf4j-api-1.4.3.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="t5c-commons-0.5.13.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="t5c-contrib-0.5.13.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
@@ -56,32 +26,18 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="easymock-2.3.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="freemarker-2.3.13.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="groovy-all-1.0.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="jasperreports-3.0.0-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="ognl-2.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="opencsv-1.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="javassist-3.8.0.GA.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="opencsv-1.8.jar"/>
+	<classpathentry kind="lib" path="oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="/opt/SDK/lib/javaee.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.apache.geronimo.runtimeClasspathProvider/Apache Geronimo v2.1 2"/>
+	<classpathentry kind="lib" path="hibernate-annotations-3.2.0.ga.jar"/>
+	<classpathentry kind="lib" path="javassist-3.9.0.GA.jar"/>
+	<classpathentry exported="true" kind="lib" path="tapestry-ioc-5.1.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="tapestry-test-5.1.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="tapestry5-annotations-5.1.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="testng-5.8-jdk15.jar"/>
+	<classpathentry exported="true" kind="lib" path="chenillekit-tapestry-1.0.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-1.5.0-sun-1.5.0.16"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
