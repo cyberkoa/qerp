@@ -1,4 +1,4 @@
-jup<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 <head> <title>Bom Detail Maintenance</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
 <table class="navigation" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">

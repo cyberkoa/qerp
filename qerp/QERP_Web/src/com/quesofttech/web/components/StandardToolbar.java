@@ -3,6 +3,7 @@ package com.quesofttech.web.components;
 
 //import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.*;
+import org.apache.tapestry5.corelib.components.Zone;
 //import org.apache.tapestry5.corelib.components.Form;
 //import org.apache.tapestry5.corelib.components.TextField;
 //import org.apache.tapestry5.corelib.components.Zone;
@@ -15,7 +16,17 @@ import org.apache.tapestry5.ComponentResources;
 
 public class StandardToolbar
 {
-    /**
+	@Parameter
+	private Zone zone;
+	
+	@Parameter
+	private Object viewer;
+	
+	
+	
+	
+	
+	/**
      * client event name
     */
     public static final String EVENT_ADD = "addRecord";
@@ -77,6 +88,31 @@ public class StandardToolbar
         resources.triggerEvent(EVENT_ADD, context, null);
     	return null;
     }
+
+    Object onActionFromToolbarSave ()
+    {
+       //_form.clearErrors();
+       //myState = "A";
+       //_strMode = "A";
+       //return blockFormView;
+    	
+        // Now that the environment is setup, inform the component or other listeners that the form
+        // is about to render.  
+
+    	
+    	
+    	
+        resources.triggerEvent(EVENT_SAVE, context, null);
+        // should update here , or let the container update ?
+        //return new MultiZoneUpdate("userInput", registrationForm).add("helpPanel", registrationHelp);
+
+    	return null;
+    }
+    
+    
+    
+    
+    
     
     void onActionFromtoolbarDel(Long id)
     {
@@ -87,5 +123,8 @@ public class StandardToolbar
        //_DeleteRecord(id);
        }
     }
+    
+    
+
     
 }
