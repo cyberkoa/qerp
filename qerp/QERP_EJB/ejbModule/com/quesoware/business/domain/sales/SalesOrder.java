@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "SalesOrder", uniqueConstraints = { @UniqueConstraint(columnNames = { "docNo","docType" }) })
+@Table(name = "SalesOrder", uniqueConstraints = { @UniqueConstraint(columnNames = { "so_Number","so_DocType" }) })
 @SuppressWarnings("serial")
 public class SalesOrder extends BaseEntity {
 	

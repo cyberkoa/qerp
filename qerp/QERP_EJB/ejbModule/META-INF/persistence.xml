@@ -18,6 +18,35 @@
 		<jta-data-source>qerp</jta-data-source>
 		<non-jta-data-source>qerp</non-jta-data-source>
         <jar-file>QERP_EJB.jar</jar-file>
+        <class>com.quesoware.business.domain.system.DocumentType</class>
+        <class>com.quesoware.business.domain.system.ApplicationConfiguration</class>
+        <class>com.quesoware.business.domain.security.UserRole</class>
+        <class>com.quesoware.business.domain.security.UserProgram</class>
+        <class>com.quesoware.business.domain.security.UserPassword</class>
+        <class>com.quesoware.business.domain.security.User</class>
+        <class>com.quesoware.business.domain.security.RoleProgram</class>
+        <class>com.quesoware.business.domain.security.Role</class>
+        <class>com.quesoware.business.domain.security.Program</class>
+        <class>com.quesoware.business.domain.security.Module</class>
+        <class>com.quesoware.business.domain.sales.SalesOrderMaterial</class>
+        <class>com.quesoware.business.domain.sales.SalesOrder</class>
+        <class>com.quesoware.business.domain.sales.Customer</class>
+        <class>com.quesoware.business.domain.production.Routing</class>
+        <class>com.quesoware.business.domain.production.ProductionOrderOperation</class>
+        <class>com.quesoware.business.domain.production.ProductionOrderMaterial</class>
+        <class>com.quesoware.business.domain.production.ProductionOrder</class>
+        <class>com.quesoware.business.domain.inventory.MaterialType</class>
+        <class>com.quesoware.business.domain.inventory.MaterialGroup</class>
+        <class>com.quesoware.business.domain.inventory.Material</class>
+        <class>com.quesoware.business.domain.general.UOM</class>
+        <class>com.quesoware.business.domain.general.Operation</class>
+        <class>com.quesoware.business.domain.general.BomDetail</class>
+        <class>com.quesoware.business.domain.general.BOM</class>
+        <class>com.quesoware.business.domain.finance.Company</class>
+        <class>com.quesoware.business.domain.embeddable.RowInfo</class>
+        <class>com.quesoware.business.domain.embeddable.Dimension</class>
+        <class>com.quesoware.business.domain.embeddable.Address</class>
+        <class>com.quesoware.business.domain.base.BaseEntity</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>       
     </persistence-unit>
  

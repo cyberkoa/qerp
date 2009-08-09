@@ -14,5 +14,5 @@
             </sys:dependency>        
     </sys:dependencies>
   </sys:environment>
-  <enterprise-beans/>
+  <enterprise-beans />
 </openejb-jar>
