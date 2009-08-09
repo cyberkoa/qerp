@@ -37,7 +37,7 @@ import java.util.List;
 //import java.util.ArrayList;
 
 @Entity
-@Table(name = "ApplicationConfiguration", uniqueConstraints = { @UniqueConstraint(columnNames = { "<unique_field>" }) })
+@Table(name = "ApplicationConfiguration", uniqueConstraints = { @UniqueConstraint(columnNames = { "appconfig_Key" }) })
 @SuppressWarnings("serial")
 public class ApplicationConfiguration extends BaseEntity {
 	

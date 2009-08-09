@@ -53,7 +53,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "ProductionOrder", uniqueConstraints = { @UniqueConstraint(columnNames = { "docNo" }) })
+@Table(name = "ProductionOrder", uniqueConstraints = { @UniqueConstraint(columnNames = { "prodo_Number" }) })
 @SuppressWarnings("serial")
 public class ProductionOrder extends BaseEntity {
 	
