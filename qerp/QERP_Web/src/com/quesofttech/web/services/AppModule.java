@@ -34,7 +34,7 @@ public class AppModule {
 	
 	public static void contributeBindingSource(MappedConfiguration<String, BindingFactory> configuration,
 			BindingSource bindingSource) {
-		configuration.add("list", new ListBindingFactory(bindingSource));
+		//configuration.add("list", new ListBindingFactory(bindingSource));
 		
 	}
 

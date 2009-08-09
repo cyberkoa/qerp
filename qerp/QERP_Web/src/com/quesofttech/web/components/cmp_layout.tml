@@ -151,7 +151,7 @@
 <div>
 	<div id="doc3" style="width:1270px;">
 	    <div id="hd" style="text-align: center;">
-	        <div t:type="t5components/RoundCornerContainer" fgcolor="#EEEEEE" style="background-image:url(images/QERPLogo1.png);background-repeat: no-repeat;align:left;background-color:#EEEEEE;margin-top:5px;margin-bottom:5px;">
+	        <div t:type="chenillekit/RoundCornerContainer" fgcolor="#EEEEEE" style="background-image:url(images/QERPLogo1.png);background-repeat: no-repeat;align:left;background-color:#EEEEEE;margin-top:5px;margin-bottom:5px;">
 	           <div style="position:relative;float:right;left:-15px;">
 					
 				
@@ -178,7 +178,7 @@
 	        </fieldset>
 	    </div>
 	    <div id="ft">
-	        <div t:type="t5components/RoundCornerContainer" fgcolor="#EEEEEE" style="background-color:#EEEEEE;margin-top:15px;">
+	        <div t:type="chenillekit/RoundCornerContainer" fgcolor="#EEEEEE" style="background-color:#EEEEEE;margin-top:15px;">
 	            <p style="padding:5px;">
 	               QERP Software  powered by Quesoware &nbsp;
 	            </p>
