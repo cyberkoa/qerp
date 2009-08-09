@@ -28,13 +28,45 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.slf4j.Logger;
 import org.apache.tapestry5.annotations.ApplicationState;
+
+import com.quesofttech.web.components.*;
+
+
 public class Test {
 	//@Parameter(defaultPrefix="literal", required=true)
     //private String _pages;
 
+	
+	
     @Inject
     private ComponentResources _resources;
 
+    private StandardToolbar toolbar;
+
+    private Block blockFormView;
+    
+    private int testvalue;
 
 
+
+	public int getTestvalue()
+	{
+		return testvalue;
+	}
+
+
+
+	public void setTestvalue(int testvalue)
+	{
+		this.testvalue = testvalue;
+	}
+    
+	@OnEvent(value = "addRecord", component = "toolbar")
+    Object onAddRecord()
+    {
+		System.out.println("triggered addRecord");
+    	return blockFormView;
+    }
+    
+    
 }

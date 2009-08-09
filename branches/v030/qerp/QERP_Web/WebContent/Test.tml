@@ -1,6 +1,49 @@
-<html t:type="cmp_layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 <head> <title>Test Maintenance Application</title><link rel="stylesheet" type="text/css"  href="${asset:context:css/global.css}"/></head>
 <body>
-  <div t:type="StandardToolbar" id="st1" />
+<table width="100%">
+       <tr>
+               <td style="background:#EEEEEE;align:center;">
+                       <center><font color="#001C48" size="3"><b>Operation Maintenance</b></font></center>
+               </td>
+       </tr>
+</table>
+
+<div t:type="StandardToolbar" id="st1" />
+
+<t:zone t:id="zoneGridView" show="slidedown">
+    <t:delegate to="blockGrid" />
+</t:zone>
+<t:zone t:id="zoneFormView">
+    <t:delegate to="blockForm" />
+</t:zone>
+
+
+<t:block id="blockGridView">
+
+   
+       <div style="height:300px;width:100%;overflow:auto;background-color:#CCCCFF">
+           <t:grid
+           t:id="Grid"
+           t:source="Operations"
+           t:row="Operation"
+                   t:rowsPerPage="10"
+           t:pagerPosition="both"
+           t:inPlace="literal:true">
+           <t:parameter name="idCell">
+               <t:actionlink t:id="select"  t:zone="zoneFormView"  t:context="Operation.id">
+                   select
+               </t:actionlink>
+           </t:parameter>
+           </t:grid>
+       </div>
+   </t:block>
+   
+   <t:block id="blockFormView">
+  
+      <div>
+        Value : ${testvalue}
+      </div>
+   </t:block>
 </body>
 </html>
