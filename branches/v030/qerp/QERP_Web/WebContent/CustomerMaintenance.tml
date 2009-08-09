@@ -33,7 +33,7 @@
            </t:parameter>
            </t:GRID>
        </div>
-       <div t:type="t5components/TabSet"
+       <div t:type="chenillekit/TabSet"
 	    panelIds="list:'Customer','Address','Contact'"
 	    activePanelId="activePanel">
 	
