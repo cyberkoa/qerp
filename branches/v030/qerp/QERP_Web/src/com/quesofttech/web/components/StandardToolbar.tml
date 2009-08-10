@@ -1,5 +1,5 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">     
-       <t:actionlink  t:id="toolbarAdd"><button type="button"><img src="images/addRecord24.png" /></button></t:actionlink>
+       <t:actionlink  t:id="toolbarAdd"><img src="images/addRecord24.png" /></t:actionlink>
        <button type="submit"><img  src="images/saveRecord24.png" /></button>
        <t:actionlink  t:id="toolbardel"><button type="button"><img src="images/deleteRecord24.png" /></button></t:actionlink>
 </t:container>

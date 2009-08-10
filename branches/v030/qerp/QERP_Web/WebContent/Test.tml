@@ -9,13 +9,13 @@
        </tr>
 </table>
 
-<div t:type="StandardToolbar" id="st1" />
+<div t:type="StandardToolbar" id="toolbar" zone="zoneFormView" />
 
 <t:zone t:id="zoneGridView" show="slidedown">
-    <t:delegate to="blockGrid" />
+    <t:delegate to="blockGridView" />
 </t:zone>
 <t:zone t:id="zoneFormView">
-    <t:delegate to="blockForm" />
+    <t:delegate to="blockFormView" />
 </t:zone>
 
 

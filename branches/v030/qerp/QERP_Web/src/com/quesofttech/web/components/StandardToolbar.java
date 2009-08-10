@@ -68,14 +68,14 @@ public class StandardToolbar
     {
         // Now that the environment is setup, inform the component or other listeners that the form
         // is about to render.  
-
+        
         resources.triggerEvent(EVENT_ADD, context, null);
 
         //resources.triggerEvent(EventConstants.PREPARE, context, null);
     }
 
 
-    Object onActionFromToolbarAdd ()
+    boolean onActionFromToolbarAdd ()
     {
        //_form.clearErrors();
        //myState = "A";
@@ -84,9 +84,9 @@ public class StandardToolbar
     	
         // Now that the environment is setup, inform the component or other listeners that the form
         // is about to render.  
-
-        resources.triggerEvent(EVENT_ADD, context, null);
-    	return null;
+    	System.out.println("trigger in toolbar");  
+        resources.triggerEvent(EVENT_ADD, new Object[] { zone }, null);
+    	return true; // abort event
     }
 
     Object onActionFromToolbarSave ()
