@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.sql.Timestamp;
 import javax.annotation.Resource;
+import org.apache.tapestry5.services.*;
+
 import com.quesofttech.web.base.SimpleBasePage;
 import com.quesofttech.web.base.SecureBasePage;
 import com.quesofttech.web.state.Visit;
@@ -14,7 +16,10 @@ import com.quesoware.business.domain.general.*;
 import com.quesoware.business.domain.general.iface.*;
 import com.quesoware.business.domain.security.iface.ISecurityFinderServiceRemote;
 
+
+
 import org.apache.tapestry5.corelib.components.*;
+import org.apache.tapestry5.ajax.MultiZoneUpdate;
 import org.apache.tapestry5.annotations.*;
 
 import org.apache.tapestry5.ComponentResources;
@@ -41,33 +46,74 @@ public class Test extends SimpleBasePage {
 	
     @Inject
     private ComponentResources _resources;
+    
+    /**
+     * Set up via the traditional or Ajax component event request handler
+     */
+    @Environmental
+    private ComponentEventResultProcessor componentEventResultProcessor;
+    
 
+    @Component(id="toolbar", 
+    		parameters = {
+    		"zone=zoneFormView"
+    			})    
     private StandardToolbar toolbar;
-
+    
+    @Component 
+    private Viewer viewer;
+    
+    @Property
+    @Inject
+    private Block blockViewer;
+    
+    @Property
     @Inject
     private Block blockFormView;
 
     @Inject
     private Block blockGridView;
     
+    
+    @Property
     private Zone zoneFormView;
 
     private Zone zoneGridView;
     
     private String testvalue;
+    
+    private String testvalue2;
 
     private Operation _operation;
     private Collection<?> _operations;
 
+	private String zone;
 
+
+	
     
-	@OnEvent(value = "addRecord", component = "toolbar")
-    Object onAddRecord()
+    /**
+     * Event handler for inplaceupdate event triggered from nested components when an Ajax update occurs. The event
+     * context will carry the zone, which is recorded here, to allow the Grid and its sub-components to properly
+     * re-render themselves.  Invokes {@link org.apache.tapestry5.services.ComponentEventResultProcessor#processResultValue(Object)}
+     * passing this (the Grid component) as the content provider for the update.
+     */
+	@OnEvent(value = "addRecord")
+    void onAddRecord(String zone) throws IOException
     {
-		System.out.println("triggered addRecord");
-    	return blockFormView;
-    }
+		// Koa : check why zone = null
+		// Koa : next try to createEventLink then use ClientBehaviourSupport to link the zone and link
+		
+		System.out.println("triggered addRecord, zone : " + zone);
+        this.zone = zone;
+	    //return blockViewer;
+        //componentEventResultProcessor.processResultValue(this);
 
+	    ComponentResources viewerResources = viewer.getResources();
+        viewerResources.triggerEvent("addRecord", new Object[] { zone }, null);
+        
+    }
+    
 
 
 	public String getTestvalue()
@@ -84,20 +130,6 @@ public class Test extends SimpleBasePage {
 
 
 
-	public Block getBlockFormView()
-	{
-		return blockFormView;
-	}
-
-
-
-	public void setBlockFormView(Block blockFormView)
-	{
-		this.blockFormView = blockFormView;
-	}
-
-
-
 	public Block getBlockGridView()
 	{
 		return blockGridView;
@@ -109,21 +141,7 @@ public class Test extends SimpleBasePage {
 	{
 		this.blockGridView = blockGridView;
 	}
-    	
-	
-    public Zone getZoneFormView()
-	{
-		return zoneFormView;
-	}
-
-
-
-	public void setZoneFormView(Zone zoneFormView)
-	{
-		this.zoneFormView = zoneFormView;
-	}
-
-
+    
 
 	private IOperationServiceRemote getOperationService() {
         return getBusinessServicesLocator().getOperationServiceRemote();
@@ -172,6 +190,22 @@ public class Test extends SimpleBasePage {
     	   this.setTestvalue(_operation.getCode());
        }
     }
+
+
+
+	public String getTestvalue2()
+	{
+		return testvalue2;
+	}
+
+
+
+	public void setTestvalue2(String testvalue2)
+	{
+		this.testvalue2 = testvalue2;
+	}
+    
+    
     
 
     

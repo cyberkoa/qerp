@@ -9,13 +9,13 @@
        </tr>
 </table>
 
-<div t:type="StandardToolbar" id="toolbar" zone="zoneFormView" />
+<t:StandardToolbar t:id="toolbar" t:zone="zoneFormView" block="blockViewer"/>
 
 <t:zone t:id="zoneGridView" show="slidedown">
     <t:delegate to="blockGridView" />
 </t:zone>
 <t:zone t:id="zoneFormView">
-    <t:delegate to="blockFormView" />
+    <t:delegate to="blockViewer" />
 </t:zone>
 
 
@@ -44,6 +44,17 @@
       <div>
         Value : ${testvalue}
       </div>
+
+      
    </t:block>
+   
+   <t:block id="blockViewer">
+      <form t:type="form" t:id="viewerform" t:zone="zoneFormView" >
+  	     <t:viewer t:id="viewer" />
+      </form>
+   </t:block>
+
+
+   
 </body>
 </html>
