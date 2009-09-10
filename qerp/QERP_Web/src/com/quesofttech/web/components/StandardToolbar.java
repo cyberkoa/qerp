@@ -2,28 +2,33 @@
 package com.quesofttech.web.components;
 
 //import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.ajax.MultiZoneUpdate;
 import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.corelib.components.Zone;
 //import org.apache.tapestry5.corelib.components.Form;
 //import org.apache.tapestry5.corelib.components.TextField;
 //import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ComponentResources;
 
 
 
 
-
+@SupportsInformalParameters
 public class StandardToolbar
 {
 	@Parameter
-	private Zone zone;
+	@Property
+	private String zone;
 	
 	@Parameter
 	private Object viewer;
 	
 	
-	
+	@Parameter
+	@Property
+	private Block block;
 	
 	
 	/**
@@ -72,10 +77,13 @@ public class StandardToolbar
         resources.triggerEvent(EVENT_ADD, context, null);
 
         //resources.triggerEvent(EventConstants.PREPARE, context, null);
+    }    
+    void onAction ()
+    {
+    	System.out.println("trigger in toolbar onAction");
     }
-
-
-    boolean onActionFromToolbarAdd ()
+    
+    Object onActionFromToolbarAdd ()
     {
        //_form.clearErrors();
        //myState = "A";
@@ -84,9 +92,15 @@ public class StandardToolbar
     	
         // Now that the environment is setup, inform the component or other listeners that the form
         // is about to render.  
-    	System.out.println("trigger in toolbar");  
+    	System.out.println("trigger in toolbar"); 
+    	//ComponentResources containerResources = resources.getContainerResources();
+    	
+    	
+    	//return block;
         resources.triggerEvent(EVENT_ADD, new Object[] { zone }, null);
-    	return true; // abort event
+        return resources.getBlockParameter("block");
+        //return new MultiZoneUpdate("zoneFormView", block);
+        //return true; // abort event
     }
 
     Object onActionFromToolbarSave ()

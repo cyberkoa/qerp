@@ -1,0 +1,7 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">     
+	 <t:label t:for="Code">Code</t:label>:
+	 <div> ${Code}</div>
+	 <div>
+	 	<input t:type="TextField" t:id="Code" t:value="Code" t:maxLength="10" t:size="10" /> 
+	 </div>
+</t:container>
