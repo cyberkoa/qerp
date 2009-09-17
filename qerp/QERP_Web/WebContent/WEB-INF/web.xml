@@ -9,7 +9,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
     
     <context-param> 
         <param-name>tapestry.app-package</param-name> 
-        <param-value>com.quesofttech.web</param-value> 
+        <param-value>com.quesoware.web</param-value> 
     </context-param> 
     
     <filter> 
