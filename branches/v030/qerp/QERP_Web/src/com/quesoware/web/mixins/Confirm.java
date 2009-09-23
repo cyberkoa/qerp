@@ -26,7 +26,6 @@ import com.quesoware.business.domain.security.SecurityFinderService;
 import com.quesoware.business.domain.security.User;
 import com.quesoware.business.domain.security.iface.ISecurityFinderServiceRemote;
 import com.quesoware.web.base.SimpleBasePage;
-import com.quesoware.web.pages.BomDetailMaintenance;
 import com.quesoware.web.pages.Index;
 import com.quesoware.web.state.Visit;
 
